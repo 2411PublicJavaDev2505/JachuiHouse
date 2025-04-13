@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 페이지</title>
-    <link rel="stylesheet" href="../resources/css/footer.css">
+<!--     <link rel="stylesheet" href="../resources/css/footer.css"> -->
     <link rel="stylesheet" href="../resources/css/login.css">
     
 </head>
@@ -39,13 +39,14 @@
                         <label for="save-id">아이디 저장</label><br>
                     </div>
                     <button type="submit" class="loginBtn">로그인</button><br>
-                    <div class="confirm-container">
+					<div class="confirm-container">
                         <p>계정이 없으신가요?</p> 
                             <a href="/member/signupJachui">자취생 회원가입</a>
                             <a href="/member/signupRealtor">공인중개사 회원가입</a>
                         </p>
-                        <p>비밀번호를 잊으셨나요?</p>
-                                <a href="/member/password">비밀번호 재설정</a> 
+                        <p>아이디·비밀번호 찾기</p>
+                                <a href="/member/findId">아이디 찾기</a> 
+                                <a href="/member/resetPw">비밀번호 재설정</a> 
                     </div>
                     </div>
                 </form>

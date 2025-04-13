@@ -1,7 +1,10 @@
 package com.house.jachui.member.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,5 +57,80 @@ public class MemberController {
 			return "common/error";
 		}
 		
+	}
+	
+	
+	// 공인중개사 회원가입 페이지 이동
+	@GetMapping("/signupRealtor")
+	public String memberSignupRealtorForm() {
+		return "member/signupRealtor";
+	}
+	
+	// 공인중개사 회원가입 처리	
+	@PostMapping("/signupRealtor")
+	public String memberSignupRealtor(
+			@ModelAttribute MemberVO member
+			,HttpServletRequest request) {
+		int result = mService.memberSignupRealtor(member);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+			return "common/error";
+		}
+		
+	}
+
+	
+	// 아이디찾기 페이지 이동
+	@GetMapping("/findId")
+	public String selectFindIdForm() {
+		return "member/findId";
+	}
+	
+	// 아이디찾기 처리	
+	@PostMapping("/findId")
+	public String selectFindId(
+			@ModelAttribute MemberVO member
+			,HttpServletRequest request) {
+		int result = mService.selectFindId(member);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+			return "common/error";
+		}
+		
+	}
+	
+	// 비밀번호 재설정 페이지 이동
+	@GetMapping("/resetPw")
+	public String updateResetPwForm() {
+		return "member/resetPw";
+	}
+	
+	// 비밀번호 재설정 처리	
+	@PostMapping("/resetPw")
+	public String updateResetPw(
+			@ModelAttribute MemberVO member
+			,HttpServletRequest request) {
+		int result = mService.updateResetPw(member);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+			return "common/error";
+		}
+		
+	}
+	
+	// 아이디찾기결과 페이지 이동
+	@GetMapping("/foundId")
+	public String selectFoundIdForm() {
+		return "member/resetPw";
+	}
+	
+	@PostMapping("/foundId")
+	public String foundId(MemberVO member, Model model) {
+		List<MemberVO> matchedList = mService.findIds(member);
+		model.addAttribute("matchedList", matchedList);
+		return "member/foundId";
 	}
 }

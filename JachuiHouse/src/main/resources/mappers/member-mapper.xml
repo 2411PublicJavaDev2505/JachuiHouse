@@ -1,1 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+	<resultMap type="Member" id="loginResultMap">
+		<id property="userId" 	column="USER_ID" />
+		<result property="userPw"	column="USER_PW"/>
+	</resultMap>
+	
+	<resultMap type="com.house.jachui.member.vo.MemberVO" id="memberResultMap">
+		<id		property="userId"				column="USER_ID"/>
+		<result property="userPw"				column="USER_PW"/>
+		<result property="userName"				column="USER_NAME"/>
+		<result property="userEmail"			column="USER_EMAIL"/>
+		<result property="userPhone"			column="USER_PHONE"/>
+		<result property="userGender"			column="USER_GENDER"/>
+		<result property="userAddress"			column="USER_ADDRESS"/>
+		<result property="userBirth"			column="USER_BIRTH"/>
+		<result property="userPostcode"			column="USER_POSTCODE"/>
+		<result property="userDetailAddress"	column="USER_DETAILADDRESS"/>
+		<result property="businessName"			column="BUSINESS_NAME"/>
+		<result property="aloneLiving"			column="ALONE_LIVING"/>
+		<result property="userRole"				column="USER_ROLE"/>
+		<result property="realtorName"			column="REALTOR_NAME"/>
+		<result property="realtorNo"			column="REALTOR_NO"/>
+		<result property="deleteYn"				column="DELETE_YN"/>
+		<result property="approveYn"			column="APPROVE_YN"/>
+		<result property="joinDate"				column="JOIN_DATE"/>
+	</resultMap>
+	
+	<insert id="memberSignupJachui">
+		INSERT INTO MEMBER
+		VALUES(#{userId} ,#{userPw}, #{userName}, #{userPhone}, #{userAddress}, 
+		#{userPostcode}, #{userDetailAddress}, #{userBirth}, #{aloneLiving})
+	</insert>
+	
+	<select id="findIds" resultMap="memberResultMap">
+		SELECT 
+            USER_ID AS userId,
+            CREATE_DATE AS joinDate
+        FROM 
+            MEMBER
+        WHERE 
+            USER_NAME = #{userName}
+            AND USER_EMAIL = #{userEmail}
+            AND USER_ROLE = #{userRole}
+            AND DELETE_YN = 'N'
+	</select>
+</mapper>

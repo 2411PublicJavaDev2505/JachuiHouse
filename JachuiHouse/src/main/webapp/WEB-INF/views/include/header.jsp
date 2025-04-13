@@ -22,7 +22,7 @@
                 <a href="#">사방팔방</a>
             </div>
             <div class="loginBtn">
-                <a href="#">로그인</a>
+                <a href="/member/login">로그인</a>
             </div>
         </header>
 </body>

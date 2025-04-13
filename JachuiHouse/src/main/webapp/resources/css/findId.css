@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #FFFBF0;
+}
+
+.container {
+  width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #a3a0a0;
+  border-radius: 10px;
+  overflow: hidden;
+    box-sizing: boder-box;
+    box-shadow: 2px 5px 10px 3px rgb(165, 162, 162);
+}
+
+h2 {
+  /* 텍스트 중앙 정렬시키려면 text-align: center */
+  text-align: center;  
+}
+
+/* h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  margin-right: 150px;
+} */
+
+label { display: block; margin-top: 15px; }
+input[type="text"], input[type="email"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.radio-group, .auth-group {
+  margin-top: 10px;
+}
+.radio-group label, .auth-group label {
+  display: inline-block;
+  margin-right: 15px;
+}
+.btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #FF7337;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #FFA37C;
+}
