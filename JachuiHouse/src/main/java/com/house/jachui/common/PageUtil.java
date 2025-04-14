@@ -23,12 +23,10 @@ public class PageUtil {
 		if(endNavi > maxPage ) {
 			endNavi = maxPage;
 		
-	}
+		}
 		pageInfo.put("maxPage", maxPage);
 		pageInfo.put("startNavi", startNavi);
 		pageInfo.put("endNavi", endNavi);
 		return pageInfo;
-		
+	}
 }
-}
-

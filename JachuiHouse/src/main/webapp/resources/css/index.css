@@ -1,0 +1,110 @@
+body{
+    margin: 0;
+    background-color: #FAF3E0;
+
+}
+.logo img{
+    width: 250px;
+    height: 200px;
+    margin-top: 15px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFAB87;
+    align-items: center;
+    height: 55px;
+    padding: 10px;
+    font-size: 20px;
+}
+header a{
+    text-decoration: none;
+    color: white;
+    padding: 30px;
+}
+header .logo {
+    font-size: 24px;
+}
+
+.loginBtn{
+    display: flex;
+    text-align: center;
+    margin-right: 50px;
+}
+
+.main {
+    margin: 0px 100px 0 100px;
+
+}
+.banner {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #F4ECE0;
+}
+section {
+    background-color: #FAF3E0;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.left-image{
+    width: 400px;
+    height: 300px;
+    margin: 40px 0px 0px 40px;
+}
+.right-image{
+    width: 400px;
+    height: 400px;
+    margin-right: 50px;
+    border-radius: 399px 399px 0px 0px
+}
+.main-menu {
+    display: flex;
+    gap: 70px;
+    background-color: white;
+}
+.main-hello {
+    display: flex;
+    align-items: center;
+}
+.main-menu a{
+    text-decoration: none;
+}
+.left-menu {
+    display: flex;
+}
+.main-menu div{
+    border-radius: 25px;
+    margin: 20px;
+}
+.user-story {
+    color: white;
+    background-color: #FF7337;
+    padding: 20px;
+}
+.alone-living {
+    color: white;
+    background-color: #FF804A;
+    padding: 20px;
+}
+.used-market {
+    color: white;
+    background-color: #FFA37C;
+    padding: 20px;
+}
+.notice-board {
+    color: white;
+    background-color: #6A9D81;
+    padding: 20px 35px 20px 35px;
+}
+
+footer {
+    text-align: left; 
+    margin-top: 20px;
+    padding: 10px; 
+    color: #cecece;;
+    border-top: 1px solid #ddd;
+    width: 100%;
+    height: 40px;
+    background-color: #FAF3E0;
+}

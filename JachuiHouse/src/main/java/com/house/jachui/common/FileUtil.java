@@ -2,8 +2,8 @@ package com.house.jachui.common;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,26 +14,32 @@ import jakarta.servlet.http.HttpSession;
 
 @Component
 public class FileUtil {
-	
-	public Map<String, String> saveFile(MultipartFile uploadFile,HttpSession session, String type) throws IllegalStateException, IOException {
+
+	public Map<String, String> saveFile(MultipartFile uploadFile, HttpSession session, String type) throws IllegalStateException, IOException{
 		Map<String, String> result = new HashMap<String, String>();
-		//아래 ()안에 notice이름을 바꿔줬음!"bUploadFiles"는 바꿔줘야함!(c는 이력서!?)
-		String folderName = type.equals("employ")? "eUploadFiles": "cUploadFiles";
+		String folderName = type.equals("board") ? "nUploadFiles":"bUploadFiles";
 		String prefix = type.toLowerCase().substring(0,1);
-		String employFileName = uploadFile.getOriginalFilename();
-		String employFileRename = null;
-		String employFilePath = null;
+		String tradeFilename = uploadFile.getOriginalFilename();
+		String tradeFileRename;
+		String tradeFilePath;
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String transStr = sdf.format(new Date(System.currentTimeMillis())); 
-		String ext = employFileName.substring(employFileName.lastIndexOf(".")+1);
-		employFileRename = transStr +"." +ext;
-		employFilePath ="/resources/"+folderName+"/"+employFileRename;
+		String transStr = sdf.format(new Date(System.currentTimeMillis()));
+		String ext = tradeFilename.substring(tradeFilename.lastIndexOf(".")+1);
+		tradeFileRename = transStr + "." + ext;
+		tradeFilePath = "/resources/"+folderName+"/"+tradeFileRename;
+		
 		String folderPath = session.getServletContext().getRealPath("/resources/"+folderName);
-		String savePath = folderPath +"\\"+ employFileRename;
+		File dir = new File(folderPath); 
+		if (!dir.exists()) { // 디렉토리없을 시 자동생성
+			dir.mkdirs();
+		}
+		
+		String savePath = folderPath+"\\"+tradeFileRename;
 		uploadFile.transferTo(new File(savePath));
-		result.put(prefix+"Filename", employFileName);
-		result.put(prefix+"FileRename", employFileRename);
-		result.put(prefix+"Filepath", employFilePath);
+		result.put(prefix+"Filename", tradeFilename);
+		result.put(prefix+"FileRename", tradeFileRename);
+		result.put(prefix+"FilePath", tradeFilePath);
 		return result;
 	}
 }

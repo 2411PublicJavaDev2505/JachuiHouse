@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    background-color: #FAF3E0;
+
+}
+.logo img{
+    width: 250px;
+    height: 200px;
+    margin-top: 15px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFAB87;
+    align-items: center;
+    height: 55px;
+    padding: 10px;
+    font-size: 20px;
+}
+header a{
+    text-decoration: none;
+    color: white;
+    padding: 30px;
+}
+header .logo {
+    font-size: 24px;
+}
+
+.loginBtn{
+    display: flex;
+    text-align: center;
+    margin-right: 50px;
+}
