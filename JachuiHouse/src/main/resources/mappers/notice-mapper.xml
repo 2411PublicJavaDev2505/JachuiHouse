@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.jachui.notice.model.store.NoticeMapper">
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE
+	</select>
+	<select id="selectListAll" resultType="NoticeVO">
+		SELECT * FROM "NOTICE" ORDER BY NOTICE_NO DESC
+	</select>
+	<insert id="addNotice">
+		INSERT INTO NOTICE
+		VALUES(SEQ_NOTICE_NO.NEXTVAL, #{noticeType}, #{noticeTitle}
+		, #{noticeContent}, default, default, #{noticeFileName}, #{noticeFilePath}, #{noticeFileRename}, #{userId})
+	</insert>
+</mapper>
