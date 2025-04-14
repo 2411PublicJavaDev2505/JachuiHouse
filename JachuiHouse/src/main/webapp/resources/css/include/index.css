@@ -1,13 +1,20 @@
 @charset "UTF-8";
+body{
+    margin: 0;
+    background-color: #FFF9E9;
+} 
 .main {
+	width: 1200px;
     margin: 0px 100px 0 100px;
-
+    height: 755px;
 }
+
 .banner {
     text-align: center;
     padding: 50px 0;
     background-color: #F4ECE0;
 }
+
 section {
     background-color: #FAF3E0;
     display: flex;
