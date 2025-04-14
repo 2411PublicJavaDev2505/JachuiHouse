@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../resources/css/include/header.css">
 <link rel="stylesheet" href="../resources/css/include/index.css">
 <link rel="stylesheet" href="../resources/css/include/footer.css">
+    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
 
 </head>
 <body>
@@ -61,7 +62,9 @@
                 </div>     
             </div>
         <!-- 푸터 -->
-		<jsp:include page="/WEB-INF/views/include/header.jsp" />
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+    
+
     </div>
         
         <!-- JavaScript 파일 연결 -->
