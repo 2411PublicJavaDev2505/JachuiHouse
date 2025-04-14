@@ -19,7 +19,7 @@
             <div class="nav">
                 <a href="/">홈</a> 
                 <a href="/post/list">자취록</a>
-                <a href="#">찾아방</a>
+                <a href="/chazabang/list">찾아방</a>
                 <a href="#">사방팔방</a>
             </div>
             <div class="loginBtn">
