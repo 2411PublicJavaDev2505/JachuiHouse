@@ -15,6 +15,7 @@ import com.house.jachui.member.service.MemberService;
 import com.house.jachui.member.vo.MemberVO;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/member")
@@ -133,4 +134,11 @@ public class MemberController {
 		model.addAttribute("matchedList", matchedList);
 		return "member/foundId";
 	}
-}
+	
+	//공인중개사 마이페이지 이동
+	@GetMapping("/realtor/mypage")
+	public String showRealtorMypageForm(HttpSession session, Model model) {
+		return "member/realtor/mypage";
+		}
+	}
+
