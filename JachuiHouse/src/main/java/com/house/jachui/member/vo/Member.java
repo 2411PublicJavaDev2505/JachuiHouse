@@ -13,7 +13,6 @@ public class Member {
 	private Date userBirth;
 	private String userPostcode;  //추가 erd에도 추가하기.
 	private String userDetailAddress;  //추가 erd에도 추가하기.
-	private String businessName;  //추가 erd에도 추가하기.
 	private String aloneLiving;
 	private String userRole;
 	private String realtorName;
@@ -81,12 +80,6 @@ public class Member {
 	public void setUserDetailAddress(String userDetailAddress) {
 		this.userDetailAddress = userDetailAddress;
 	}
-	public String getBusinessName() {
-		return businessName;
-	}
-	public void setBusinessName(String businessName) {
-		this.businessName = businessName;
-	}
 	public String getAloneLiving() {
 		return aloneLiving;
 	}
@@ -134,7 +127,7 @@ public class Member {
 		return "Member [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userEmail=" + userEmail
 				+ ", userPhone=" + userPhone + ", userGender=" + userGender + ", userAddress=" + userAddress
 				+ ", userBirth=" + userBirth + ", userPostcode=" + userPostcode + ", userDetailAddress="
-				+ userDetailAddress + ", businessName=" + businessName + ", aloneLiving=" + aloneLiving + ", userRole="
+				+ userDetailAddress + ", aloneLiving=" + aloneLiving + ", userRole="
 				+ userRole + ", realtorName=" + realtorName + ", realtorNo=" + realtorNo + ", deleteYn=" + deleteYn
 				+ ", approveYn=" + approveYn + ", joinDate=" + joinDate + "]";
 	}

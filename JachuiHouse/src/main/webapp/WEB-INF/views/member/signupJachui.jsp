@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 가입</title>
-        <link rel="stylesheet" href="../resources/css/signupJachui.css">
+        <link rel="stylesheet" href="../resources/css/member/signupJachui.css">
 </head>
 <body>
     <div class="container">
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label for="userAddress">주소</label>
                         <div class="signUp-input-area">
-                            <input type="text" name="userAddress" placeholder="우편번호" maxlength="6" id="userPostcode" required>
+                            <input type="text" name="userPostcode" placeholder="우편번호" maxlength="6" id="userPostcode" required>
                             <button type="button" onclick="business_execDaumPostcode()">검색</button>
                         </div>
         
@@ -65,18 +65,18 @@
         
         
                         <div class="signUp-input-area">
-                            <input type="text" name="userAddress" placeholder="상세 주소" id="userDetailAddress" required>
+                            <input type="text" name="userDetailAddress" placeholder="상세 주소" id="userDetailAddress" required>
                         </div>
                     </div>
         
                     <div class="form-group">
                         <label for="BirthDay">생년월일</label>
-                        <input type="text" name="userBirth" placeholder="생년월일 6자리를 입력해주세요" required>
+                        <input type="date" name="userBirth" required>
                     </div>
         
                     <div class="form-group">
                         <label for="aloneLiving">자취년차</label>
-                        <input type="text" name="userBirth" placeholder="선택 사항입니다">
+                        <input type="text" name="userBirth" placeholder="선택 사항입니다. 숫자만 입력해주세요.">
                     </div>
         
                     <button type="submit" class="signUpBtn">회원가입</button>
@@ -92,32 +92,45 @@
             new daum.Postcode({
                 oncomplete: function(data) {
                 var addr = ''; 
-
-                if (data.userSelectedTtype === 'R') {
+                var extraAddr = '';
+              //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') {
                     addr = data.roadAddress;
-                } else{
+              
+              		if(data.bname !== '' && / [동|로|가]$/g.test(data.bname)){
+              			extraAddr +=data.bname;
+              		}
+	              	// 건물명이 있을 경우
+	              	if(data.buildingName !== '' && data.apartment === 'Y'){
+	              		extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	              	}
+                              
+                } else {
                     addr = data.jibunAddress;
                 }
-
-                document.getElementById("business_postcode").value = data.zonecode;
-                document.getElementById("business_Address").value = addr;
-
-                document.getElementById("business_detailAddress").focus();
+				
+            	// 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("userPostcode").value = data.zonecode;
+                document.getElementById("userAddress").value = addr;
+				// 상세주소 입력란으로 커서 이동.
+                document.getElementById("userDetailAddress").focus();
                 }
+            
+            	document.getElementById("extraAddress").value = extraAddr;
             }).open();
         }
 
         // id 입력 후 버튼 클릭 시 dbCheckId.do로 controller에 요청
         function fn_dbCheckId() {
-            var joinForm = document.joinForm;
-            var id = joinForm.id.value;
+            var signup_form = document.signup_form;
+            var id = signup_form.id.value;
             if(id.length==0 || id==""){
                 alert("아이디를 입력해주세요.");
-                joinForm.id.focus();
+                signup_form.id.focus();
             }else {
             window.open("${contextPath}/member/dbCheckId.do?user_id="+id,"","width=500, height=300");
-            }
-        }
+    		}
+        }       
     </script>
 </body>
 </html>
