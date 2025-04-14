@@ -1,0 +1,66 @@
+@charset "UTF-8";
+.main {
+    margin: 0px 100px 0 100px;
+
+}
+.banner {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #F4ECE0;
+}
+section {
+    background-color: #FAF3E0;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.left-image{
+    width: 400px;
+    height: 300px;
+    margin: 40px 0px 0px 40px;
+}
+.right-image{
+    width: 400px;
+    height: 400px;
+    margin-right: 50px;
+    border-radius: 399px 399px 0px 0px
+}
+.main-menu {
+    display: flex;
+    gap: 70px;
+    background-color: white;
+}
+.main-hello {
+    display: flex;
+    align-items: center;
+}
+.main-menu a{
+    text-decoration: none;
+}
+.left-menu {
+    display: flex;
+}
+.main-menu div{
+    border-radius: 25px;
+    margin: 20px;
+}
+.user-story {
+    color: white;
+    background-color: #FF7337;
+    padding: 20px;
+}
+.alone-living {
+    color: white;
+    background-color: #FF804A;
+    padding: 20px;
+}
+.used-market {
+    color: white;
+    background-color: #FFA37C;
+    padding: 20px;
+}
+.notice-board {
+    color: white;
+    background-color: #6A9D81;
+    padding: 20px 35px 20px 35px;
+}

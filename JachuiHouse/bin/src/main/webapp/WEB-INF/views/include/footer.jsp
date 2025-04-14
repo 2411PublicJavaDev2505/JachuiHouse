@@ -4,15 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자취스크립트</title>
-<link rel="stylesheet" href="../resources/css/include/footer.css">
-<<<<<<< HEAD
-   <!-- 푸터 -->
-    <footer>
-        이용약관 | 광고문의 | 개인정보처리방침 | 찾아오시는길 | 회사명: 자취스크립트(주) | 대표자 : 강우혁 | 문의 전화: 010-2222-3333
-    </footer>
-=======
->>>>>>> refs/remotes/origin/master
+<title>Insert title here</title>
 </head>
 <body>
 <!-- 푸터 -->
