@@ -133,4 +133,21 @@ public class MemberController {
 		model.addAttribute("matchedList", matchedList);
 		return "member/foundId";
 	}
+	// 마이페이지
+	@GetMapping("/myPage")
+	public String showAloneDetail() {
+		return "member/myPage";
+	}
+	// 회원탈퇴
+	@GetMapping("/delete")
+	public String showDleteMember() {
+		return "member/delete";
+	}
+
+	// 예산계산기
+	@GetMapping("/accountBook")
+	public String showAccountBook() {
+		return "member/accountBook";
+	}
+	
 }
