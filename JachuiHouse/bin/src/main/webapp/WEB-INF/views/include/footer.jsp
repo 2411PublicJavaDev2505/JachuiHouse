@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자취스크립트</title>
-<link rel="stylesheet" href="../resources/css/include/footer.css">
+<title>Insert title here</title>
 </head>
 <body>
 <!-- 푸터 -->

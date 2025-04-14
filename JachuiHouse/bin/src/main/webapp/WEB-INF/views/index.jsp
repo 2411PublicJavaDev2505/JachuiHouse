@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>자취스크립트</title>
-<link rel="stylesheet" href="../resources/css/include/header.css">
-<link rel="stylesheet" href="../resources/css/include/index.css">
-<link rel="stylesheet" href="../resources/css/include/footer.css">
+	<link rel="stylesheet" href="../resources/css/header.css">
+	<link rel="stylesheet" href="../resources/css/footer.css">
+	<link rel="stylesheet" href="../resources/css/index.css">
+	
 </head>
 <body>
-	 <div class="container">    
-	 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
-	 
+	 <div class="container">
+    	<jsp:include page="/WEB-INF/views/include/header.jsp" />    
         <!-- 배너 슬라이드 -->
             <div class="main">
                 <section class="banner">
@@ -59,8 +59,8 @@
                     </div>
                 </div>     
             </div>
-        <!-- 푸터 -->
-		<jsp:include page="/WEB-INF/views/include/header.jsp" />
+           <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+            
     </div>
         
         <!-- JavaScript 파일 연결 -->
