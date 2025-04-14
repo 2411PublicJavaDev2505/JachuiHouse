@@ -9,8 +9,15 @@ import com.house.jachui.member.vo.MemberVO;
 
 @Mapper
 public interface MemberMapper {
-	List<MemberVO> findIds(MemberVO member);
-	
+
 	int memberSignupJachui(MemberVO member);
+
+	int memberSignupRealtor(MemberVO member);
+
+	int selectFindId(MemberVO member);
+
+	int updateResetPw(MemberVO member);
+
+	List<MemberVO> selectFoundId(MemberVO member);
 
 }

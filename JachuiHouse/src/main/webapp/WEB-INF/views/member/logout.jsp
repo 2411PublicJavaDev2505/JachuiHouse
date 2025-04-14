@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../resources/css/main.css"> <!-- 아직안만들어짐 --> 
     <link rel="stylesheet" href="../resources/css/header.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
-    <link rel="stylesheet" href="../resources/css/success.css"> <!-- 아직안만들어짐 -->
+    <link rel="stylesheet" href="../resources/css/member/logout.css">
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/include/header.jsp" />

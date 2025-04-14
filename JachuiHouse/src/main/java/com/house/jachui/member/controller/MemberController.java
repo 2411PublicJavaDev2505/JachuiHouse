@@ -128,8 +128,8 @@ public class MemberController {
 	}
 	
 	@PostMapping("/foundId")
-	public String foundId(MemberVO member, Model model) {
-		List<MemberVO> matchedList = mService.findIds(member);
+	public String selectFoundId(MemberVO member, Model model) {
+		List<MemberVO> matchedList = mService.selectFoundId(member);
 		model.addAttribute("matchedList", matchedList);
 		return "member/foundId";
 	}

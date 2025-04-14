@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>아이디 찾기 결과</title>
-	<link rel="stylesheet" href="../resources/css/foundId.css">
+	<link rel="stylesheet" href="../resources/css/member/foundId.css">
 </head>
 <body>
 	<div class="container">
 		<h2>고객님의 정보와 일치하는 아이디 목록입니다.</h2>
-		
-		<c:choose>  <!-- 비교문 -->
-			<c:when test="${not empty matchedList}"> <!-- true 일때 -->
+		 <!-- 비교문 -->
+		  <!-- true 일때 -->
+		<c:choose> 
+			<c:when test="${not empty matchedList}">
 				<table>
 					<tr>
 						<th>아이디</th>
@@ -28,9 +30,9 @@
 					</c:forEach>
 				</table>
 			</c:when>
-			
-			<c:otherwise> <!-- false 일때 -->
-				<p>일지하는 정보가 없습니다.</p>
+			 
+			<c:otherwise>
+				<p>일치하는 정보가 없습니다.</p>
 			</c:otherwise>
 		</c:choose>
 		
