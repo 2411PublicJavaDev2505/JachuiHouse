@@ -8,11 +8,9 @@
 <link rel="stylesheet" href="../resources/css/include/header.css">
 <link rel="stylesheet" href="../resources/css/include/index.css">
 <link rel="stylesheet" href="../resources/css/include/footer.css">
-<<<<<<< HEAD
     <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
 
-=======
->>>>>>> refs/remotes/origin/master
+
 </head>
 <body>
 	 <div class="container">    
