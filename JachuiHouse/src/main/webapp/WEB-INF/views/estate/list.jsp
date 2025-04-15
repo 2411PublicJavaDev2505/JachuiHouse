@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,29 +31,33 @@
                     </li>
                 </ul>
             </div>
-            <div class="add-estate-btn">
-                <button>매물등록</button>
-            </div>
+            <c:if test="${userRole eq 'R'}">
+			    <div class="add-estate-btn">
+			        <button>매물등록</button>
+			    </div>
+			</c:if>
             <div class="search-container">
                 <input type="text" class="input-keyword">
                 <button class="search-btn">검색</button>
             </div>
         </div>
-        <div class="estate-list">
-            <a href="/chazabang/detail" class="estate">
-                <div class="estate-style">
-                    <img src="../resources/images/estate/좋아보이느집.jpg" alt="이미지 준비중입니다...">
-                        <section class="estate-inf">
-                            <div class="estate-inf-header">
-                                <p class="estate-rent">월세 200/95</p>
-                            <span class="estate-type">원룸</span>
-                        </div>
-                        <span class="estate-floor-and-width">3층, 20㎡</span>
-                        <span class="estate-address">서울시 노원구 상계동</span>
-                    </section>
-                </div>
-            </a>
-        </div>
+        <c:forEach items="${estList }" var="est">
+	        <div class="estate-list">
+	            <a href="/chazabang/detail" class="estate">
+	                <div class="estate-style">
+	                    <img src="../resources/images/estate/좋아보이느집.jpg" alt="이미지 준비중입니다...">
+	                        <section class="estate-inf">
+	                            <div class="estate-inf-header">
+	                                <p class="estate-rent">${est.estateRentType } ${est.estateDeposit }/${est.estateMonthlyRent }</p>
+	                            <span class="estate-type">${est.estateType }</span>
+	                        </div>
+	                        <span class="estate-floor-and-width">${est.estateFloor }층, ${est.estateWidth }㎡</span>
+	                        <span class="estate-address">${est.estateAddress }</span>
+	                    </section>
+	                </div>
+	            </a>
+	        </div>
+        </c:forEach>
     </main>
 	</div>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
@@ -62,13 +67,11 @@
 
         buttons.forEach(button => {
             button.addEventListener("click", function () {
-                // 모든 버튼 초기화
                 buttons.forEach(btn => {
-                    btn.style.backgroundColor = ""; // 배경색 제거
+                    btn.style.backgroundColor = ""; 
                     btn.style.border = "";
                     btn.style.color = "";
                 });
-                // 클릭된 버튼 스타일 적용
                 this.style.backgroundColor = "transparent";
                 this.style.border = "1px solid #FF7C45";
                 this.style.color = "#FF7C45";
