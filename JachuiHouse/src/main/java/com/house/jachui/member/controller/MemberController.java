@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.house.jachui.member.service.MemberService;
-import com.house.jachui.member.vo.MemberVO;
+import com.house.jachui.member.model.service.MemberService;
+import com.house.jachui.member.model.vo.Member;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -49,7 +49,7 @@ public class MemberController {
 	// 자취생 회원가입 처리	
 	@PostMapping("/signupJachui")
 	public String memberSignupJachui(
-			@ModelAttribute MemberVO member
+			@ModelAttribute Member member
 			,HttpServletRequest request) {
 		int result = mService.memberSignupJachui(member);
 		if(result > 0) {
@@ -70,7 +70,7 @@ public class MemberController {
 	// 공인중개사 회원가입 처리	
 	@PostMapping("/signupRealtor")
 	public String memberSignupRealtor(
-			@ModelAttribute MemberVO member
+			@ModelAttribute Member member
 			,HttpServletRequest request) {
 		int result = mService.memberSignupRealtor(member);
 		if(result > 0) {
@@ -91,7 +91,7 @@ public class MemberController {
 	// 아이디찾기 처리	
 	@PostMapping("/findId")
 	public String selectFindId(
-			@ModelAttribute MemberVO member
+			@ModelAttribute Member member
 			,HttpServletRequest request) {
 		int result = mService.selectFindId(member);
 		if(result > 0) {
@@ -111,7 +111,7 @@ public class MemberController {
 	// 비밀번호 재설정 처리	
 	@PostMapping("/resetPw")
 	public String updateResetPw(
-			@ModelAttribute MemberVO member
+			@ModelAttribute Member member
 			,HttpServletRequest request) {
 		int result = mService.updateResetPw(member);
 		if(result > 0) {
@@ -129,8 +129,8 @@ public class MemberController {
 	}
 	
 	@PostMapping("/foundId")
-	public String selectFoundId(MemberVO member, Model model) {
-		List<MemberVO> matchedList = mService.selectFoundId(member);
+	public String selectFoundId(Member member, Model model) {
+		List<Member> matchedList = mService.selectFoundId(member);
 		model.addAttribute("matchedList", matchedList);
 		return "member/foundId";
 	}
@@ -139,7 +139,7 @@ public class MemberController {
 	@GetMapping("/realtor/mypage")
 	public String showRealtorMypageForm(HttpSession session, Model model) {
 		return "member/realtor/mypage";
-		}
+		
 	}
 
 	// 마이페이지
