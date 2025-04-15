@@ -10,8 +10,8 @@
 	    <link rel="stylesheet" href="../resources/css/post/detail.css">
 	</head>
 	<body>
-		<jsp:include page="/WEB-INF/views/include/header.jsp"/>
         <div id="container">
+			<jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <div class="main">
                 <div class="post">
                         <div class="postinf">
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
+	            <jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
             </div>
-            <jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
 	</body>
 </html>

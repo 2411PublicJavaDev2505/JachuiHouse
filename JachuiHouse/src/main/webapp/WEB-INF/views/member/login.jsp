@@ -1,20 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"></html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 페이지</title>
-<!--     <link rel="stylesheet" href="../resources/css/footer.css"> -->
-    <link rel="stylesheet" href="../resources/css/login.css">
+    <link rel="stylesheet" href="../resources/css/member/login.css">
     
 </head>
 <body>
-    <!-- <header>
-        <jsp:include page="/WEB-INF/views/include/header.jsp" />
-    </header> -->
-
+	<div class="container">
+   <jsp:include page="/WEB-INF/views/include/header.jsp" />
     <main class="login-main">
         <div class="login-container">
             
@@ -43,15 +40,14 @@
                         <p>계정이 없으신가요?</p> 
                             <a href="/member/signupJachui">자취생 회원가입</a>
                             <a href="/member/signupRealtor">공인중개사 회원가입</a>
-                        </p>
                         <p>아이디·비밀번호 찾기</p>
                                 <a href="/member/findId">아이디 찾기</a> 
                                 <a href="/member/resetPw">비밀번호 재설정</a> 
                     </div>
+                	</form>
                     </div>
-                </form>
-            </div>
-        </div>
-
-    </main>
+          	  </div>
+   	 </main>
+	
+	</div>
 </body>

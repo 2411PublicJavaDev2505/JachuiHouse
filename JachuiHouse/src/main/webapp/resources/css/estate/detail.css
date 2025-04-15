@@ -1,0 +1,96 @@
+@charset "UTF-8";
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFF9E9;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  .main-container {
+    width: 100%;
+    padding: 50px 0;
+  }
+  
+  .estate-card {
+    width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+    padding: 20px;
+  }
+  
+  .image-placeholder {
+    position: relative;
+    text-align: center;
+  }
+  
+  .image-placeholder img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .image-placeholder button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255,255,255,0.8);
+    border: none;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  .image-placeholder button:first-of-type {
+    left: 10px;
+  }
+  
+  .image-placeholder button:last-of-type {
+    right: 10px;
+  }
+  
+  .estate-conatact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .chat-btn button {
+    background-color: #FF7C45;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .realtor-phone {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .estate-info {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .estate-info > div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+  }
+  
+  .info-title {
+    font-weight: bold;
+    color: #555;
+  }
+  

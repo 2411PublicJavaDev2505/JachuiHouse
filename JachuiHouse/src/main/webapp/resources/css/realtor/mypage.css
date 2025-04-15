@@ -1,0 +1,202 @@
+@charset "UTF-8";
+
+body{
+    background-color: #FAF3E0;
+    margin: 0;
+}
+main div{
+    box-sizing: border-box;
+
+}
+main{
+    box-sizing: border-box;
+    width: 1000px;
+    height: 700px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+#mainAll{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+#mainLeft{
+    width:300px;
+    height:100%;
+    margin-top: 50px;
+}
+#mainRight{
+    width:700px;
+    height:100%;
+    
+}
+#profile{
+    width:100%;
+    height: 210px;
+}
+#photo{
+    width: 66%;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 100px;
+}
+#photo img{
+    width: 100%;
+    height: 200px;
+    border-radius: 100px;
+}
+#name{
+    height:40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#intro{
+    height: 40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#company{
+    height:40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#phone{
+    height:40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#email{
+    height: 40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#modi{
+    height:40px;
+    text-align: center;
+    margin-top: 50px;
+}
+#modify{
+    height:100%;
+    width:80%;
+    font-size: 20px;
+    color: white;
+    border-radius: 6px;
+    background-color: #969696;
+}
+
+#del{
+    height:40px;
+    text-align: center;
+    margin-top: 15px;
+}
+#delete{
+    height:100%;
+    width:80%;
+    font-size: 20px;
+    color: white;
+    border-radius: 6px;
+    background-color: #ff7c45;
+}
+#content-intro{
+    height:50px;
+    font-size: 28px;
+
+}
+#chatList{
+    background-color: #0c8ce9;
+    border-radius: 5px;
+    width:120px;
+    height: 40px;
+    margin-left: 420px;
+    font-size: 20px ;
+    color:white;
+}
+#content{
+    width: 100%;
+    height: 25%;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    
+
+}
+#roomImg{
+    width:165px;
+    height: 165px;
+    margin-top: 4px;
+    margin-bottom: 6px;
+    margin-left: 5px;
+    float: left;
+}
+#roomIntro{
+    float:left;
+    width:520px;
+    height:100%;
+    margin-left: 5px;
+}
+#roomIntro b{
+    font-size: 30px;
+}
+#roomIntro text{
+    font-size: 30px;
+}
+#top{
+    width:100%;
+    height:34%;
+}
+#mid{
+    width:100%;
+    height:33%;
+
+}
+#bot{
+    width:100%;
+    height:33%;
+
+}
+#top-in{  
+    width:100%;
+    float:right;
+    height:100%;
+    
+}
+#jongro{
+    width:55%;
+    height: 100%;
+    float: left;
+    
+}
+#button-box{
+    margin-top: 6px;
+    width:45%;
+    float: left;
+    height:80%;
+}
+#update{
+    background-color: #0c8ce9;
+    color: white;
+    font-size: 25px;
+    border:none;
+    border-radius: 5px;
+    width: 80px;
+    height: 40px;
+    float: left;
+    margin-left: 60px;
+}
+#x{
+    margin-left: 10px;
+    background-color: #f60909;
+    color: white;
+    font-size: 25px;
+    border:none;
+    border-radius: 5px;
+    width: 80px;
+    height: 40px;
+    float: left;
+}
+#roomImg img{
+    border-radius: 5px;
+    width:165px;
+    height: 165px;
+}
