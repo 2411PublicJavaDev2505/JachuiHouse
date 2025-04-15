@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MemberMapper">
+<mapper namespace="com.house.jachui.member.mapper.MemberMapper">
 	<resultMap type="Member" id="loginResultMap">
 		<id property="userId" 	column="USER_ID" />
 		<result property="userPw"	column="USER_PW"/>
@@ -19,7 +19,6 @@
 		<result property="userBirth"			column="USER_BIRTH"/>
 		<result property="userPostcode"			column="USER_POSTCODE"/>
 		<result property="userDetailAddress"	column="USER_DETAILADDRESS"/>
-		<result property="businessName"			column="BUSINESS_NAME"/>
 		<result property="aloneLiving"			column="ALONE_LIVING"/>
 		<result property="userRole"				column="USER_ROLE"/>
 		<result property="realtorName"			column="REALTOR_NAME"/>
@@ -30,12 +29,20 @@
 	</resultMap>
 	
 	<insert id="memberSignupJachui">
-		INSERT INTO MEMBER
+		INSERT INTO MEMBER(USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_ADDRESS, 
+		USER_POSTCODE, USER_DETAILADDRESS, USER_BIRTH, ALONE_LIVING, USER_ROLE, REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE)
 		VALUES(#{userId} ,#{userPw}, #{userName}, #{userPhone}, #{userAddress}, 
-		#{userPostcode}, #{userDetailAddress}, #{userBirth}, #{aloneLiving})
+		#{userPostcode}, #{userDetailAddress}, #{userBirth}, #{aloneLiving}, 'M', 'X', 0, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
-	<select id="findIds" resultMap="memberResultMap">
+	<insert id="memberSignupRealtor">
+		INSERT INTO MEMBER(USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_ADDRESS,
+		USER_POSTCODE, USER_DETAILADDRESS, )
+		VALUES(#{userId} ,#{userPw}, #{userName}, #{userPhone}, #{userAddress}, 
+		#{userPostcode}, #{userDetailAddress}, 'R', #{realtorName}, '1', DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="selectFindId" resultType="com.house.jachui.member.vo.MemberVO">
 		SELECT 
             USER_ID AS userId,
             CREATE_DATE AS joinDate
@@ -47,4 +54,29 @@
             AND USER_ROLE = #{userRole}
             AND DELETE_YN = 'N'
 	</select>
+	
+	<select id="selectFoundId" resultType="com.house.jachui.member.vo.MemberVO">
+		SELECT 
+            USER_NAME AS userName,
+            USER_EMAIL AS userEmail
+        FROM 
+            MEMBER
+        <where> 
+        	USER_ROLE = #{userRole}
+            AND USER_EMAIL = #{userEmail}
+            OR USER_PHONE = #{userPhone}
+            AND DELETE_YN = 'N'
+        </where>
+	</select>
+	
+	<update id="updateResetPw" parameterType="com.house.jachui.member.vo.MemberVO">
+		UPDATE MEMBER 
+		SET USER_PW
+		WHERE
+		USER_ID = #{userId}
+		AND USER_NAME = #{userName}
+		AND USER_EMAIL = #{userEmail}
+	</update>
+	
+	
 </mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.jachui.trade.model.store.TradeMapper">
+	<resultMap type="Trade" id="tradeResultMap">
+		<id 	property="tradeNo" 			column="TRADE_NO" />
+		<result property="userId"			column="USER_ID" />
+		<result property="tradeTitle" 		column="TRADE_TITLE" />
+		<result property="tradeContent" 	column="TRADE_CONTENT" />
+		<result property="tradePrice" 		column="TRADE_PRICE" />
+		<result property="viewCount" 		column="VIEW_COUNT" />
+		<result property="writeDate" 		column="WRITE_DATE" />
+		<result property="tradeFilename" 	column="TRADE_FILENAME" />
+		<result property="tradeFileRename" 	column="TRADE_FILERENAME" />
+		<result property="tradeFilepath" 	column="TRADE_FILEPATH" />
+		<result property="tradeYn"			column="TRADE_YN" />
+		<result property="tradeDate" 		column="TRADE_DATE" />
+		<result property="delYn" 			column="DEL_YN" />
+	</resultMap>
+	
+	
+	<!-- 단건 조회 -->
+    <select id="selectOneByNo" resultMap="tradeResultMap">
+        SELECT * FROM TRADE WHERE TRADE_NO = #{tradeNo} AND DEL_YN = 'N'
+    </select>
+
+    <!-- 전체 목록 조회 (페이징 없이) -->
+    <select id="selectListAll" resultMap="tradeResultMap">
+        SELECT * FROM TRADE WHERE DEL_YN = 'N' ORDER BY TRADE_NO DESC
+    </select>
+
+    <!-- 특정 사용자 게시글 목록 (예: 마이페이지) -->
+    <select id="selectPersonalList" resultMap="tradeResultMap">
+        SELECT * FROM TRADE 
+        WHERE USER_ID = #{userId} AND DEL_YN = 'N'
+        ORDER BY TRADE_NO DESC
+    </select>
+
+    <!-- 총 게시물 수 -->
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) FROM TRADE WHERE DEL_YN = 'N'
+    </select>
+
+    <!-- 검색 결과 리스트 -->
+    <select id="selectSearchList" resultMap="tradeResultMap">
+        SELECT * FROM TRADE 
+        WHERE ${searchType} LIKE '%' || #{searchKeyword} || '%' 
+        AND DEL_YN = 'N'
+        ORDER BY TRADE_NO DESC
+    </select>
+
+    <!-- 조건 검색 게시물 수 -->
+    <select id="getTotalCountWithCondition" resultType="int">
+        SELECT COUNT(*) FROM TRADE 
+        WHERE ${searchType} LIKE '%' || #{searchKeyword} || '%' 
+        AND DEL_YN = 'N'
+    </select>
+
+    <!-- 조회수 증가 -->
+    <update id="countViewUpdate">
+        UPDATE TRADE SET VIEW_COUNT = VIEW_COUNT + 1
+        WHERE TRADE_NO = #{tradeNo}
+    </update>
+    
+    
+	<insert id="insertTrade" parameterType="TradeAddRequest" useGeneratedKeys="true">
+		<selectKey order="BEFORE" resultType="_int" keyProperty="tradeNo">
+			SELECT SEQ_TRADE_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO TRADE(TRADE_NO, USER_ID, TRADE_TITLE, TRADE_CONTENT, TRADE_PRICE,
+		TRADE_FILENAME, TRADE_FILERENAME, TRADE_FILEPATH) 
+		VALUES (#{tradeNo}, #{userId}, #{tradeTitle}, #{tradeContent}, #{tradePrice},
+		 #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath)
+	</insert>
+	<update id="updateTrade" parameterType="TradeAddRequest">
+		UPDATE TRADE
+		SET TRADE_TITLE = #{tradeTitle},
+		    TRADE_CONTENT = #{tradeContent},
+		    TRADE_FILENAME = #{tradeFilename},
+		    TRADE_FILERENAME = #{tradeFileRename},
+		    TRADE_FILEPATH = #{tradeFilepath}
+		WHERE TRADE_NO = #{tradeNo}
+	</update>
+	<delete id="deleteTrade">
+		UPDATE TRADE
+		SET DEL_YN = 'Y'
+		WHERE TRADE_NO = #{tradeNo}
+	</delete>
+</mapper>
