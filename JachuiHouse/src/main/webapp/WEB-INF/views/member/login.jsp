@@ -25,12 +25,12 @@
 					</div>
 					<form class="login-form" action="/member/login" method="post">
 						<div class="form-group">
-							<label for=>아이디: </label>
-							<input type="text" name="memberId">
+							<label for="userId">아이디: </label>
+							<input type="text" name="userId" id="userId">
 						</div>
 						<div class="form-group">
-							<label for="">비밀번호: </label>
-							<input type="password" name="memberPw">
+							<label for="userPw">비밀번호: </label>
+							<input type="password" name="userPw" id="userPw">
 						</div>
 						<div class="checkbox-container">
 							<input type="checkbox" id="save-id">
