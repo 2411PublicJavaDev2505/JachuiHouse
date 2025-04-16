@@ -1,0 +1,64 @@
+@charset "UTF-8";
+main{
+    margin-top: 50px;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+.left-image img{
+    width: 200px;
+    border-radius: 100%;
+}
+.updateBtn button{
+    background-color: #FFA37C;
+    width: 100%;
+    color: white;
+    padding: 7px;
+    border-color: #D4693B;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.dleteBtn button{
+    width: 100%;
+    padding: 7px;
+    background-color: #FF7C45 ;
+    border-radius: 8px;
+    border-color: #D4693B;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+.calculatorBtn {
+    margin-top: 20px;
+}
+.calculatorBtn button{
+    width: 100%;
+    padding: 7px;
+    background-color: #FF7C45 ;
+    border-radius: 8px;
+    border-color: #D4693B;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+.updateBtn button, .dleteBtn button, .calculatorBtn button:hover{
+    cursor: pointer;
+}
+
+.my-inform p {
+    border-bottom: 2px solid #969696;
+    padding: 5px;
+}
+.chat-content, .notice-content, .thing-content{
+    border: 1px solid #969696;
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+}
+.chat-content p, .notice-content p {
+    border-bottom: 2px solid #969696;
+    text-align: center;
+}

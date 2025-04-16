@@ -2,6 +2,7 @@ package com.house.jachui.member.model.service;
 
 import java.util.List;
 
+import com.house.jachui.member.controller.dto.UpdateRequest;
 import com.house.jachui.member.model.vo.Member;
 
 
@@ -24,6 +25,15 @@ public interface MemberService {
 
 	// 아이디찾기결과
 	List<Member> selectFoundId(Member member);
+
+
+	boolean checkPw(String userId, String userPw);
+
+
+	int deleteMember(String userId);
+
+
+	int updateMember(UpdateRequest member);
 
 
 

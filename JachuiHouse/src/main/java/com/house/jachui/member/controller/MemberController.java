@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.house.jachui.member.controller.dto.UpdateRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 
@@ -142,6 +144,7 @@ public class MemberController {
 		
 	}
 
+
 	// 마이페이지
 	@GetMapping("/myPage")
 	public String showAloneDetail() {
@@ -152,11 +155,58 @@ public class MemberController {
 	public String showDleteMember() {
 		return "member/delete";
 	}
-
+	@PostMapping("/delete")
+	public String deleteMember(
+			HttpSession session,
+			@RequestParam("userId") String userId,
+			@RequestParam("userPw") String userPw,
+			Model model) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		if(!mService.checkPw(userId, userPw)) {
+			model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
+			return "common/error";
+		}
+		
+		int result = mService.deleteMember(userId);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+		model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
+	        return "common/error";
+		}
+	}
 	// 예산계산기
 	@GetMapping("/accountBook")
 	public String showAccountBook() {
 		return "member/accountBook";
+	}
+	// 회원정보 수정
+	@GetMapping("/update")
+	public String showMemberUpdate() {
+		return "member/update";
+	}
+	@PostMapping("/update")
+	public String updateMember(
+			HttpSession session,
+			@ModelAttribute UpdateRequest member
+			,Model model){
+		int result = mService.updateMember(member);
+		if(result > 0) {
+			String role = (String)session.getAttribute("userRole");
+			switch(role) {
+			case "M" : 
+				return "redirect:/member/myPage";
+			case "R" :
+				return "redirect:/realtor/mypage";
+			default :
+				return "common/error";
+			}
+			
+		}else {
+			model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
+	        return "common/error";
+		}
+		 
 	}
 	
 }
