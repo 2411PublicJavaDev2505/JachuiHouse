@@ -2,10 +2,10 @@ package com.house.jachui.member.model.service.impl;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.model.mapper.MemberMapper;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
@@ -45,5 +45,18 @@ public class MemberServiceImpl implements MemberService{
 		List<Member> result = mMapper.selectFoundId(member);
 		return result;
 	}
+
+	@Override
+	public Member selectOneByLogin(MemberLoginRequest member) {
+		Member result = mMapper.selectOneByLogin(member);
+		return result;
+	}
+
+	/*
+	 * @Override 
+	 * public Member selectOneByLogin(MemberLoginRequest member) { 
+	 * Member result = mMapper.MemberLoginRequest(member); 
+	 * return null; }
+	 */
 
 }

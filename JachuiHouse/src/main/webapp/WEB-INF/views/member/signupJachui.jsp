@@ -26,9 +26,10 @@
                 <form class="form" action="/member/signupJachui" method="POST" id="signup_form">
                         <div class="form-group">
                             <label for="id">아이디</label>
-                            <input type="text" name="userId" minlength="4" maxlength="10" placeholder="4자~10자 사이 영어, 공백없이" onkeydown="inputIdChk()" required>
-                            <button type="button" onClick="fn_dbCheckId()" name="dbCheckId" class="checkId">중복확인</button>
-                            <input type="hidden" name="idDuplication" value="idUncheck">
+                            <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="4자~10자 사이 영어+숫자, 공백없이" onkeydown="inputIdChk()" autofocus required>
+                            <label id="label1"></label>
+                            <!-- <button type="button" onClick="fn_dbCheckId()" name="dbCheckId" class="checkId">중복확인</button>
+                            <input type="hidden" name="idDuplication" value="idUncheck"> -->
                         </div>
         
                     <div class="form-group">

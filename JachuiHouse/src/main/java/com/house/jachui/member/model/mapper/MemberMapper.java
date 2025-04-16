@@ -3,8 +3,8 @@ package com.house.jachui.member.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.session.SqlSession;
 
+import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.model.vo.Member;
 
 
@@ -20,5 +20,8 @@ public interface MemberMapper {
 	int updateResetPw(Member member);
 
 	List<Member> selectFoundId(Member member);
+
+	Member selectOneByLogin(MemberLoginRequest member);
+
 
 }
