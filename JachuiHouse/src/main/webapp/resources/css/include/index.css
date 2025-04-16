@@ -4,9 +4,10 @@ body{
     background-color: #FFF9E9;
 } 
 .main {
-	width: 1200px;
-    margin: 0px 100px 0 100px;
+	width: 1500px;
+    margin: 0 auto;
     height: 755px;
+    margin-top : 60px;
 }
 
 .banner {

@@ -15,8 +15,7 @@
 		<main>
 	        <div class="main-container">
 	            <div class="account-head">
-	            <button onClick="location.href='myPage'">마이페이지로</button>
-	                <h1>예산 계산기</h1>
+	            <button onClick="location.href='myPage'" style="font-size:1rem">마이페이지로</button>	                <h1>예산 계산기</h1>
 	            </div>
 	            <div class="account-contents">
 	                <p>주거비</p>

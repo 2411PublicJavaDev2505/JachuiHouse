@@ -2,16 +2,15 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>자취스크립트</title>
-<link rel="stylesheet" href="../resources/css/include/header.css">
-<link rel="stylesheet" href="../resources/css/include/index.css">
-<link rel="stylesheet" href="../resources/css/include/footer.css">
-    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
-</head>
-<body>
-	<main>
+	<head>
+		<meta charset="UTF-8">
+		<title>자취스크립트</title>
+		<link rel="stylesheet" href="../resources/css/include/header.css">
+		<link rel="stylesheet" href="../resources/css/include/index.css">
+		<link rel="stylesheet" href="../resources/css/include/footer.css">
+	    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+	</head>
+	<body>
 		 <div class="container">    
 		 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		 
@@ -51,7 +50,7 @@
 	                        </a>
 	                    </div>
 	                    <div class="right-menu">
-	                        <a href="/notice/list">
+	                        <a href="#">
 	                            <div class="notice-board">
 	                                <h3>공지사항</h3>
 	                                <li>감기 조심하세요</li>
@@ -64,29 +63,16 @@
 	        <!-- 푸터 -->
 	   		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	    </div>
-	</main>
         <!-- JavaScript 파일 연결 -->
         <script>
-        new TypeIt('.main-hello', {
-            loop:true,
-            speed: 90,
-            waitUntilVisible: true,})
-            .type("자취스크립에 오신 걸 환영합니다.", {delay:500})
-            .delete(12)
-            .type("서 당신의 꿀팁을 공유해주세요.")
-            .go();
+	        new TypeIt('.main-hello', {
+	            loop:true,
+	            speed: 90,
+	            waitUntilVisible: true,})
+	            .type("자취스크립에 오신 걸 환영합니다.", {delay:500})
+	            .delete(12)
+	            .type("서 당신의 꿀팁을 공유해주세요.")
+	            .go();
         </script>
-        <!-- JavaScript 파일 연결 -->
-        <script>
-        new TypeIt('.main-hello', {
-            loop:true,
-            speed: 90,
-            waitUntilVisible: true,})
-            .type("자취스크립에 오신 걸 환영합니다.", {delay:500})
-            .delete(12)
-            .type("서 당신의 꿀팁을 공유해주세요.")
-            .go();
-        </script>
-</body>
-</html>
+	</body>
 </html>

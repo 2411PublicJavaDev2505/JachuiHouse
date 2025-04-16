@@ -22,7 +22,7 @@
 	                    <p>자취생 강우혁입니다.</p>
 	                </div>
 	                <div class="updateBtn">
-	                    <button>내 정보 수정</button>
+	                    <button onClick="location.href='update'">내 정보 수정</button>
 	                </div>
 	                <div class="my-inform">
 	                    <p>서울시 종로구</p>

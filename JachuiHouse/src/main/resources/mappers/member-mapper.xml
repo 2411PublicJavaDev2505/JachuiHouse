@@ -97,6 +97,15 @@
 	      AND USER_PW = #{userPw}
 	      AND DELETE_YN = 'N'
 	</select> -->
+	<delete id="deleteMember"> 
+		DELETE FROM MEMBER WHERE USER_ID = #{userId} 
+	</delete>
+	<select id="selectPassword" resultType="Member"> 
+		SELECT USER_PW FROM MEMBER WHERE USER_ID = #{userId} 
+	</select>
+	<update id="updateMember"> 
+		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE={#userPhone}, USER_ADDRESS=#{userAddress}, REALTOR_NAME=#{realtorName} WHERE USER_ID=#{userId} 
+	</update>
 	
 	<select id="selectRealtorById" resultType="Member">
 		SELECT * FROM MEMBER WHERE REALTOR_NAME =#{realtorName} AND USER_NAME =#{userName} 

@@ -27,16 +27,16 @@
                 <a href="/member/login">로그인</a>
             </c:if>
             <c:if test="${sessionScope.userId ne null }">
-            	<c:if test="${sessionScope.role eq 'A' }">
+            	<c:if test="${sessionScope.userRole eq 'A' }">
             		<a href="/admin/adminlist">관리자 페이지</a>
             	</c:if>
-            	<c:if test="${sessionScope.userId eq 'R' }">
+            	<c:if test="${sessionScope.userRole eq 'R' }">
             		<a href="/member/realtor/mypage">마이페이지</a>
             	</c:if>
-            	<c:if test="${sessionScope.userId eq 'M' }">
+            	<c:if test="${sessionScope.userRole eq 'M' }">
             		<a href="/member/myPage">마이페이지</a>
             	</c:if>
-            	<a href="/member/logout">로그아웃</a>
+            	<a href="/member/logout">로그아웃</a> 
             </c:if>
             </div>
         </header>
