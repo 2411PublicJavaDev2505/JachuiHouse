@@ -26,5 +26,8 @@ public interface MemberService {
 	List<Member> selectFoundId(Member member);
 
 
+	Member selectRealtorById(String userId);
+
+
 
 }

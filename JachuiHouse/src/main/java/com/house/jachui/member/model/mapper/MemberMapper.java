@@ -21,4 +21,6 @@ public interface MemberMapper {
 
 	List<Member> selectFoundId(Member member);
 
+	Member selectRealtorById(String userId);
+
 }

@@ -138,7 +138,16 @@ public class MemberController {
 	//공인중개사 마이페이지 이동
 	@GetMapping("/realtor/mypage")
 	public String showRealtorMypageForm(HttpSession session, Model model) {
-		return "member/realtor/mypage";
+		String userRole = (String)session.getAttribute("userRole");
+			if("R".equals(userRole)) {
+				String userId = (String)session.getAttribute("userId");
+				Member member = mService.selectRealtorById(userId);
+				if(member != null) {
+					model.addAttribute("member", member);
+					return "member/realtor/mypage";
+				}
+			}
+			return "member/realtor/page";
 		
 	}
 
@@ -146,6 +155,11 @@ public class MemberController {
 	@GetMapping("/myPage")
 	public String showAloneDetail() {
 		return "member/myPage";
+	}
+	// 공인중개사 채팅 목록
+	@GetMapping("/realtor/chatlist")
+	public String showRealtorChatList() {
+		return "member/realtor/chatlist";
 	}
 	// 회원탈퇴
 	@GetMapping("/delete")

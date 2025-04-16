@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/header.css">
-<link rel="stylesheet" href="../resources/css/include/footer.css">
-<link rel="stylesheet" href="../resources/css/realtor/mypage.css">
+<link rel="stylesheet" href="../../resources/css/include/header.css">
+<link rel="stylesheet" href="../../resources/css/include/footer.css">
+<link rel="stylesheet" href="../../resources/css/realtor/mypage.css">
 </head>
 <body>
 	<header>
@@ -17,7 +17,7 @@
             </div>
             </a> 
             <div class="nav">
-                <a href="#">홈</a> 
+                <a href="/">홈</a> 
                 <a href="#">자취록</a>
                 <a href="#">찾아방</a>
                 <a href="#">사방팔방</a>
@@ -35,19 +35,19 @@
                     </div>
                 </div>
                 <div id="name">
-                    <b>강우혁</b>
+                    <b>"${member.userName }"</b>
                 </div>
                 <div id="intro">
-                    공인중개사 강우혁입니다.
+                    공인중개사 "${member.userName }"입니다.
                 </div>
                 <div id="company">
-                    kh공인중개사 사무소
+                    "${member.realtorName}"
                 </div>
                 <div id="phone">
-                    010-1919-9191
+                    "${member.userPhone }"
                 </div>
                 <div id="email">
-                    kh@kh.com
+                    "${member.userEmail }"
                 </div>
                 <div id="modi">
                     <button type="submit" id="modify">정보 수정</button>
@@ -119,7 +119,7 @@
                 </div>
                 <div id="content">
                     <div id="roomImg">
-
+						
                     </div>
                     <div id="roomIntro">
                         <div id="top">
