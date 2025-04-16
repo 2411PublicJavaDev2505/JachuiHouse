@@ -27,6 +27,7 @@ public class Estate {
 	private int estateDeposit;
 	private int estateMonthlyRent;
 	private String userId;
+	private String userPhone;
 	private List<EstateOption>estateOptionList;
 	private List<EstateFile>estateFileileList;
 	

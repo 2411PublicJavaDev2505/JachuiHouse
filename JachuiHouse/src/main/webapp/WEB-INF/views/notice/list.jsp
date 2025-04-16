@@ -62,14 +62,13 @@
 				</c:if>
 			</div>
 		</div>
-		    <div class="board">
-        		<!-- admin확인절차 넣어줘야 함 -->
-        		<%-- <c:if test="${member.userId == 'admin'}"> --%>
-        		 	<button class="btn"><a href="">신고 관리</a></button>
-        		<%-- </c:if> --%>  
-        	</div>		
+	    <div class="board">
+       		<!-- admin확인절차 넣어줘야 함 -->
+       		<%-- <c:if test="${member.userId == 'admin'}"> --%>
+       		 	<button class="btn"><a href="">신고 관리</a></button>
+       		<%-- </c:if> --%>  
+       	</div>		
 	</main> 
-	
-		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-</body>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	</body>
 </html>

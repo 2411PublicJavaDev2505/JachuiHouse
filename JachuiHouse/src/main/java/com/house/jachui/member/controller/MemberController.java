@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.house.jachui.member.dto.MemberLoginRequest;
+import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 
@@ -30,14 +32,51 @@ public class MemberController {
 	
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
-	public String MemberLoginForm() {
-		return "member/login";  // /WEB-INF/views/login.jsp 로 연결됨
+	public String memberLoginForm() {
+		return "member/login";
 	}
-	// 로그인 처리
+	
+	//로그인 처리
 	@PostMapping("/login")
-	public String loginProcess() {
-		// 로그인 처리 로직 (예: 아이디/비밀번호 확인)
-		return "로그인 처리 완료";
+	public String memberLoginForm(
+			MemberLoginRequest member,
+			HttpSession session,
+			Model model) {
+		try {
+			// 로그인 요청 객체 생성
+			// 로그인 서비스 호출
+			Member mem = mService.selectOneByLogin(member);
+			if (mem != null) {
+				// 로그인 성공 시 세션에 값 저장
+				session.setAttribute("loggedIn", true); //로그인 상태 저장
+				session.setAttribute("userId", mem.getUserId()); // 유저 ID 저장
+				session.setAttribute("userName", mem.getUserName()); // 사용자 이름 저장
+				session.setAttribute("userRole", mem.getUserRole()); 
+				return "redirect:/"; //메인페이지로 리다이렉트
+			} else {
+				model.addAttribute("errorMsg", "아이디 또는 비밀번호가 잘못되었습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", "존재하지 않는 정보입니다.");
+			return "common/error";
+		}
+	}
+			
+			
+//	// 로그인 처리
+//	@PostMapping("/login")
+//	public String loginProcess() {
+//		// 로그인 처리 로직 (예: 아이디/비밀번호 확인)
+//		return "로그인 처리 완료";
+//	}
+	
+	@GetMapping("/logout")
+	public String memberLogout(HttpSession session) {
+		if(session != null) {
+			session.invalidate();
+		}
+		return "member/logout";
 	}
 	
 	// 자취생 회원가입 페이지 이동
@@ -71,7 +110,7 @@ public class MemberController {
 	@PostMapping("/signupRealtor")
 	public String memberSignupRealtor(
 			@ModelAttribute Member member
-			,HttpServletRequest request) {
+			,HttpServletRequest reponse) {
 		int result = mService.memberSignupRealtor(member);
 		if(result > 0) {
 			return "redirect:/";
@@ -125,11 +164,11 @@ public class MemberController {
 	// 아이디찾기결과 페이지 이동
 	@GetMapping("/foundId")
 	public String selectFoundIdForm() {
-		return "member/resetPw";
+		return "member/foundId";
 	}
 	
 	@PostMapping("/foundId")
-	public String selectFoundId(Member member, Model model) {
+	public String selectFoundId(@ModelAttribute Member member, Model model) {
 		List<Member> matchedList = mService.selectFoundId(member);
 		model.addAttribute("matchedList", matchedList);
 		return "member/foundId";
@@ -138,25 +177,86 @@ public class MemberController {
 	//공인중개사 마이페이지 이동
 	@GetMapping("/realtor/mypage")
 	public String showRealtorMypageForm(HttpSession session, Model model) {
-		return "member/realtor/mypage";
-		
+		String userRole = (String)session.getAttribute("userRole");
+		if("R".equals(userRole)) {
+			String userId = (String)session.getAttribute("userId");
+			Member member = mService.selectRealtorById(userId);
+			if(member != null) {
+				model.addAttribute("member", member);
+				return "member/realtor/mypage";
+			}
+		}
+		return "member/realtor/page";
 	}
+
 
 	// 마이페이지
 	@GetMapping("/myPage")
 	public String showAloneDetail() {
 		return "member/myPage";
 	}
+	// 공인중개사 채팅 목록
+	@GetMapping("/realtor/chatlist")
+	public String showRealtorChatList() {
+		return "member/realtor/chatlist";
+	}
 	// 회원탈퇴
 	@GetMapping("/delete")
 	public String showDleteMember() {
 		return "member/delete";
 	}
-
+	@PostMapping("/delete")
+	public String deleteMember(
+			HttpSession session,
+			@RequestParam("userId") String userId,
+			@RequestParam("userPw") String userPw,
+			Model model) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		if(!mService.checkPw(userId, userPw)) {
+			model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
+			return "common/error";
+		}
+		
+		int result = mService.deleteMember(userId);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+		model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
+	        return "common/error";
+		}
+	}
 	// 예산계산기
 	@GetMapping("/accountBook")
 	public String showAccountBook() {
 		return "member/accountBook";
+	}
+	// 회원정보 수정
+	@GetMapping("/update")
+	public String showMemberUpdate() {
+		return "member/update";
+	}
+	@PostMapping("/update")
+	public String updateMember(
+			HttpSession session,
+			@ModelAttribute UpdateRequest member
+			,Model model){
+		int result = mService.updateMember(member);
+		if(result > 0) {
+			String role = (String)session.getAttribute("userRole");
+			switch(role) {
+			case "M" : 
+				return "redirect:/member/myPage";
+			case "R" :
+				return "redirect:/realtor/mypage";
+			default :
+				return "common/error";
+			}
+			
+		}else {
+			model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
+	        return "common/error";
+		}
+		 
 	}
 	
 }

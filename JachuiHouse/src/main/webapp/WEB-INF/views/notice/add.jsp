@@ -28,6 +28,7 @@
             
                 <div class="form-group">
                 제목   <input type="text" id="" name="noticeTitle"  placeholder="제목">
+				</div>
 
                 <div class="form-group">
                     내용
@@ -39,12 +40,11 @@
                 <div class="form-group">
                 첨부파일 : <span><a href="..${NoticeVO.filePath }">${NoticeVO.fileName }</a></span>
 				<input type="file" name="uploadFile" onchange="readURL(this)">
-            
+            	</div>
         		<button type="submit" class="btn">등록하기</button>
 				</form>
             </div>
         </main>
-
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-</body>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	</body>
 </html>

@@ -13,7 +13,6 @@ main {
 .delete-head {
     padding: 5px;
     border-bottom: 2px solid #000;
-    margin-right : 2rem;
 }
 .delete-head h2 {
     margin: 10px;
@@ -21,7 +20,6 @@ main {
 .password {
     padding: 2rem;
     border-bottom: 1px solid #ddd;
-    margin-right : 2rem;
 }
 #pw {
     width: 30%;
@@ -34,7 +32,7 @@ main {
 }
 .opinion {
     padding-bottom: 3rem;
-    margin: 2rem 2rem 2rem 0px;
+    margin: 2rem;
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -42,7 +40,6 @@ main {
 }  
 .opinion-label {
     padding: 0%;
-    margin-left : 2rem;
 }
 #textarea_id {
     border-color: grey;

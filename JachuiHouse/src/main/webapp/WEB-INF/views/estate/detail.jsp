@@ -29,37 +29,46 @@
                         <button>1:1 채팅문의</button>
                     </div>
 					<div class="realtor-phone">
-                        010-0000-0000
+                        ${estate.userPhone }
                     </div>
 				</div>
                 <div class="estate-info">
                     <div class="estate-info-1">
                         <span class="info-title">거래정보</span>
-                        <div class="estate-rent">월세 200/95</div>
+                        <div class="estate-rent">${estate.estateRentType } ${estate.estateDeposit }/${estate.estateMonthlyRent }</div>
                     </div>
                     <div class="estate-info-2">
                         <span class="info-title">주소</span>
-                        <div class="estate-address">서울시 금천구 동산00로 000 00동 000호</div>
+                        <div class="estate-address">${esate.estateAddress }</div>
                     </div>
                     <div class="estate-info-3">
                         <span class="info-title">전용면적</span>
-                        <div class="estate-width">25㎡</div>
+                        <div class="estate-width">${estate.estateWidth }㎡</div>
                     </div>
                     <div class="estate-info-4">
                         <span class="info-title">형태</span>
-                        <div class="estate-type">원룸</div>
+                        <div class="estate-type">${estate.estateType }</div>
                     </div>
                     <div class="estate-info-5">
                         <span class="info-title">층</span>
-                        <div class="estate-floor">12층</div>
+                        <div class="estate-floor">${estate.estateFloor }층</div>
                     </div>
                     <div class="estate-info-6">
                         <span class="info-title">입주가능일</span>
-                        <div class="estate-movein-date">즉시입주가능</div>
+						<div class="estate-movein-date">
+						  	<c:choose>
+							    <c:when test="${estate.moveInNowYN eq 'Y'}">
+							      즉시입주가능
+							    </c:when>
+							    <c:otherwise>
+							      ${estate.estateMoveinDate}
+							    </c:otherwise>
+						  	</c:choose>
+						</div>
                     </div>
                     <div class="estate-info-7">
                         <span class="info-title">옵션</span>
-                        <div class="estate-option">에어컨, 세탁기, 인덕션, 냉장고</div>
+                        <div class="estate-option">${estate.optionList }</div>
                     </div>
                 </div>
             </div>
@@ -67,4 +76,4 @@
     	</div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	</body>
-    </html>
+</html>

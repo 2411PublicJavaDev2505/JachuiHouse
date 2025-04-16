@@ -14,12 +14,14 @@
 			<jsp:include page="/WEB-INF/views/include/header.jsp" />
 				<main>
 			            <div class="main-container">
+			            <form action="deleteMember" method="post">
 			                <div class="delete-head">
 			                    <h2>회원탈퇴 신청</h2>
 			                </div>
+			                 <input type="hidden" name="userId" value="${loginUser.userId}" />
 			                <div class="password">
 			                <label>비밀번호 입력 :</label>
-			                    <input type="password" id="pw" name="pw" placeholder="비밀번호를 입력해주세요." >
+			                    <input type="password" id="pw" name="userPw" placeholder="비밀번호를 입력해주세요." >
 			                </div>
 			                <div class="opinion">
 			                    <label class="opinion-label">고객님의 의견</label>
@@ -33,22 +35,32 @@
 			                    </div>
 			                </div>
 			                <div class="button-area">
-			                    <button class="cancelBtn" onClick="location.href='myPage'">취소</button>
-			                    <button class="deleteBtn" onClick="confirmDelete()">탈퇴</button>
+			                    <button class="cancelBtn" type="button" onClick="backToMyPage();">취소</button>
+			                    <button class="deleteBtn" type="button" onClick="confirmDelete(event)">탈퇴</button>
 			                </div>
-			            </div>
+			            </form>
+			            </div> 
 			        </main>
 			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		</div>
 		<script type="text/javascript">
-			function confirmDelete(){
-				const confirmed = confirm("정말로 탈퇴하시겠습니까?");
-				if(confirmed){
-					location.href = "member/delete";
-				}else{
-					retrun;
-				}
+		function confirmDelete(event) {
+			event.preventDefault(); 
+			const checkbox = document.getElementById("a");
+
+			if (!checkbox.checked) {
+				alert("회원탈퇴에 동의해주세요.");
+				return;
 			}
+			const confirmed = confirm("정말로 탈퇴하시겠습니까?");
+			if (confirmed) {
+				document.querySelector("form").submit();
+			}
+		}
+		backToMyPage = () => {
+			location.href = "myPage";
+		}
+		
 		</script>
 </body>
 </html>

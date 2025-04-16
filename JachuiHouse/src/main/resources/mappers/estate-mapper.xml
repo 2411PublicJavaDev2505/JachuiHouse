@@ -1,9 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.house.jachui.estate.mapper.EstateMapper">
-  	<resultMap type="Estate" id="estateResultMap">
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.jachui.estate.model.mapper.EstateMapper">
+	<resultMap type="Estate" id="estResultMap">
+		<id property="estateNo" column="ESTATE_NO"/>
+		<result property="estateType" column="ESTATE_TYPE"/>
+		<result property="estateAddress" column="ESTATE_ADDRESS"/>
+		<result property="estateFloor" column="ESTATE_FLOOR"/>
+		<result property="estateWidth" column="ESTATE_WIDTH"/>
+		<result property="estateMoveinDate" column="ESTATE_MOVEIN_DATE"/>
+		<result property="MovinNowYN" column="MOVEIN_NOW_YN"/>
+		<result property="estateRentType" column="ESTATE_RENT_TYPE"/>
+		<result property="estateDeposit" column="ESTATE_DEPOSIT"/>
+		<result property="estateMonthlyRent" column="ESTATE_MONTHLY_RENT"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="userPhone" column="USER_PHONE"/>
+		<collection property="optionList" select="selectOptionList"
+					column="ESTATE_NO" javaType="java.util.List"
+					ofType="EstateOption"></collection>
+	</resultMap>
+	<resultMap type="Estate" id="estateResultMap">
   		<id property="estateNo" column="ESTATE_NO"/>
   		<result property="estateType" column="ESTATE_TYPE"/>
   		<result property="estateAddress" column="ESTATE_ADDRESS"/>
@@ -26,7 +43,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   					column="ESTATE_NO"
   					javaType="java.util.List"></collection>
   	</resultMap>
-  	<select id="selectEstateByNo" resultMap="estateResultMap">
+    <select id="selectEstateList" resultType="com.house.jachui.estate.model.vo.Estate">
+        SELECT * FROM ESTATE 
+        ORDER BY ESTATE_NO DESC
+    </select>
+    <select id="selectOptionList" resultType="EStateOption">
+    	SELECT * FROM ESTATE_OPTION O 
+    	JOIN OPTION_LIST L 
+    	ON O.OPTION_NO = L.OPTION_NO
+    	WHERE ESTATE_NO = #{estateNo}
+    </select>
+    <select id="selectOneByNo">
+    	SELECT 
+        E.*, 
+        m.USER_PHONE
+	    FROM ESTATE E
+	    JOIN MEMBER M ON E.USER_ID = M.USER_ID
+	    WHERE E.ESTATE_NO = #{estateNo}
+    </select>
+    <select id="selectEstateByNo" resultMap="estateResultMap">
   		SELECT * FROM ESTATE WHERE ESTATE_NO = #{estateNo}
   	</select>
-  </mapper>
+</mapper>

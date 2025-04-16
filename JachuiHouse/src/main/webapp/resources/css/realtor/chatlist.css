@@ -1,0 +1,173 @@
+@charset "UTF-8";
+body{
+    background-color: #FAF3E0;
+    margin: 0;
+}
+main div{
+    box-sizing: border-box;
+
+}
+main{
+    box-sizing: border-box;
+
+    width: 1000px;
+    height: 700px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+#mainAll{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+#mainLeft{
+    width:300px;
+    height:100%;
+    margin-top: 50px;
+}
+#mainRight{
+    width:700px;
+    height:100%;
+    
+}
+#profile{
+    width:100%;
+    height: 210px;
+}
+#photo{
+    width: 66%;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 100px;
+}
+#photo img{
+    width: 100%;
+    height: 200px;
+    border-radius: 100px;
+}
+#name{
+    height:40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#intro{
+    height: 40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#company{
+    height:40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#phone{
+    height:40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#email{
+    height: 40px;
+    text-align: center;
+    padding-top: 15px;
+}
+#modi{
+    height:40px;
+    text-align: center;
+    margin-top: 50px;
+}
+#modify{
+    height:100%;
+    width:80%;
+    font-size: 20px;
+    color: white;
+    border-radius: 6px;
+    background-color: #969696;
+}
+
+#del{
+    height:40px;
+    text-align: center;
+    margin-top: 15px;
+}
+#delete{
+    height:100%;
+    width:80%;
+    font-size: 20px;
+    color: white;
+    border-radius: 6px;
+    background-color: #ff7c45;
+}
+#content-intro{
+    height:50px;
+    font-size: 28px;
+    border-bottom: 2px solid gray;
+
+}
+#chatList{
+    background-color: #0c8ce9;
+    border-radius: 5px;
+    width:120px;
+    height: 40px;
+    margin-left: 515px;
+    font-size: 20px;
+    color:white;
+}
+#content{
+    width: 98%;
+    height: 80%;
+    margin-top: 20px;
+    border-radius: 7px;
+    background-color: #FFA37C;
+    border: none;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+#chat-intro{
+    width: 95%;
+    height: 15%;
+    margin: 0 auto;
+    border-bottom: 2px solid gray;
+}
+#chatmokrok{
+    height: 100%;
+    font-size: 35px;
+    padding-top: 15px;
+}
+#list{
+    width:95%;
+    height: 16%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-bottom: 2px solid gray;
+}
+#nickname{
+    width:35%;
+    height: 40%;
+    float: left;
+}
+#nicknameText{
+    text-align: center;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    margin-top: 2px;
+    padding-top: 2px;
+    background-color: #EAC45C;
+    border:none;
+    border-radius: 5px;
+}
+#time{
+    padding-left: 340px;
+    padding-top: 3px;
+    width:65%;
+    height: 40%;
+    float: left;
+}
+#chat{
+    width:100%;
+    height: 60%;
+    float: left;
+    font-size: 20px;
+    padding-left: 30px;
+    padding-top: 12px;
+}
