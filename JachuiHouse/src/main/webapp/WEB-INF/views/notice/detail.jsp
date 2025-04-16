@@ -41,15 +41,15 @@
                 </span>
                 </div>
               </div>
-          </div>
+          </div><br>
+     	    <button type = "submit" class="btn" >
+			<a style='text-decoration:none;' href = "/notice/modify/${notice.noticeNo }" 
+			onclick="modifylist">수정하기</a></button>
+     		<button type = "submit" class="btn" >
+			<a style='text-decoration:none;' href = "/notice/delete?noticeNo=${notice.noticeNo }"=${notice.noticeNo }" 
+			onclick="deletelist">삭제하기</a></button>
         </main>
         </form>
-        	           		<button type = "submit" class="add-button">
-						<a style='text-decoration:none;' href = "/notice/modify/${notice.noticeNo }" 
-						class="btn" onclick="modifylist">수정하기</a></button>
-        					<button type = "submit" class="add-button">
-						<a style='text-decoration:none;' href = "/notice/delete?noticeNo=${notice.noticeNo }"=${notice.noticeNo }" 
-						class="btn" onclick="deletelist">삭제하기</a></button>
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>
 </html>

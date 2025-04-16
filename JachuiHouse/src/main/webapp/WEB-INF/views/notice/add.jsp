@@ -29,7 +29,6 @@
                 <div class="form-group">
                 제목   <input type="text" id="" name="noticeTitle"  placeholder="제목">
 
-
                 <div class="form-group">
                     내용
                 </div>

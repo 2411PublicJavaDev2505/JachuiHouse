@@ -68,36 +68,36 @@ public class NoticeController {
 		}
 	}
 	
-//	@GetMapping("/search")
-//	public String NoticeSearch(
-//			@RequestParam("searchCondition") String searchCondition
-//			, @RequestParam("searchKeyword") String searchKeyword
-//			, @RequestParam(value="currentPage", defaultValue="1") int currentPage
-//			, Model model) {
-//		try {
-//			Map<String, String> paramMap = new HashMap<String, String>();
-//			paramMap.put("searchCondition", searchCondition);
-//			paramMap.put("searchKeyword", searchKeyword);
-//			
-//			int totalCount = nService.getTotalCount(paramMap);
-//			List<NoticeVO> searchList = nService.searchListByKeyword(paramMap, currentPage); 
-//			
-//			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
-//				model.addAttribute("maxPage", pageInfo.get("maxPage"));
-//				model.addAttribute("startNavi", pageInfo.get("startNavi"));
-//				model.addAttribute("endNavi", pageInfo.get("endNavi"));
-//				
-//				model.addAttribute("searchList", searchList);
-//				model.addAttribute("searchCondition", searchCondition);
-//				model.addAttribute("searchKeyword", searchKeyword);
-//				return "inflBoard/search";
-//				
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			model.addAttribute("errorMessage", e.getMessage());
-//				return "common/error";
-//		}
-//	}
+	@GetMapping("/search")
+	public String NoticeSearch(
+			@RequestParam("searchCondition") String searchCondition
+			, @RequestParam("searchKeyword") String searchKeyword
+			, @RequestParam(value="currentPage", defaultValue="1") int currentPage
+			, Model model) {
+		try {
+			Map<String, String> paramMap = new HashMap<String, String>();
+			paramMap.put("searchCondition", searchCondition);
+			paramMap.put("searchKeyword", searchKeyword);
+			
+			int totalCount = nService.getTotalCount(paramMap);
+			List<NoticeVO> searchList = nService.searchListByKeyword(paramMap, currentPage); 
+			
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+				model.addAttribute("maxPage", pageInfo.get("maxPage"));
+				model.addAttribute("startNavi", pageInfo.get("startNavi"));
+				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				
+				model.addAttribute("searchList", searchList);
+				model.addAttribute("searchCondition", searchCondition);
+				model.addAttribute("searchKeyword", searchKeyword);
+				return "inflBoard/search";
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+				return "common/error";
+		}
+	}
 	
 	@GetMapping("/add")
 	public String NoticeAdd() {
