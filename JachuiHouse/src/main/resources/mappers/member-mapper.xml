@@ -8,7 +8,7 @@
 		<result property="userPw"	column="USER_PW"/>
 	</resultMap>
 	
-	<resultMap type="com.house.jachui.member.model.vo.Member" id="memberResultMap">
+	<resultMap type="Member" id="memberResultMap">
 		<id		property="userId"				column="USER_ID"/>
 		<result property="userPw"				column="USER_PW"/>
 		<result property="userName"				column="USER_NAME"/>
@@ -42,7 +42,7 @@
 		#{userPostcode}, #{userDetailAddress}, 'R', #{realtorName}, '1', DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
-	<select id="selectFindId" resultType="com.house.jachui.member.model.vo.Member">
+	<select id="selectFindId" resultType="Member">
 		SELECT 
             USER_ID AS userId,
             CREATE_DATE AS joinDate
@@ -55,7 +55,7 @@
             AND DELETE_YN = 'N'
 	</select>
 	
-	<select id="selectFoundId" resultType="com.house.jachui.member.model.vo.Member">
+	<select id="selectFoundId" resultType="Member">
 		SELECT 
             USER_NAME AS userName,
             USER_EMAIL AS userEmail
@@ -69,7 +69,7 @@
         </where>
 	</select>
 	
-	<update id="updateResetPw" parameterType="com.house.jachui.member.model.vo.Member">
+	<update id="updateResetPw" parameterType="Member">
 		UPDATE MEMBER 
 		SET USER_PW
 		WHERE
