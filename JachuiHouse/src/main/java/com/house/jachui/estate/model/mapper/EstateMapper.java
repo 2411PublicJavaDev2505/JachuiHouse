@@ -11,4 +11,6 @@ public interface EstateMapper {
 
 	List<Estate> selectEstateList();
 
+	Estate selectOneByNo(int estateNo);
+
 }

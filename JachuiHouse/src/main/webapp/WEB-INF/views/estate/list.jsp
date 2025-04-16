@@ -43,7 +43,7 @@
         </div>
         <c:forEach items="${estList }" var="est">
 	        <div class="estate-list">
-	            <a href="/chazabang/detail" class="estate">
+	            <a href="/chazabang/detail/${est.estateNo }" class="estate">
 	                <div class="estate-style">
 	                    <img src="../resources/images/estate/좋아보이느집.jpg" alt="이미지 준비중입니다...">
 	                        <section class="estate-inf">

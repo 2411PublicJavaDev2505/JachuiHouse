@@ -8,4 +8,6 @@ public interface EstateService {
 
 	List<Estate> getEstateList();
 
+	Estate selectOneByNo(int estateNo);
+
 }

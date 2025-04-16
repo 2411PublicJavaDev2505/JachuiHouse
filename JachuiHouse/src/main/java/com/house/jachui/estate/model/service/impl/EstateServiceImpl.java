@@ -9,18 +9,22 @@ import com.house.jachui.estate.model.mapper.EstateMapper;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.estate.model.vo.Estate;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class EstateServiceImpl implements EstateService {
 
-    private final EstateMapper estateMapper;
-
-    @Autowired
-    public EstateServiceImpl(EstateMapper estateMapper) {
-        this.estateMapper = estateMapper;
-    }
-
+    private final EstateMapper estMapper;
+    
     @Override
     public List<Estate> getEstateList() {
-        return estateMapper.selectEstateList();
+        return estMapper.selectEstateList();
+    }
+    
+    @Override
+    public Estate selectOneByNo(int estateNo) {
+    	Estate est = estMapper.selectOneByNo(estateNo);
+    	return null;
     }
 }
