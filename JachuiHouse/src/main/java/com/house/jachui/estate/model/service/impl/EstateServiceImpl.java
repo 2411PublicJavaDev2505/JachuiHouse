@@ -24,7 +24,7 @@ public class EstateServiceImpl implements EstateService {
     
     @Override
     public Estate selectOneByNo(int estateNo) {
-    	Estate est = estMapper.selectOneByNo(estateNo);
-    	return null;
+    	Estate estate = estMapper.selectOneByNo(estateNo);
+    	return estate;
     }
 }

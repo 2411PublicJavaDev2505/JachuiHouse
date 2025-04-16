@@ -10,7 +10,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,13 +21,13 @@ public class Estate {
 	private int estateFloor;
 	private int estateWidth;
 	private Date estateMoveinDate;
-	private String MoveinNowYn;
+	private String moveinNowYN;
 	private String estateRentType;
 	private int estateDeposit;
 	private int estateMonthlyRent;
 	private String userId;
 	private String userPhone;
 	private List<EstateOption>estateOptionList;
-	private List<EstateFile>estateFileileList;
+	private List<EstateFile>estateFileList;
 	
 }

@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>찾아방 상세 페이지</title>
-		<Link rel="stylesheet" href="../resources/css/estate/detail.css"/>
-		<Link rel="stylesheet" href="../resources/css/include/header.css"/>
-		<Link rel="stylesheet" href="../resources/css/include/footer.css"/>
+		<Link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/estate/detail.css"/>
+		<Link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/header.css"/>
+		<Link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/footer.css"/>
 	</head>
 	<body>
         <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
@@ -21,7 +22,7 @@
 				</c:if>
 				<div class="image-placeholder">
                     <button>◁</button>
-					<img src="../resources/images/estate/좋아보이느집.jpg" alt="등록된 사진이 없습니다."/>
+					<img src="${pageContext.request.contextPath}/resources/images/estate/좋아보이느집.jpg" alt="등록된 사진이 없습니다."/>
                     <button>▷</button>
 				</div>
 				<div class="estate-conatact">
@@ -39,7 +40,7 @@
                     </div>
                     <div class="estate-info-2">
                         <span class="info-title">주소</span>
-                        <div class="estate-address">${esate.estateAddress }</div>
+                        <div class="estate-address">${estate.estateAddress }</div>
                     </div>
                     <div class="estate-info-3">
                         <span class="info-title">전용면적</span>
@@ -57,7 +58,7 @@
                         <span class="info-title">입주가능일</span>
 						<div class="estate-movein-date">
 						  	<c:choose>
-							    <c:when test="${estate.moveInNowYN eq 'Y'}">
+							    <c:when test="${estate.moveinNowYN eq 'Y'}">
 							      즉시입주가능
 							    </c:when>
 							    <c:otherwise>
@@ -68,7 +69,11 @@
                     </div>
                     <div class="estate-info-7">
                         <span class="info-title">옵션</span>
-                        <div class="estate-option">${estate.optionList }</div>
+                        	<div class="estate-option">
+		                        <c:forEach items="${estate.estateOptionList }" var="option">
+		                        		<span>${option.optionName }</span>
+		                        </c:forEach>
+                        	</div>
                     </div>
                 </div>
             </div>

@@ -25,14 +25,16 @@ public class EstateController {
     public String showEstateList(Model model) {
         List<Estate> estList = estService.getEstateList();
         model.addAttribute("estList", estList);
+        System.out.println(estList);
         return "estate/list";
     }
 	
 	
 	@GetMapping("/detail/{estateNo}")
 	public String showEstateDetail(@PathVariable("estateNo") int estateNo, Model model) {
-		Estate est = estService.selectOneByNo(estateNo);
-		model.addAttribute("est", est);
+		Estate estate = estService.selectOneByNo(estateNo);
+		model.addAttribute("estate",estate);
+		System.out.println(estate);
 		return "estate/detail";
 	}
 }
