@@ -3,39 +3,51 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Notice - list</title>
-</head>
-    <link rel="stylesheet" href="../resources/css/noticelist.css">
+	<head>
+		<meta charset="UTF-8">
+		<title>Notice - list</title>
+		<link rel="stylesheet" href="../resources/css/include/header.css">
+		<link rel="stylesheet" href="../resources/css/notice/list.css">
+		<link rel="stylesheet" href="../resources/css/include/footer.css">
+	</head>   
 <body>
-    <main class="notice-container">
-        <h1>공지사항</h1>
-        <table class="notice-table">
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>분류</th>
-                    <th>제목</th>
-                    <th>날짜</th>
-                </tr>
-            </thead>
-            <div class="write-btn-container">
-<%--             <c:if test="${member.userId == 'admin'}"> --%>
-		        <a href="/notice/add" class="write-btn">글쓰기</a>
-<%-- 		    </c:if> --%>
-		    </div>
-            <tbody>
-                <c:forEach var="noticeVO" items="${nList}" varStatus="i">
-                    <tr>
-                        <td>${noticeVO.noticeNo}</td>
-                        <td>${noticeVO.noticeType }</td>
-                        <td><a href="/notice/detail?noticeNo=${noticeVO.noticeNo}">${noticeVO.noticeTitle}</a></td>
-						<td>${noticeVO.noticeWriteDate}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+    	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+
+	<main class="main">
+    	<div id="notice-div">
+        
+        	<form class="report-form" action="/notice/search" method="get">
+        		 <div class="search">
+	        		 <input class="searchplace" type="text" placeholder="  제목으로 검색어를 입력하세요.">
+	        		 <button class="btn" type="submit">검색</button>
+        		 </div>	        
+	        </form> 
+
+        		 <div class="board">
+        		 <!-- admin확인절차 넣어줘야 함 -->
+        		 <%-- <c:if test="${member.userId == 'admin'}"> --%>
+        		 	<button class="btn"><a href="/notice/add">게시글 등록</a></button>
+        		 <%-- </c:if> --%>  
+        		 </div>
+        		 	
+        	<table class="boardbl">
+        		<tr>
+        			<th>번호</th>
+        			<th>공지 분류</th>
+        			<th>공지 제목</th>
+        			<th>작성일</th>
+        		</tr>	
+        		<c:forEach var="noticeVO" items="${nList}" varStatus="i">
+        			<tr>
+        				<td>${noticeVO.noticeNo }</td>
+        				<td>${noticeVO.noticeType }</td>
+        				<td><a href="/notice/detail/${noticeVO.noticeNo}">${noticeVO.noticeTitle}</a></td>
+        				<!-- pathvariable있을때 ?쓰면 안됨 -->
+        				<td>${noticeVO.noticeWriteDate }</td>
+        			</tr>
+        		</c:forEach>		 
+        	</table>
+        </div>
 
         <div class="pagination-container">
 			<div class="pagination">
@@ -50,19 +62,14 @@
 				</c:if>
 			</div>
 		</div>
-
-	    <div class="search-filter">
-	        <form action="/notice/search" method="get">
-	            <select class="filter-dropdown">
-	                <option value="all">항목 선택 </option>
-	                <option value="title">제목</option>
-	                <option value="content">내용</option>
-	            </select>
-	            <input type="text" class="search-input" name="searchKeyword" placeholder="검색어 입력">
-	            <button type="submit" class="search-btn">검색하기</button>
-	        </form>
-	    </div>
-
-    </main>
+		    <div class="board">
+        		<!-- admin확인절차 넣어줘야 함 -->
+        		<%-- <c:if test="${member.userId == 'admin'}"> --%>
+        		 	<button class="btn"><a href="">신고 관리</a></button>
+        		<%-- </c:if> --%>  
+        	</div>		
+	</main> 
+	
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>
 </html>
