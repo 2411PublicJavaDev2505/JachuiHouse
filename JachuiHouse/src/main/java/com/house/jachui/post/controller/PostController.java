@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.house.jachui.common.FileUtil;
 import com.house.jachui.common.PageUtil;
-import com.house.jachui.member.service.MemberService;
 import com.house.jachui.post.controller.dto.PostInsertRequest;
 import com.house.jachui.post.domain.PostVO;
 import com.house.jachui.post.service.PostService;
