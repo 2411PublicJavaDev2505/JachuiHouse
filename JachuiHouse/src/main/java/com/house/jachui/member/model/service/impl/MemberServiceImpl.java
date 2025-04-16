@@ -11,7 +11,10 @@ import com.house.jachui.member.model.mapper.MemberMapper;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
 
 	@Autowired
@@ -82,4 +85,13 @@ public class MemberServiceImpl implements MemberService{
 		int result = mMapper.updateMember(member);
 		return result;
 	}
+
+	
+	// 뭔가이상해
+	@Override
+	public boolean insertMember(Member member) {
+		int result = mMapper.insertMember(member);
+		return result > 0;
+	}
+
 }

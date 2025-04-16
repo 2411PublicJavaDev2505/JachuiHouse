@@ -85,14 +85,14 @@ public class MemberController {
 		return "member/signupJachui";
 	}
 	
-	// 자취생 회원가입 처리	
+	// 자취생 회원가입 처리	 // 뭔가이상해
 	@PostMapping("/signupJachui")
-	public String memberSignupJachui(
-			@ModelAttribute Member member
-			,HttpServletRequest request) {
-		int result = mService.memberSignupJachui(member);
-		if(result > 0) {
-			return "redirect:/";
+	public String memberSignupJachui(Member member, HttpSession session) {
+		boolean result = mService.insertMember(member);
+		
+		if(result) {
+			session.setAttribute("welcomeMsg!", "회원가입이 완료되었습니다!");
+			return "redirect:/"; // 메인 페이지로 리다이렉트
 		}else {
 			return "common/error";
 		}
@@ -110,7 +110,8 @@ public class MemberController {
 	@PostMapping("/signupRealtor")
 	public String memberSignupRealtor(
 			@ModelAttribute Member member
-			,HttpServletRequest reponse) {
+			,HttpServletRequest reponse
+			,HttpServletRequest response) {
 		int result = mService.memberSignupRealtor(member);
 		if(result > 0) {
 			return "redirect:/";

@@ -28,18 +28,9 @@
 		<result property="joinDate"				column="JOIN_DATE"/>
 	</resultMap>
 	
-	<!-- <insert id="memberSignupJachui" parameterType="Member">
+	<insert id="memberSignupJachui" parameterType="Member">
 		INSERT INTO MEMBER(USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_ADDRESS, 
 		USER_POSTCODE, USER_DETAILADDRESS, USER_BIRTH, ALONE_LIVING, USER_ROLE, REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE)
-		VALUES(#{userId} ,#{userPw}, #{userName}, #{userPhone}, #{userAddress}, 
-		#{userPostcode}, #{userDetailAddress}, #{userBirth}, #{aloneLiving}, 'M', 'X', 0, DEFAULT, DEFAULT, DEFAULT)
-	</insert> -->
-	
-	<!-- 로그인 -->
-
-	<insert id="memberSignupJachui" parameterType="Member">
-		INSERT INTO member(userId, userPw, userName, userPhone, userAddress, 
-		userPostcode, userDetailAddress, userBirth, aloneLiving, userRole, realtorName, realtorNo, deleteYn, approveYn, joinDate)
 		VALUES(#{userId} ,#{userPw}, #{userName}, #{userPhone}, #{userAddress}, 
 		#{userPostcode}, #{userDetailAddress}, #{userBirth}, #{aloneLiving}, 'M', 'X', 0, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
@@ -49,6 +40,11 @@
 		USER_POSTCODE, USER_DETAILADDRESS, USER_ROLE, REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE)
 		VALUES(#{userId} ,#{userPw}, #{userName}, #{userPhone}, #{userAddress}, 
 		#{userPostcode}, #{userDetailAddress}, 'R', #{realtorName}, '1', DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<!-- 뭔가이상해 -->
+	<insert id="">
+		INSERT INTO MEMBER()
 	</insert>
 	
 	<update id="updateResetPw" parameterType="Member">
