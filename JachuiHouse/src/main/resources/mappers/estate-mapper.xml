@@ -20,6 +20,29 @@
 					column="ESTATE_NO" javaType="java.util.List"
 					ofType="EstateOption"></collection>
 	</resultMap>
+	<resultMap type="Estate" id="estateResultMap">
+  		<id property="estateNo" column="ESTATE_NO"/>
+  		<result property="estateType" column="ESTATE_TYPE"/>
+  		<result property="estateAddress" column="ESTATE_ADDRESS"/>
+  		<result property="estateFloor" column="ESTATE_FLOOR"/>
+  		<result property="estateWidth" column="ESTATE_WIDTH"/>
+  		<result property="estateMoveinDate" column="ESTATE_MOVEIN_DATE"/>
+  		<result property="MoveinNowYn" column="MOVEIN_NOW_YN"/>
+  		<result property="estateRentType" column="ESTATE_RENT_TYPE"/>
+  		<result property="estateDeposit" column="ESTATE_DEPOSIT"/>
+  		<result property="estateMonthlyRent" column="ESTATE_MONTHLY_RENT"/>
+  		<result property="userId" column="USER_ID"/>
+  		<!-- 이미지 리스트 -->
+  		<collection property="estateFileList"
+  					select="selectEstateFileList"
+  					column="ESTATE_NO"
+  					javaType="java.util.List"></collection>
+  		<!-- 옵션 리스트 -->
+  		<collection property="estateOptionList"
+  					select="selectEstateOptionList"
+  					column="ESTATE_NO"
+  					javaType="java.util.List"></collection>
+  	</resultMap>
     <select id="selectEstateList" resultType="com.house.jachui.estate.model.vo.Estate">
         SELECT * FROM ESTATE 
         ORDER BY ESTATE_NO DESC
@@ -38,4 +61,7 @@
 	    JOIN MEMBER M ON E.USER_ID = M.USER_ID
 	    WHERE E.ESTATE_NO = #{estateNo}
     </select>
+    <select id="selectEstateByNo" resultMap="estateResultMap">
+  		SELECT * FROM ESTATE WHERE ESTATE_NO = #{estateNo}
+  	</select>
 </mapper>

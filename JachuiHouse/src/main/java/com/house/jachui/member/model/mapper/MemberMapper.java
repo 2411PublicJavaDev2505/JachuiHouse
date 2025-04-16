@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.model.vo.Member;
 
-
 @Mapper
 public interface MemberMapper {
 
@@ -23,5 +22,5 @@ public interface MemberMapper {
 
 	Member selectOneByLogin(MemberLoginRequest member);
 
-
+	Member selectRealtorById(String userId);
 }

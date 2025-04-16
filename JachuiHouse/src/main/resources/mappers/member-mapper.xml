@@ -28,7 +28,7 @@
 		<result property="joinDate"				column="JOIN_DATE"/>
 	</resultMap>
 	
-	<!-- <insert id="memberSignupJachui" parameterType="com.house.jachui.member.model.vo.Member">
+	<!-- <insert id="memberSignupJachui" parameterType="Member">
 		INSERT INTO MEMBER(USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_ADDRESS, 
 		USER_POSTCODE, USER_DETAILADDRESS, USER_BIRTH, ALONE_LIVING, USER_ROLE, REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE)
 		VALUES(#{userId} ,#{userPw}, #{userName}, #{userPhone}, #{userAddress}, 
@@ -37,19 +37,28 @@
 	
 	<!-- 로그인 -->
 
-	<insert id="memberSignupJachui" parameterType="com.house.jachui.member.model.vo.Member">
+	<insert id="memberSignupJachui" parameterType="Member">
 		INSERT INTO member(userId, userPw, userName, userPhone, userAddress, 
 		userPostcode, userDetailAddress, userBirth, aloneLiving, userRole, realtorName, realtorNo, deleteYn, approveYn, joinDate)
 		VALUES(#{userId} ,#{userPw}, #{userName}, #{userPhone}, #{userAddress}, 
 		#{userPostcode}, #{userDetailAddress}, #{userBirth}, #{aloneLiving}, 'M', 'X', 0, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
-	<insert id="memberSignupRealtor" parameterType="com.house.jachui.member.model.vo.Member">
+	<insert id="memberSignupRealtor" parameterType="Member">
 		INSERT INTO MEMBER(USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_ADDRESS,
 		USER_POSTCODE, USER_DETAILADDRESS, USER_ROLE, REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE)
 		VALUES(#{userId} ,#{userPw}, #{userName}, #{userPhone}, #{userAddress}, 
 		#{userPostcode}, #{userDetailAddress}, 'R', #{realtorName}, '1', DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+	
+	<update id="updateResetPw" parameterType="Member">
+		UPDATE MEMBER 
+		SET USER_PW = #{userPw}
+		WHERE
+		USER_ID = #{userId}
+		AND USER_NAME = #{userName}
+		AND USER_EMAIL = #{userEmail}
+	</update>
 	
 	<select id="selectFindId" resultType="Member">
 		SELECT 
@@ -77,11 +86,11 @@
         </where>
 	</select>
 	
-	<select id="selectOneByLogin" resultType="com.house.jachui.member.model.vo.Member">
+	<select id="selectOneByLogin" resultType="Member">
 		SELECT * FROM MEMBER WHERE USER_ID = #{userId} AND USER_PW =#{userPw}
 	</select>
 	
-<!-- 	<select id="MemberLoginRequest" resultType="com.house.jachui.member.model.vo.Member">
+<!-- 	<select id="MemberLoginRequest" resultType="Member">
 		SELECT USER_ID, USER_PW
 	    FROM MEMBER
 	    WHERE USER_ID = #{userId}
@@ -89,13 +98,8 @@
 	      AND DELETE_YN = 'N'
 	</select> -->
 	
-	<update id="updateResetPw" parameterType="com.house.jachui.member.model.vo.Member">
-		UPDATE MEMBER 
-		SET USER_PW = #{userPw}
-		WHERE
-		USER_ID = #{userId}
-		AND USER_NAME = #{userName}
-		AND USER_EMAIL = #{userEmail}
-	</update>
-	
+	<select id="selectRealtorById" resultType="Member">
+		SELECT * FROM MEMBER WHERE REALTOR_NAME =#{realtorName} AND USER_NAME =#{userName} 
+		AND USER_EMAIL =#{userEmail} AND USER_PHONE =#{userPhone}
+	</select>
 </mapper>

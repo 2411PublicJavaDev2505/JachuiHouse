@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 body{
     background-color: #FAF3E0;
     margin: 0;
@@ -10,6 +9,7 @@ main div{
 }
 main{
     box-sizing: border-box;
+
     width: 1000px;
     height: 700px;
     margin: 0 auto;
@@ -100,6 +100,7 @@ main{
 #content-intro{
     height:50px;
     font-size: 28px;
+    border-bottom: 2px solid gray;
 
 }
 #chatList{
@@ -107,96 +108,66 @@ main{
     border-radius: 5px;
     width:120px;
     height: 40px;
-    margin-left: 435px;
-    font-size: 20px ;
+    margin-left: 515px;
+    font-size: 20px;
     color:white;
 }
 #content{
-    width: 100%;
-    height: 25%;
+    width: 98%;
+    height: 80%;
     margin-top: 20px;
-    border-radius: 5px;
-    background-color: white;
+    border-radius: 7px;
+    background-color: #FFA37C;
     border: none;
-    
-
+    margin: 0 auto;
+    margin-top: 20px;
 }
-#roomImg{
-    width:165px;
-    height: 165px;
-    margin-top: 4px;
-    margin-bottom: 6px;
-    margin-left: 5px;
-    float: left;
+#chat-intro{
+    width: 95%;
+    height: 15%;
+    margin: 0 auto;
+    border-bottom: 2px solid gray;
 }
-#roomIntro{
-    float:left;
-    width:520px;
-    height:100%;
-    margin-left: 5px;
-}
-#roomIntro b{
-    font-size: 30px;
-}
-#roomIntro text{
-    font-size: 30px;
-}
-#top{
-    width:100%;
-    height:34%;
-}
-#mid{
-    width:100%;
-    height:33%;
-
-}
-#bot{
-    width:100%;
-    height:33%;
-
-}
-#top-in{  
-    width:100%;
-    float:right;
-    height:100%;
-    
-}
-#jongro{
-    width:55%;
+#chatmokrok{
     height: 100%;
-    float: left;
-    
+    font-size: 35px;
+    padding-top: 15px;
 }
-#button-box{
-    margin-top: 6px;
-    width:45%;
-    float: left;
-    height:80%;
+#list{
+    width:95%;
+    height: 16%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-bottom: 2px solid gray;
 }
-#update{
-    background-color: #0c8ce9;
-    color: white;
-    font-size: 25px;
+#nickname{
+    width:35%;
+    height: 40%;
+    float: left;
+}
+#nicknameText{
+    text-align: center;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    margin-top: 2px;
+    padding-top: 2px;
+    background-color: #EAC45C;
     border:none;
     border-radius: 5px;
-    width: 80px;
-    height: 40px;
-    float: left;
-    margin-left: 60px;
 }
-#x{
-    margin-left: 10px;
-    background-color: #f60909;
-    color: white;
-    font-size: 25px;
-    border:none;
-    border-radius: 5px;
-    width: 80px;
-    height: 40px;
+#time{
+    padding-left: 340px;
+    padding-top: 3px;
+    width:65%;
+    height: 40%;
     float: left;
 }
-#roomImg img{
-    border-radius: 5px;
-    width:165px;
-    height: 165px;
+#chat{
+    width:100%;
+    height: 60%;
+    float: left;
+    font-size: 20px;
+    padding-left: 30px;
+    padding-top: 12px;
 }

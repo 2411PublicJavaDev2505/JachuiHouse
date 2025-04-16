@@ -26,8 +26,7 @@ public interface MemberService {
 	// 아이디찾기결과
 	List<Member> selectFoundId(Member member);
 
-
 	Member selectOneByLogin(MemberLoginRequest member);
 
-
+	Member selectRealtorById(String userId);
 }

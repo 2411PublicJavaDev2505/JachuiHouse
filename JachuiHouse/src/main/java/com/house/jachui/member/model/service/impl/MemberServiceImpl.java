@@ -58,5 +58,9 @@ public class MemberServiceImpl implements MemberService{
 	 * Member result = mMapper.MemberLoginRequest(member); 
 	 * return null; }
 	 */
-
+	@Override
+	public Member selectRealtorById(String userId) {
+		Member result = mMapper.selectRealtorById(userId);
+		return result;
+	}
 }
