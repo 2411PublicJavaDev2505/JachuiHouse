@@ -5,33 +5,32 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
+import com.house.jachui.member.dto.SignupJachuiRequest;
+import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.vo.Member;
 
 @Mapper
 public interface MemberMapper {
 
-	int memberSignupJachui(Member member);
+	int signupJachui(SignupJachuiRequest request);
 
-	int memberSignupRealtor(Member member);
+	int signupRealtor(SignupRealtorRequest request);
 
-	int selectFindId(Member member);
-	
-	int updateResetPw(Member member);
-	
-	int updateMember(UpdateRequest member);
-	
-	int deleteMember(String userId);
+	Member selectOneByLogin(MemberLoginRequest member);
 
-	String selectPassword(String userId);
+	Member selectRealtorById(String userId);
+
+	Member selectFindId(Member member);
 
 	List<Member> selectFoundId(Member member);
 
-	Member selectOneByLogin(MemberLoginRequest member);
-	
-	Member selectRealtorById(String userId);
+	int updateResetPw(Member member);
 
-	// 뭔가이상해
-	int insertMember(Member member);
+	int updateMember(UpdateRequest member);
+
+	int deleteMember(String userId);
+
+	String selectPassword(String userId);
 
 }

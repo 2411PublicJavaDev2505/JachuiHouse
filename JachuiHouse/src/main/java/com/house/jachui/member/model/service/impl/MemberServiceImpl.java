@@ -2,11 +2,12 @@ package com.house.jachui.member.model.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
+import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.UpdateRequest;
+import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.model.mapper.MemberMapper;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
@@ -15,83 +16,64 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
-	@Autowired
-	private MemberMapper mMapper;
-	
-	@Override
-	public int memberSignupJachui(Member member) {
-		int result = mMapper.memberSignupJachui(member);
-		return result;
-	}
+    private final MemberMapper mMapper;
 
-	@Override
-	public int memberSignupRealtor(Member member) {
-		int result = mMapper.memberSignupRealtor(member);
-		return result;
-	}
+    // 자취생 회원가입
+    @Override
+    public boolean signupJachui(SignupJachuiRequest request) {
+        return mMapper.signupJachui(request) > 0;
+    }
 
-	@Override
-	public int selectFindId(Member member) {
-		int result = mMapper.selectFindId(member);
-		return result;
-	}
+    // 공인중개사 회원가입
+    @Override
+    public int signupRealtor(SignupRealtorRequest request) {
+        return mMapper.signupRealtor(request);
+    }
 
-	@Override
-	public int updateResetPw(Member member) {
-		int result = mMapper.updateResetPw(member);
-		return result;
-	}
+    // 로그인 처리
+    @Override
+    public Member selectOneByLogin(MemberLoginRequest member) {
+        return mMapper.selectOneByLogin(member);
+    }
 
-	@Override
-	public List<Member> selectFoundId(Member member) {
-		List<Member> result = mMapper.selectFoundId(member);
-		return result;
-	}
+    @Override
+    public Member selectRealtorById(String userId) {
+        return mMapper.selectRealtorById(userId);
+    }
 
-	@Override
-	public Member selectOneByLogin(MemberLoginRequest member) {
-		Member result = mMapper.selectOneByLogin(member);
-		return result;
-	}
+    @Override
+    public Member selectFindId(Member member) {
+        return mMapper.selectFindId(member);
+    }
 
-	/*
-	 * @Override 
-	 * public Member selectOneByLogin(MemberLoginRequest member) { 
-	 * Member result = mMapper.MemberLoginRequest(member); 
-	 * return null; }
-	 */
-	@Override
-	public Member selectRealtorById(String userId) {
-		Member result = mMapper.selectRealtorById(userId);
-		return result;
-	}
-	
-	// 회원탈퇴
-	@Override
-	public int deleteMember(String userId) {
-		int result = mMapper.deleteMember(userId);
-		return result;
-	}
-	@Override
-	public boolean checkPw(String userId, String userPw) {
-		String check = mMapper.selectPassword(userId);
-		return check != null && check.equals(userPw);
-	}
+    // 아이디 목록 반환
+    @Override
+    public List<Member> selectFoundId(Member member) {
+        return mMapper.selectFoundId(member);
+    }
 
-	@Override
-	public int updateMember(UpdateRequest member) {
-		int result = mMapper.updateMember(member);
-		return result;
-	}
+    // 비밀번호 재설정
+    @Override
+    public int updateResetPw(Member member) {
+        return mMapper.updateResetPw(member);
+    }
 
-	
-	// 뭔가이상해
-	@Override
-	public boolean insertMember(Member member) {
-		int result = mMapper.insertMember(member);
-		return result > 0;
-	}
+    @Override
+    public int updateMember(UpdateRequest member) {
+        return mMapper.updateMember(member);
+    }
 
+    @Override
+    public int deleteMember(String userId) {
+        return mMapper.deleteMember(userId);
+    }
+
+    // 비밀번호 확인
+    @Override
+    public boolean checkPw(String userId, String userPw) {
+        String check = mMapper.selectPassword(userId);
+        return check != null && check.equals(userPw);
+    }
 }
