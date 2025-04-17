@@ -53,6 +53,11 @@ body {
     width: 600px;
     border: 0;
   }
+  
+  .value::placeholder {
+    color: white;
+    opacity: 1; /* 크로스브라우징 대응 */
+}
  
   .description {
     line-height: 1.6;
