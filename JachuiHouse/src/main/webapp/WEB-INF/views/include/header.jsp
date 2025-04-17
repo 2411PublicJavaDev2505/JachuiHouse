@@ -6,14 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 </head>
 <body>
  <!-- 헤더 -->
         <header>
             <a href="/">
             <div class="logo">
-                <img src="../resources/image/logo.png" alt="logo">
+                <img src="/resources/image/logo.png" alt="logo">
             </div>
             </a> 
             <div class="nav">

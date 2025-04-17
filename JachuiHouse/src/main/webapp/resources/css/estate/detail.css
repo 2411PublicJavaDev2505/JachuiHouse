@@ -93,39 +93,42 @@ body {
     font-weight: bold;
     color: #555;
   }
-  .estate-info-7 {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 10px;
+ .option-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 고정 4열 */
+  grid-row-gap: 20px;
+  grid-column-gap: 60px;
+  margin-top: 16px;
 }
 
-.estate-option {
+.option-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.option-img-box {
+  width: 64px;
+  height: 64px;
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  padding: 6px 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fafafa;
-  min-width: 140px;
-  max-width: 200px;
-  box-sizing: border-box;
+  justify-content: center;
 }
 
-.option-img {
-  flex-shrink: 0;
-  margin-right: 8px;
-}
-
-.option-img img {
-  width: 24px;
-  height: 24px;
+.option-img-box img {
+  width: 36px;
+  height: 36px;
   object-fit: contain;
-  border-radius: 4px;
 }
 
 .option-name {
-  white-space: nowrap;
   font-size: 14px;
   color: #333;
+  text-align: center;
 }
+
+

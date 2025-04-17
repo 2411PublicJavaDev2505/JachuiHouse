@@ -36,7 +36,7 @@
     	WHERE ESTATE_NO = #{estateNo}
     </select>
     <select id="selectOptionList" resultType="com.house.jachui.estate.model.vo.EstateOption">
-    	SELECT OPTION_NAME FROM ESTATE_OPTION O 
+    	SELECT * FROM ESTATE_OPTION O 
     	JOIN OPTION_LIST L 
     	ON O.OPTION_NO = L.OPTION_NO
     	WHERE ESTATE_NO = #{estateNo}

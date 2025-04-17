@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
 @ToString
 public class EstateFile {
 
@@ -13,4 +14,5 @@ public class EstateFile {
 	private String estateFilePath;
 	private String estateFileRename;
 	private int estateNo;
+	private int estateFileOrder;
 }

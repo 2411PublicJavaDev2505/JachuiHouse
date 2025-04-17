@@ -68,16 +68,18 @@
 						</div>
                     </div>
 	                    <div class="estate-info-7">
-	                        <span class="info-title">옵션</span>
-			                <c:forEach items="${estate.estateOptionList }" var="option">
-			                    <div class="estate-option">
-			                    	<div class="opption-img">
-			                    		<img src="${option.optionImg}" alt="${option.optionName } 이미지 준비중"/>
-			                    	</div>
-			                        <span>${option.optionName }</span>
-	                      		</div>
-			              	</c:forEach>
-	                    </div>
+						  <span class="info-title">옵션</span>
+						  <div class="option-grid">
+						    <c:forEach items="${estate.estateOptionList}" var="option">
+						      <div class="option-item">
+						        <div class="option-img-box">
+						          <img src="${option.optionImg}" alt="${option.optionName} 아이콘"/>
+						        </div>
+						        <div class="option-name">${option.optionName}</div>
+						      </div>
+						    </c:forEach>
+						  </div>
+						</div>
                 	</div>
             	</div>
        		</main>
