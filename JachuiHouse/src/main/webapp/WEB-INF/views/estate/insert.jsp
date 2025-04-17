@@ -54,8 +54,7 @@
 				     	</div>
 				      	<span class="option-name">세탁기</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="건조기" hidden/>
 				      	<div class="option-img-box">
@@ -63,8 +62,7 @@
 				     	</div>
 				      	<span class="option-name">건조기</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="냉장고" hidden/>
 				      	<div class="option-img-box">
@@ -72,8 +70,7 @@
 				     	</div>
 				      	<span class="option-name">냉장고</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="인덕션" hidden/>
 				      	<div class="option-img-box">
@@ -81,8 +78,7 @@
 				     	</div>
 				      	<span class="option-name">인덕션</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="가스레인지" hidden/>
 				      	<div class="option-img-box">
@@ -90,8 +86,7 @@
 				     	</div>
 				      	<span class="option-name">가스레인지</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="전자레인지" hidden/>
 				      	<div class="option-img-box">
@@ -99,8 +94,7 @@
 				     	</div>
 				      	<span class="option-name">전자레인지</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="에어컨" hidden/>
 				      	<div class="option-img-box">
@@ -108,8 +102,7 @@
 				     	</div>
 				      	<span class="option-name">에어컨</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="TV" hidden/>
 				      	<div class="option-img-box">
@@ -117,8 +110,7 @@
 				     	</div>
 				      	<span class="option-name">TV</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="침대" hidden/>
 				      	<div class="option-img-box">
@@ -126,8 +118,7 @@
 				     	</div>
 				      	<span class="option-name">침대</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="도어락" hidden/>
 				      	<div class="option-img-box">
@@ -135,8 +126,7 @@
 				     	</div>
 				      	<span class="option-name">도어락</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="신발장" hidden/>
 				      	<div class="option-img-box">
@@ -144,8 +134,7 @@
 				     	</div>
 				      	<span class="option-name">신발장</span>
 				    </label>
-				  </div>
-				  <div class="option-grid">
+				  
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="비데" hidden/>
 				      	<div class="option-img-box">
@@ -154,12 +143,21 @@
 				      	<span class="option-name">비데</span>
 				    </label>
 				  </div>
+				  <div class="form-section">
+					  <label>매물 사진 (최대 20장)</label>
+					  <div id="photo-upload-container" class="photo-upload-container">
+					  	<div class="photo-upload-input">
+					  		<input type="file" name="estateImages" accept="image/*" onchange="addNextImageInput(this)"/>
+					   </div>
+					</div>
+				</div>
 			</fieldset>
             <br/>
             <button type="submit">등록하기</button>
         </form>
     </div>
     <script>
+    	// 옵션 선택
         function toggleFields() {
             const rentType = document.querySelector('select[name="estateRentType"]').value;
             const monthlyInput = document.getElementById("monthlyRent");
@@ -175,8 +173,41 @@
         window.addEventListener('DOMContentLoaded', () => {
             document.querySelector('select[name="estateRentType"]').addEventListener('change', toggleFields);
             document.querySelector('input[name="moveinNowYN"]').addEventListener('change', toggleFields);
-            toggleFields(); // 초기 상태 적용
+            toggleFields();
         });
+        // 사진 추가 
+        let maxPhotos = 20;
+        function addNextImageInput(currentInput) {
+          const container = document.getElementById('photo-upload-container');
+          const inputs = container.querySelectorAll('input[type="file"]');
+          if (inputs.length >= maxPhotos) return;
+          if (currentInput.files && currentInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const previewImg = document.createElement('img');
+              previewImg.src = e.target.result;
+              previewImg.classList.add('photo-preview');
+              const wrapper = currentInput.closest('.photo-upload-input');
+              wrapper.classList.add('has-image');
+              wrapper.appendChild(previewImg);
+            };
+            reader.readAsDataURL(currentInput.files[0]);
+          }
+
+          if (currentInput.files.length > 0) {
+            const newWrapper = document.createElement('div');
+            newWrapper.classList.add('photo-upload-input');
+            const newInput = document.createElement('input');
+            newInput.type = 'file';
+            newInput.name = 'estateImages';
+            newInput.accept = 'image/*';
+            newInput.onchange = function () {
+              addNextImageInput(this);
+            };
+            newWrapper.appendChild(newInput);
+            container.appendChild(newWrapper);
+          }
+        }
     </script>
 </body>
 </html>
