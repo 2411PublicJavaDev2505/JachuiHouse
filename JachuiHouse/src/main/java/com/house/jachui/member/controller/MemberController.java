@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.UpdateRequest;
+import com.house.jachui.member.dto.SignupJachuiRequest;
+import com.house.jachui.member.dto.SignupRealtorRequest;
+import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 
@@ -55,7 +58,7 @@ public class MemberController {
 				return "redirect:/"; //메인페이지로 리다이렉트
 			} else {
 				model.addAttribute("errorMsg", "아이디 또는 비밀번호가 잘못되었습니다.");
-				return "common/error";
+				return "member/login";
 			}
 		} catch (Exception e) {
 			model.addAttribute("errorMsg", "존재하지 않는 정보입니다.");
@@ -85,14 +88,14 @@ public class MemberController {
 		return "member/signupJachui";
 	}
 	
-	// 자취생 회원가입 처리	
+	// 자취생 회원가입 처리	 
 	@PostMapping("/signupJachui")
-	public String memberSignupJachui(
-			@ModelAttribute Member member
-			,HttpServletRequest request) {
-		int result = mService.memberSignupJachui(member);
-		if(result > 0) {
-			return "redirect:/";
+	public String memberSignupJachui(@ModelAttribute SignupJachuiRequest request, HttpSession session) {
+		boolean result = mService.signupJachui(request);
+		
+		if(result) {
+			session.setAttribute("welcomeMsg", "회원가입이 완료되었습니다!");
+			return "redirect:/"; // 메인 페이지로 리다이렉트
 		}else {
 			return "common/error";
 		}
@@ -108,10 +111,8 @@ public class MemberController {
 	
 	// 공인중개사 회원가입 처리	
 	@PostMapping("/signupRealtor")
-	public String memberSignupRealtor(
-			@ModelAttribute Member member
-			,HttpServletRequest reponse) {
-		int result = mService.memberSignupRealtor(member);
+	public String memberSignupRealtor(@ModelAttribute SignupRealtorRequest request) {
+		int result = mService.signupRealtor(request);
 		if(result > 0) {
 			return "redirect:/";
 		}else {
@@ -132,8 +133,8 @@ public class MemberController {
 	public String selectFindId(
 			@ModelAttribute Member member
 			,HttpServletRequest request) {
-		int result = mService.selectFindId(member);
-		if(result > 0) {
+		Member result = mService.selectFindId(member);
+		if(result != null) {
 			return "redirect:/";
 		}else {
 			return "common/error";

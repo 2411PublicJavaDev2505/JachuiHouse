@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -64,6 +65,13 @@
 	   		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	    </div>
         <!-- JavaScript 파일 연결 -->
+        <!-- // 뭔가이상해 -->
+		<c:if test="${not empty sessionScope.welcomeMsg}">
+			<script>
+				alert("${sessionScope.welcomMsg}");
+			</script>
+			<c:remove var="welcomeMsg" scope="session" />
+		</c:if>
         <script>
 	        new TypeIt('.main-hello', {
 	            loop:true,
@@ -73,6 +81,9 @@
 	            .delete(12)
 	            .type("서 당신의 꿀팁을 공유해주세요.")
 	            .go();
+	        
+	        
+	        
         </script>
 	</body>
 </html>

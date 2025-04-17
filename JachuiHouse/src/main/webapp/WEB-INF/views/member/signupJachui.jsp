@@ -31,7 +31,12 @@
                             <!-- <button type="button" onClick="fn_dbCheckId()" name="dbCheckId" class="checkId">중복확인</button>
                             <input type="hidden" name="idDuplication" value="idUncheck"> -->
                         </div>
-        
+                        
+                    <div class="form-group">
+			            <label for="userEmail">이메일: </label>
+			            <input type="email" id="userEmail" name="userEmail" required>
+			        </div>  
+        			
                     <div class="form-group">
                         <label for="password">비밀번호</label>
                         <input type="password" name="userPw" required>
@@ -73,6 +78,12 @@
                     <div class="form-group">
                         <label for="BirthDay">생년월일</label>
                         <input type="date" name="userBirth" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gender">성별</label>
+                        <input type="radio" name="gender" value="M" required>남
+                        <input type="radio" name="gender" value="W" required>여
                     </div>
         
                     <div class="form-group">
