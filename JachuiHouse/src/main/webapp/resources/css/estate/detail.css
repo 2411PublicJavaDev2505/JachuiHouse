@@ -93,3 +93,39 @@ body {
     font-weight: bold;
     color: #555;
   }
+  .estate-info-7 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.estate-option {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  min-width: 140px;
+  max-width: 200px;
+  box-sizing: border-box;
+}
+
+.option-img {
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.option-img img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.option-name {
+  white-space: nowrap;
+  font-size: 14px;
+  color: #333;
+}

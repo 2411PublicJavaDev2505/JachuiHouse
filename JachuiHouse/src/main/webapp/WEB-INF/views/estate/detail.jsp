@@ -67,17 +67,20 @@
 						  	</c:choose>
 						</div>
                     </div>
-                    <div class="estate-info-7">
-                        <span class="info-title">옵션</span>
-                        	<div class="estate-option">
-		                        <c:forEach items="${estate.estateOptionList }" var="option">
-		                        		<span>${option.optionName }</span>
-		                        </c:forEach>
-                        	</div>
-                    </div>
-                </div>
-            </div>
-        </main>
+	                    <div class="estate-info-7">
+	                        <span class="info-title">옵션</span>
+			                <c:forEach items="${estate.estateOptionList }" var="option">
+			                    <div class="estate-option">
+			                    	<div class="opption-img">
+			                    		<img src="${option.optionImg}" alt="${option.optionName } 이미지 준비중"/>
+			                    	</div>
+			                        <span>${option.optionName }</span>
+	                      		</div>
+			              	</c:forEach>
+	                    </div>
+                	</div>
+            	</div>
+       		</main>
     	</div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	</body>
