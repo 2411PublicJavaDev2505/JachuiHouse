@@ -12,44 +12,29 @@
     </head>
     <body>
     <div id="container">
-        <header>
-            <a href="/">
-            <div class="logo">
-                <img src="../resources/img/logo.png" alt="logo">
-            </div>
-            </a> 
-            <div class="nav">
-                <a href="#">홈</a> 
-                <a href="#">자취록</a>
-                <a href="#">찾아방</a>
-                <a href="trade/list">사방팔방</a>
-            </div>
-            <div class="loginBtn">
-                <a href="#">로그인</a>
-            </div>
-        </header>
+        <jsp:include page="/WEB-INF/views/include/header.jsp" />
     
     <main class="container">
  
-        <div class="search-bar">
-            <form action="list.jsp" method="get">
-                <select name="category" class="dropdown">
-                    <option value="title">제목</option>
-                    <option value="title">작성자</option>
-                </select>
-                <input type="text" name="keyword" placeholder="검색어를 입력하세요" class="search-input"/>
-                <button type="submit" class="search-btn" onclick="handlerSearch()">검색</button>
-            </form>
-        </div>
+		<form action="list.jsp" method="get">
+			<div class="search-bar">
+				<select name="category" class="dropdown">
+					<option value="title">제목</option>
+					<option value="title">작성자</option>
+				</select>
+					ype="text" name="keyword" placeholder="검색어를 입력하세요" class="search-input"/>
+				<button type="submit" class="search-btn" onclick="handlerSearch()">검색</button>
+			</div>
+		</form>
     
         <form class="write-btn" action="/trade/insert" method="get">
             <button type="submit">게시글 작성</button>
         </form>
     
         <div class="product-list">
-        <c:forEach var="trade" items="${tradeList}">
+        <c:forEach items="${tradeList}" var="trade">
             <div class="product-card">
-                <a href="/trade/detail/${trade.tradeNo}">
+                <a href="/trade/detail/${trade.tradeNo}" class="trade">
                     <img src="/resources/img/${trade.tradeFileRename}" alt="${trade.tradeTitle}">
                 </a>
                 <div class="product-title">${trade.tradeTitle}</div>
@@ -123,9 +108,7 @@
         </div>
     
     </main>
-    <footer>
-        이용약관 | 광고문의 | 개인정보처리방침 | 찾아오시는길 | 회사명: 자취스크립트(주) | 대표자 : 강우혁 | 문의 전화: 010-2222-3333
-    </footer>
+   	 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
     
     </body>
