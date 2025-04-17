@@ -1,11 +1,17 @@
 package com.house.jachui.member.dto;
 
+import java.sql.Date;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
+@ToString
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SignupRealtorRequest {
 
 	private String userId;
