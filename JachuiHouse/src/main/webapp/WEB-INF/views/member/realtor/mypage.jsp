@@ -10,22 +10,7 @@
 <link rel="stylesheet" href="../../resources/css/realtor/mypage.css">
 </head>
 <body>
-	<header>
-        <a href="/">
-            <div class="logo">
-                <img src="../resources/image/logo.png" alt="logo">
-            </div>
-            </a> 
-            <div class="nav">
-                <a href="/">홈</a> 
-                <a href="#">자취록</a>
-                <a href="#">찾아방</a>
-                <a href="#">사방팔방</a>
-            </div>
-            <div class="loginBtn">
-                <a href="/member/login">로그인</a>
-            </div>
-    </header>
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
     <main>
         <div id="mainAll">
             <div id="mainLeft">

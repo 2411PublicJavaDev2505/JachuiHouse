@@ -262,7 +262,7 @@ public class MemberController {
 		String userRole = (String)session.getAttribute("userRole");
 		if(result > 0) {
 			if("R".equals(userRole)) {
-				return "member/realtor/mypage";
+				return "redirect:/member/realtor/myPage";
 			}
 		}
 		return "common/error";
@@ -278,7 +278,6 @@ public class MemberController {
 			return "member/update";
 		}
 		return "common/error";
-		
 	}
 	
 	
