@@ -6,9 +6,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		    <link rel="stylesheet" href="../resources/css/header.css">
-		    <link rel="stylesheet" href="../resources/css/footer.css">
-		    <link rel="stylesheet" href="../resources/css/boarder.css">
+		<link rel="stylesheet" href="../resources/css/include/header.css">
+		<link rel="stylesheet" href="../resources/css/notice/list.css">
+		<link rel="stylesheet" href="../resources/css/include/footer.css">
 	</head>
 <body>
     <header>

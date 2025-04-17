@@ -1,68 +1,91 @@
 @charset "UTF-8";
-
 body {
     font-family: 'Apple SD Gothic Neo', sans-serif;
     margin: 0;
     background-color: #fffaf0;
   }
 
-.main {
-    display: flex;
-    /* width: 730; */
-    justify-content: center;
-    /* align-items: center; */
-    /* margin: 5% auto; */
-    /* background-color: #FFFBF0; */
-    /* padding-top: 100px; */
-    width: 100%;
-    padding: 40px 0px;
-    box-sizing: border-box;
-    margin-top: auto;
-}
-  .report-form{
-      flex: 1;
-    padding: 40px;
-    /* height: 650px; */
-    height: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  
-.report-form h1 {
-    font-size: 28;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    font-size: 15px;
-    margin-bottom: 5px;
-}
-
-.form-group input {
-    width: 97.5%;
-    padding: 10px;
-    border: 1px solid #c0baba;
-    border-radius: 5px;
-}
-  
-  .btn{
+.btn{
     padding: 5px;
     border-radius: 15px;
     border: 1px solid #eee;
     width: 80px;
     background-color: #FFA37C;
 }
+  
+  .detail-container {
+    max-width: 800px; /* 적절한 폭 지정 */
+    margin: 30px auto; /* 가운데 정렬 */
+    padding: 30px;
+  }
+  
+  .detail-container h2 {
+    margin-bottom: 30px;
+  }
+  
+  .detail-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .label {
+    width: 100px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  
+  .value {
+    flex: 1;
+    background-color: #FF804A;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    min-width: 0;
+    word-break: break-word;
+  }
+ 
+  .description {
+    line-height: 1.6;
+    background-color: #FF804A;
+    padding: 20px;
+    border-radius: 20px;
+    white-space: pre-line;
+  }
+  
+  .file-box {
+    display: flex;
+    align-items: center;
+  }
+  
+  .file-label {
+    background-color: #666;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+  }
 
-.btn:hover {
-    background-color: #a9441a;
+  .file-button {
+    background-color: #ffffff;
+    color: black;
+    padding: 4px 10px;
+    margin-right: 10px;
+    font-size: 0.9em;
+  }
+  
+  .file-name {
+    background-color: #cd814a;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 0.9em;
   }

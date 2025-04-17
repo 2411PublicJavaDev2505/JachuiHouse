@@ -12,13 +12,6 @@ body {
     width: 80px;
     background-color: #FFA37C;
 }
-
-  .nav-bar a {
-    margin-left: 20px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
   
   .detail-container {
     max-width: 800px; /* 적절한 폭 지정 */
