@@ -102,6 +102,10 @@
 	</select>
 	
 	<update id="updateMember"> 
+		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE={#userPhone}, USER_ADDRESS=#{userAddress} WHERE USER_ID=#{userId} 
+	</update>
+	
+	<update id="updateRealtor">
 		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, USER_ADDRESS=#{userAddress}, REALTOR_NAME=#{realtorName} WHERE USER_ID=#{userId} 
 	</update>
 	
@@ -111,6 +115,11 @@
 		AND USER_NAME =#{userName} 
 		AND USER_EMAIL =#{userEmail} 
 		AND USER_PHONE =#{userPhone}
+		SELECT * FROM MEMBER WHERE USER_ID= #{userId}
+	</select>
+	
+	<select id="selectMemberById" resultType="Member">
+		SELECT * FROM MEMBER WHERE USER_ID= #{userId}
 	</select>
 	
 </mapper>

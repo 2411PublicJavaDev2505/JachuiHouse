@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
+import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
@@ -190,12 +191,6 @@ public class MemberController {
 		return "member/realtor/page";
 	}
 
-
-	// 마이페이지
-	@GetMapping("/myPage")
-	public String showAloneDetail() {
-		return "member/myPage";
-	}
 	// 공인중개사 채팅 목록
 	@GetMapping("/realtor/chatlist")
 	public String showRealtorChatList() {
@@ -231,33 +226,59 @@ public class MemberController {
 	public String showAccountBook() {
 		return "member/accountBook";
 	}
+	// 공인중개사 정보 수정 페이지로 이동
+	@GetMapping("/realtor/update")
+	public String showRealtorUpdate(HttpSession session, Model model) {
+		String userId = (String)session.getAttribute("userId");
+		Member member = mService.selectRealtorById(userId);
+		if(member != null) {
+			model.addAttribute("member", member);
+			return "member/realtor/update";
+		}
+		return "common/error";
+	}
+	//에러메시지가 뜨는이유, userRole로 본인확인을 하려면 Request, mapper에 userRole관련된 코드가 있어야 하는지
+	// 공인중개사 정보 수정 기능
+	@PostMapping("/realtor/update")
+	public String realtorUpdate(HttpSession session, @ModelAttribute UpdateRealtorRequest realtor
+			, Model model) {
+		int result = mService.updateRealtor(realtor);
+		String userRole = (String)session.getAttribute("userRole");
+		if(result > 0) {
+			if("R".equals(userRole)) {
+				return "member/realtor/mypage";
+			}
+		}
+		return "common/error";
+		
+	}
 	// 회원정보 수정
 	@GetMapping("/update")
-	public String showMemberUpdate() {
-		return "member/update";
+	public String showMemberUpdate(HttpSession session, Model model) {
+		String userId = (String)session.getAttribute("userId");
+		Member member = mService.selectMemberById(userId);
+		if(member != null) {
+			model.addAttribute("member", member);
+			return "member/update";
+		}
+		return "common/error";
+		
 	}
+	
+	
+	//리퀘스트 하나 더 만들고 get,post메소드 하나씩 더 만들기
 	@PostMapping("/update")
 	public String updateMember(
 			HttpSession session,
 			@ModelAttribute UpdateRequest member
 			,Model model){
 		int result = mService.updateMember(member);
+		String userRole = (String)session.getAttribute("userRole");
 		if(result > 0) {
-			String role = (String)session.getAttribute("userRole");
-			switch(role) {
-			case "M" : 
-				return "redirect:/member/myPage";
-			case "R" :
-				return "redirect:/realtor/mypage";
-			default :
-				return "common/error";
+			if("M".equals(userRole)) {
+				return "member/myPage";
 			}
-			
-		}else {
-			model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
-	        return "common/error";
 		}
-		 
+	    return "common/error";
 	}
-	
 }
