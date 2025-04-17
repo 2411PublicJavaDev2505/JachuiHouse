@@ -11,26 +11,15 @@ import com.house.jachui.trade.model.vo.Trade;
 @Mapper
 public interface TradeMapper {
 
-	List<Trade> selectPersonalList(String userId, int currentPage);
+	Trade selectOneByNo(int tradeNo);
 
-	List<Trade> selectListAll(int currentPage);
+	List<Trade> selectListAll();
+
+	List<Trade> selectAllTrade(int currentPage);
 
 	int getTotalCount();
 
-	Trade selectOneByNo(int tradeNo);
 
-	Integer countViewUpdate(int tradeNo);
 
-	List<Trade> selectSearchList(Map<String, String> paramMap, int currentPage);
-
-	int getTotalCountWithCondition(Map<String, String> paramMap);
-
-	int insertTrade(TradeAddRequest trade);
-
-	int updateTrade(TradeAddRequest trade);
-
-	int deleteTrade(int tradeNo);
-
-	String getuserId(String userId);
 
 }

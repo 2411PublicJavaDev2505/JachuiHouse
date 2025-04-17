@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사방팔아방 상세페이지</title>
-        <link rel="stylesheet" href="../resources/css/header.css">
-	    <link rel="stylesheet" href="../resources/css/trade/insert.css">
-	    <link rel="stylesheet" href="../resources/css/footer.css">
+<title>사방팔아방 등록페이지</title>
+        <link rel="stylesheet" href="/resources/css/include/header.css">
+	    <link rel="stylesheet" href="/resources/css/trade/insert.css">
+	    <link rel="stylesheet" href="/resources/css/include/footer.css">
     </head>
       <body>
         <div id="container">
@@ -75,7 +75,7 @@
 
           <script>
             function handleRegist() {
-              alert("게시글이 등록록되었습니다");
+              alert("게시글이 등록되었습니다");
               // 실제 수정 동작 연결은 여기에
               location.href = "/trade/list";
             }

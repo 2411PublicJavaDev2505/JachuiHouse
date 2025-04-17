@@ -20,48 +20,27 @@
 	</resultMap>
 	
 	
-	<!-- 단건 조회 -->
-    <select id="selectOneByNo" resultMap="tradeResultMap">
-        SELECT * FROM TRADE WHERE TRADE_NO = #{tradeNo} AND DEL_YN = 'N'
-    </select>
+	<select id="selectOneByNo" parameterType="int" resultMap="tradeResultMap">
+	    SELECT * FROM TRADE WHERE TRADE_NO = #{tradeNo}
+	</select>
 
-    <!-- 전체 목록 조회 (페이징 없이) -->
     <select id="selectListAll" resultMap="tradeResultMap">
-        SELECT * FROM TRADE WHERE DEL_YN = 'N' ORDER BY TRADE_NO DESC
-    </select>
+	    SELECT * FROM TRADE
+	</select>
 
-    <!-- 특정 사용자 게시글 목록 (예: 마이페이지) -->
-    <select id="selectPersonalList" resultMap="tradeResultMap">
-        SELECT * FROM TRADE 
-        WHERE USER_ID = #{userId} AND DEL_YN = 'N'
-        ORDER BY TRADE_NO DESC
-    </select>
-
-    <!-- 총 게시물 수 -->
-    <select id="getTotalCount" resultType="int">
-        SELECT COUNT(*) FROM TRADE WHERE DEL_YN = 'N'
-    </select>
-
-    <!-- 검색 결과 리스트 -->
-    <select id="selectSearchList" resultMap="tradeResultMap">
-        SELECT * FROM TRADE 
-        WHERE ${searchType} LIKE '%' || #{searchKeyword} || '%' 
-        AND DEL_YN = 'N'
-        ORDER BY TRADE_NO DESC
-    </select>
-
-    <!-- 조건 검색 게시물 수 -->
-    <select id="getTotalCountWithCondition" resultType="int">
-        SELECT COUNT(*) FROM TRADE 
-        WHERE ${searchType} LIKE '%' || #{searchKeyword} || '%' 
-        AND DEL_YN = 'N'
-    </select>
-
-    <!-- 조회수 증가 -->
-    <update id="countViewUpdate">
-        UPDATE TRADE SET VIEW_COUNT = VIEW_COUNT + 1
-        WHERE TRADE_NO = #{tradeNo}
-    </update>
+	<select id="selectAllTrade" resultMap="tradeResultMap">
+	    SELECT TRADE_NO, USER_ID, TRADE_TITLE, TRADE_CONTENT,
+	           TRADE_PRICE, VIEW_COUNT, WRITE_DATE, TRADE_FILENAME,
+	           TRADE_FILERENAME, TRADE_FILEPATH, TRADE_YN, TRADE_DATE, DEL_YN
+	    FROM TRADE
+	    WHERE DEL_YN = 'N'
+	    ORDER BY WRITE_DATE DESC
+	</select>
+	
+	<select id="getTotalCount" resultType="_int">
+	    SELECT COUNT(*) FROM TRADE
+	</select>
+    
     
     
 	<insert id="insertTrade" parameterType="TradeAddRequest" useGeneratedKeys="true">
@@ -69,9 +48,9 @@
 			SELECT SEQ_TRADE_NO.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO TRADE(TRADE_NO, USER_ID, TRADE_TITLE, TRADE_CONTENT, TRADE_PRICE,
-		TRADE_FILENAME, TRADE_FILERENAME, TRADE_FILEPATH) 
+		TRADE_FILENAME, TRADE_FILERENAME, TRADE_FILEPATH, DEL_YN) 
 		VALUES (#{tradeNo}, #{userId}, #{tradeTitle}, #{tradeContent}, #{tradePrice},
-		 #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath)
+		 #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath}, 'N')
 	</insert>
 	<update id="updateTrade" parameterType="TradeAddRequest">
 		UPDATE TRADE

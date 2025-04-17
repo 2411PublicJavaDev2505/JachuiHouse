@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>자취스크립트</title>
-		<link rel="stylesheet" href="../resources/css/include/header.css">
-		<link rel="stylesheet" href="../resources/css/include/index.css">
-		<link rel="stylesheet" href="../resources/css/include/footer.css">
-	    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
-	</head>
-	<body>
+<head>
+<meta charset="UTF-8">
+<title>자취스크립트</title>
+<link rel="stylesheet" href="../resources/css/include/header.css">
+<link rel="stylesheet" href="../resources/css/include/index.css">
+<link rel="stylesheet" href="../resources/css/include/footer.css">
+    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+</head>
+<body>
+	<main>
 		 <div class="container">    
 		 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		 
@@ -64,26 +64,18 @@
 	        <!-- 푸터 -->
 	   		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	    </div>
+	</main>
         <!-- JavaScript 파일 연결 -->
-        <!-- // 뭔가이상해 -->
-		<c:if test="${not empty sessionScope.welcomeMsg}">
-			<script>
-				alert("${sessionScope.welcomMsg}");
-			</script>
-			<c:remove var="welcomeMsg" scope="session" />
-		</c:if>
         <script>
-	        new TypeIt('.main-hello', {
-	            loop:true,
-	            speed: 90,
-	            waitUntilVisible: true,})
-	            .type("자취하우스에 오신 걸 환영합니다.", {delay:500})
-	            .delete(12)
-	            .type("서 당신의 꿀팁을 공유해주세요.")
-	            .go();
-	        
-	        
-	        
+        new TypeIt('.main-hello', {
+            loop:true,
+            speed: 90,
+            waitUntilVisible: true,})
+            .type("자취스크립에 오신 걸 환영합니다.", {delay:500})
+            .delete(12)
+            .type("서 당신의 꿀팁을 공유해주세요.")
+            .go();
         </script>
-	</body>
+</body>
+</html>
 </html>
