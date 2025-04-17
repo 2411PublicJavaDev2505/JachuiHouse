@@ -22,17 +22,14 @@ import com.house.jachui.member.model.vo.Member;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
-	@Autowired
-	private MemberService mService;
 	
-	@Autowired
-	public MemberController(MemberService mService) {
-		this.mService = mService;
-	}
+	private final MemberService mService;
 	
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
@@ -177,7 +174,7 @@ public class MemberController {
 	}
 	
 	//공인중개사 마이페이지 이동
-	@GetMapping("/realtor/mypage")
+	@GetMapping("/realtor/myPage")
 	public String showRealtorMypageForm(HttpSession session, Model model) {
 		String userRole = (String)session.getAttribute("userRole");
 		if("R".equals(userRole)) {

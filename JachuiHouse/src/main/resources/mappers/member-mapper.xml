@@ -87,7 +87,7 @@
 	</select>
 	
 	<select id="selectOneByLogin" resultType="Member">
-	    SELECT USER_ID, USER_PW FROM MEMBER
+	    SELECT USER_ID, USER_NAME, USER_ROLE FROM MEMBER
 	    WHERE USER_ID = #{userId}
 	    AND USER_PW = #{userPw}
 	    AND DELETE_YN = 'N'
@@ -110,11 +110,6 @@
 	</update>
 	
 	<select id="selectRealtorById" resultType="Member">
-		SELECT * FROM MEMBER 
-		WHERE REALTOR_NAME =#{realtorName} 
-		AND USER_NAME =#{userName} 
-		AND USER_EMAIL =#{userEmail} 
-		AND USER_PHONE =#{userPhone}
 		SELECT * FROM MEMBER WHERE USER_ID= #{userId}
 	</select>
 	
