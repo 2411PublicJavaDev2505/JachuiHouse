@@ -221,16 +221,13 @@ public class MemberController {
 			@RequestParam("userId") String userId,
 			@RequestParam("userPw") String userPw,
 			Model model) {
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		System.out.println(userId);
-		System.out.println(userPw);
 		if(!mService.checkPw(userId, userPw)) {
 			model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
 			return "common/error";
 		}
-		
 		int result = mService.deleteMember(userId);
 		if(result > 0) {
+			session.invalidate();
 			return "redirect:/";
 		}else {
 		model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
@@ -292,7 +289,7 @@ public class MemberController {
 		String userRole = (String)session.getAttribute("userRole");
 		if(result > 0) {
 			if("M".equals(userRole)) {
-				return "member/myPage";
+				return "redirect:/member/myPage";
 			}
 		}
 	    return "common/error";
