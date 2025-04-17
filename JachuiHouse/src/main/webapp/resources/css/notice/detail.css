@@ -5,12 +5,13 @@ body {
     background-color: #fffaf0;
   }
 
-  .nav-bar a {
-    margin-left: 20px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
+.btn{
+    padding: 5px;
+    border-radius: 15px;
+    border: 1px solid #eee;
+    width: 80px;
+    background-color: #FFA37C;
+}
   
   .detail-container {
     max-width: 800px; /* 적절한 폭 지정 */

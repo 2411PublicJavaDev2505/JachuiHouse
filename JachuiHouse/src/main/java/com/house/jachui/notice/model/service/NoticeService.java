@@ -23,6 +23,6 @@ public interface NoticeService {
 
 	int getTotalCount(Map<String, String> paramMap);
 
-//	List<NoticeVO> searchListByKeyword(Map<String, String> paramMap, int currentPage);
+	List<NoticeVO> searchListByKeyword(Map<String, String> paramMap, int currentPage);
 
 }

@@ -4,12 +4,7 @@
     text-align: center;
     background-color: #FFF9E9;
     height:650px;
-}
-
-
-.main {
     display: flex;
-    /* width: 730; */
     justify-content: center;
     /* align-items: center; */
     /* margin: 5% auto; */
@@ -20,7 +15,6 @@
     box-sizing: border-box;
     margin-top: auto;
 }
-
 
 .form-group {
     margin-bottom: 15px;
@@ -40,7 +34,7 @@
     border-radius: 5px;
 }
   
-  .btn{
+.btn{
     padding: 5px;
     border-radius: 15px;
     border: 1px solid #eee;
@@ -64,4 +58,5 @@
 .boardtbl th, tr, td{
     padding: 10px;
     border: 1px solid black;
+    background-color: white;
 }
