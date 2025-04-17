@@ -54,7 +54,7 @@
         )
         VALUES (
             #{userId}, #{userPw}, #{userName}, #{userEmail}, #{userPhone}, 
-            #{userGender}, #{userAddress}, #{userPostcode}, 
+            'M', #{userAddress}, #{userPostcode}, 
             #{userDetailAddress}, 'R', #{realtorName}, '1', DEFAULT, DEFAULT, DEFAULT
         )
     </insert>

@@ -6,9 +6,13 @@ import java.sql.Date;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // "기본 생성자"를 자동으로 생성해주되, 접근 제어자를 protected로 설정하는 것
+@Setter
+@ToString
+//@NoArgsConstructor(access = AccessLevel.PROTECTED) // "기본 생성자"를 자동으로 생성해주되, 접근 제어자를 protected로 설정하는 것
 public class SignupJachuiRequest {
 	private String userId;
 	private String userPw;

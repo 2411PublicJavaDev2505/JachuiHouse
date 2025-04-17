@@ -32,6 +32,11 @@
                         <input type="hidden" name="idDuplication" value="idUncheck">
                     </div>
     
+    				<div class="form-group">
+			            <label for="userEmail">이메일: </label>
+			            <input type="email" id="userEmail" name="userEmail" required>
+			        </div> 
+    
                     <div class="form-group">
                         <label for="password">비밀번호</label>
                         <input type="password" name="userPw" required>

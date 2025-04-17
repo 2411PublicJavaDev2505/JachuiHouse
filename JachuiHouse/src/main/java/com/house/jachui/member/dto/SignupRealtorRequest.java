@@ -11,6 +11,7 @@ public class SignupRealtorRequest {
 	private String userId;
 	private String userPw;
 	private String userName;
+	private String userEmail;
 	private String userPhone;
 	private String userAddress;
 	private String aloneLiving;
