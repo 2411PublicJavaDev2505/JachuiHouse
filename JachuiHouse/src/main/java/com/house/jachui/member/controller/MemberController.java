@@ -93,7 +93,8 @@ public class MemberController {
 		
 		if(result) {
 			session.setAttribute("welcomeMsg", "회원가입이 완료되었습니다!");
-			return "redirect:/"; // 메인 페이지로 리다이렉트
+//			return "redirect:/"; // 메인 페이지로 리다이렉트
+			return "member/login";
 		}else {
 			return "common/error";
 		}
@@ -112,7 +113,8 @@ public class MemberController {
 	public String memberSignupRealtor(@ModelAttribute SignupRealtorRequest request) {
 		int result = mService.signupRealtor(request);
 		if(result > 0) {
-			return "redirect:/";
+//			return "redirect:/";
+			return "member/login";
 		}else {
 			return "common/error";
 		}
