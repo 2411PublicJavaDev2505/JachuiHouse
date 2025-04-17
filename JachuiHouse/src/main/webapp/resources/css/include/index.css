@@ -15,7 +15,31 @@ body{
     padding: 50px 0;
     background-color: #F4ECE0;
 }
+.left-image-container {
+    position: relative;
+    display: inline-block;
+}
 
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255,255,255,0.6);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 2;
+}
+
+.arrow.left {
+    left: 10px;
+}
+
+.arrow.right {
+    margin-left : 5px;
+    
+}
 section {
     background-color: #FAF3E0;
     display: flex;
