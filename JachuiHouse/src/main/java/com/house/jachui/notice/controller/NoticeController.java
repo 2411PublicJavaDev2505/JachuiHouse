@@ -45,7 +45,7 @@ public class NoticeController {
 //	}
 	
 	@GetMapping("/list")
-	public String NoticeList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
+	public String noticeList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
 		try {
 			List<NoticeVO> nList = nService.selectListAll(currentPage);
 			int totalCount = nService.getTotalCount();
@@ -69,18 +69,14 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/search")
-	public String NoticeSearch(
-			@RequestParam("searchCondition") String searchCondition
-			, @RequestParam("searchKeyword") String searchKeyword
-			, @RequestParam(value="currentPage", defaultValue="1") int currentPage
+	public String noticeSearch(
+			@RequestParam("searchKeyword") String searchKeyword
+			, @RequestParam(value="page", defaultValue="1") int currentPage
 			, Model model) {
 		try {
-			Map<String, String> paramMap = new HashMap<String, String>();
-			paramMap.put("searchCondition", searchCondition);
-			paramMap.put("searchKeyword", searchKeyword);
 			
-			int totalCount = nService.getTotalCount(paramMap);
-			List<NoticeVO> searchList = nService.searchListByKeyword(paramMap, currentPage); 
+			int totalCount = nService.getTotalCount(searchKeyword);
+			List<NoticeVO> searchList = nService.searchListByKeyword(searchKeyword, currentPage); 
 			
 			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
@@ -88,9 +84,8 @@ public class NoticeController {
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));
 				
 				model.addAttribute("searchList", searchList);
-				model.addAttribute("searchCondition", searchCondition);
 				model.addAttribute("searchKeyword", searchKeyword);
-				return "inflBoard/search";
+				return "notice/search";
 				
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,12 +95,12 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/add")
-	public String NoticeAdd() {
+	public String noticeAdd() {
 		return "notice/add";
 	}
 	
 	@PostMapping("/add")
-	public String NoticeAdd(
+	public String noticeAdd(
 			@ModelAttribute NoticeAddRequest notice
 			, @RequestParam("uploadFile") MultipartFile uploadFile
 			, HttpSession session, Model model) {
@@ -126,7 +121,7 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/detail/{noticeNo}")
-	public String NoticeDetail(@PathVariable int noticeNo, Model model) {
+	public String noticeDetail(@PathVariable int noticeNo, Model model) {
 		try {
 			NoticeVO notice = nService.selectOneByNo(noticeNo);
 			model.addAttribute("notice", notice);
@@ -139,7 +134,7 @@ public class NoticeController {
 	}
 		
 	@GetMapping("/delete")
-	public String NoticeDelete(@RequestParam("noticeNo")int noticeNo, Model model) {
+	public String noticeDelete(@RequestParam("noticeNo")int noticeNo, Model model) {
 		try {
 			int result = nService.deleteNotice(noticeNo);
 			return "redirect:/notice/list";
@@ -151,11 +146,11 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/modify/{noticeNo}")
-	public String NoticeModify(@PathVariable int noticeNo, Model model) {
+	public String noticeModify(@PathVariable int noticeNo, Model model) {
 		try {
 			NoticeVO notice = nService.selectOneByNo(noticeNo);
 			model.addAttribute("notice", notice);
-			return null;
+			return "notice/modify";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("errorMsg", e.getMessage());
@@ -164,7 +159,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/modify")
-	public String NoticeModify(@ModelAttribute NoticeModifyRequest notice
+	public String noticeModify(@ModelAttribute NoticeModifyRequest notice
 			, @RequestParam("reloadFile") MultipartFile reloadFile
 			, HttpSession session, Model model) {
 		try {

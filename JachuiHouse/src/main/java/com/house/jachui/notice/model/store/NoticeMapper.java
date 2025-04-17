@@ -25,8 +25,8 @@ public interface NoticeMapper {
 
 	int updateNotice(NoticeModifyRequest notice);
 
-	int getTotalCount(Map<String, String> paramMap);
+	int getTotalCount(String searchKeyword);
 
-	List<NoticeVO> selectSearchList(Map<String, String> paramMap, int currentPage);
+	List<NoticeVO> selectSearchList(String searchKeyword, int currentPage);
 
 }

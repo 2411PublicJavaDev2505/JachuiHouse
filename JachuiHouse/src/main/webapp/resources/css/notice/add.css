@@ -28,6 +28,7 @@ body {
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 750px;
   }
   
   .info-row {
@@ -43,13 +44,14 @@ body {
   }
   
   .value {
-    flex: 1;
     background-color: #FF804A;
     color: white;
-    padding: 8px 16px;
+    padding: 8px 20px;
     border-radius: 20px;
     min-width: 0;
     word-break: break-word;
+    width: 600px;
+    border: 0;
   }
  
   .description {
@@ -68,9 +70,7 @@ body {
   .file-label {
     background-color: #666;
     color: white;
-    padding: 5px 10px;
     border-radius: 10px;
-    margin-right: 10px;
     font-size: 14px;
   }
 
