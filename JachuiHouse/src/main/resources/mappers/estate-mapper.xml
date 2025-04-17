@@ -16,9 +16,7 @@
 		<result property="estateMonthlyRent" 	column="ESTATE_MONTHLY_RENT"/>
 		<result property="userId" 				column="USER_ID"/>
 		<result property="userPhone" 			column="USER_PHONE"/>
-		
   		<!-- 이미지 리스트 -->
-  		
    		<collection property="estateFileList"
   					select="selectFileList"
   					column="ESTATE_NO"
@@ -52,4 +50,28 @@
 	  	JOIN MEMBER M ON E.USER_ID = M.USER_ID
 	  	WHERE E.ESTATE_NO = #{estateNo}
 	</select>
+	<insert id="insertEstate" useGeneratedKeys="true">
+		<selectKey order="BEFORE" resultType="_int" keyProperty="estateNo">
+			SELECT SEQ_ESTATE_NO.NEXTVAL FROM DUAL
+		</selectKey>
+			INSERT INTO ESTATE (
+				ESTATE_TYPE, ESTATE_ADDRESS,
+				ESTATE_FLOOR, ESTATE_WIDTH,
+				ESTATE_MOVEIN_DATE, MOVEIN_NOW_YN,
+				ESTATE_RENT_TYPE, ESTATE_DEPOSIT,
+				ESTATE_MONTHLY_RENT
+			)
+			VALUES (
+				#{estateType}, #{estateAddress}, #{estateFloor}, #{estateWidth},
+				<choose>
+					<when test="moveinNowYN == 'Y'">
+						NULL
+					</when>
+					<otherwise>
+						#{estateMoveinDate}
+					</otherwise>
+				</choose>,
+				#{moveinNowYN}, #{estateRentType}, #{estateDeposit}, #{estateMonthlyRent}
+			)
+	</insert>
 </mapper>
