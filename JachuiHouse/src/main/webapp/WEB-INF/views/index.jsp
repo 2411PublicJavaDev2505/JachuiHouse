@@ -51,7 +51,7 @@
 	                        </a>
 	                    </div>
 	                    <div class="right-menu">
-	                        <a href="#">
+	                        <a href="/notice/list">
 	                            <div class="notice-board">
 	                                <h3>공지사항</h3>
 	                                <li>감기 조심하세요</li>
