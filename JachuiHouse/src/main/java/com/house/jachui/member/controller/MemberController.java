@@ -191,6 +191,23 @@ public class MemberController {
 		return "member/realtor/page";
 	}
 
+	// 자취생 마이페이지
+	@GetMapping("/myPage")
+	public String showAloneDetail(
+			HttpSession session,
+			Model model) {
+			String userRole = (String)session.getAttribute("userRole");
+			if("M".equals(userRole)) {
+				String userId = (String)session.getAttribute("userId");
+				Member member = mService.selectMemberById(userId);
+				model.addAttribute("member", member);
+				return "member/myPage";
+			}else {
+				model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
+		        return "common/error";
+			}
+	}
+	
 	// 공인중개사 채팅 목록
 	@GetMapping("/realtor/chatlist")
 	public String showRealtorChatList() {
@@ -208,6 +225,8 @@ public class MemberController {
 			@RequestParam("userPw") String userPw,
 			Model model) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
+		System.out.println(userId);
+		System.out.println(userPw);
 		if(!mService.checkPw(userId, userPw)) {
 			model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
 			return "common/error";

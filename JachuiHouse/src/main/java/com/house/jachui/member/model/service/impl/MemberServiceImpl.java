@@ -84,9 +84,10 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	// 자취생 마이페이지
 	@Override
 	public Member selectMemberById(String userId) {
-		Member result = mMapper.selectMemberById(userId);
-		return result;
+		Member member = mMapper.selectMemberById(userId);
+		return member;
 	}
 }

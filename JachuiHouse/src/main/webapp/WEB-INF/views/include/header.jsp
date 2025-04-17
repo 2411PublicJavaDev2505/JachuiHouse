@@ -31,7 +31,7 @@
             		<a href="/admin/adminlist">관리자 페이지</a>
             	</c:if>
             	<c:if test="${sessionScope.userRole eq 'R' }">
-            		<a href="/member/realtor/mypage">마이페이지</a>
+            		<a href="/member/realtor/myPage">마이페이지</a>
             	</c:if>
             	<c:if test="${sessionScope.userRole eq 'M' }">
             		<a href="/member/myPage">마이페이지</a>

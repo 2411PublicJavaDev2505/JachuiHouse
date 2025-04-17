@@ -94,7 +94,7 @@
 	</select>
 	
 	<delete id="deleteMember"> 
-		DELETE FROM MEMBER WHERE USER_ID = #{userId} 
+		DELETE FROM MEMBER WHERE USER_ID = #{userId}
 	</delete>
 	
 	<select id="selectPassword" resultType="Member"> 
@@ -119,7 +119,6 @@
 	</select>
 	
 	<select id="selectMemberById" resultType="Member">
-		SELECT * FROM MEMBER WHERE USER_ID= #{userId}
+		SELECT * FROM MEMBER WHERE USER_ID = #{userId}
 	</select>
-	
 </mapper>
