@@ -14,11 +14,11 @@
 			<jsp:include page="/WEB-INF/views/include/header.jsp" />
 				<main>
 			            <div class="main-container">
-			            <form action="deleteMember" method="post">
+			            <form action="/member/delete" method="post">
 			                <div class="delete-head">
 			                    <h2>회원탈퇴 신청</h2>
 			                </div>
-			                 <input type="hidden" name="userId" value="${loginUser.userId}" />
+			                 <input type="hidden" name="userId" value="${sessionScope.userId}" />
 			                <div class="password">
 			                <label>비밀번호 입력 :</label>
 			                    <input type="password" id="pw" name="userPw" placeholder="비밀번호를 입력해주세요." >

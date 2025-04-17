@@ -36,5 +36,8 @@ public interface MemberService {
 	Member selectRealtorById(String userId);
 
 	boolean checkPw(String userId, String userPw);
+
+
+	Member selectMemberById(String userId);
 	
 }

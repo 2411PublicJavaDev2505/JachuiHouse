@@ -18,16 +18,16 @@
 	                    <img src="../resources/image/profile.jpeg" alt="image">
 	                </div>
 	                <div>
-	                    <h3>강우혁</h3>
-	                    <p>자취생 강우혁입니다.</p>
+	                    <h3>${member.userId }</h3>
+	                    <p>자취생 ${member.userName }입니다.</p>
 	                </div>
 	                <div class="updateBtn">
 	                    <button onClick="location.href='update'">내 정보 수정</button>
 	                </div>
 	                <div class="my-inform">
-	                    <p>서울시 종로구</p>
-	                    <p>010-1111-8888</p>
-	                    <p>kh@kh.com</p>
+	                    <p>${member.userAddress }</p>
+	                    <p>${member.userPhone }</p>
+	                    <p>${member.userEmail }</p>
 	                </div>
 	                <div class="dleteBtn">
 	                    <button onClick="location.href='delete'">회원 탈퇴</button>

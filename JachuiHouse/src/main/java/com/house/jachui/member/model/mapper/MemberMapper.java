@@ -31,4 +31,6 @@ public interface MemberMapper {
 	
 	Member selectRealtorById(String userId);
 
+	Member selectMemberById(String userId);
+
 }

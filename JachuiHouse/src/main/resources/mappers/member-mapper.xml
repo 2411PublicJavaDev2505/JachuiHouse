@@ -98,10 +98,10 @@
 	      AND DELETE_YN = 'N'
 	</select> -->
 	<delete id="deleteMember"> 
-		DELETE FROM MEMBER WHERE USER_ID = #{userId} 
+		DELETE FROM MEMBER WHERE USER_ID = #{userId}
 	</delete>
-	<select id="selectPassword" resultType="Member"> 
-		SELECT USER_PW FROM MEMBER WHERE USER_ID = #{userId} 
+	<select id="selectPassword" resultType="string"> 
+		SELECT USER_PW FROM MEMBER WHERE USER_ID = #{userId}
 	</select>
 	<update id="updateMember"> 
 		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE={#userPhone}, USER_ADDRESS=#{userAddress}, REALTOR_NAME=#{realtorName} WHERE USER_ID=#{userId} 
@@ -111,4 +111,8 @@
 		SELECT * FROM MEMBER WHERE REALTOR_NAME =#{realtorName} AND USER_NAME =#{userName} 
 		AND USER_EMAIL =#{userEmail} AND USER_PHONE =#{userPhone}
 	</select>
+	<select id="selectMemberById" resultType="Member">
+		SELECT * FROM MEMBER WHERE USER_ID = #{userId}
+	</select>
+	
 </mapper>

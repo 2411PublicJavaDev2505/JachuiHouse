@@ -23,7 +23,7 @@
                     <label>
                         ID
                     </label> <br>
-                        <input type="text" readonly /> <br>
+                        <input type="text" readonly/> <br>
                         <label >
                             비밀번호
                         </label> <br>
@@ -45,22 +45,22 @@
                         </label> <br>
                         <input type="text"> <br>
                    </div>
+	                   <div class="button">
+	                       <div class="cancelBtn">
+	                           <button onClick="backToPage();">취소</button>
+	                        </div>
+	                        <div class="updateBtn">
+	                            <button type="submit">수정</button>
+	                        </div>
+	                   </div>
                 </form>
-                   <div class="button">
-                       <div class="cancelBtn">
-                           <button onClick="backToPage();">취소</button>
-                        </div>
-                        <div class="updateBtn">
-                            <button type="submit">수정</button>
-                        </div>
-                   </div>
             </div>
         </main>	
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 	<script type="text/javascript">
 		backToPage = () => {
-			location.href = "/member/myPage"
+			location.href = "myPage"
 		}
 	</script>
 </body>

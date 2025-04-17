@@ -82,4 +82,10 @@ public class MemberServiceImpl implements MemberService{
 		int result = mMapper.updateMember(member);
 		return result;
 	}
+	// 자취생 마이페이지
+	@Override
+	public Member selectMemberById(String userId) {
+		Member member = mMapper.selectMemberById(userId);
+		return member;
+	}
 }
