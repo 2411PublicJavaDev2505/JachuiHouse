@@ -97,12 +97,12 @@
 		DELETE FROM MEMBER WHERE USER_ID = #{userId}
 	</delete>
 	
-	<select id="selectPassword" resultType="Member"> 
+	<select id="selectPassword" resultType="string"> 
 		SELECT USER_PW FROM MEMBER WHERE USER_ID = #{userId} 
 	</select>
 	
 	<update id="updateMember"> 
-		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE={#userPhone}, USER_ADDRESS=#{userAddress} WHERE USER_ID=#{userId} 
+		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, USER_ADDRESS=#{userAddress} WHERE USER_ID=#{userId} 
 	</update>
 	
 	<update id="updateRealtor">
