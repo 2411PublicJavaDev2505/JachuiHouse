@@ -3,6 +3,7 @@ package com.house.jachui.member.model.service;
 import java.util.List;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
+import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.vo.Member;
 
@@ -36,5 +37,11 @@ public interface MemberService {
 	Member selectRealtorById(String userId);
 
 	boolean checkPw(String userId, String userPw);
+
+
+	int updateRealtor(UpdateRealtorRequest realtor);
+
+
+	Member selectMemberById(String userId);
 	
 }

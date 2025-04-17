@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
+import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.vo.Member;
 
@@ -30,5 +31,9 @@ public interface MemberMapper {
 	Member selectOneByLogin(MemberLoginRequest member);
 	
 	Member selectRealtorById(String userId);
+
+	int updateRealtor(UpdateRealtorRequest realtor);
+
+	Member selectMemberById(String userId);
 
 }

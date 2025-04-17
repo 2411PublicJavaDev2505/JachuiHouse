@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
+import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.mapper.MemberMapper;
 import com.house.jachui.member.model.service.MemberService;
@@ -80,6 +81,18 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateMember(UpdateRequest member) {
 		int result = mMapper.updateMember(member);
+		return result;
+	}
+
+	@Override
+	public int updateRealtor(UpdateRealtorRequest realtor) {
+		int result = mMapper.updateRealtor(realtor);
+		return result;
+	}
+
+	@Override
+	public Member selectMemberById(String userId) {
+		Member result = mMapper.selectMemberById(userId);
 		return result;
 	}
 }
