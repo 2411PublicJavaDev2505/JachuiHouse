@@ -54,6 +54,10 @@ body {
     flex-shrink: 0;
   }
   
+  .description {
+	  white-space: pre-line;
+	}
+  
   .value {
     flex: 1;
     background-color: #cd814a;

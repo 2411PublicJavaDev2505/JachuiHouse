@@ -76,17 +76,6 @@
             .type("서 당신의 꿀팁을 공유해주세요.")
             .go();
         </script>
-        <!-- JavaScript 파일 연결 -->
-        <script>
-        new TypeIt('.main-hello', {
-            loop:true,
-            speed: 90,
-            waitUntilVisible: true,})
-            .type("자취스크립에 오신 걸 환영합니다.", {delay:500})
-            .delete(12)
-            .type("서 당신의 꿀팁을 공유해주세요.")
-            .go();
-        </script>
 </body>
 </html>
 </html>

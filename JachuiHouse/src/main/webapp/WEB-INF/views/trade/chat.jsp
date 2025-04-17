@@ -5,16 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>1대1 채팅메시지</title>
-    <link rel="stylesheet" href="../resources/css/header.css">
-    <link rel="stylesheet" href="../resources/css/trade/chat.css">
-    <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="/resources/css/include/header.css">
+    <link rel="stylesheet" href="/resources/css/trade/chat.css">
+    <link rel="stylesheet" href="/resources/css/include/footer.css">
 </head>
 <body>
     <div id="container">
             <header>
                 <a href="/">
                 <div class="logo">
-                    <img src="../resources/img/logo.png" alt="logo">
+                    <img src="/resources/img/logo.png" alt="logo">
                 </div>
                 </a> 
                 <div class="nav">
@@ -33,7 +33,7 @@
                     <!-- 내 프로필 정보 -->
                     <div class="my-profile">
                         <div class="left-image">
-                            <img src="../resources/img/프로필 사진.jpg" alt="image" class="profile-img">
+                            <img src="/resources/img/프로필 사진.jpg" alt="image" class="profile-img">
                         </div>
                         <h3>강우혁</h3>
                         <p>자취생 강우혁입니다.</p>
@@ -68,7 +68,7 @@
                         <div class="message received">조금 싸게는 안될까요?</div>
                         <div class="message sent">안됩니다</div>
                         <div class="message sent">
-                            <img src="../resources/img/포메라니안(반려동물).jpg" alt="강아지" class="chat-image">
+                            <img src="/resources/img/포메라니안(반려동물).jpg" alt="강아지" class="chat-image">
                         </div>
                     </div>
                     <div class="chat-input-wrapper">

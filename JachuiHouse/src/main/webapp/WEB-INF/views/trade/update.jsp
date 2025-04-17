@@ -5,16 +5,16 @@
 <head>
 	<meta charset="UTF-8">
 	 <title>사방팔아방 상세페이지</title>
-        <link rel="stylesheet" href="../resources/css/header.css">
-	    <link rel="stylesheet" href="../resources/css/trade/update.css">
-	    <link rel="stylesheet" href="../resources/css/footer.css">
+        <link rel="stylesheet" href="/resources/css/include/header.css">
+	    <link rel="stylesheet" href="/resources/css/trade/update.css">
+	    <link rel="stylesheet" href="/resources/css/include/footer.css">
       </head>
       <body>
         <div id="container">
             <header>
                 <a href="/">
                 <div class="logo">
-                    <img src="../resources/img/logo.png" alt="logo">
+                    <img src="/resources/img/logo.png" alt="logo">
                 </div>
                 </a> 
                 <div class="nav">
@@ -45,7 +45,7 @@
             <div class="info-row">
                 <div class="label">이미지</div>
                 <div class="value image-wrapper">
-                    <img src="../resources/img/중고 옷걸이.jpg" alt="이미지 썸네일">
+                    <img src="/resources/img/중고 옷걸이.jpg" alt="이미지 썸네일">
                 </div>
               </div>
       
