@@ -1,5 +1,9 @@
 package com.house.jachui.chat.model.service.impl;
 
-public class ChatServiceImpl {
+import org.springframework.stereotype.Service;
+
+import com.house.jachui.chat.model.service.ChatService;
+@Service
+public class ChatServiceImpl implements ChatService {
 
 }

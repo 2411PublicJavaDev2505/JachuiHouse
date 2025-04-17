@@ -263,7 +263,6 @@ public class MemberController {
 			}
 		}
 		return "common/error";
-		
 	}
 	// 회원정보 수정
 	@GetMapping("/update")
