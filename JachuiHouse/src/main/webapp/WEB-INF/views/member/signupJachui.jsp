@@ -25,6 +25,7 @@
 
                 <form class="form" action="/member/signupJachui" method="POST" id="signup_form">
                         <div class="form-group">
+                        	<h3>아이디 입력</h3>
                             <label for="id">아이디</label>
                             <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="4자~10자 사이 영어+숫자, 공백없이" onkeydown="inputIdChk()" autofocus required>
                             <label id="label1"></label>
