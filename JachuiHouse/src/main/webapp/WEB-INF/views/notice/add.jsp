@@ -4,11 +4,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title> Notice - add </title>
+		<title> 공지사항 - 작성 </title>
 			<link rel="stylesheet" href="../resources/css/include/header.css">
 			<link rel="stylesheet" href="../resources/css/notice/add.css">
 			<link rel="stylesheet" href="../resources/css/include/footer.css">
-		</head>
+	</head>
 	<body>
 		<form class="report-form" action="/notice/add" method="post" enctype="multipart/form-data">
     	<jsp:include page="/WEB-INF/views/include/header.jsp" />

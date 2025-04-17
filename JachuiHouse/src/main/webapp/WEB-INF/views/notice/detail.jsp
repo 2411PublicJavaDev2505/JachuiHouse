@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,7 +19,7 @@
           	<div class="detail-box">
 	            <div class="info-row">
 		            <div class="label">등록일자</div>
-		            <div class="">${notice.noticeWriteDate}</div>
+		            <div class=""><fmt:formatDate pattern = "yyyy/MM/dd" value="${notice.noticeWriteDate}"/></div>
 	            </div>
       
 	            <div class="info-row">

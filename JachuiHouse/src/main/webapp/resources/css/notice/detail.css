@@ -44,7 +44,7 @@ body {
   
   .value {
     flex: 1;
-    background-color: #cd814a;
+    background-color: rgb(255, 239, 206);
     color: black;
     padding: 8px 16px;
     border-radius: 20px;
@@ -60,7 +60,7 @@ body {
   
   .description {
     line-height: 1.6;
-    background-color: #cd814a;
+    background-color: rgb(255, 239, 206);
     padding: 20px;
     border-radius: 20px;
     white-space: pre-line;
@@ -90,7 +90,7 @@ body {
   }
   
   .file-name {
-    background-color: #cd814a;
+    background-color: rgb(255, 239, 206);
     color: white;
     padding: 4px 10px;
     border-radius: 10px;
