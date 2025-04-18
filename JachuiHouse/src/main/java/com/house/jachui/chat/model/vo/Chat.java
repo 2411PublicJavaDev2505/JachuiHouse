@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatVO {
+public class Chat {
 	private int chatNo;
 	private String writerId;
 	private Date chatSendDate;
