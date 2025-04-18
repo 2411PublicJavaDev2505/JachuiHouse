@@ -6,6 +6,9 @@
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM NOTICE
 	</select>
+	<select id="getTotalCountKeyword" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%' 
+	</select>
 	<select id="selectListAll" resultType="NoticeVO">
 		SELECT * FROM NOTICE ORDER BY NOTICE_NO DESC
 	</select>
@@ -27,7 +30,7 @@
 		, NOTICE_FILE_RENAME=#{noticeFileRename}, USER_ID=#{userId}
 		WHERE NOTICE_NO=#{noticeNo}
 	</update>
-<!-- 	<select id="selectSearchList" resultType="NoticeVO"> -->
-<!-- 		SELECT * FROM NOTICE WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%' -->
-<!-- 	</select> -->
+	<select id="selectSearchList" resultType="NoticeVO">
+		SELECT * FROM NOTICE WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%'
+	</select>
 </mapper>

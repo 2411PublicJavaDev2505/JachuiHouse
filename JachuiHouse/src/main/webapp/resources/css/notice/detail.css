@@ -5,12 +5,13 @@ body {
     background-color: #fffaf0;
   }
 
-  .nav-bar a {
-    margin-left: 20px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
+.btn{
+    padding: 5px;
+    border-radius: 15px;
+    border: 1px solid #eee;
+    width: 80px;
+    background-color: #FFA37C;
+}
   
   .detail-container {
     max-width: 800px; /* 적절한 폭 지정 */
@@ -43,7 +44,7 @@ body {
   
   .value {
     flex: 1;
-    background-color: #cd814a;
+    background-color: rgb(255, 239, 206);
     color: black;
     padding: 8px 16px;
     border-radius: 20px;
@@ -59,7 +60,7 @@ body {
   
   .description {
     line-height: 1.6;
-    background-color: #cd814a;
+    background-color: rgb(255, 239, 206);
     padding: 20px;
     border-radius: 20px;
     white-space: pre-line;
@@ -89,7 +90,7 @@ body {
   }
   
   .file-name {
-    background-color: #cd814a;
+    background-color: rgb(255, 239, 206);
     color: white;
     padding: 4px 10px;
     border-radius: 10px;

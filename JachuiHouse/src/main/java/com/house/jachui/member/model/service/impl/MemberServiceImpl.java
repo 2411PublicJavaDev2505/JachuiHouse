@@ -6,8 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
-import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
+import com.house.jachui.member.dto.UpdateRealtorRequest;
+import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.mapper.MemberMapper;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
@@ -76,4 +77,17 @@ public class MemberServiceImpl implements MemberService {
         String check = mMapper.selectPassword(userId);
         return check != null && check.equals(userPw);
     }
+
+	@Override
+	public int updateRealtor(UpdateRealtorRequest realtor) {
+		int result = mMapper.updateRealtor(realtor);
+		return result;
+	}
+
+	// 자취생 마이페이지
+	@Override
+	public Member selectMemberById(String userId) {
+		Member member = mMapper.selectMemberById(userId);
+		return member;
+	}
 }

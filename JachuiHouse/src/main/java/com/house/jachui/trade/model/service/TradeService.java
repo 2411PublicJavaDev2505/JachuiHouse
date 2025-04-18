@@ -8,26 +8,15 @@ import com.house.jachui.trade.model.vo.Trade;
 
 public interface TradeService {
 
-	List<Trade> selectPersonalList(String userId, int currentPage);
 
-	List<Trade> selectListAll(int currentPage);
+	
+	Trade selectOneByNo(int tradeNo);
+	
+	List<Trade> getAllTradeList();
 
 	int getTotalCount();
 
-	Trade selectOneByNo(int tradeNo);
+	List<Trade> printAllTradeList(int currentPage);
 
-	Integer countViewUpdate(int tradeNo);
-
-	List<Trade> selectSearchList(Map<String, String> paramMap, int currentPage);
-
-	int getTotalCount(Map<String, String> paramMap);
-
-	int insertTrade(TradeAddRequest trade);
-
-	int updateTrade(TradeAddRequest trade);
-
-	int deleteTrade(int tradeNo);
-	
-	String getuserId(String userId);
 
 }

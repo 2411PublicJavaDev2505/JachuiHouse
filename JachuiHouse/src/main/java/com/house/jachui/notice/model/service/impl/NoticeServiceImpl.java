@@ -54,13 +54,13 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int getTotalCount(Map<String, String> paramMap) {
-		return mapper.getTotalCount(paramMap);
+	public int getTotalCount(String searchKeyword) {
+		return mapper.getTotalCount(searchKeyword);
 	}
 
-//	@Override
-//	public List<NoticeVO> searchListByKeyword(Map<String, String> paramMap, int currentPage) {
-//		return mapper.selectSearchList(paramMap, currentPage);
-//	}
+	@Override
+	public List<NoticeVO> searchListByKeyword(String searchKeyword, int currentPage) {
+		return mapper.selectSearchList(searchKeyword, currentPage);
+	}
 
 }

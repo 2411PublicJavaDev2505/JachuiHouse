@@ -21,8 +21,8 @@ public interface NoticeService {
 
 	int updateNotice(NoticeModifyRequest notice);
 
-	int getTotalCount(Map<String, String> paramMap);
+	int getTotalCount(String searchKeyword);
 
-//	List<NoticeVO> searchListByKeyword(Map<String, String> paramMap, int currentPage);
+	List<NoticeVO> searchListByKeyword(String searchKeyword, int currentPage);
 
 }

@@ -41,5 +41,13 @@ public class FileUtil {
 		result.put(prefix+"FileRename", tradeFileRename);
 		result.put(prefix+"FilePath", tradeFilePath);
 		return result;
+		
+	}
+	public static String fileRename(String originalFileName) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String date = sdf.format(new Date(System.currentTimeMillis()));
+//		String str = "_" + String.format("%05d", null);
+		String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
+		return date + ext;
 	}
 }

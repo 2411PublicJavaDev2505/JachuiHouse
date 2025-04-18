@@ -33,7 +33,7 @@
             </div>
             <c:if test="${userRole eq 'R'}">
 			    <div class="add-estate-btn">
-			        <button>매물등록</button>
+			        <button onClick="location.href='/chazabang/insert'">매물등록</button>
 			    </div>
 			</c:if>
             <div class="search-container">

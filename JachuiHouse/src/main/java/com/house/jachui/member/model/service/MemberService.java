@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
-import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
+import com.house.jachui.member.dto.UpdateRealtorRequest;
+import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.vo.Member;
 
 public interface MemberService {
@@ -39,4 +40,9 @@ public interface MemberService {
 
     // 비밀번호 확인 (회원탈퇴 시)
     boolean checkPw(String userId, String userPw);
+
+	int updateRealtor(UpdateRealtorRequest realtor);
+
+	Member selectMemberById(String userId);
+	
 }

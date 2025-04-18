@@ -18,63 +18,30 @@ public class TradeServiceImpl implements TradeService {
 	
 	@Autowired
     public TradeServiceImpl(TradeMapper mapper) {
-        this.mapper = mapper;
+		this.mapper = mapper;
     }
 	
-	@Override
-	public List<Trade> selectPersonalList(String userId, int currentPage) {
-		return mapper.selectPersonalList(userId, currentPage);
-	}
-
-	@Override
-	public List<Trade> selectListAll(int currentPage) {
-		 return mapper.selectListAll(currentPage);
-	}
-
-	@Override
-	public int getTotalCount() {
-		return mapper.getTotalCount();
-	}
-
 	@Override
 	public Trade selectOneByNo(int tradeNo) {
 		 return mapper.selectOneByNo(tradeNo);
 	}
 
 	@Override
-	public Integer countViewUpdate(int tradeNo) {
-		return mapper.countViewUpdate(tradeNo);
+	public List<Trade> getAllTradeList() {
+		 return mapper.selectListAll();
 	}
 
 	@Override
-	public List<Trade> selectSearchList(Map<String, String> paramMap, int currentPage) {
-		return mapper.selectSearchList(paramMap, currentPage);
+	public List<Trade> printAllTradeList(int currentPage) {
+		return mapper.selectAllTrade(currentPage);
 	}
 
-	@Override
-	public int getTotalCount(Map<String, String> paramMap) {
-		return mapper.getTotalCountWithCondition(paramMap);
-	}
 
 	@Override
-	public int insertTrade(TradeAddRequest trade) {
-		return mapper.insertTrade(trade);
+	public int getTotalCount() {
+		return mapper.getTotalCount();
 	}
 
-	@Override
-	public int updateTrade(TradeAddRequest trade) {
-		return mapper.updateTrade(trade);
-	}
-
-	@Override
-	public int deleteTrade(int tradeNo) {
-		return mapper.deleteTrade(tradeNo);
-	}
-
-	@Override
-	public String getuserId(String userId) {
-		return mapper.getuserId(userId);
-	}
 
 
 }
