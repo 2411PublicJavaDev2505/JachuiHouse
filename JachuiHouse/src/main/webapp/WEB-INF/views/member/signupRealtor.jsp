@@ -19,6 +19,7 @@
 				</div>
 				<div>
 					<span>공인중개사 회원가입</span>
+				<div id="msgTag" style="color: red;"></div>
 				</div>
 				</div>
                
@@ -124,62 +125,95 @@
         	const realtorNameExp = /[a-zA-Z0-9ㄱ-힣]{2,20}/;
         	const realtorNoExp = /^[0-9]{6,15}$/;
         	
+        	//msgTag.innerText = "";
+        	
             if(!userIdExp.test(userId.value.trim())){
-            		msgTag.innerText = "아이디는 소문자로 시작하고, 영어 소문자와 숫자로 4~12자리여야합니다."
-            		event.preventDefalut();
+            	event.preventDefault();
+            	const msg = "아이디는 소문자로 시작하고, 영어 소문자와 숫자로 4~12자리여야합니다."
+        		showMessage(msg);
+            	return false;
             }
             
             if(!userEmailExp.test(userEmail.value.trim())){
-    			msgTag.innerText = "이메일 형식이 올바르지 않습니다."
-    			event.preventDefault();
+    			//msgTag.innerText = "이메일 형식이 올바르지 않습니다."
+   				event.preventDefault();
+    			const msg = "이메일 형식이 올바르지 않습니다."
+           		showMessage(msg);
+               	return false;
     		}
             
             if(!userPwExp.test(userPw.value.trim())){
-    			msgTag.innerText = "비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다"
-    			event.preventDefault();
+            	event.preventDefault();
+    			const msg = "비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다."
+           		showMessage(msg);
+               	return false;
     		}
             
-            if(userPwCheckExp.value.trim() !== userPw.value.trim()){
-    			msgTag.innerText = "같은 값을 입력해주세요."
-    			event.preventDefault();
+            if(userPwCheck.value.trim() !== userPw.value.trim()){ //.value는 input 태그에 붙이는 것이다. userPwCheck는 값만 가져옴. Expression 사용X
+            	event.preventDefault();
+    			const msg = "같은 값을 입력해주세요."
+           		showMessage(msg);
+               	return false;
     		}
             
             if(!userNameExp.test(userName.value.trim())){
-    			msgTag.innerText = "이름은 한글만 가능합니다."
-    			event.preventDefault();
+            	event.preventDefault();
+    			const msg = "이름은 한글만 가능합니다."
+           		showMessage(msg);
+               	return false;
     		}
             
             if(!userPhoneExp.test(userPhone.value.trim())){
-    			msgTag.innerText = "010으로 시작하고 11자리여야 합니다."
-    			event.preventDefault();
+            	event.preventDefault();
+    			const msg = "010으로 시작하고 11자리여야 합니다."
+           		showMessage(msg);
+               	return false;
     		}
             
             if(!userPostcodeExp.test(userPostcode.value.trim())){
-    			msgTag.innerText = "우편번호를 입력해주세요."
-    			event.preventDefault();
+            	event.preventDefault();
+    			const msg = "우편번호를 입력해주세요."
+            	showMessage(msg);
+                return false;
     		}
             
             if(!userAddressExp.test(userAddress.value.trim())){
-    			msgTag.innerText = "도로명/지번주소를 입력해주세요."
-    			event.preventDefault();
+            	event.preventDefault();
+    			const msg = "도로명/지번주소를 입력해주세요."
+               	showMessage(msg);
+                return false;
     		}
             
             if(!userDetailAddressExp.test(userDetailAddress.value.trim())){
-    			msgTag.innerText = "상세주소를 입력해주세요."
-    			event.preventDefault();
+            	event.preventDefault();
+    			const msg = "상세주소를 입력해주세요."
+             	showMessage(msg);
+                return false;
     		}
             
             if(!realtorNameExp.test(realtorName.value.trim())){
-    			msgTag.innerText = "상호명은 2~20자리여야 합니다"
-    			event.preventDefault();
+            	event.preventDefault();
+            	const msg = "상호명은 2~20자리여야 합니다"
+   				showMessage(msg);
+                return false;
     		}
             
             if(!realtorNoExp.test(realtorNo.value.trim())){
-    			msgTag.innerText = "공인중개사 등록번호는 숫자만 입력해주세요."
     			event.preventDefault();
+            	const msg = "공인중개사 등록번호는 숫자만 입력해주세요."
+    			showMessage(msg);
+                return false;
     		}
         	
         })
+        // SweetAlert2 
+        document.querySelector("#success").addEventListener("click", function() {
+        	new swal(
+     	       'Success',
+     	       'You clicked the <b style="color:green;">Success</b> button!',
+     	       'error'
+    	    )
+        });
     </script>
 </body>
 </html>
