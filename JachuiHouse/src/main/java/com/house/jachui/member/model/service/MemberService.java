@@ -44,5 +44,7 @@ public interface MemberService {
 	int updateRealtor(UpdateRealtorRequest realtor);
 
 	Member selectMemberById(String userId);
+
+	String selectNameById(String string);
 	
 }
