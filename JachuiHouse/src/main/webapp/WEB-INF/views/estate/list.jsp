@@ -8,7 +8,7 @@
 <Link rel="stylesheet" href="../resources/css/estate/list.css"/>
 <Link rel="stylesheet" href="../resources/css/include/header.css"/>
 <Link rel="stylesheet" href="../resources/css/include/footer.css"/>
-    <title>Document</title>
+    <title>찾아방</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp"/>
@@ -41,6 +41,7 @@
                 <button class="search-btn">검색</button>
             </div>
         </div>
+        <div class="estate-grid">
         <c:forEach items="${estList }" var="est">
 	        <div class="estate-list">
 	            <a href="/chazabang/detail/${est.estateNo }" class="estate">
@@ -76,6 +77,7 @@
 	            </a>
 	        </div>
         </c:forEach>
+        </div>
     </main>
 	</div>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

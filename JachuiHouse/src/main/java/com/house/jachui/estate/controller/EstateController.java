@@ -55,11 +55,10 @@ public class EstateController {
 	    HttpSession session,
 	    Model model
 	) throws IOException {
-	    // 세션에서 로그인한 userId 추출
 	    String userId = (String) session.getAttribute("userId");
-	    // Estate 객체에 userId를 설정
 	    estate.setUserId(userId);
 	    int result = estService.insertEstate(estate, images, optionCodes, session);
-	    return "redirect:/estate/list";
+
+	    return "redirect:/chazabang/list";
 	}
 }
