@@ -25,19 +25,40 @@
 	</select>
 
     <select id="selectListAll" resultMap="tradeResultMap">
-	    SELECT * FROM TRADE
+	    SELECT * FROM TRADE ORDER BY TRADE_NO
+	</select>
+
+	<select id="getTotalCountKeyword" resultType="_int">
+		SELECT COUNT(*) FROM TRADE WHERE TRADE_TITLE LIKE '%'||#{searchKeyword}||'%' 
 	</select>
 
 	<select id="getTotalCount" resultType="_int">
 	    SELECT COUNT(*) FROM TRADE
+	    WHERE
+	    <choose>
+	        <when test="category == 'title'">
+	            TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
+	        </when>
+	        <when test="category == 'writer'">
+	            USER_ID LIKE '%' || #{searchKeyword} || '%'
+	        </when>
+	        <otherwise>
+	            1=1
+	        </otherwise>
+	    </choose>
 	</select>
 	
-	<select id="getTotalCountKeyword" resultType="_int">
-		SELECT COUNT(*) FROM TRADE WHERE TRADE_TITLE LIKE '%'||#{searchKeyword}||'%' 
-	</select>
-	
-    <select id="selectSearchList" resultType="NoticeVO">
-		SELECT * FROM NOTICE WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%'
+    <select id="selectSearchList" resultType="Trade">
+	    SELECT * FROM TRADE
+	    WHERE 
+	    <choose>
+	        <when test="category == 'title'">
+	            TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
+	        </when>
+	        <when test="category == 'writer'">
+	           	USER_ID LIKE '%' || #{searchKeyword} || '%'
+	        </when>
+	    </choose>
 	</select>
     
     
