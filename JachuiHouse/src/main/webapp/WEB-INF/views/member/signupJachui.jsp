@@ -12,13 +12,16 @@
 <body>
     <div class="container">
         <div class="inner">
-        <p class="logo_jachuiHouse">
-            <a href="http://localhost:7777" class="link">
-                <span class="blind">JachuiHouse</span>
-            </a>
-        </p>
+        	<div class="login-image">
+	        	<a href="http://localhost:7777">
+					<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
+				</a>
+          	</div>
+			<div>  
+                <span>회원가입</span>
+            <div id="msgTag" style="color: red;"></div>
+			</div>
             <div class="content">
-                <h2>회원가입</h2>
                 <div class="agreements">
                     <label><input type="checkbox">약관에 동의합니다. <a href="#">내용보기</a></label>
                     <label><input type="checkbox">개인정보 수집에 동의합니다. <a href="#">내용보기</a></label>
