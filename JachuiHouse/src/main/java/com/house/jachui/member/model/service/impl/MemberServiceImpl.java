@@ -90,4 +90,10 @@ public class MemberServiceImpl implements MemberService {
 		Member member = mMapper.selectMemberById(userId);
 		return member;
 	}
+
+	@Override
+	public String selectNameById(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
