@@ -8,6 +8,7 @@ import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.vo.Member;
+import com.house.jachui.notice.model.vo.NoticeVO;
 
 public interface MemberService {
 
@@ -44,5 +45,10 @@ public interface MemberService {
 	int updateRealtor(UpdateRealtorRequest realtor);
 
 	Member selectMemberById(String userId);
+
+	//회원 관리 리스트
+	List<NoticeVO> selectListAll(int currentPage);
+	//회원 관리 리스트 - 페이지네이션
+	int getTotalCount();
 	
 }

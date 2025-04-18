@@ -2,6 +2,7 @@ package com.house.jachui.member.model.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
@@ -12,6 +13,7 @@ import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.mapper.MemberMapper;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
+import com.house.jachui.notice.model.vo.NoticeVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -89,5 +91,19 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectMemberById(String userId) {
 		Member member = mMapper.selectMemberById(userId);
 		return member;
+	}
+
+	//회원 관리 리스트
+	@Override
+	public List<NoticeVO> selectListAll(int currentPage) {
+		int limit = 10;
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return mMapper.selectListAll(rowBounds);
+	}
+
+	@Override
+	public int getTotalCount() {
+		return mMapper.getTotalCount();
 	}
 }
