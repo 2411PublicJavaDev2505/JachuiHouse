@@ -14,10 +14,22 @@
 	<main>
 		 <div class="container">    
 		 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
-		 
+		 .
 	        <!-- 배너 슬라이드 -->
 	            <div class="main">
 	                <section class="banner">
+	                   <div class="left-image-container">
+						    <button class="arrow left" onclick="changeImage(-1)">&#10094;</button>
+						    <img id="leftImage" src="../resources/image/main-left.jpeg" alt="image" class="left-image">
+						    <button class="arrow right" onclick="changeImage(1)">&#10095;</button>
+						</div>
+	                    <h2 class="main-hello">
+	                    </h2>
+	                    <div>
+	                        <img src="../resources/image/main-right.png" alt="house" class="right-image">
+	                    </div>
+	                </section>
+	                 <section class="banner2">
 	                   <div class="left-image-container">
 						    <button class="arrow left" onclick="changeImage(-1)">&#10094;</button>
 						    <img id="leftImage" src="../resources/image/main-left.jpeg" alt="image" class="left-image">
@@ -53,7 +65,7 @@
 	                        </a>
 	                    </div>
 	                    <div class="right-menu">
-	                        <a href="/notice/list">
+	                        <a href="#">
 	                            <div class="notice-board">
 	                                <h3>공지사항</h3>
 	                                <li>감기 조심하세요</li>
