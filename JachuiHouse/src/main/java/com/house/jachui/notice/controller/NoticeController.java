@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.common.FileUtil;
 import com.house.jachui.common.PageUtil;
+import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.notice.controller.dto.NoticeAddRequest;
 import com.house.jachui.notice.controller.dto.NoticeModifyRequest;
 import com.house.jachui.notice.model.service.NoticeService;
@@ -104,13 +105,32 @@ public class NoticeController {
 			@ModelAttribute NoticeAddRequest notice
 			, @RequestParam("uploadFile") MultipartFile uploadFile
 			, HttpSession session, Model model) {
+
+//	    // ✅ 여기! 메서드 호출 여부 체크
+//	    System.out.println(">>> noticeAdd() controller called!");
 			try {
+				// 1. 파일 저장 처리
 				if(uploadFile != null && !uploadFile.getOriginalFilename().isBlank()) {
 					Map<String, String> fileInfo = fileUtil.saveFile(uploadFile, session, "notice");
 					notice.setNoticeFileName(fileInfo.get("nFilename"));
 					notice.setNoticeFileRename(fileInfo.get("nFileRename"));
 					notice.setNoticeFilePath(fileInfo.get("nFilepath"));
 				}
+				
+		        // 2. 세션에서 userId 가져와서 세팅
+				String UserId = (String) session.getAttribute("userId");
+//		        Member userId = (Member) session.getAttribute("userId");
+		        if (UserId != null) {
+//		            notice.setUserId(userId.getUserId());  // ✨ 여기가 중요 ✨
+		        System.out.println("세션에서 가져온 userId: " + UserId);
+		        notice.setUserId(UserId);
+		            
+		        } else {
+		            model.addAttribute("errorMessage", "로그인이 필요합니다.");
+		            return "common/error";
+		        }
+
+		        // 3. 저장
 				int result = nService.addNotice(notice);
 				return "redirect:/notice/list";				
 			} catch (Exception e) {
@@ -163,12 +183,51 @@ public class NoticeController {
 			, @RequestParam("reloadFile") MultipartFile reloadFile
 			, HttpSession session, Model model) {
 		try {
-			if(reloadFile != null && !reloadFile.getOriginalFilename().isBlank()) {
-				Map<String, String> fileInfo = fileUtil.saveFile(reloadFile, session, "notice");
-				notice.setNoticeFileName(fileInfo.get("nFilename"));
-				notice.setNoticeFileRename(fileInfo.get("nFileRename"));
-				notice.setNoticeFilePath(fileInfo.get("nFilepath"));
-			}
+			// 📌 1. 파일 정보 확인 로그
+			System.out.println("📦 업로드한 파일 이름: " + reloadFile.getOriginalFilename());
+			
+	        // 파일 새로 업로드한 경우
+	        if (reloadFile != null && !reloadFile.getOriginalFilename().isBlank()) {
+	            Map<String, String> fileInfo = fileUtil.saveFile(reloadFile, session, "notice");
+	            
+				// 📌 2. 파일 저장 결과 확인 로그
+				System.out.println("✅ 저장된 파일 원본명: " + fileInfo.get("nFilename"));
+				System.out.println("✅ 저장된 파일 리네임: " + fileInfo.get("nFileRename"));
+				System.out.println("✅ 저장된 파일 경로: " + fileInfo.get("nFilePath"));
+	            
+	            notice.setNoticeFileName(fileInfo.get("nFilename"));
+	            notice.setNoticeFileRename(fileInfo.get("nFileRename"));
+	            notice.setNoticeFilePath(fileInfo.get("nFilepath"));
+	        } else {
+				System.out.println("📎 새 파일 없음. 기존 파일 유지할 예정");
+	        	
+	            // 기존 첨부파일 정보를 그대로 유지
+	            NoticeVO originNotice = nService.selectOneByNo(notice.getNoticeNo());
+	            
+				// 📌 3. 기존 파일 정보 확인 로그
+				System.out.println("📂 기존 파일명: " + originNotice.getNoticeFileName());
+				System.out.println("📂 기존 파일리네임: " + originNotice.getNoticeFileRename());
+				System.out.println("📂 기존 파일경로: " + originNotice.getNoticeFilePath());
+	            
+	            notice.setNoticeFileName(originNotice.getNoticeFileName());
+	            notice.setNoticeFileRename(originNotice.getNoticeFileRename());
+	            notice.setNoticeFilePath(originNotice.getNoticeFilePath());
+	        }
+	        
+//			if(reloadFile != null && !reloadFile.getOriginalFilename().isBlank()) {
+//	            // 파일 저장 처리
+//				Map<String, String> fileInfo = fileUtil.saveFile(reloadFile, session, "notice");
+//
+//	            // 저장된 파일 정보 설정
+//				notice.setNoticeFileName(fileInfo.get("nFilename"));
+//				notice.setNoticeFileRename(fileInfo.get("nFileRename"));
+//				notice.setNoticeFilePath(fileInfo.get("nFilepath"));
+//			}
+	        
+			// 📌 4. 최종 저장될 Notice 객체 확인
+			System.out.println("📝 최종 notice 객체: " + notice);
+	        
+	        // 공지사항 수정 처리
 			int result = nService.updateNotice(notice);
 			return "redirect:/notice/detail/"+notice.getNoticeNo();
 		} catch (Exception e) {

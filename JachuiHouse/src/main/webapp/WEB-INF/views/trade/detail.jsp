@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,22 +12,7 @@
       </head>
       <body>
         <div id="container">
-            <header>
-                <a href="/">
-                <div class="logo">
-                    <img src="/resources/img/logo.png" alt="logo">
-                </div>
-                </a> 
-                <div class="nav">
-                    <a href="#">홈</a> 
-                    <a href="#">자취록</a>
-                    <a href="#">찾아방</a>
-                    <a href="#">사방팔방</a>
-                </div>
-                <div class="loginBtn">
-                    <a href="#">로그인</a>
-                </div>
-            </header>
+             <jsp:include page="/WEB-INF/views/include/header.jsp" />
     
         <main class="detail-container">
           <h2>사방팔아방 상세페이지</h2>
@@ -41,8 +27,19 @@
               <div class="label">물품명</div>
               <div class="value">${trade.tradeTitle}</div>
             </div>
+            
+            <c:if test="${not empty trade.tradeFileRename}">
+			  <div class="info-row image-row">
+			    <div class="label">상품 이미지</div>
+			    <div class="value image-box">
+			      <img src="${pageContext.request.contextPath}/resources/img/${trade.tradeFileRename}" 
+			           alt="${trade.tradeTitle}" 
+			           class="product-image"/>
+			    </div>
+			  </div>
+			</c:if>
       
-            <div class="info-row">
+            <div class="info-row description-row">
                 <div class="label">상세내용</div>
                 <div class="value description">${trade.tradeContent}</div>
             </div>
@@ -58,9 +55,7 @@
               </div>
           </div>
         </main>
-        <footer>
-            이용약관 | 광고문의 | 개인정보처리방침 | 찾아오시는길 | 회사명: 자취스크립트(주) | 대표자 : 강우혁 | 문의 전화: 010-2222-3333
-        </footer>
+         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
         </div>
       </body>
       </html>

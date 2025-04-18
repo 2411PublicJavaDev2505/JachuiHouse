@@ -16,33 +16,34 @@
         	<h2>공지사항 작성</h2>
         	
         	<div class="detail-box">
-	            <div class="info-row">
-		            <div class="label">공지종류</div>
-		            <div class="">
-		            	<input type="radio" name="noticeType" checked>공통
-						<input type="radio" name="noticeType">공인중개사
-						<input type="radio" name="noticeType">자취생
-		            </div>
-	            </div>
+					<div class="info-row">
+					  <div class="label">공지종류</div>
+					  <div>
+					    <label><input type="radio" name="noticeType" value="공통" checked /> 공통</label>
+					    <label><input type="radio" name="noticeType" value="공인중개사" /> 공인중개사</label>
+					    <label><input type="radio" name="noticeType" value="자취생" /> 자취생</label>
+					  </div>
+					</div>
+
 	            
 	            <div class="info-row">
 		            <div class="label">공지제목</div>
 		            <div>
-		            	<input class="value" type="text" id="" name="noticeTitle"  placeholder="제목">
+		            	<input class="add" type="text" id="" name="noticeTitle"  placeholder="제목">
 		            </div>
 	            </div>
       
             	<div class="info-row">
 	                <div class="label">상세내용</div>
 	                <div>
-		                <textarea class="value description" id="real-product-detail" name="noticeContent" rows="10" cols="80" 
+		                <textarea class="add description" id="real-product-detail" name="noticeContent" rows="10" cols="80" 
 		                placeholder="내용 입력란"></textarea>
                 	</div>
               	</div>
               	
               	<div class="info-row">
 	                <div class="label">첨부파일</div>
-	                <div class="value">
+	                <div class="add">
 		                <span><a href="..${NoticeVO.filePath }">${NoticeVO.fileName }</a></span>
 						<input type="file" name="uploadFile" onchange="readURL(this)">
                 	</div>

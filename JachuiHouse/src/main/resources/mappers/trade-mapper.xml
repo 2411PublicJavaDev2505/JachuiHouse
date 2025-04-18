@@ -25,34 +25,48 @@
 	</select>
 
     <select id="selectListAll" resultMap="tradeResultMap">
-	    SELECT * FROM TRADE
+	    SELECT * FROM TRADE ORDER BY TRADE_NO
 	</select>
 
-	<select id="selectAllTrade" resultMap="tradeResultMap">
-	    SELECT TRADE_NO, USER_ID, TRADE_TITLE, TRADE_CONTENT,
-	           TRADE_PRICE, VIEW_COUNT, WRITE_DATE, TRADE_FILENAME,
-	           TRADE_FILERENAME, TRADE_FILEPATH, TRADE_YN, TRADE_DATE, DEL_YN
-	    FROM TRADE
-	    WHERE DEL_YN = 'N'
-	    ORDER BY WRITE_DATE DESC
+	<select id="getTotalCountKeyword" resultType="_int">
+		SELECT COUNT(*) FROM TRADE WHERE TRADE_TITLE LIKE '%'||#{searchKeyword}||'%' 
 	</select>
-	
+
 	<select id="getTotalCount" resultType="_int">
 	    SELECT COUNT(*) FROM TRADE
+	    WHERE
+	    <choose>
+	        <when test="category == 'title'">
+	            TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
+	        </when>
+	        <when test="category == 'writer'">
+	            USER_ID LIKE '%' || #{searchKeyword} || '%'
+	        </when>
+	        <otherwise>
+	            1=1
+	        </otherwise>
+	    </choose>
+	</select>
+	
+    <select id="selectSearchList" resultType="Trade">
+	    SELECT * FROM TRADE
+	    WHERE 
+	    <choose>
+	        <when test="category == 'title'">
+	            TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
+	        </when>
+	        <when test="category == 'writer'">
+	           	USER_ID LIKE '%' || #{searchKeyword} || '%'
+	        </when>
+	    </choose>
 	</select>
     
     
-    
-	<insert id="insertTrade" parameterType="TradeAddRequest" useGeneratedKeys="true">
-		<selectKey order="BEFORE" resultType="_int" keyProperty="tradeNo">
-			SELECT SEQ_TRADE_NO.NEXTVAL FROM DUAL
-		</selectKey>
-		INSERT INTO TRADE(TRADE_NO, USER_ID, TRADE_TITLE, TRADE_CONTENT, TRADE_PRICE,
-		TRADE_FILENAME, TRADE_FILERENAME, TRADE_FILEPATH, DEL_YN) 
-		VALUES (#{tradeNo}, #{userId}, #{tradeTitle}, #{tradeContent}, #{tradePrice},
-		 #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath}, 'N')
+	<insert id="insertTrade">
+		INSERT INTO TRADE VALUES(SEQ_TRADE_NO.NEXTVAL, #{userId}, #{tradeTitle}, #{tradeContent}, #{tradePrice},
+		 default, default, #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath}, 'N', default. 'N')
 	</insert>
-	<update id="updateTrade" parameterType="TradeAddRequest">
+	<update id="updateTrade">
 		UPDATE TRADE
 		SET TRADE_TITLE = #{tradeTitle},
 		    TRADE_CONTENT = #{tradeContent},
