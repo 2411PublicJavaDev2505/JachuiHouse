@@ -14,14 +14,14 @@
 			<div class="login-container">
 				<div class="login-form">
 					<div class="logo-container">
-					<div class="login-image">
-						<a href="http://localhost:7777">
-							<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
-						</a>
-					</div>
-					<div>
-						<span>로그인</span>
-					</div>
+						<div class="login-image">
+							<a href="http://localhost:7777">
+								<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
+							</a>
+						</div>
+						<div>
+							<span>로그인</span>
+						</div>
 					</div>
 					<form class="login-form" action="/member/login" method="post">
 						<div class="form-group">

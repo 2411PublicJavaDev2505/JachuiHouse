@@ -31,7 +31,7 @@
                    <div class="form-group">
                        <h3>아이디 입력</h3>
                        <label for="userId" >아이디: </label>
-                       <input class="form-control" type="text" id="userId" minlength="4" maxlength="12" placeholder="영어 소문자와 숫자로 4~12자리"  autofocus required >
+                       <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="12" placeholder="영어 소문자와 숫자로 4~12자리"  autofocus required >
                        <button id="btn-di-check">중복확인</button>
                        <div id="id-check-result" class="area"></div>
                    </div>

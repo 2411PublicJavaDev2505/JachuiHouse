@@ -45,9 +45,7 @@ body {
     --justify-content: center;
 }   
 
-.login-image{
-    flex: 1;
-}
+
 
 .login-container {
     display: flex;
@@ -236,9 +234,12 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding: 50px;
+	
 }
 
 .login-image img{
 	width: 100px;
 	height: 100px;
+	/* padding: 50px; */
 }
