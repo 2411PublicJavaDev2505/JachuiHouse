@@ -15,6 +15,12 @@ body{
     padding: 50px 0;
     background-color: #F4ECE0;
 }
+.banner2 {
+    text-align: center;
+    margin-top : 20px;
+    padding: 50px 0;
+    background-color: #F4ECE0;
+}
 .left-image-container {
     position: relative;
     display: inline-block;
