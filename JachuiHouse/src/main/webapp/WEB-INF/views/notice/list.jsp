@@ -16,7 +16,7 @@
 
 	<main class="main">
     	<div id="notice-div">
-<!-- 	        <div class="top-bar"> -->
+
 	        	<form class="report-form" action="/notice/search" method="get">
 	        		 <div class="search">
 		        		 <input class="searchplace" name="searchKeyword" type="text" placeholder="  제목으로 검색어를 입력하세요.">
@@ -26,11 +26,11 @@
 	
 	        		 <div class="board">
 	        		 <!-- admin확인절차 넣어줘야 함 -->
-	        		 <%-- <c:if test="${member.userId == 'admin'}"> --%>
+	        		 <c:if test="${sessionScope.userId == 'admin'}">
 	        		 	<button class="btn"><a href="/notice/add">게시글 등록</a></button>
-	        		 <%-- </c:if> --%>  
+	        		 </c:if>  
 	        		 </div><br>
-<!-- 	        	</div>	 	 -->
+	        		 
         	<table class="boardbl">
         		<tr>
         			<th>번호</th>
@@ -77,13 +77,12 @@
 					</c:if>
 				</div>
 			</div>
-
         
 	    <div class="board">
        		<!-- admin확인절차 넣어줘야 함 -->
-       		<%-- <c:if test="${member.userId == 'admin'}"> --%>
-       		 	<button class="btn"><a href="">신고 관리</a></button>
-       		<%-- </c:if> --%>  
+       		<c:if test="${sessionScope.userId == 'admin'}">
+       		 	<button class="btn"><a href="admin/report">신고 관리</a></button>
+       		</c:if>  
        	</div>		
         </div>
 	</main> 

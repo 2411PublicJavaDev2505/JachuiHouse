@@ -43,7 +43,7 @@ body {
     flex-shrink: 0;
   }
   
-  .value {
+  .add {
     background-color: #FF804A;
     color: white;
     padding: 8px 20px;
@@ -54,7 +54,7 @@ body {
     border: 0;
   }
   
-  .value::placeholder {
+  .add::placeholder {
     color: white;
     opacity: 1; /* 크로스브라우징 대응 */
 }

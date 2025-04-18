@@ -25,7 +25,7 @@
 	</delete>
 	<update id="updateNotice">
 		UPDATE NOTICE SET NOTICE_TYPE=#{noticeType}, NOTICE_TITLE=#{noticeTitle}
-		, NOTICE_CONCEPT=#{noticeConcept}, NOTICE_WRITE_DATE=SYSDATE, NOTICE_MODIFY_DATE=SYSDATE
+		, NOTICE_CONTENT=#{noticeContent}, NOTICE_MODIFY_DATE=SYSDATE
 		, NOTICE_FILE_NAME=#{noticeFileName}, NOTICE_FILE_PATH=#{noticeFilePath}
 		, NOTICE_FILE_RENAME=#{noticeFileRename}, USER_ID=#{userId}
 		WHERE NOTICE_NO=#{noticeNo}
