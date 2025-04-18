@@ -4,10 +4,11 @@ main{
     height: 700px;
     display: flex;
     justify-content: center;
-    gap: 100px;
+    gap: 200px;
 }
 .left-image img{
     width: 200px;
+    height : 200px;
     border-radius: 100%;
 }
 .updateBtn button{
@@ -47,18 +48,20 @@ main{
 .updateBtn button, .dleteBtn button, .calculatorBtn button:hover{
     cursor: pointer;
 }
-
+.rigth-inform {
+	width : 450px;
+}
 .my-inform p {
-    border-bottom: 2px solid #969696;
+    border-bottom: 2px solid #E0DFDF;
     padding: 5px;
 }
 .chat-content, .notice-content, .thing-content{
-    border: 1px solid #969696;
+    border: 1px solid #E0DFDF;
     background-color: white;
     border-radius: 15px;
     padding: 15px;
 }
 .chat-content p, .notice-content p {
-    border-bottom: 2px solid #969696;
+    border-bottom: 2px solid #E0DFDF;
     text-align: center;
 }
