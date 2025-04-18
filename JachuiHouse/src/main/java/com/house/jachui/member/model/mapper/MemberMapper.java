@@ -3,6 +3,7 @@ package com.house.jachui.member.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
@@ -10,6 +11,7 @@ import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.vo.Member;
+import com.house.jachui.notice.model.vo.NoticeVO;
 
 @Mapper
 public interface MemberMapper {
@@ -37,5 +39,9 @@ public interface MemberMapper {
 	int updateRealtor(UpdateRealtorRequest realtor);
 
 	Member selectMemberById(String userId);
+
+	List<NoticeVO> selectListAll(RowBounds rowBounds);
+
+	int getTotalCount();
 
 }
