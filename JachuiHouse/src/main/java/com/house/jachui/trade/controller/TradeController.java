@@ -38,6 +38,8 @@ public class TradeController {
     private final FileUtil file;
 	private PageUtil pageUtil;
 	private FileUtil fileUtil;
+	private String toTalCount;
+	private List<Trade> searchList;
 
     // 목록,검색
     @GetMapping("/list")
@@ -72,29 +74,38 @@ public class TradeController {
     
     @GetMapping("/search")
     public String tradeSearch(
-			@RequestParam("searchKeyword") String searchKeyword
-			, @RequestParam(value="page", defaultValue="1") int currentPage
-			, Model model) {
-		try {
-			
-			int totalCount = tService.getTotalCount(searchKeyword);
-			List<Trade> searchList = tService.searchListByKeyword(searchKeyword, currentPage); 
-			
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
-				model.addAttribute("maxPage", pageInfo.get("maxPage"));
-				model.addAttribute("startNavi", pageInfo.get("startNavi"));
-				model.addAttribute("endNavi", pageInfo.get("endNavi"));
-				
-				model.addAttribute("searchList", searchList);
-				model.addAttribute("searchKeyword", searchKeyword);
-				return "trade/search";
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
-				return "common/error";
-		}
-	}
+        @RequestParam("searchKeyword") String searchKeyword,
+        @RequestParam("category") String category,
+        @RequestParam(value="page", defaultValue="1") int currentPage,
+        Model model
+    ) {
+        try {
+            int totalCount = tService.getTotalCount(searchKeyword, category);
+            List<Trade> searchList = tService.searchListByKeyword(searchKeyword, category, currentPage);
+
+            if (searchList == null || searchList.isEmpty()) {
+                model.addAttribute("searchList", null);
+                model.addAttribute("errorMessage", "검색 결과가 없습니다.");
+            } else {
+                Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage);
+                model.addAttribute("maxPage", pageInfo.get("maxPage"));
+                model.addAttribute("startNavi", pageInfo.get("startNavi"));
+                model.addAttribute("endNavi", pageInfo.get("endNavi"));
+                model.addAttribute("searchList", searchList);
+            }
+
+            model.addAttribute("searchKeyword", searchKeyword);
+            model.addAttribute("category", category);
+            model.addAttribute("currentPage", currentPage);
+
+            return "trade/search";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "검색 중 오류 발생: " + e.getMessage());
+            return "common/error";
+        }
+    }
 
 
 	//등록 화면 요청

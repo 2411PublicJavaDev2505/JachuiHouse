@@ -42,15 +42,18 @@ public class TradeServiceImpl implements TradeService {
 	}
 
 	@Override
-	public int getTotalCount(String searchKeyword) {
-		return mapper.getTotalCount(searchKeyword);
+	public int getTotalCount(String searchKeyword, String category) {
+		return mapper.getTotalCount(searchKeyword, category);
 	}
 
 	@Override
-	public List<Trade> searchListByKeyword(String searchKeyword, int currentPage) {
-		return mapper.selectSearchList(searchKeyword, currentPage);
+	public List<Trade> searchListByKeyword(String searchKeyword, String category, int currentPage) {
+		int limit = 8;
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return mapper.selectSearchList(searchKeyword, category, rowBounds);
 	}
-
+	
 	@Override
 	public int insertTrade(TradeAddRequest trade) {
 		return mapper.insertTrade(trade);
@@ -65,10 +68,4 @@ public class TradeServiceImpl implements TradeService {
 	public int deleteTrade(int tradeNo) {
 		return mapper.deleteTrade(tradeNo);
 	}
-
-
-	
-
-
-
 }

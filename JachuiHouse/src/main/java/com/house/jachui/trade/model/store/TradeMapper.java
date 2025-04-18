@@ -15,24 +15,18 @@ public interface TradeMapper {
 
 	List<Trade> selectListAll(RowBounds rowBounds);
 
-	List<Trade> selectSearchList(String searchKeyword, int currentPage);
+	List<Trade> selectSearchList(String searchKeyword, String category, RowBounds rowBounds);
 
 	Trade selectOneByNo(int tradeNo);
 	
 	int getTotalCount();
 
-	int getTotalCount(String searchKeyword);
+	int getTotalCount(String searchKeyword, String category);
 
 	int insertTrade(TradeAddRequest trade);
 
 	int updateTrade(TradeUpdateRequest trade);
 
 	int deleteTrade(int tradeNo);
-
-
-	
-
-
-
 
 }

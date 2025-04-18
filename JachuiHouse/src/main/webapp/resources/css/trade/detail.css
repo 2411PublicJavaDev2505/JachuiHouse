@@ -47,11 +47,32 @@ body {
     align-items: flex-start;
     margin-bottom: 20px;
   }
+
+  .image-row {
+  align-items: center;
+	}
+	
+.image-box {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  padding: 10px 0;
+}
+
+.product-image {
+  width: 100%;          /* 이미지가 부모 div 가득 채움 */
+  max-width: 600px;     /* 필요하면 최대 너비 제한, 더 크게 하고 싶으면 키워도 됨 */
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  object-fit: cover;    /* 필요 시 비율 채우기용 */
+}
   
   .label {
-    width: 100px;
-    font-weight: bold;
-    flex-shrink: 0;
+   width: 100px;
+   font-weight: bold;
+   flex-shrink: 0;
+   margin-top: 8px;
   }
   
   .value {

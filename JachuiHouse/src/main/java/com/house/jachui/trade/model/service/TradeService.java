@@ -11,13 +11,13 @@ public interface TradeService {
 
 	List<Trade> selectListAll(int currentPage);
 
-	List<Trade> searchListByKeyword(String searchKeyword, int currentPage);
+	List<Trade> searchListByKeyword(String searchKeyword, String category, int currentPage);
 
 	Trade selectOneByNo(int tradeNo);
 
 	int getTotalCount();
 	
-	int getTotalCount(String searchKeyword);
+	int getTotalCount(String searchKeyword, String category);
 
 	int insertTrade(TradeAddRequest trade);
 	

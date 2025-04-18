@@ -19,12 +19,12 @@
           <div class="detail-box">
             <div class="info-row">
               <div class="label">작성자</div>
-              <div class="value">${trade.userId}USER01</div>
+              <div class="value">${trade.userId}</div>
             </div>
       
             <div class="info-row">
               <div class="label">물품명</div>
-              <div class="value">${trade.tradeTitle}중고 옷걸이</div>
+              <div class="value">${trade.tradeTitle}</div>
             </div>
       
             <div class="info-row">
@@ -36,12 +36,7 @@
       
             <div class="info-row">
                 <div class="label">상세내용</div>
-                <div class="value description">${trade.tradeContent}좁은 공간 또는 여행지에서 빨래를 건조하거나,<br>
-                  옷을 걸 때 유용한 도구<br><br>
-                  창틀, 등(0.15~8.3cm)에 고정시켜주면<br>
-                  간단한 옷걸이가 완성돼요<br>
-                  색상은 랜덤입니다
-                </div>
+                <div class="value description">${trade.tradeContent}</div>
               </div>
               
               <div class="info-row">
@@ -49,7 +44,7 @@
                 <div class="value">
                   <span class="file-button">첨부파일</span>
                   <span class="file-name">
-                    <a href="../..${trade.fileName}" download alt>${trade.fileName}중고 옷걸이</a>
+                    <a href="../..${trade.filename}" download alt>${trade.filename}</a>
                 </span>
                 </div>
               </div>

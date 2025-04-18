@@ -43,7 +43,7 @@
 	                                <p>맘에드는 집을 찾아방</p>
 	                            </div>
 	                        </a>
-	                        <a href="#">
+	                        <a href="/trade/list">
 	                            <div class="used-market">
 	                                <h3>사방팔아방</h3>
 	                                <p>자취러들의 중고장터</p>
