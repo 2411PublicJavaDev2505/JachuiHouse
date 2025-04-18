@@ -11,6 +11,4 @@ public class OptionAddrequest {
 
 	private int optionNo;
 	private int estateNo;
-	private String optionName;
-	private String optionImg;
 }

@@ -33,7 +33,6 @@ public class EstateController {
     public String showEstateList(Model model) {
         List<Estate> estList = estService.getEstateList();
         model.addAttribute("estList", estList);
-        System.out.println(estList);
         return "estate/list";
     }
 	
@@ -42,7 +41,6 @@ public class EstateController {
 	public String showEstateDetail(@PathVariable("estateNo") int estateNo, Model model) {
 		Estate estate = estService.selectOneByNo(estateNo);
 		model.addAttribute("estate",estate);
-		System.out.println(estate);
 		return "estate/detail";
 	}
 	@GetMapping("/insert")
@@ -50,12 +48,18 @@ public class EstateController {
 		return "estate/insert";
 	}
 	@PostMapping("/insert")
-	public String InsertEstate(@ModelAttribute EstateAddRequest estate,
-								@ModelAttribute OptionAddrequest options,
-								@RequestParam("images") MultipartFile images,
-								HttpSession session,
-								Model model) throws IllegalStateException, IOException {
-		int result = estService.insertEstate(estate, images, options);
-		return "redirect:/estate/list";
+	public String InsertEstate(
+	    @ModelAttribute EstateAddRequest estate,
+	    @RequestParam(value = "optionCodes", required = false) List<Integer> optionCodes,
+	    @RequestParam(value = "images", required = false) List<MultipartFile> images,
+	    HttpSession session,
+	    Model model
+	) throws IOException {
+	    // 세션에서 로그인한 userId 추출
+	    String userId = (String) session.getAttribute("userId");
+	    // Estate 객체에 userId를 설정
+	    estate.setUserId(userId);
+	    int result = estService.insertEstate(estate, images, optionCodes, session);
+	    return "redirect:/estate/list";
 	}
 }

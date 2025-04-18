@@ -3,6 +3,7 @@ package com.house.jachui.estate.model.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.estate.model.vo.EstateFile;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -25,6 +27,7 @@ public class EstateServiceImpl implements EstateService {
 
     private final EstateMapper estMapper;
     private final SqlSession session;
+    private final FileUtil fileutil;
 	
 	private String webPath = "/images/estate/";
 	private String folderPath = "C:/uploadImage/chazabang/";
@@ -39,28 +42,21 @@ public class EstateServiceImpl implements EstateService {
     	Estate estate = estMapper.selectOneByNo(estateNo);
     	return estate;
     }
+    @Override
+    public int insertEstate(EstateAddRequest estate,
+    						List<MultipartFile> images,
+					        List<Integer> optionCodes,
+					        HttpSession session
+    ) throws IOException, IllegalStateException {
+        
+        int result = estMapper.insertEstate(estate);
+        int estateNo = estate.getEstateNo();
 
-	@Override
-	public int insertEstate(EstateAddRequest estate, MultipartFile images, OptionAddrequest options) throws IllegalStateException, IOException {
-		int result = estMapper.insertEstate(estate);
-		if(result == 0) 
-		return 0;
-		
-		int estateNo = estate.getEstateNo();
-		
-		if(images.getSize() > 0) {
-			EstateFile file = new EstateFile();
-			file.setEstateFilePath(webPath);
-			file.setEstateNo(estateNo);
-			file.setEstateFileOrder(0);
-			
-			String fileName = file.getEstateFileName();
-			String fileRename = FileUtil.fileRename(fileName);
-			file.setEstateFileName(fileName);
-			file.setEstateFileRename(fileRename);
-			result = estMapper.insertEstateFile(file);
-			images.transferTo(new File(folderPath+file.getEstateFileRename()));
-		}
-		return result;
-	}
+        if (images != null) {
+            for (MultipartFile file : images) {
+                Map<String, String> saved = fileutil.saveFile(file, session, "estate");
+            }
+        }
+        return estateNo;
+    }
 }

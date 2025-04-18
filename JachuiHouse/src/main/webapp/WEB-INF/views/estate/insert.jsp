@@ -11,11 +11,11 @@
 <body>
     <div class="wrapper">
         <h2>매물 등록</h2>
-        <form action="${pageContext.request.contextPath}/chazabang/insert" method="post">
+        <form action="/chazabang/insert" method="post" enctype="multipart/form-data">
             <label>거래유형:
                 <select name="estateRentType">
-                    <option value="월세">월세</option>
-                    <option value="전세">전세</option>
+                    <option value="monthly">월세</option>
+                    <option value="charter">전세</option>
                 </select>
             </label><br/>
 
@@ -24,16 +24,17 @@
 
             <label>주소: <input type="text" name="estateAddress"/></label><br/>
 
-            <label>면적(㎡): <input type="text" name="estateWidth"/></label><br/>
-
             <label>형태:
                 <select name="estateType">
-                    <option value="원룸/투룸">원룸/투룸</option>
-                    <option value="주택/빌라">주택/빌라</option>
-                    <option value="아파트">아파트</option>
-                    <option value="오피스텔">오피스텔</option>
+                    <option value="onwtwo">원룸/투룸</option>
+                    <option value="villa">주택/빌라</option>
+                    <option value="apart">아파트</option>
+                    <option value="officetel">오피스텔</option>
                 </select>
             </label><br/>
+            
+            <label>면적(㎡): <input type="text" name="estateWidth"/></label><br/>
+
 
             <label>층수: <input type="text" name="estateFloor"/></label><br/>
 
@@ -48,7 +49,7 @@
 				<legend>옵션 선택</legend>
 				<div class="option-grid">
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="세탁기" hidden/>
+				      <input type="checkbox" name="optionCodes" value="1" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/세탁기.png" alt="세탁기"/>
 				     	</div>
@@ -56,7 +57,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="건조기" hidden/>
+				      <input type="checkbox" name="optionCodes" value="3" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/건조기.png" alt="건조기"/>
 				     	</div>
@@ -64,7 +65,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="냉장고" hidden/>
+				      <input type="checkbox" name="optionCodes" value="2" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/냉장고.png" alt="냉장고"/>
 				     	</div>
@@ -72,7 +73,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="인덕션" hidden/>
+				      <input type="checkbox" name="optionCodes" value="10" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/인덕션.png" alt="인덕션"/>
 				     	</div>
@@ -80,7 +81,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="가스레인지" hidden/>
+				      <input type="checkbox" name="optionCodes" value="12" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/가스레인지.png" alt="가스레인지"/>
 				     	</div>
@@ -88,7 +89,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="전자레인지" hidden/>
+				      <input type="checkbox" name="optionCodes" value="8" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/전자레인지.png" alt="전자레인지"/>
 				     	</div>
@@ -96,7 +97,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="에어컨" hidden/>
+				      <input type="checkbox" name="optionCodes" value="4" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/에어컨.png" alt="에어컨"/>
 				     	</div>
@@ -104,7 +105,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="TV" hidden/>
+				      <input type="checkbox" name="optionCodes" value="5" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/TV.png" alt="TV"/>
 				     	</div>
@@ -112,7 +113,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="침대" hidden/>
+				      <input type="checkbox" name="optionCodes" value="11" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/침대.png" alt="침대"/>
 				     	</div>
@@ -120,7 +121,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="도어락" hidden/>
+				      <input type="checkbox" name="optionCodes" value="6" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/도어락.png" alt="도어락"/>
 				     	</div>
@@ -128,7 +129,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="신발장" hidden/>
+				      <input type="checkbox" name="optionCodes" value="7" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/신발장.png" alt="신발장"/>
 				     	</div>
@@ -136,7 +137,7 @@
 				    </label>
 				  
 				    <label class="option-item">
-				      <input type="checkbox" name="optionCodes" value="비데" hidden/>
+				      <input type="checkbox" name="optionCodes" value="9" hidden/>
 				      	<div class="option-img-box">
 				        	<img src="${pageContext.request.contextPath}/resources/images/estate/option/비데.png" alt="비데"/>
 				     	</div>
@@ -161,8 +162,8 @@
         function toggleFields() {
             const rentType = document.querySelector('select[name="estateRentType"]').value;
             const monthlyInput = document.getElementById("monthlyRent");
-            monthlyInput.disabled = (rentType === "전세");
-            monthlyInput.value = (rentType === "전세") ? "" : monthlyInput.value;
+            monthlyInput.disabled = (rentType === "charter");
+            monthlyInput.value = (rentType === "charter") ? "" : monthlyInput.value;
 
             const nowMoveIn = document.querySelector('input[name="moveinNowYN"]').checked;
             const moveInDate = document.getElementById("moveinDate");
