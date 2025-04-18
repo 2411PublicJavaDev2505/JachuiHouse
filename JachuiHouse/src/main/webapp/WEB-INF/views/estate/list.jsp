@@ -8,7 +8,7 @@
 <Link rel="stylesheet" href="../resources/css/estate/list.css"/>
 <Link rel="stylesheet" href="../resources/css/include/header.css"/>
 <Link rel="stylesheet" href="../resources/css/include/footer.css"/>
-    <title>Document</title>
+    <title>찾아방</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp"/>
@@ -41,6 +41,7 @@
                 <button class="search-btn">검색</button>
             </div>
         </div>
+        <div class="estate-grid">
         <c:forEach items="${estList }" var="est">
 	        <div class="estate-list">
 	            <a href="/chazabang/detail/${est.estateNo }" class="estate">
@@ -48,8 +49,26 @@
 	                    <img src="../resources/images/estate/좋아보이느집.jpg" alt="이미지 준비중입니다...">
 	                        <section class="estate-inf">
 	                            <div class="estate-inf-header">
-	                                <p class="estate-rent">${est.estateRentType } ${est.estateDeposit }/${est.estateMonthlyRent }</p>
-	                            <span class="estate-type">${est.estateType }</span>
+	                            <c:if test="${est.estateRentType eq 'charter'}">
+	                                <p class="estate-rent">전세 ${est.estateDeposit }</p>
+	                            </c:if>
+	                            <c:if test="${est.estateRentType eq 'monthly'}">
+	                                <p class="estate-rent">월세 ${est.estateDeposit }/${est.estateMonthlyRent }</p>
+	                            </c:if>
+	                            <span class="estate-type">
+	                            	<c:if test="${est.estateType eq 'onetwo'}">
+			                        	<span class="estate-type">원룸/투룸</span>
+			                        </c:if>
+			                        <c:if test="${est.estateType eq 'villa'}">
+			                        	<span class="estate-type">주택/빌라</span>
+			                        </c:if>
+			                        <c:if test="${est.estateType eq 'apart'}">
+			                        	<span class="estate-type">아파트</span>
+			                        </c:if>
+			                        <c:if test="${est.estateType eq 'officetel'}">
+			                        	<span class="estate-type">오피스텔</span>
+			                        </c:if>
+	                            </span>
 	                        </div>
 	                        <span class="estate-floor-and-width">${est.estateFloor }층, ${est.estateWidth }㎡</span>
 	                        <span class="estate-address">${est.estateAddress }</span>
@@ -58,6 +77,7 @@
 	            </a>
 	        </div>
         </c:forEach>
+        </div>
     </main>
 	</div>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

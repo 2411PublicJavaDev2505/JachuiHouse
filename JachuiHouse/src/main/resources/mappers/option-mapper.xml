@@ -6,4 +6,9 @@
  	<select id="selectOptionList" resultType="EstateOption">
  		SELECT * FROM "OPTION" WHERE ESTATE_NO = #{estateNo} ORDER BY OPTION_NO DESC
  	</select>
+ 	<insert id="insertOptionList">
+		INSERT INTO  OPTION_LIST (estate_no, option_no)
+		VALUES
+	    (#{estateNo}, #{optionCode})
+	</insert>
  </mapper>

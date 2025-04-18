@@ -53,7 +53,7 @@
                         <div class="message received">조금 싸게는 안될까요?</div>
                         <div class="message sent">안됩니다</div>
                         <div class="message sent">
-                            <img src="/resources/img/포메라니안(반려동물).jpg" alt="강아지" class="chat-image">
+                            <img src="/resources/img/포메라니안.jpg" alt="강아지" class="chat-image">
                         </div>
                     </div>
                     <div class="chat-input-wrapper">

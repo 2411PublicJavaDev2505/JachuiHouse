@@ -36,19 +36,35 @@
                 <div class="estate-info">
                     <div class="estate-info-1">
                         <span class="info-title">거래정보</span>
-                        <div class="estate-rent">${estate.estateRentType } ${estate.estateDeposit }/${estate.estateMonthlyRent }</div>
+                        <c:if test="${estate.estateRentType eq 'charter'}">
+                        	<div class="estate-rent">전세 ${estate.estateDeposit }</div>
+                        </c:if>
+                        <c:if test="${estate.estateRentType eq 'monthly'}">
+                        	<div class="estate-rent">월세 ${estate.estateDeposit }/${estate.estateMonthlyRent }</div>
+                        </c:if>
                     </div>
                     <div class="estate-info-2">
                         <span class="info-title">주소</span>
                         <div class="estate-address">${estate.estateAddress }</div>
                     </div>
+                    <div class="estate-info-4">
+                        <span class="info-title">형태</span>
+                        <c:if test="${estate.estateType eq 'onetwo'}">
+                        	<div class="estate-type">원룸/투룸</div>
+                        </c:if>
+                        <c:if test="${estate.estateType eq 'villa'}">
+                        	<div class="estate-type">주택/빌라</div>
+                        </c:if>
+                        <c:if test="${estate.estateType eq 'apart'}">
+                        	<div class="estate-type">아파트</div>
+                        </c:if>
+                        <c:if test="${estate.estateType eq 'officetel'}">
+                        	<div class="estate-type">오피스텔</div>
+                        </c:if>
+                    </div>
                     <div class="estate-info-3">
                         <span class="info-title">전용면적</span>
                         <div class="estate-width">${estate.estateWidth }㎡</div>
-                    </div>
-                    <div class="estate-info-4">
-                        <span class="info-title">형태</span>
-                        <div class="estate-type">${estate.estateType }</div>
                     </div>
                     <div class="estate-info-5">
                         <span class="info-title">층</span>

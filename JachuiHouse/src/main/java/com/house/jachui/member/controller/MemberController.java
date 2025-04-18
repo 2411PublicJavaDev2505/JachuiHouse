@@ -1,6 +1,7 @@
 package com.house.jachui.member.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
@@ -19,6 +21,7 @@ import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
+import com.house.jachui.notice.model.vo.NoticeVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +33,8 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 	
 	private final MemberService mService;
+	//회원 관리 리스트 - 페이지네이션
+	private final PageUtil pageUtil;
 	
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
@@ -293,5 +298,30 @@ public class MemberController {
 			}
 		}
 	    return "common/error";
+	}
+	
+	//회원 관리 리스트
+	@GetMapping("/list")
+	public String noticeList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
+		try {
+			List<NoticeVO> nList = mService.selectListAll(currentPage);
+			int totalCount = mService.getTotalCount();
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			
+			if(!nList.isEmpty()) {
+				model.addAttribute("maxPage", pageInfo.get("maxPage"));
+				model.addAttribute("startNavi", pageInfo.get("startNavi"));
+				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				model.addAttribute("nList", nList);
+				return "notice/list";
+			}else {
+				model.addAttribute("errorMessage", "데이터가 존재하지 않습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
 	}
 }

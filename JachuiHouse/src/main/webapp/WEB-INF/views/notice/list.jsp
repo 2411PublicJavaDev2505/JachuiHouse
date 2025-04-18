@@ -81,7 +81,8 @@
 	    <div class="board">
        		<!-- admin확인절차 넣어줘야 함 -->
        		<c:if test="${sessionScope.userId == 'admin'}">
-       		 	<button class="btn"><a href="admin/report">신고 관리</a></button>
+       		 	<button class="btn"><a href="admin/rlist">신고 관리</a></button>
+       		 	<button class="btn"><a href="/member/list">회원 관리</a></button>
        		</c:if>  
        	</div>		
         </div>

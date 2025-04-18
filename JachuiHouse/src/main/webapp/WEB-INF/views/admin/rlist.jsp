@@ -13,7 +13,7 @@
 	</head>   
 <body>
     	<jsp:include page="/WEB-INF/views/include/header.jsp" />
-
+<!-- 이 JSP는 report 컨트롤러 작업이랑 상세사항 작업 연결해야 함 -->
 	<main class="main">
     	<div id="notice-div">
 
@@ -35,27 +35,27 @@
         		</tr>	
         		<c:forEach var="noticeVO" items="${nList}" varStatus="i">
         			<tr>
-        				<td>${noticeVO.noticeNo }</td>
         				<td>
 						    <c:choose>
-						        <c:when test="${noticeVO.noticeType == '공통'}">
+						        <c:when test="${reportVO.noticeType == '댓글'}">
 						            <span class="notice-type-common">${noticeVO.noticeType}</span>
 						        </c:when>
-						        <c:when test="${noticeVO.noticeType == '자취생'}">
+						        <c:when test="${reportVO.noticeType == '게시판'}">
 						            <span class="notice-type-student">${noticeVO.noticeType}</span>
-						        </c:when>
-						        <c:when test="${noticeVO.noticeType == '공인중개사'}">
-						            <span class="notice-type-agent">${noticeVO.noticeType}</span>
 						        </c:when>
 						        <c:otherwise>
 						            ${noticeVO.noticeType}
 						        </c:otherwise>
 						    </c:choose>
 						</td>
-<%--         				<td>${noticeVO.noticeType }</td> --%>
-        				<td><a href="/notice/detail/${noticeVO.noticeNo}">${noticeVO.noticeTitle}</a></td>
+        				<td>${reportVO.reportReason }</td>
+	        				<c:if test="${sessionScope.postNo == postVO.postNo}">
+	        					<td><a href="/notice/detail/${reportVO.reportNo}">${postVO.postTitle }</a></td>
+<!-- 	        					자바스크립트로 창열리게 하기 -->
+	        				</c:if>
+        				<td>${reportVO.userId}</td>
         				<!-- pathvariable있을때 ?쓰면 안됨 -->
-        				<td><fmt:formatDate pattern = "yyyy/MM/dd" value="${noticeVO.noticeWriteDate }"/></td>
+        				<td><fmt:formatDate pattern = "yyyy/MM/dd" value="${reportVO.reportDate }"/></td>
         			</tr>
         		</c:forEach>		 
         	</table>
