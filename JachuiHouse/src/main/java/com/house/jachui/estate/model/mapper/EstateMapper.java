@@ -17,6 +17,4 @@ public interface EstateMapper {
 
 	int insertEstate(EstateAddRequest estate);
 
-	int insertEstateFile(EstateFile file);
-
 }
