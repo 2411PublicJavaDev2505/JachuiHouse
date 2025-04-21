@@ -28,5 +28,7 @@ public interface TradeMapper {
 	int updateTrade(TradeUpdateRequest trade);
 
 	int deleteTrade(int tradeNo);
+	
+	int countViewUpdate(int tradeNo);
 
 }

@@ -142,32 +142,52 @@ body {
     text-align: right; /* ✅ 오른쪽 정렬 */
 }
 
+.product-views {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+}
+
 /* 페이지네이션 */
-.pagination {
+.pagination-container {
     display: flex;
     justify-content: center;
-    margin: 40px 0;
-    gap: 6px;
-    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.pagination {
+    display: flex;
+    gap: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .pagination a {
-    padding: 8px 12px;
     text-decoration: none;
-    color: #444;
-    border-radius: 6px;
-    font-weight: bold;
-}
-
-.pagination .page-num.active {
-    color: #e49b73;
-}
-
-.pagination .arrow {
+    font-size: 16px;
     color: #d6805b;
-    font-size: 15px;
+    font-weight: 400;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: color 0.2s ease;
 }
 
+.pagination a:hover {
+    color: #b5532f;
+}
+
+.pagination a.active {
+    font-weight: 700;
+    color: #d6805b;
+}
+
+.pagination a.first,
+.pagination a.last,
+.pagination a.prev,
+.pagination a.next {
+    font-size: 16px;
+    color: #d6805b;
+    font-weight: 400;
+}
 /* 푸터 */
 .site-footer {
     background-color: #eee;

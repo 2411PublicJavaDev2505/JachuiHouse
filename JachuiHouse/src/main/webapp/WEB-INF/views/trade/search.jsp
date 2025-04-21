@@ -37,30 +37,30 @@
             <c:forEach var="trade" items="${searchList}">
                 <div class="product-card">
                     <a href="/trade/detail/${trade.tradeNo}" class="trade">
-                        <img src="${pageContext.request.contextPath}/resources/img/${empty trade.tradeFileRename ? 'default.png' : trade.tradeFileRename}" 
+                        <img src="${pageContext.request.contextPath}/resources/bUploadFiles/${empty trade.tradeFileRename ? 'default.png' : trade.tradeFileRename}" 
      						alt="${trade.tradeTitle}">
                     </a>
                     <div class="product-title">${trade.tradeTitle}</div>
                     <div class="product-price">${trade.tradePrice}원</div>
+                    <div class="product-views">조회수 ${trade.viewCount}</div>
                 </div>
             </c:forEach>
         </div>
 
 
-        <div class="pagination">
-            <a href="#" class="arrow">◀◁</a>
-            <a href="#" class="page-num active">1</a>
-            <a href="#" class="page-num active">2</a>
-            <a href="#" class="page-num active">3</a>
-            <a href="#" class="page-num active">4</a>
-            <a href="#" class="page-num active">5</a>
-            <a href="#" class="page-num active">6</a>
-            <a href="#" class="page-num active">7</a>
-            <a href="#" class="page-num active">8</a>
-            <a href="#" class="page-num active">9</a>
-            <a href="#" class="page-num active">10</a>
-            <a href="#" class="arrow">▷▶</a>
-        </div>
+        <div class="pagination-container">
+				<div class="pagination">
+					<c:if test="${startNavi ne 1 }">
+						<a href="//list?page=${startNavi - 1 }" class="prev">&lt;</a>
+					</c:if>
+					<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
+						<a href="/trade/list?page=${p }">${p }</a>
+					</c:forEach>
+					<c:if test="${endNavi ne maxPage }">
+						<a href="/trade/list?page=${endNavi + 1 }" class="next">&gt;</a>
+					</c:if>
+				</div>
+			</div>
     
     </main>
    	 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />

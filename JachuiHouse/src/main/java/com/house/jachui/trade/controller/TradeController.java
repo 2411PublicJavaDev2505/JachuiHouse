@@ -36,8 +36,6 @@ public class TradeController {
     private final TradeService tService;
     private final PageUtil page;
     private final FileUtil file;
-	private PageUtil pageUtil;
-	private FileUtil fileUtil;
 	private String toTalCount;
 	private List<Trade> searchList;
 
@@ -53,12 +51,13 @@ public class TradeController {
 	    	List<Trade> tList = tService.selectListAll(currentPage);
 	        int totalCount = tService.getTotalCount();
 	        System.out.println(totalCount);
-	        Map<String, Integer>pageInfo = page.generatePageInfo(totalCount, currentPage);
+	        Map<String, Integer>pageInfo = page.generatePageInfoTrade(totalCount, currentPage);
 	        
 	        if(!tList.isEmpty()) {
 		        model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				model.addAttribute("currentPage", currentPage);
 				model.addAttribute("tList", tList);
 		        return "trade/list";
 	        }else {
@@ -121,7 +120,7 @@ public class TradeController {
 			, HttpSession session, Model model) {
 			try {
 				if(uploadFile != null && !uploadFile.getOriginalFilename().isBlank()) {
-					Map<String, String> fileInfo = fileUtil.saveFile(uploadFile, session, "trade");
+					Map<String, String> fileInfo = file.saveFile(uploadFile, session, "trade");
 					trade.setTradeFilename(fileInfo.get("tFilename"));
 					trade.setTradeFileRename(fileInfo.get("tFileRename"));
 					trade.setTradeFilepath(fileInfo.get("tFilepath"));
@@ -140,6 +139,7 @@ public class TradeController {
 	@GetMapping("/detail/{tradeNo}")
 	public String tradeDetail(@PathVariable("tradeNo") int tradeNo, Model model) {
 	    try {
+	    	tService.countViewUpdate(tradeNo);
 			Trade trade = tService.selectOneByNo(tradeNo);
 		    model.addAttribute("trade", trade);
 		    return "trade/detail";
@@ -154,7 +154,9 @@ public class TradeController {
 	@GetMapping("/update/{tradeNo}")
 	public String tradeUpdate(@PathVariable int tradeNo, Model model) {
 		try {
+			System.out.println("여기1");
 			Trade trade = tService.selectOneByNo(tradeNo);
+			System.out.println("여기2");
 			model.addAttribute("trade", trade);
 			return "trade/update";
 		} catch (Exception e) {
@@ -169,13 +171,31 @@ public class TradeController {
 			, @RequestParam("reloadFile") MultipartFile reloadFile
 			, HttpSession session, Model model) {
 		try {
+			System.out.println("여기3");
 			if(reloadFile != null && !reloadFile.getOriginalFilename().isBlank()) {
-				Map<String, String> fileInfo = fileUtil.saveFile(reloadFile, session, "trade");
-				trade.setTradeFilename(fileInfo.get("nFilename"));
-				trade.setTradeFileRename(fileInfo.get("nFileRename"));
-				trade.setTradeFilepath(fileInfo.get("nFilepath"));
+				Map<String, String> fileInfo = file.saveFile(reloadFile, session, "trade");
+				trade.setTradeFilename(fileInfo.get("tFilename"));
+				System.out.println("tFilename:"+fileInfo.get("tFilename"));
+				
+				trade.setTradeFileRename(fileInfo.get("tFileRename"));
+				System.out.println("tFileRename:"+fileInfo.get("tFileRename"));
+				
+				trade.setTradeFilepath(fileInfo.get("tFilePath"));
+				System.out.println("tFilePath:"+fileInfo.get("tFilePath"));
+				
+
+				
+			 } else {
+		            // 기존 정보 유지
+		            Trade origin = tService.selectOneByNo(trade.getTradeNo());
+		            trade.setTradeFilename(origin.getTradeFilename());
+		            trade.setTradeFileRename(origin.getTradeFileRename());
+		            trade.setTradeFilepath(origin.getTradeFilepath());
+			
 			}
+			System.out.println("여기4");
 			int result = tService.updateTrade(trade);
+			System.out.println("여기5" + result);
 			return "redirect:/trade/detail/"+trade.getTradeNo();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -185,8 +205,9 @@ public class TradeController {
 	}
 	
 	@GetMapping("/delete")
-	public String noticeDelete(@RequestParam("tradeNo")int tradeNo, Model model) {
+	public String tradeDelete(@RequestParam("tradeNo")int tradeNo, Model model) {
 		try {
+			System.out.println("삭제가능?"+ tradeNo);
 			int result = tService.deleteTrade(tradeNo);
 			return "redirect:/trade/list";
 		} catch (Exception e) {

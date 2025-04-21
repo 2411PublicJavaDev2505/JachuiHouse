@@ -25,7 +25,7 @@ public interface TradeService {
 	
 	int deleteTrade(int tradeNo);
 
-
+	int countViewUpdate(int tradeNo);
 
 
 }
