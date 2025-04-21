@@ -6,7 +6,7 @@
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM NOTICE
 	</select>
-	<select id="getTotalCountKeyword" resultType="_int">
+	<select id="getTotalCountByKeyword" resultType="_int">
 		SELECT COUNT(*) FROM NOTICE WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%' 
 	</select>
 	<select id="selectListAll" resultType="NoticeVO">

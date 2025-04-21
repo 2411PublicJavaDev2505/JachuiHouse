@@ -2,6 +2,7 @@ package com.house.jachui.member.model.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
@@ -93,17 +94,31 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
-	//회원 관리 리스트
+	//회원 관리 조회
 	@Override
-	public List<NoticeVO> selectListAll(int currentPage) {
+	public List<Member> selectListAll(int currentPage) {
 		int limit = 10;
 		int offset = (currentPage-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return mMapper.selectListAll(rowBounds);
 	}
-
+	//회원 관리 조회 - 페이지네이션
 	@Override
 	public int getTotalCount() {
 		return mMapper.getTotalCount();
+	}
+
+	//회원 관리 검색 - 페이지네이션
+	@Override
+	public int getTotalCountByKeyword(@Param("searchKeyword")String searchKeyword) {
+		return mMapper.getTotalCountByKeyword(searchKeyword);
+	}
+	//회원 관리 검색
+	@Override
+	public List<Member> searchListByKeyword(String searchKeyword, int currentPage) {
+		int limit = 10;
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return mMapper.selectSearchList(searchKeyword, currentPage, rowBounds);
 	}
 }
