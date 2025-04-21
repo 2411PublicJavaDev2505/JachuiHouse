@@ -5,12 +5,11 @@
 
 <mapper namespace="com.house.jachui.estate.model.mapper.EstateFileMapper">
 
- <insert id="insertEstateFiles" parameterType="java.util.List">
+
+<insert id="insertEstateFile">
  	INSERT INTO ESTATE_FILE (ESTATE_NO, ESTATE_FILE_NO, ESTATE_FILE_NAME, ESTATE_FILE_RENAME, ESTATE_FILE_PATH)
 	VALUES
-  	<foreach collection="estateFileList" item="file" separator=",">
-    	(#{file.estateNo}, SEQ_ESTATE_FILE_NO.NEXTVAL, #{file.estateFileName}, #{file.estateFileReName}, #{file.estateFilePath})
-  	</foreach>
+    (#{estateNo}, SEQ_ESTATE_FILE_NO.NEXTVAL, #{estateFileName}, #{estateFileRename}, #{estateFilePath})
 </insert>
 
 </mapper>

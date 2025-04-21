@@ -58,7 +58,7 @@ public class EstateController {
 	    String userId = (String) session.getAttribute("userId");
 	    estate.setUserId(userId);
 	    int result = estService.insertEstate(estate, images, optionCodes, session);
-
+	    
 	    return "redirect:/chazabang/list";
 	}
 }

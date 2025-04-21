@@ -59,17 +59,20 @@ public class EstateServiceImpl implements EstateService {
         
         int result = estMapper.insertEstate(estate);
         int estateNo = estate.getEstateNo();
-        System.out.println(estateNo);
 
         if (images != null) {
-            for (MultipartFile file : images) {
-                Map<String, String> saved = fileutil.saveFile(file, session, "estate");
-                EstateFile estateFile = new EstateFile();
-                estateFile.setEstateNo(estateNo);
-                estateFile.setEstateFileName(saved.get("original"));
-                estateFile.setEstateFileRename(saved.get("saved"));
-                estateFile.setEstateFilePath(webPath); // 혹은 실제 URL
-                estFileMapper.insertEstateFile(estateFile);
+            for (int i=0;i< images.size();i++) {
+            	MultipartFile file = images.get(i);
+            	if (file != null && !file.isEmpty()) {
+	                Map<String, String> saved = fileutil.saveFile(file, session, "estate");
+	                EstateFile estateFile = new EstateFile();
+	                estateFile.setEstateNo(estateNo);
+	                estateFile.setEstateFileName(saved.get("eFilename"));
+	                estateFile.setEstateFileRename(saved.get("eFileRename"));
+	                estateFile.setEstateFilePath(webPath);
+	                estFileMapper.insertEstateFile(estateFile);
+	                System.out.println(images.size());
+            	}
             }
         }
         for(int i=0;i< optionCodes.size();i++) {

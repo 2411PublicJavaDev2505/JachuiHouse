@@ -5,9 +5,10 @@ body{
     background-color: #fff9e9;
 }
 .logo img{
-    width: 220px;
-    height: 180px;
+    width: 100px;
+    height: 70px;
     margin-top: 10px;
+	margin-left: 50px;
 }
 header {
     display: flex;
