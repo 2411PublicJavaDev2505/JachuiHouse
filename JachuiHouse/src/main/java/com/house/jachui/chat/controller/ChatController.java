@@ -8,14 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.house.jachui.chat.controller.dto.SendRequest;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.member.model.service.MemberService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -60,8 +65,21 @@ public class ChatController {
 		model.addAttribute("writerId",map.get("writerId"));
 		model.addAttribute("recieverName", recieverName);
 		return "chat/chat";
-		
 	}
-		
+	@PostMapping("/send")
+	public String sendChat(Model model
+			,@ModelAttribute SendRequest chat
+			, HttpSession session
+			, @RequestParam(value = "images", required = false)
+	List<MultipartFile> images) {
+		int result = cService.sendChat(chat, images, session);
+		String role = (String)session.getAttribute("role");
+		if(result > 0) {
+			return "redirect:/chat/chat?writerId="+chat.getWriterId()+"&recieverId="+chat.getRecieverId();
+		}else {
+			return "common/error";
+		}
+	}
+	
 	
 }

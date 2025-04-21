@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 
+import com.house.jachui.chat.controller.dto.SendRequest;
 import com.house.jachui.chat.model.vo.Chat;
 
 @Mapper
