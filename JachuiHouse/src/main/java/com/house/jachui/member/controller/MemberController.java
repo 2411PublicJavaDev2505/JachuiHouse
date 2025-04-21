@@ -25,7 +25,6 @@ import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
-import com.house.jachui.notice.model.vo.NoticeVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -324,20 +323,20 @@ public class MemberController {
 	    return "common/error";
 	}
 	
-	//회원 관리 리스트
+	//회원 관리 조회
 	@GetMapping("/list")
-	public String noticeList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
+	public String memberList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
 		try {
-			List<NoticeVO> nList = mService.selectListAll(currentPage);
+			List<Member> mList = mService.selectListAll(currentPage);
 			int totalCount = mService.getTotalCount();
 			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
 			
-			if(!nList.isEmpty()) {
+			if(!mList.isEmpty()) {
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));
-				model.addAttribute("nList", nList);
-				return "notice/list";
+				model.addAttribute("mList", mList);
+				return "member/list";
 			}else {
 				model.addAttribute("errorMessage", "데이터가 존재하지 않습니다.");
 				return "common/error";
@@ -348,4 +347,31 @@ public class MemberController {
 			return "common/error";
 		}
 	}
+	
+	//회원 관리 검색
+	@GetMapping("/search")
+	public String memberSearch(
+			@RequestParam("searchKeyword") String searchKeyword
+			, @RequestParam(value="page", defaultValue="1") int currentPage
+			, Model model) {
+		try {
+			int totalCount = mService.getTotalCountByKeyword(searchKeyword);
+			List<Member> searchList = mService.searchListByKeyword(searchKeyword, currentPage);
+			
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+				model.addAttribute("maxPage", pageInfo.get("maxPage"));
+				model.addAttribute("startNavi", pageInfo.get("startNavi"));
+				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				
+				model.addAttribute("searchList", searchList);
+				model.addAttribute("searchKeyword", searchKeyword);
+				
+				return "member/search";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+				return "common/error";
+		}
+	}
+	
 }

@@ -46,10 +46,10 @@ body {
     width: 15%; /* 폭 줄이기 */
 }
 
-.boardbl th:nth-child(3),  /* 공지 제목 */
-.boardbl td:nth-child(3) {
-    width: 50%; /* 폭 넓히기 */
-}
+/* .boardbl th:nth-child(3),  공지 제목 */
+/* .boardbl td:nth-child(3) { */
+/*     width: 50%; 폭 넓히기 */
+/* } */
 
 .btn{
     padding: 10px;
@@ -150,3 +150,44 @@ text-decoration: none;
 /*     border-radius: 12px; */
 /*     overflow: hidden; */
 /* } */
+
+.member-row:hover {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto; 
+  padding: 20px;
+  border: 1px solid #ff8080;
+  width: 400px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.close {
+  color: black;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 22px;
+  cursor: pointer;
+}

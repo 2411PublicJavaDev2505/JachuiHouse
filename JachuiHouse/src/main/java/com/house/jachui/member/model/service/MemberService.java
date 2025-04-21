@@ -2,6 +2,8 @@ package com.house.jachui.member.model.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
@@ -46,12 +48,16 @@ public interface MemberService {
 
 	Member selectMemberById(String userId);
 
-	String selectNameById(String string);
-	//회원 관리 리스트
-	List<NoticeVO> selectListAll(int currentPage);
-	//회원 관리 리스트 - 페이지네이션
+	//회원 관리 조회
+	List<Member> selectListAll(int currentPage);
+	//회원 관리 조회 - 페이지네이션
 	int getTotalCount();
 
 	
+	
+	//회원 관리 검색 - 페이지네이션
+	int getTotalCountByKeyword(@Param("searchKeyword")String searchKeyword);
+	//회원 관리 검색
+	List<Member> searchListByKeyword(String searchKeyword, int currentPage);
 	
 }

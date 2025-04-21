@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import com.house.jachui.notice.controller.dto.NoticeAddRequest;
@@ -25,8 +26,8 @@ public interface NoticeMapper {
 
 	int updateNotice(NoticeModifyRequest notice);
 
-	int getTotalCount(String searchKeyword);
+	int getTotalCountByKeyword(@Param("searchKeyword") String searchKeyword);
 
-	List<NoticeVO> selectSearchList(String searchKeyword, int currentPage);
+	List<NoticeVO> selectSearchList(@Param("searchKeyword") String searchKeyword, @Param("currentPage") int currentPage,  RowBounds rowBounds);
 
 }

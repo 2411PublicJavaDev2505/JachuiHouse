@@ -116,13 +116,37 @@
 		SELECT * FROM MEMBER WHERE USER_ID = #{userId}
 	</select>
 	
-	<!-- 회원 관리 리스트 -->
+	<!-- 회원 관리 조회 -->
 	<select id="selectListAll" resultType="Member">
 		SELECT * FROM MEMBER ORDER BY USER_NAME DESC
 	</select>
 	
-	<!-- 회원 관리 리스트 - 페이지네이션-->
+	<!-- 회원 관리 조회 - 페이지네이션-->
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	<!-- 회원 관리 검색 -->
+	<select id="selectSearchList" resultType="Member">
+		SELECT * FROM MEMBER
+			<where>
+	  			<if test="searchKeyword != null and searchKeyword != ''">
+				(USER_NAME LIKE '%'||#{searchKeyword}||'%'
+			   OR USER_ADDRESS LIKE '%'||#{searchKeyword}||'%'
+			   OR REALTOR_NAME LIKE '%'||#{searchKeyword}||'%')				
+				</if>
+			</where>
+			ORDER BY USER_ID DESC
+	</select>
+	<!-- 회원 관리 검색 - 페이지네이션-->
+	<select id="getTotalCountByKeyword" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER 
+			<where>
+	  			<if test="searchKeyword != null and searchKeyword != ''">
+				(USER_NAME LIKE '%'||#{searchKeyword}||'%'
+			   OR USER_ADDRESS LIKE '%'||#{searchKeyword}||'%'
+			   OR REALTOR_NAME LIKE '%'||#{searchKeyword}||'%')
+			   	</if>
+			</where>
 	</select>
 </mapper>
