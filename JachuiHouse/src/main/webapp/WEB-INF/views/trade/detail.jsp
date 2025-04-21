@@ -28,11 +28,16 @@
               <div class="value">${trade.tradeTitle}</div>
             </div>
             
+            <div class="info-row">
+              <div class="label">가격</div>
+              <div class="value">${trade.tradePrice}</div>
+            </div>
+            
             <c:if test="${not empty trade.tradeFileRename}">
 			  <div class="info-row image-row">
 			    <div class="label">상품 이미지</div>
 			    <div class="value image-box">
-			      <img src="${pageContext.request.contextPath}/resources/img/${trade.tradeFileRename}" 
+			      <img src="${pageContext.request.contextPath}/resources/bUploadFiles/${trade.tradeFileRename}" 
 			           alt="${trade.tradeTitle}" 
 			           class="product-image"/>
 			    </div>
@@ -44,16 +49,42 @@
                 <div class="value description">${trade.tradeContent}</div>
             </div>
               
-              <div class="info-row">
-                <div class="label">첨부파일</div>
+              <%-- <div class="info-row">
+                <div class="label">이미지 변경</div>
                 <div class="value">
                   <span class="file-button">첨부파일</span>
                   <span class="file-name">
-                    <a href="../..${trade.tradeFilepath}" download alt>${trade.tradeFilename}</a>
+                    <a href="${pageContext.request.contextPath}/resources/img/${trade.tradeFileRename}" download>
+					    ${trade.tradeFilename}
+					</a>
                   </span>
                 </div>
-              </div>
+              </div> --%>
           </div>
+          
+          <c:if test="${trade.userId eq sessionScope.userId}">
+	          <div class="button-container">
+	            <button class="custom-button" onclick="handleUpdate()">수정</button>
+	            <button class="custom-button" onclick="handleDelete()">삭제</button>
+	          </div>
+          </c:if>
+
+          <script>
+			  function handleUpdate() {
+			    const tradeNo = "${trade.tradeNo}";
+			    location.href = "/trade/update/" + tradeNo; // 수정 페이지로 이동
+			  }
+			
+			  function handleDelete() {
+			    const tradeNo = "${trade.tradeNo}";
+			    const confirmed = confirm("정말 이 게시글을 삭제하시겠습니까?");
+			    if (confirmed) {
+			      location.href = "/trade/delete?tradeNo=" + tradeNo;
+			    }
+			  }
+			</script>
+          
+          
         </main>
          <jsp:include page="/WEB-INF/views/include/footer.jsp" />
         </div>

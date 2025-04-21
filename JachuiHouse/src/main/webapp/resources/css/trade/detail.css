@@ -1,152 +1,188 @@
 body {
-    font-family: 'Apple SD Gothic Neo', sans-serif;
-    margin: 0;
-    background-color: #fffaf0;
-  }
-  
-  .main-header {
-    background-color: #f4a072;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 40px;
-  }
-  
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .nav-bar a {
-    margin-left: 20px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .detail-container {
-    max-width: 800px; /* 적절한 폭 지정 */
-    margin: 30px auto; /* 가운데 정렬 */
-    padding: 30px;
-  }
-  
-  .detail-container h2 {
-    margin-bottom: 30px;
-  }
-  
-  .detail-box {
-    background-color: white;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .info-row {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-  }
+  font-family: 'Apple SD Gothic Neo', sans-serif;
+  margin: 0;
+  background-color: #fffaf0;
+  color: #333;
+}
 
-  .image-row {
+/* 헤더 */
+.main-header {
+  background-color: #f4a072;
+  color: white;
+  display: flex;
   align-items: center;
-	}
-	
+  justify-content: space-between;
+  padding: 10px 40px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-bar a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* 컨테이너 */
+.detail-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.detail-container h2 {
+  margin-bottom: 40px;
+  font-size: 28px;
+  text-align: left;
+  color: #333;
+}
+
+/* 박스 */
+.detail-box {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 항목 줄 */
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.label {
+  width: 120px;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 6px;
+  color: #333;
+}
+
+.value {
+  flex: 1;
+  background-color: #f9f1e7;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  word-break: break-word;
+}
+
+/* 이미지 줄 */
+.image-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
 .image-box {
   width: 100%;
   display: flex;
-  justify-content: center; /* 가운데 정렬 */
+  justify-content: center;
   padding: 10px 0;
 }
 
 .product-image {
-  width: 100%;          /* 이미지가 부모 div 가득 채움 */
-  max-width: 600px;     /* 필요하면 최대 너비 제한, 더 크게 하고 싶으면 키워도 됨 */
+  width: 100%;
+  max-width: 600px;
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  object-fit: cover;    /* 필요 시 비율 채우기용 */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  object-fit: cover;
 }
-  
-  .label {
-   width: 100px;
-   font-weight: bold;
-   flex-shrink: 0;
-   margin-top: 8px;
-  }
-  
-  .value {
-    flex: 1;
-    background-color: #cd814a;
-    color: black;
-    padding: 8px 16px;
-    border-radius: 20px;
-    min-width: 0;
-    word-break: break-word;
-  }
-  
-  .image-wrapper img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .description {
-    line-height: 1.6;
-    background-color: #cd814a;
-    padding: 20px;
-    border-radius: 20px;
-    white-space: pre-line;
-  }
-  
-  .file-box {
-    display: flex;
-    align-items: center;
-  }
-  
-  .file-label {
-    background-color: #666;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 10px;
-    margin-right: 10px;
-    font-size: 14px;
-  }
 
-  .file-button {
-    background-color: #ffffff;
-    color: black;
-    padding: 4px 10px;
-    border-radius: 10px;
-    margin-right: 10px;
-    font-size: 0.9em;
-  }
-  
-  .file-name {
-    background-color: #cd814a;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 10px;
-    font-size: 0.9em;
-  }
-  
-  /* 푸터 */
+/* 설명 텍스트 */
+.description {
+  line-height: 1.8;
+  background-color: #f9f1e7;
+  padding: 20px;
+  border-radius: 12px;
+  white-space: pre-line;
+  font-size: 15px;
+  color: #333;
+}
+
+/* 파일 입력 (사용 안 할 수도 있으니 유지만) */
+.file-box {
+  display: flex;
+  align-items: center;
+}
+
+.file-label {
+  background-color: #666;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.file-button {
+  background-color: #ffffff;
+  color: black;
+  padding: 4px 10px;
+  border-radius: 10px;
+  margin-right: 10px;
+  font-size: 0.9em;
+}
+
+.file-name {
+  background-color: #cd814a;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 0.9em;
+}
+
+/* 버튼 */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  gap: 10px;
+}
+
+.custom-button {
+  background-color: #ff7a40;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-button:hover {
+  background-color: #e8622d;
+  transform: translateY(-1px);
+}
+
+/* 푸터 */
 .site-footer {
-    background-color: #eee;
-    padding: 20px 0;
-    font-size: 13px;
-    text-align: center;
-    color: #666;
+  background-color: #eee;
+  padding: 20px 0;
+  font-size: 13px;
+  text-align: center;
+  color: #666;
+  margin-top: 60px;
 }
 
 .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .footer-inner a {
-    margin-right: 16px;
-    color: #666;
-    text-decoration: none;
+  margin-right: 16px;
+  color: #666;
+  text-decoration: none;
 }
