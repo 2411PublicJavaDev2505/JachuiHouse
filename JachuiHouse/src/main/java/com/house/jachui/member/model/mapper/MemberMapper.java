@@ -3,6 +3,7 @@ package com.house.jachui.member.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import com.house.jachui.member.dto.MemberLoginRequest;
@@ -32,6 +33,8 @@ public interface MemberMapper {
 
 	int updateMember(UpdateRequest member);
 
+	int updateProfileImage(@Param("userId") String userId, @Param("profileImage") String newFileName);
+	
 	int deleteMember(String userId);
 
 	String selectPassword(String userId);
@@ -43,5 +46,8 @@ public interface MemberMapper {
 	List<NoticeVO> selectListAll(RowBounds rowBounds);
 
 	int getTotalCount();
+
+
+
 
 }

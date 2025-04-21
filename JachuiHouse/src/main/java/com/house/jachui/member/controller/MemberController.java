@@ -1,7 +1,11 @@
 package com.house.jachui.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.MemberLoginRequest;
@@ -288,8 +293,23 @@ public class MemberController {
 	@PostMapping("/update")
 	public String updateMember(
 			HttpSession session,
-			@ModelAttribute UpdateRequest member
-			,Model model){
+			@ModelAttribute UpdateRequest member,
+			@RequestParam(value = "profileImage", required = false) MultipartFile file,
+			Model model) throws IOException{
+		String userId = member.getUserId();
+		 // 새 프로필 이미지가 있는 경우 저장 처리
+	    if (file != null && !file.isEmpty()) {
+	        String uploadDir = "C:\\Users\\user1\\Desktop\\backend\\bootprojectworkspace\\JachuiHouse\\JachuiHouse\\src\\main\\webapp\\resources\\image"; // 원하는 경로로 설정
+	        String originalFilename = file.getOriginalFilename();
+	        String newFileName = UUID.randomUUID() + "_" + originalFilename;
+	          
+	        // 이미지 저장 (예외는 GlobalExceptionHandler에서 처리)
+	        file.transferTo(Path.of(uploadDir, newFileName));
+	    
+	        // 이미지 변경이 없는 경우, 기존 이미지 유지
+	    	 mService.updateProfileImage(userId, newFileName); 
+	    }
+		
 		int result = mService.updateMember(member);
 		String userRole = (String)session.getAttribute("userRole");
 		if(result > 0) {

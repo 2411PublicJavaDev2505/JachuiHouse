@@ -111,4 +111,12 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalCount() {
 		return mMapper.getTotalCount();
 	}
+
+	@Override
+	public int updateProfileImage(String userId, String newFileName) {	
+		return mMapper.updateProfileImage(userId, newFileName);
+	}
+
+
+
 }

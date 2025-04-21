@@ -27,6 +27,7 @@
 		<result property="deleteYn"				column="DELETE_YN"/>
 		<result property="approveYn"			column="APPROVE_YN"/>
 		<result property="joinDate"				column="JOIN_DATE"/>
+		<result property="profileImage"			column="PROFILE_IMAGE"/>
 	</resultMap>
 	
 	<!-- 자취생 회원가입 -->
@@ -108,7 +109,9 @@
 	<update id="updateRealtor">
 		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, USER_ADDRESS=#{userAddress}, REALTOR_NAME=#{realtorName} WHERE USER_ID=#{userId} 
 	</update>
-	
+	<update id="updateProfileImage" parameterType="map">
+		UPDATE MEMBER SET PROFILE_IMAGE = #{profileImage} WHERE USER_ID = #{userId}
+	</update>
 	<select id="selectRealtorById" resultType="Member">
 		SELECT * FROM MEMBER WHERE USER_ID= #{userId}
 	</select>
@@ -126,4 +129,6 @@
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
 	</select>
+	<!-- 	마이페이지 이미지 수정 -->
+
 </mapper>

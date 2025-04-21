@@ -51,5 +51,8 @@ public interface MemberService {
 	List<NoticeVO> selectListAll(int currentPage);
 	//회원 관리 리스트 - 페이지네이션
 	int getTotalCount();
+
+	int updateProfileImage(String userId, String newFileName);
+
 	
 }
