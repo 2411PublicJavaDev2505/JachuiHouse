@@ -162,6 +162,13 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
   padding: 0 10px 0 45px;
 } */
 
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c0baba;
+  border-radius: 5px;
+}
+
 
 .form-group{
   margin-bottom: 3px;

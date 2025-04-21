@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 가입</title>
         <link rel="stylesheet" href="../resources/css/member/signupRealtor.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
 <body>
     <div class="container">
@@ -144,7 +145,7 @@
 	            }
 	        
 	        }).open();
-    	}
+	    }
     
         const signUpBtn = document.querySelector(".signUpBtn");
         signUpBtn.addEventListener("click", function (event) {
