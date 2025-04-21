@@ -1,4 +1,4 @@
-package com.house.jachui.post.model.vo;
+package com.house.jachui.post.domain;
 
 import java.sql.Date;
 

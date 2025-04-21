@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class PostInsertRequest {
+	private String userId;
 	private String postType;
 	private String postTitle;
 	private String postContent;

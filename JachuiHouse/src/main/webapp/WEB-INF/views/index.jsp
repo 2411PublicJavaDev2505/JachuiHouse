@@ -89,23 +89,26 @@
             .delete(12)
             .type("서 당신의 꿀팁을 공유해주세요.")
             .go();
-        const images = [
-            "../resources/image/main-left.jpeg",
-            "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/868/b95e315ef9ac68f64598172e66701798_res.jpeg",
-            "https://prs.ohousecdn.com/apne2/any/v1-329094204354688.jpg?w=480&h=480&c=c&q=80"
-        ];
-        let currentImageIndex = 0;
+        <!-- JavaScript 파일 연결 -->
 
-        function changeImage(direction) {
-            currentImageIndex += direction;
-            if (currentImageIndex < 0) {
-                currentImageIndex = images.length - 1;
-            } else if (currentImageIndex >= images.length) {
-                currentImageIndex = 0;
-            }
-
-            document.getElementById("leftImage").src = images[currentImageIndex];
-        }
+	        const images = [
+	            "../resources/image/main-left.jpeg",
+	            "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/868/b95e315ef9ac68f64598172e66701798_res.jpeg",
+	            "https://prs.ohousecdn.com/apne2/any/v1-329094204354688.jpg?w=480&h=480&c=c&q=80"
+	        ];
+	        let currentImageIndex = 0;
+	
+	        function changeImage(direction) {
+	            currentImageIndex += direction;
+	            if (currentImageIndex < 0) {
+	                currentImageIndex = images.length - 1;
+	            } else if (currentImageIndex >= images.length) {
+	                currentImageIndex = 0;
+	            }
+	
+	            document.getElementById("leftImage").src = images[currentImageIndex];
+       		}
         </script>
+
 </body>
 </html>

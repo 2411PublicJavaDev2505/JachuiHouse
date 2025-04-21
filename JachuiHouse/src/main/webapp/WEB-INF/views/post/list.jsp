@@ -10,6 +10,7 @@
 	    <link rel="stylesheet" href="../resources/css/include/header.css">
 	    <link rel="stylesheet" href="../resources/css/include/footer.css">
 	    <link rel="stylesheet" href="../resources/css/post/list.css">
+
 	</head>
 	<body>
         <div id="container">
@@ -39,7 +40,7 @@
                        		<c:forEach var="post" items="${pList }">
 		                        <tr>
 		                            <td>${post.postType }</td>
-		                            <td>${post.postTitle }</td>
+		                            <td><a href="/post/detail?postNo=${post.postNo }">${post.postTitle }</a></td>
 		                            <td>${post.userId }</td>
 		                            <td>${post.writeDate }</td>
 		                        </tr>
