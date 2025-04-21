@@ -122,4 +122,18 @@ public class MemberServiceImpl implements MemberService {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return mMapper.selectSearchList(searchKeyword, currentPage, rowBounds);
 	}
+
+	@Override
+	public int updateProfileImage(String userId, String newFileName) {	
+		return mMapper.updateProfileImage(userId, newFileName);
+	}
+
+	@Override
+	public String selectNameById(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 }

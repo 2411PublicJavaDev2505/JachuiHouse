@@ -33,6 +33,8 @@ public interface MemberMapper {
 
 	int updateMember(UpdateRequest member);
 
+	int updateProfileImage(@Param("userId") String userId, @Param("profileImage") String newFileName);
+	
 	int deleteMember(String userId);
 
 	String selectPassword(String userId);
@@ -51,5 +53,8 @@ public interface MemberMapper {
 	int getTotalCountByKeyword(@Param("searchKeyword") String searchKeyword);
 	//회원 관리 검색
 	List<Member> selectSearchList(@Param("searchKeyword") String searchKeyword, @Param("currentPage") int currentPage, RowBounds rowBounds);
+
+
+
 
 }

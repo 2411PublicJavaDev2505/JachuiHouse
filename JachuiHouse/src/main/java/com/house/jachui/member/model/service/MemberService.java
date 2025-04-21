@@ -59,5 +59,9 @@ public interface MemberService {
 	int getTotalCountByKeyword(@Param("searchKeyword")String searchKeyword);
 	//회원 관리 검색
 	List<Member> searchListByKeyword(String searchKeyword, int currentPage);
+	int updateProfileImage(String userId, String newFileName);
+
+	String selectNameById(String string);
+
 	
 }

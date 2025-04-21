@@ -15,7 +15,7 @@
 		<main>
 	         <div class="left-inform">
 	                <div class="left-image">
-	                    <img src="../resources/image/profile.jpeg" alt="image">
+		                    <img src="/resources/image/${member.profileImage}" alt="image" id="profileImage">	                			           
 	                </div>
 	                <div>
 	                    <h3>${member.userId }</h3>
@@ -61,6 +61,6 @@
 	            </div>
 	        </main>
 	        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	</div>
+	</div>	
 </body>
 </html>

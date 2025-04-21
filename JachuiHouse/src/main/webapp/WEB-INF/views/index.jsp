@@ -20,7 +20,7 @@
 	                <section class="banner">
 	                   <div class="left-image-container">
 						    <button class="arrow left" onclick="changeImage(-1)">&#10094;</button>
-						    <img id="leftImage" src="../resources/image/main-left.jpeg" alt="image" class="left-image">
+						    <img id="leftImage" src="https://octapi.lxzin.com/imageBlockProp/image/202210/12/720/0/ad6e0563-7903-4c48-8b70-45821992255c.jpg" alt="image" class="left-image">
 						    <button class="arrow right" onclick="changeImage(1)">&#10095;</button>
 						</div>
 	                    <h2 class="main-hello">
@@ -28,20 +28,7 @@
 	                    <div>
 	                        <img src="../resources/image/main-right.png" alt="house" class="right-image">
 	                    </div>
-	                </section>
-	                 <section class="banner2">
-	                   <div class="left-image-container">
-						    <button class="arrow left" onclick="changeImage(-1)">&#10094;</button>
-						    <img id="leftImage" src="../resources/image/main-left.jpeg" alt="image" class="left-image">
-						    <button class="arrow right" onclick="changeImage(1)">&#10095;</button>
-						</div>
-	                    <h2 class="main-hello">
-	                    </h2>
-	                    <div>
-	                        <img src="../resources/image/main-right.png" alt="house" class="right-image">
-	                    </div>
-	                </section>
-	            
+	                </section>            
 	                <!-- 주요 기능 소개 -->
 	                <div class="main-menu">
 	                    <div class="left-menu">
@@ -89,25 +76,24 @@
             .delete(12)
             .type("서 당신의 꿀팁을 공유해주세요.")
             .go();
-        <!-- JavaScript 파일 연결 -->
+        const images = [
+            "../resources/image/main-left.jpeg",
+            "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/868/b95e315ef9ac68f64598172e66701798_res.jpeg",
+            "https://prs.ohousecdn.com/apne2/any/v1-329094204354688.jpg?w=480&h=480&c=c&q=80",
+            "https://octapi.lxzin.com/imageBlockProp/image/202210/12/720/0/ad6e0563-7903-4c48-8b70-45821992255c.jpg"
+        ];
+        let currentImageIndex = 0;
 
-	        const images = [
-	            "../resources/image/main-left.jpeg",
-	            "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/868/b95e315ef9ac68f64598172e66701798_res.jpeg",
-	            "https://prs.ohousecdn.com/apne2/any/v1-329094204354688.jpg?w=480&h=480&c=c&q=80"
-	        ];
-	        let currentImageIndex = 0;
-	
-	        function changeImage(direction) {
-	            currentImageIndex += direction;
-	            if (currentImageIndex < 0) {
-	                currentImageIndex = images.length - 1;
-	            } else if (currentImageIndex >= images.length) {
-	                currentImageIndex = 0;
-	            }
-	
-	            document.getElementById("leftImage").src = images[currentImageIndex];
-       		}
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+
+            document.getElementById("leftImage").src = images[currentImageIndex];
+        }
         </script>
 
 </body>
