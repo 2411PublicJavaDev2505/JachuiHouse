@@ -17,7 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.common.FileUtil;
 import com.house.jachui.common.PageUtil;
+import com.house.jachui.notice.controller.dto.NoticeAddRequest;
+import com.house.jachui.notice.controller.dto.NoticeModifyRequest;
+import com.house.jachui.notice.model.vo.NoticeVO;
 import com.house.jachui.trade.controller.dto.TradeAddRequest;
+import com.house.jachui.trade.controller.dto.TradeUpdateRequest;
 import com.house.jachui.trade.model.service.TradeService;
 import com.house.jachui.trade.model.vo.Trade;
 
@@ -32,194 +36,170 @@ public class TradeController {
     private final TradeService tService;
     private final PageUtil page;
     private final FileUtil file;
+	private PageUtil pageUtil;
+	private FileUtil fileUtil;
+	private String toTalCount;
+	private List<Trade> searchList;
 
     // 목록,검색
     @GetMapping("/list")
     public String ShowTradeList(
-        @RequestParam(value="page", defaultValue="1") int currentPage,
+    	@RequestParam(value="page", defaultValue="1") int currentPage,
         Model model,
         HttpSession session) {
-       
-                return "trade/list";
+    	
+    	// 전체 리스트 가져오기 (페이징은 나중에)
+       try {
+	    	List<Trade> tList = tService.selectListAll(currentPage);
+	        int totalCount = tService.getTotalCount();
+	        System.out.println(totalCount);
+	        Map<String, Integer>pageInfo = page.generatePageInfo(totalCount, currentPage);
+	        
+	        if(!tList.isEmpty()) {
+		        model.addAttribute("maxPage", pageInfo.get("maxPage"));
+				model.addAttribute("startNavi", pageInfo.get("startNavi"));
+				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				model.addAttribute("tList", tList);
+		        return "trade/list";
+	        }else {
+				model.addAttribute("errorMessage", "데이터가 존재하지 않습니다.");
+				return "common/error";
+	        }
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    	model.addAttribute("errorMsg",e.getMessage());
+	    	return "common/error";
+	    }
     }
-
     
-  
-
-//    @GetMapping("/detail/{tradeNo}")
-//    public String RecipeDetail(@PathVariable int tradeNo, Model model) {
-//        try {
-//            Trade trade = tService.selectOneByNo(tradeNo);
-//            Integer viewCount = tService.countViewUpdate(tradeNo);
-//            model.addAttribute("trade", trade);
-//            return "/detail";
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            model.addAttribute("errorMessage", e.getMessage());
-//            return "common/error";
-//        }
-//    }
-//
-//    @GetMapping("/search")
-//    public String showSearchList(
-//            @RequestParam("searchKeyword") String searchKeyword,
-//            @RequestParam(value="currentPage", defaultValue="1")int currentPage,
-//            Model model) {
-//        try {
-//            Map<String, String> paramMap = new HashMap<>();
-//            System.out.println(searchKeyword);
-//            paramMap.put("searchKeyword", searchKeyword);
-//            List<Trade> searchList = tService.selectSearchList(paramMap, currentPage);
-//            int totalCount = tService.getTotalCount(paramMap);
-//            Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage);
-//            model.addAttribute("maxPage", pageInfo.get("maxPage"));
-//            model.addAttribute("startNavi", pageInfo.get("startNavi"));
-//            model.addAttribute("endNavi", pageInfo.get("endNavi"));
-//            model.addAttribute("searchList", searchList);
-//            model.addAttribute("searchKeyword", searchKeyword);
-//            return "trade/search";
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            model.addAttribute("errorMsg", e.getMessage());
-//            return "common/error";
-//        }
-//    }
-//    
- // 등록 폼
-    @GetMapping("/insert")
-    public String showTradeInsertForm(HttpSession session, Model model) {
-        String userId = (String) session.getAttribute("userId");
-        if (userId == null) {
-            model.addAttribute("errorMsg", "로그인이 필요합니다~!");
-            return "common/error";
-        }
-
-        Trade trade = new Trade();
-        trade.setUserId(userId);  // 로그인한 사용자 userId 설정
-        model.addAttribute("trade", trade);
-
-        return "/trade/tradeInsert";
-    }
-
-    // 등록 처리
-    @PostMapping("/insert")
-    public String insertBoard(@ModelAttribute TradeAddRequest trade,
-                              @RequestParam("uploadFile") MultipartFile uploadFile,
-                              HttpSession session, Model model) {
+    @GetMapping("/search")
+    public String tradeSearch(
+        @RequestParam("searchKeyword") String searchKeyword,
+        @RequestParam("category") String category,
+        @RequestParam(value="page", defaultValue="1") int currentPage,
+        Model model
+    ) {
         try {
-            String userId = (String) session.getAttribute("userId");
-            if (userId == null) {
-                model.addAttribute("errorMsg", "로그인이 필요합니다~");
-                return "common/error";
+            int totalCount = tService.getTotalCount(searchKeyword, category);
+            List<Trade> searchList = tService.searchListByKeyword(searchKeyword, category, currentPage);
+
+            if (searchList == null || searchList.isEmpty()) {
+                model.addAttribute("searchList", null);
+                model.addAttribute("errorMessage", "검색 결과가 없습니다.");
+            } else {
+                Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage);
+                model.addAttribute("maxPage", pageInfo.get("maxPage"));
+                model.addAttribute("startNavi", pageInfo.get("startNavi"));
+                model.addAttribute("endNavi", pageInfo.get("endNavi"));
+                model.addAttribute("searchList", searchList);
             }
 
-            trade.setUserId(userId);
+            model.addAttribute("searchKeyword", searchKeyword);
+            model.addAttribute("category", category);
+            model.addAttribute("currentPage", currentPage);
 
-            if (uploadFile != null && !uploadFile.isEmpty()) {
-                Map<String, String> fileInfo = file.saveFile(uploadFile, session, "trade");
-                trade.setTradeFilename(fileInfo.get("tFilename"));
-                trade.setTradeFileRename(fileInfo.get("tFileRename"));
-                trade.setTradeFilepath(fileInfo.get("tFilepath"));
-            }
-
-            int result = tService.insertTrade(trade);
-            return "redirect:/trade/list";
+            return "trade/search";
 
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("errorMsg", e.getMessage());
+            model.addAttribute("errorMessage", "검색 중 오류 발생: " + e.getMessage());
             return "common/error";
         }
     }
+
+
+	//등록 화면 요청
+	@GetMapping("/insert")
+	public String showInsertForm() {
+		return "trade/insert"; // → /WEB-INF/views/trade/insert.jsp
+	}
+	
+	@PostMapping("/insert")
+	public String tradeinsert(
+			@ModelAttribute TradeAddRequest trade
+			, @RequestParam("uploadFile") MultipartFile uploadFile
+			, HttpSession session, Model model) {
+			try {
+				if(uploadFile != null && !uploadFile.getOriginalFilename().isBlank()) {
+					Map<String, String> fileInfo = fileUtil.saveFile(uploadFile, session, "trade");
+					trade.setTradeFilename(fileInfo.get("tFilename"));
+					trade.setTradeFileRename(fileInfo.get("tFileRename"));
+					trade.setTradeFilepath(fileInfo.get("tFilepath"));
+				}
+				int result = tService.insertTrade(trade);
+				return "redirect:/trade/list";				
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("errorMessage", e.getMessage());
+				return "common/error";
+			}
+	}
+	
+
+	// 상세페이지
+	@GetMapping("/detail/{tradeNo}")
+	public String tradeDetail(@PathVariable("tradeNo") int tradeNo, Model model) {
+	    try {
+			Trade trade = tService.selectOneByNo(tradeNo);
+		    model.addAttribute("trade", trade);
+		    return "trade/detail";
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
+	}
+
+	// 수정페이지
+	@GetMapping("/update/{tradeNo}")
+	public String tradeUpdate(@PathVariable int tradeNo, Model model) {
+		try {
+			Trade trade = tService.selectOneByNo(tradeNo);
+			model.addAttribute("trade", trade);
+			return "trade/update";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	@PostMapping("/update")
+	public String tradeUpdate(@ModelAttribute TradeUpdateRequest trade
+			, @RequestParam("reloadFile") MultipartFile reloadFile
+			, HttpSession session, Model model) {
+		try {
+			if(reloadFile != null && !reloadFile.getOriginalFilename().isBlank()) {
+				Map<String, String> fileInfo = fileUtil.saveFile(reloadFile, session, "trade");
+				trade.setTradeFilename(fileInfo.get("nFilename"));
+				trade.setTradeFileRename(fileInfo.get("nFileRename"));
+				trade.setTradeFilepath(fileInfo.get("nFilepath"));
+			}
+			int result = tService.updateTrade(trade);
+			return "redirect:/trade/detail/"+trade.getTradeNo();
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	@GetMapping("/delete")
+	public String noticeDelete(@RequestParam("tradeNo")int tradeNo, Model model) {
+		try {
+			int result = tService.deleteTrade(tradeNo);
+			return "redirect:/trade/list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
+	}
+
+	// 채팅페이지
+	@GetMapping("/chat/{tradeNo}")
+	public String showChatPage(@PathVariable int tradeNo, Model model) {
+	    // 채팅방 번호 or 게시물 번호로 매핑
+	    return "trade/chat";
+	}
 }
-    
-//   
-//    // 수정 폼
-//    @GetMapping("/update")
-//    public String showBoardUpdateForm(@RequestParam("tradeNo") int tradeNo,
-//                                      HttpSession session, Model model) {
-//        try {
-//            String userId = (String) session.getAttribute("userId");
-//            if (userId == null) {
-//                model.addAttribute("errorMsg", "로그인이 필요합니다~!");
-//                return "common/error";
-//            }
-//
-//            Trade trade = tService.selectOneByNo(tradeNo);
-//            if (trade == null) {
-//                model.addAttribute("errorMsg", "해당 게시글이 존재하지 않습니다.");
-//                return "common/error";
-//            }
-//
-//            model.addAttribute("trade", trade);
-//            session.setAttribute("userId", tService.getuserId(userId));
-//
-//            return "/trade/tradeUpdate";
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            model.addAttribute("errorMsg", e.getMessage());
-//            return "common/error";
-//        }
-//    }
-//
-//    // 수정 처리
-//    @PostMapping("/update")
-//    public String updateTrade(@ModelAttribute TradeAddRequest trade,
-//                              @RequestParam("reloadFile") MultipartFile reloadFile,
-//                              HttpSession session, Model model) {
-//        try {
-//            String userId = (String) session.getAttribute("userId");
-//            if (userId == null) {
-//                model.addAttribute("errorMsg", "로그인이 필요합니다.");
-//                return "common/error";
-//            }
-//
-//            if (reloadFile != null && !reloadFile.isEmpty()) {
-//                Map<String, String> fileInfo = file.saveFile(reloadFile, session, "trade");
-//                trade.setTradeFilename(fileInfo.get("tFilename"));
-//                trade.setTradeFileRename(fileInfo.get("tFileRename"));
-//                trade.setTradeFilepath(fileInfo.get("tFilepath"));
-//            }
-//
-//            int result = tService.updateTrade(trade);
-//            if (result > 0) {
-//            	return "redirect:/trade/detail/" + trade.getTradeNo();
-//            } else {
-//                model.addAttribute("errorMsg", "데이터 수정에 실패하였습니다.");
-//                return "common/error";
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            model.addAttribute("errorMsg", e.getMessage());
-//            return "common/error";
-//        }
-//    }
-//   
-//    // 삭제
-//    @GetMapping("/delete")
-//    public String deleteTrade(@RequestParam("boardNo") int tradeNo,
-//                              HttpSession session, Model model) {
-//        try {
-//            String userId = (String) session.getAttribute("userId");
-//            if (userId == null) {
-//                model.addAttribute("errorMsg", "로그인이 필요합니다.");
-//                return "common/error";
-//            }
-//
-//            int result = tService.deleteTrade(tradeNo);
-//            if (result > 0) {
-//                return "redirect:/trade/list";
-//            } else {
-//                model.addAttribute("errorMsg", "삭제에 실패했습니다.");
-//                return "common/error";
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            model.addAttribute("errorMsg", e.getMessage());
-//            return "common/error";
-//        }
-//    }
-//}

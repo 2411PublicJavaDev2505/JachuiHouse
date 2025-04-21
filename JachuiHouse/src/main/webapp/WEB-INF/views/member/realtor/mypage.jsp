@@ -4,28 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/header.css">
-<link rel="stylesheet" href="../resources/css/include/footer.css">
-<link rel="stylesheet" href="../resources/css/realtor/mypage.css">
+<title>공인중개사-마이페이지</title>
+<link rel="stylesheet" href="../../resources/css/include/header.css">
+<link rel="stylesheet" href="../../resources/css/include/footer.css">
+<link rel="stylesheet" href="../../resources/css/realtor/mypage.css">
 </head>
 <body>
-	<header>
-        <a href="/">
-            <div class="logo">
-                <img src="../resources/image/logo.png" alt="logo">
-            </div>
-            </a> 
-            <div class="nav">
-                <a href="#">홈</a> 
-                <a href="#">자취록</a>
-                <a href="#">찾아방</a>
-                <a href="#">사방팔방</a>
-            </div>
-            <div class="loginBtn">
-                <a href="/member/login">로그인</a>
-            </div>
-    </header>
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
     <main>
         <div id="mainAll">
             <div id="mainLeft">
@@ -35,25 +20,29 @@
                     </div>
                 </div>
                 <div id="name">
-                    <b>강우혁</b>
+                    <b>${member.userId }</b>
                 </div>
                 <div id="intro">
-                    공인중개사 강우혁입니다.
+                    공인중개사 ${member.userName }입니다.
                 </div>
                 <div id="company">
-                    kh공인중개사 사무소
+                    ${member.realtorName}
                 </div>
                 <div id="phone">
-                    010-1919-9191
+                    ${member.userPhone }
                 </div>
                 <div id="email">
-                    kh@kh.com
+                    ${member.userEmail }
                 </div>
                 <div id="modi">
-                    <button type="submit" id="modify">정보 수정</button>
+                	<a href="/member/realtor/update">
+                    	<button type="submit" id="modify">정보 수정</button>
+                   	</a>
                 </div>
                 <div id="del">
-                    <button type="submit" id="delete">회원 탈퇴</button>
+                	<a href="/member/delete">
+                    	<button type="submit" id="delete">회원 탈퇴</button>
+                    </a>
                 </div>
             </div>
             <div id="mainRight">
@@ -119,7 +108,7 @@
                 </div>
                 <div id="content">
                     <div id="roomImg">
-
+						
                     </div>
                     <div id="roomIntro">
                         <div id="top">

@@ -4,30 +4,28 @@ import java.util.List;
 import java.util.Map;
 
 import com.house.jachui.trade.controller.dto.TradeAddRequest;
+import com.house.jachui.trade.controller.dto.TradeUpdateRequest;
 import com.house.jachui.trade.model.vo.Trade;
 
 public interface TradeService {
 
-	List<Trade> selectPersonalList(String userId, int currentPage);
-
 	List<Trade> selectListAll(int currentPage);
 
-	int getTotalCount();
+	List<Trade> searchListByKeyword(String searchKeyword, String category, int currentPage);
 
 	Trade selectOneByNo(int tradeNo);
 
-	Integer countViewUpdate(int tradeNo);
-
-	List<Trade> selectSearchList(Map<String, String> paramMap, int currentPage);
-
-	int getTotalCount(Map<String, String> paramMap);
+	int getTotalCount();
+	
+	int getTotalCount(String searchKeyword, String category);
 
 	int insertTrade(TradeAddRequest trade);
-
-	int updateTrade(TradeAddRequest trade);
-
-	int deleteTrade(int tradeNo);
 	
-	String getuserId(String userId);
+	int updateTrade(TradeUpdateRequest trade);
+	
+	int deleteTrade(int tradeNo);
+
+
+
 
 }

@@ -8,13 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.house.jachui.post.controller.dto.CommentInsertRequest;
 import com.house.jachui.post.controller.dto.PostInsertRequest;
+import com.house.jachui.post.domain.CommentVO;
 import com.house.jachui.post.domain.PostVO;
 import com.house.jachui.post.service.PostService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -70,12 +75,15 @@ public class PostController {
 		}
 	}
 	
-	@GetMapping("/detail")//게시글 상세 조회
+	@GetMapping("/detail")//게시글 상세 조회//댓글조회
 	public String showPostDetail(Model model,
 			@RequestParam("postNo") int postNo) {
 		try {
 			PostVO result = pService.selectOneDetail(postNo);
+			
 			if(result != null) {
+				List<CommentVO> cList = pService.selectcList();
+				model.addAttribute("cList", cList);
 				model.addAttribute("result", result);
 				return "post/detail";
 			}else {
@@ -106,4 +114,42 @@ public class PostController {
 			return "common/error";
 		}
 	}
+	
+	@ResponseBody
+	@GetMapping("/cList")//댓글 조회
+	public List<CommentVO> showCommentList(Model model) {
+		return pService.selectcList();
+//		try {
+//			List<CommentVO> cList = pService.selectcList();
+//			model.addAttribute("cList", cList);
+//			return "post/detail";
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//			model.addAttribute("errorMessage", e.getMessage());
+//			return "common/error.jsp";
+//		}
+	}
+	
+	@PostMapping("/cinsert")//댓글 작성 (POST)
+	public String insertComment(Model model,
+			@ModelAttribute CommentInsertRequest comment) {
+		try {
+			System.out.println("확인");
+			System.out.println(comment);
+			int result = pService.insertcomment(comment);
+			if(result > 0) {
+				return "redirect:/post/detail?postNo="+comment.getPostNo();
+			}else {
+				return "common/error";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
+	}
+
+
 }

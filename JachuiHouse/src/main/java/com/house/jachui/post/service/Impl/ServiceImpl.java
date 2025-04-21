@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.house.jachui.post.controller.dto.CommentInsertRequest;
 import com.house.jachui.post.controller.dto.PostInsertRequest;
+import com.house.jachui.post.domain.CommentVO;
 import com.house.jachui.post.domain.PostVO;
 import com.house.jachui.post.mapper.PostMapper;
 import com.house.jachui.post.service.PostService;
@@ -35,7 +36,7 @@ public class ServiceImpl implements PostService{
 		int result = pMapper.insertPost(post);
 		return result;
 	}
-	//게시글 상세 조회
+	//게시글 상세 조회 //댓글조회
 	@Override
 	public PostVO selectOneDetail(int postNo) {
 		PostVO result = pMapper.selectOneDetail(postNo);
@@ -47,11 +48,19 @@ public class ServiceImpl implements PostService{
 		int result = pMapper.deletePost(postNo);
 		return result;
 	}
+	//댓글작성
 	@Override
 	public int insertcomment(CommentInsertRequest comment) {
 		int result = pMapper.insertComment(comment);
 		return result;
 	}
+	//댓글 조회
+	@Override
+	public List<CommentVO> selectcList() {
+		List<CommentVO> cList = pMapper.selectcList();
+		return cList;
+	}
+
 
 	
 }

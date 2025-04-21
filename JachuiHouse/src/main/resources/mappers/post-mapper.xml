@@ -29,7 +29,11 @@
 		DELETE FROM POST WHERE POST_NO = #{postNo}
 	</delete>
 	
+	<select id="selectcList" resultType="CommentVO">
+		SELECT * FROM "COMMENT"
+	</select>
+	
 	<insert id="insertComment">
-		INSERT INTO COMMENT VALUES(SEQ_COMMENT_NO.NEXTVAL, 'user01', #{commentContent}, SYSDATE, SYSDATE, #{postNo})
+		INSERT INTO "COMMENT" VALUES(COMMENT_SEQ.NEXTVAL, #{userId}, #{commentContent}, SYSDATE, SYSDATE, #{postNo})
 	</insert>
 </mapper>  

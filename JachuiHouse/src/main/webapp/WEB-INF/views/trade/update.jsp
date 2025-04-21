@@ -5,28 +5,13 @@
 <head>
 	<meta charset="UTF-8">
 	 <title>사방팔아방 상세페이지</title>
-        <link rel="stylesheet" href="../resources/css/header.css">
-	    <link rel="stylesheet" href="../resources/css/trade/update.css">
-	    <link rel="stylesheet" href="../resources/css/footer.css">
+        <link rel="stylesheet" href="/resources/css/include/header.css">
+	    <link rel="stylesheet" href="/resources/css/trade/update.css">
+	    <link rel="stylesheet" href="/resources/css/include/footer.css">
       </head>
       <body>
         <div id="container">
-            <header>
-                <a href="/">
-                <div class="logo">
-                    <img src="../resources/img/logo.png" alt="logo">
-                </div>
-                </a> 
-                <div class="nav">
-                    <a href="#">홈</a> 
-                    <a href="#">자취록</a>
-                    <a href="#">찾아방</a>
-                    <a href="#">사방팔방</a>
-                </div>
-                <div class="loginBtn">
-                    <a href="#">로그인</a>
-                </div>
-            </header>
+             <jsp:include page="/WEB-INF/views/include/header.jsp" />
     
         <main class="detail-container">
           <h2>사방팔아방 수정페이지</h2>
@@ -45,7 +30,7 @@
             <div class="info-row">
                 <div class="label">이미지</div>
                 <div class="value image-wrapper">
-                    <img src="../resources/img/중고 옷걸이.jpg" alt="이미지 썸네일">
+                    <img src="/resources/img/중고 옷걸이.jpg" alt="이미지 썸네일">
                 </div>
               </div>
       
@@ -90,9 +75,7 @@
           </script>
 
         </main>
-        <footer>
-            이용약관 | 광고문의 | 개인정보처리방침 | 찾아오시는길 | 회사명: 자취스크립트(주) | 대표자 : 강우혁 | 문의 전화: 010-2222-3333
-        </footer>
+         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
         </div>
       </body>
-      </html>
+</html>

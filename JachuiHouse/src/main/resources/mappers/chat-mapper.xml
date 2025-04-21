@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.house.jachui.chat.model.mapper.ChatMapper">
+  	<resultMap type="Chat" id="chatResultMap">
+  		<id property="chatNo" column="CHAT_NO"/>
+  		<result property="writerNo" column="WRITER_NO"/>
+  		<result property="chatSendDate" column="CHAT_SEND_DATE"/>
+  		<result property="chatContent" column="CHAT_CONTENT"/>
+  		<result property="chatFileName" column="CHAT_FILE_NAME"/>
+  		<result property="chatFilePath" column="CHAT_FILE_PATH"/>
+  		<result property="chatFileRename" column="CHAT_FILE_RENAME"/>
+  		<result property="recieverId" column="RECEIVER_ID"/>
+  	</resultMap>
+  	
+  </mapper>

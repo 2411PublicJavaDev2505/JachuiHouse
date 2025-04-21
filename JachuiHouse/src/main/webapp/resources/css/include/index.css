@@ -4,9 +4,10 @@ body{
     background-color: #FFF9E9;
 } 
 .main {
-	width: 1200px;
-    margin: 0px 100px 0 100px;
+	width: 1500px;
+    margin: 0 auto;
     height: 755px;
+    margin-top : 60px;
 }
 
 .banner {
@@ -14,7 +15,37 @@ body{
     padding: 50px 0;
     background-color: #F4ECE0;
 }
+.banner2 {
+    text-align: center;
+    margin-top : 20px;
+    padding: 50px 0;
+    background-color: #F4ECE0;
+}
+.left-image-container {
+    position: relative;
+    display: inline-block;
+}
 
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255,255,255,0.6);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 2;
+}
+
+.arrow.left {
+    left: 10px;
+}
+
+.arrow.right {
+    margin-left : 5px;
+    
+}
 section {
     background-color: #FAF3E0;
     display: flex;

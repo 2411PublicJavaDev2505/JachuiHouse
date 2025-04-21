@@ -1,0 +1,46 @@
+@charset "UTF-8";
+main {
+    height: 600px;
+    margin-top: 60px;
+}
+.main-container {
+    border: 1px solid #000;
+    height: 500px;
+    width: 400px;
+    border-radius: 1rem;
+    margin: 0 auto;
+}
+.main-contents {
+    margin: 2rem 3rem;
+}
+.main-contents input{
+    width: 100%;
+    margin-top : 5px;
+    padding: 3px;
+    border: 2px solid #E0DFDF;
+    border-radius: 10px;
+}
+.main-header {
+    text-align: center;
+}
+.button {
+    display: flex;
+    justify-content: center;
+    gap : 20px;
+}
+.cancelBtn button, .updateBtn button {
+    padding: 3px 2rem;
+    border-radius: 1rem;
+    border: none;
+    border: 1px solid #964600;
+    cursor: pointer;
+}
+.cancelBtn button{
+    background-color: white;
+}
+.updateBtn button{
+    background-color: #FF804A;
+}
+.cancelBtn button:hover , .updateBtn button:hover {
+    background-color: orange;
+}

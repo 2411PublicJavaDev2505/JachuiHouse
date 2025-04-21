@@ -4,33 +4,29 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import com.house.jachui.trade.controller.dto.TradeAddRequest;
+import com.house.jachui.trade.controller.dto.TradeUpdateRequest;
 import com.house.jachui.trade.model.vo.Trade;
 
 @Mapper
 public interface TradeMapper {
 
-	List<Trade> selectPersonalList(String userId, int currentPage);
+	List<Trade> selectListAll(RowBounds rowBounds);
 
-	List<Trade> selectListAll(int currentPage);
-
-	int getTotalCount();
+	List<Trade> selectSearchList(String searchKeyword, String category, RowBounds rowBounds);
 
 	Trade selectOneByNo(int tradeNo);
+	
+	int getTotalCount();
 
-	Integer countViewUpdate(int tradeNo);
-
-	List<Trade> selectSearchList(Map<String, String> paramMap, int currentPage);
-
-	int getTotalCountWithCondition(Map<String, String> paramMap);
+	int getTotalCount(String searchKeyword, String category);
 
 	int insertTrade(TradeAddRequest trade);
 
-	int updateTrade(TradeAddRequest trade);
+	int updateTrade(TradeUpdateRequest trade);
 
 	int deleteTrade(int tradeNo);
-
-	String getuserId(String userId);
 
 }
