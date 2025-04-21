@@ -53,15 +53,15 @@ public class MemberServiceImpl implements MemberService {
 
     // 아이디 목록 반환
     @Override
-    public List<Member> selectFoundId(Member member) {
+    public Member selectFoundId(Member member) {
         return mMapper.selectFoundId(member);
     }
 
     // 비밀번호 재설정
     @Override
-    public int updateResetPw(Member member) {
-        return mMapper.updateResetPw(member);
-    }
+	public String resetPw(String userId, String userEmail) {
+    	return mMapper.resetPw(userId, userEmail);
+	}
 
     @Override
     public int updateMember(UpdateRequest member) {
@@ -111,4 +111,5 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalCount() {
 		return mMapper.getTotalCount();
 	}
+
 }

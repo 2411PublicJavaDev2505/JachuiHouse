@@ -16,5 +16,6 @@ import lombok.ToString;
 //@Builder
 public class MemberPasswordRequest {
 	private String userEmail;
+	private String userId;
 	
 }

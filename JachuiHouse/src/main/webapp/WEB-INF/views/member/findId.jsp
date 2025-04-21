@@ -24,8 +24,8 @@
           
           <label>회원 유형: </label>
           <div class="radio-group">
-            <label><input type="radio" name="userRole" value="alone" required> 자취생</label>
-            <label><input type="radio" name="userRole" value="realtor" required> 공인중개사</label>
+            <label><input type="radio" name="userRole" value="M" required> 자취생</label>
+            <label><input type="radio" name="userRole" value="R" required> 공인중개사</label>
           </div>
           
           <label>인증방식</label>

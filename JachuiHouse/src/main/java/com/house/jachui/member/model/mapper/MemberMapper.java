@@ -26,9 +26,9 @@ public interface MemberMapper {
 
 	Member selectFindId(Member member);
 
-	List<Member> selectFoundId(Member member);
+	Member selectFoundId(Member member);
 
-	int updateResetPw(Member member);
+	String resetPw(String userId, String userEmail);
 
 	int updateMember(UpdateRequest member);
 
@@ -43,5 +43,6 @@ public interface MemberMapper {
 	List<NoticeVO> selectListAll(RowBounds rowBounds);
 
 	int getTotalCount();
+
 
 }

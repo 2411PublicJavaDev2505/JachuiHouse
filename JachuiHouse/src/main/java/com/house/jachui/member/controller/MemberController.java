@@ -1,5 +1,7 @@
 package com.house.jachui.member.controller;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.MemberLoginRequest;
+import com.house.jachui.member.dto.MemberPasswordRequest;
 import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
@@ -147,24 +151,40 @@ public class MemberController {
 		
 	}
 	
-	// 비밀번호 재설정 페이지 이동
+	// 비밀번호 찾기 페이지로 이동
 	@GetMapping("/resetPw")
-	public String updateResetPwForm() {
+	public String resetPwGet(@ModelAttribute("member")MemberPasswordRequest MemberPasswordRequest) {
 		return "member/resetPw";
 	}
 	
-	// 비밀번호 재설정 처리	
+	// 비밀번호 찾기 처리	
 	@PostMapping("/resetPw")
 	public String updateResetPw(
-			@ModelAttribute Member member
-			,HttpServletRequest request) {
-		int result = mService.updateResetPw(member);
-		if(result > 0) {
-			return "redirect:/";
-		}else {
-			return "common/error";
+			MemberPasswordRequest MemberPasswordRequest,
+			Model model) {
+		String password = mService.resetPw(MemberPasswordRequest.getUserId(), MemberPasswordRequest.getUserEmail());  // 입력한 비밀번호를 URL 표시할 때 암호화 한다.  
+		
+		if(password != null) {
+			String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes(StandardCharsets.UTF_8)); // 암호화 된 비밀번호를 복호화 한다.  
+			model.addAttribute("password", encryptedPassword);
+ 		}else if(password==null) {
+ 			model.addAttribute("password", null);
 		}
 		
+		return "/member/findPwResult";
+	}
+	
+	// 비밀번호 찾기 결과 페이지로 이동
+	@GetMapping("/findPwResult")
+	public String resetPwCom(@RequestParam(value="password", required=false) String encryptedPassword, Model model) {
+		if(encryptedPassword != null) {
+			String originalPassword = new String(Base64.getDecoder().decode(encryptedPassword), StandardCharsets.UTF_8);
+			model.addAttribute("password", originalPassword);
+		}else if (encryptedPassword==null) {
+			model.addAttribute("password",null);
+		}
+		
+		return "member/findPwResult";
 	}
 	
 	// 아이디찾기결과 페이지 이동
@@ -175,9 +195,13 @@ public class MemberController {
 	
 	@PostMapping("/foundId")
 	public String selectFoundId(@ModelAttribute Member member, Model model) {
-		List<Member> matchedList = mService.selectFoundId(member);
-		model.addAttribute("matchedList", matchedList);
-		return "member/foundId";
+		Member foundMember = mService.selectFoundId(member);
+		if(foundMember != null) {
+			model.addAttribute("member", foundMember);
+			return "member/foundId";
+		}else {
+			return "member/error";
+		}
 	}
 	
 	//공인중개사 마이페이지 이동

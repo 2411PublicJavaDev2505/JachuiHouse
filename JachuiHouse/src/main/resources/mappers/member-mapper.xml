@@ -59,16 +59,15 @@
         )
     </insert>
 	
-	<update id="updateResetPw" parameterType="Member">
+	<update id="resetPw" parameterType="Member">
 		UPDATE MEMBER 
 		SET USER_PW = #{userPw}
 		WHERE USER_ID = #{userId}
-		AND USER_NAME = #{userName}
 		AND USER_EMAIL = #{userEmail}
 	</update>
 	
 	<select id="selectFindId" resultType="Member">
-		SELECT USER_ID AS userId, CREATE_DATE AS joinDate
+		SELECT USER_ID, CREATE_DATE
         FROM MEMBER
         WHERE USER_NAME = #{userName}
             AND USER_EMAIL = #{userEmail}
@@ -77,11 +76,11 @@
 	</select>
 	
 	<select id="selectFoundId" resultType="Member">
-		SELECT USER_NAME AS userName, USER_EMAIL AS userEmail
+		SELECT USER_ID
         FROM MEMBER
         <where> 
         	USER_ROLE = #{userRole}
-            AND (USER_EMAIL = #{userEmail} OR USER_PHONE = #{userPhone})
+            AND (USER_EMAIL = #{userEmail} OR USER_NAME = #{userName})
             AND DELETE_YN = 'N'
         </where>
 	</select>

@@ -28,10 +28,10 @@ public interface MemberService {
     Member selectFindId(Member member);
 
     // 아이디 찾기 결과 - 일치하는 아이디 목록 반환
-    List<Member> selectFoundId(Member member);
+    Member selectFoundId(Member member);
 
-    // 비밀번호 재설정
-    int updateResetPw(Member member);
+    // 비밀번호 찾기
+    String resetPw(String userId, String userEmail);
 
     // 회원정보 수정
     int updateMember(UpdateRequest member);
@@ -51,5 +51,7 @@ public interface MemberService {
 	List<NoticeVO> selectListAll(int currentPage);
 	//회원 관리 리스트 - 페이지네이션
 	int getTotalCount();
+
+	
 	
 }

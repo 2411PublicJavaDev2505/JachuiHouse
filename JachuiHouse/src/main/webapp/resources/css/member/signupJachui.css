@@ -100,8 +100,15 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
   overflow: clip !important;
 }
 
-input {
-  /* font-style: ;
+.form-group input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #c0baba;
+	border-radius: 5px;
+}
+
+/* input {
+  font-style: ;
   font-variant-ligatures: ;
   font-variant-caps: ;
   font-variant-numeric: ;
@@ -117,7 +124,7 @@ input {
   font-size-adjust: ;
   font-kerning: ;
   font-feature-settings: ;
-  font-variation-settings: ; */
+  font-variation-settings: ;
   text-rendering: auto;
   color: fieldtext;
   letter-spacing: normal;
@@ -126,24 +133,24 @@ input {
   text-transform: none;
   text-indent: 0px;
   text-shadow: none;
-  /* display: inline-block; */
+  display: inline-block;
   text-align: start;
-  /* appearance: auto; */
+  appearance: auto;
   -webkit-rtl-ordering: logical;
-  /* cursor: text;
-  background-color: field; */
-  /* margin: 0em;
+  cursor: text;
+  background-color: field;
+  margin: 0em;
   padding: 1px 0px;
   border-width: 2px;
   border-style: inset;
   border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-  border-image: initial; */
+  border-image: initial;
   padding-block: 1px;
-  padding-inline: 2px;
+  padding-inline: 2px; 
 
-  /* overflow-wrap: break-word;
-  word-break: break-word; */
-}
+  overflow-wrap: break-word;
+  word-break: break-word;
+} */
 
 /* .form-group{
   display: flex;
