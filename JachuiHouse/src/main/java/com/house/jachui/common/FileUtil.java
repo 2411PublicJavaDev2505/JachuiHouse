@@ -39,9 +39,11 @@ public class FileUtil {
 		uploadFile.transferTo(new File(savePath));
 		result.put(prefix+"Filename", tradeFilename);
 		result.put(prefix+"FileRename", tradeFileRename);
-		result.put(prefix+"FilePath", tradeFilePath);
+		System.out.println("Original Filename: " + tradeFilename);
+		System.out.println("Renamed Filename: " + tradeFileRename);
+		System.out.println("File path: " + savePath);
 		return result;
-		
+
 	}
 	public static String fileRename(String originalFileName) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");

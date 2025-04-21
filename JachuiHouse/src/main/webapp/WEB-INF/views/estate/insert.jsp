@@ -148,7 +148,7 @@
 					  <label>매물 사진 (최대 20장)</label>
 					  <div id="photo-upload-container" class="photo-upload-container">
 					  	<div class="photo-upload-input">
-					  		<input type="file" name="estateImages" accept="image/*" onchange="addNextImageInput(this)"/>
+					  		<input type="file" name="images" accept="image/*" onchange="addNextImageInput(this)"/>
 					   </div>
 					</div>
 				</div>
@@ -200,7 +200,7 @@
             newWrapper.classList.add('photo-upload-input');
             const newInput = document.createElement('input');
             newInput.type = 'file';
-            newInput.name = 'estateImages';
+            newInput.name = 'images';
             newInput.accept = 'image/*';
             newInput.onchange = function () {
               addNextImageInput(this);
