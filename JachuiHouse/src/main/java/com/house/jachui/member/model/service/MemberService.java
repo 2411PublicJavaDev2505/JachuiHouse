@@ -2,6 +2,9 @@ package com.house.jachui.member.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.house.jachui.member.dto.ContactRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
@@ -51,6 +54,8 @@ public interface MemberService {
 	List<NoticeVO> selectListAll(int currentPage);
 	//회원 관리 리스트 - 페이지네이션
 	int getTotalCount();
+
+	void contactInquiry(List<MultipartFile> contactImage, ContactRequest contactRequest);
 
 	
 	

@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.house.jachui.member.dto.ContactRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
@@ -43,6 +45,8 @@ public interface MemberMapper {
 	List<NoticeVO> selectListAll(RowBounds rowBounds);
 
 	int getTotalCount();
+
+	Object contactInquiry(List<MultipartFile> contactImage, ContactRequest contactRequest);
 
 
 }

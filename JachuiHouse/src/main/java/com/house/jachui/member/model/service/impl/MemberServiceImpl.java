@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.house.jachui.member.dto.ContactRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
@@ -62,6 +64,13 @@ public class MemberServiceImpl implements MemberService {
 	public String resetPw(String userId, String userEmail) {
     	return mMapper.resetPw(userId, userEmail);
 	}
+    
+ // 문의 메일 기능 api
+ 	@Override
+ 	public void contactInquiry(List<MultipartFile> contactImage, ContactRequest contactRequest) {
+ 		mMapper.contactInquiry(contactImage, contactRequest);
+ 		
+ 	}
 
     @Override
     public int updateMember(UpdateRequest member) {
@@ -111,5 +120,7 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalCount() {
 		return mMapper.getTotalCount();
 	}
+
+	
 
 }

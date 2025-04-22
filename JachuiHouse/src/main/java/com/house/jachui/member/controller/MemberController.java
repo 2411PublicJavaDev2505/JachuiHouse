@@ -1,5 +1,6 @@
 package com.house.jachui.member.controller;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
@@ -13,9 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.house.jachui.common.PageUtil;
+import com.house.jachui.member.dto.ContactRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.MemberPasswordRequest;
 import com.house.jachui.member.dto.UpdateRealtorRequest;
@@ -30,6 +35,7 @@ import com.house.jachui.notice.model.vo.NoticeVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/member")
@@ -73,6 +79,15 @@ public class MemberController {
 		}
 	}
 			
+	//로그아웃 기능 구현하기 
+	@PostMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if(session != null) {
+			session.invalidate();
+		}
+		return "redirect:/member/login";
+	}
 			
 //	// 로그인 처리
 //	@PostMapping("/login")
@@ -203,6 +218,20 @@ public class MemberController {
 			return "member/error";
 		}
 	}
+	
+	// 문의 메일 기능 api
+	@PostMapping("/contact/inquiry")
+    public RedirectView contactInquiry(
+            MultipartHttpServletRequest imageRequest,
+            @ModelAttribute("contactRequest") ContactRequest contactRequest) throws IOException {
+        // 문의용 이미지 파일을 리스트에 저장
+        List<MultipartFile> contactImage = imageRequest.getFiles("contactImage");
+        // service 단으로 진입하여 실질적으로 문의 사항을 등록시킬 비즈니스로직 수행 (이후 이메일로 직접적으로 문의 메일을 보낼 로직 추가 필요)
+        mService.contactInquiry(contactImage, contactRequest);
+
+        return new RedirectView("/gds/contact");
+    }
+
 	
 	//공인중개사 마이페이지 이동
 	@GetMapping("/realtor/myPage")
@@ -347,5 +376,6 @@ public class MemberController {
 			model.addAttribute("errorMessage", e.getMessage());
 			return "common/error";
 		}
+		
 	}
 }
