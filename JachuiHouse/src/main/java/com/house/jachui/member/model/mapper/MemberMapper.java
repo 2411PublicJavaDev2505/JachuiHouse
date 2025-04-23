@@ -55,6 +55,8 @@ public interface MemberMapper {
 
 	void sendEmailPw();
 
+	int updateUserPassword(String userId, String encryptedPw);
+
 	
 
 

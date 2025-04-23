@@ -197,17 +197,36 @@ public class MemberController {
 //		return "/member/findPwResult";
 	}
 	
-	// 비밀번호 찾기 결과 페이지로 이동
-	@GetMapping("/findPwResult")
-	public String resetPwCom(@RequestParam(value="password", required=false) String encryptedPassword, Model model) {
-		if(encryptedPassword != null) {
-			String originalPassword = new String(Base64.getDecoder().decode(encryptedPassword), StandardCharsets.UTF_8);
-			model.addAttribute("password", originalPassword);
-		}else if (encryptedPassword==null) {
-			model.addAttribute("password",null);
-		}
+	// 비밀번호 찾기 페이지로 이동
+	@GetMapping("/createNewPw")
+	public String showCreateNewPwPage() {
+		return "member/createNewPw";
+	}
+	
+	
+	// 비밀번호 재설정 처리
+	@PostMapping("/createNewPw")
+	public String insertNewPw(
+			@RequestParam("userPw") String userPw,
+			@RequestParam("userPwCheck") String userPwCheck,
+			HttpSession session,
+			Model model) {
 		
-		return "member/findPwResult";
+		if(!userPw.equals(userPwCheck)) {
+			model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+			return "member/createNewPw";
+		}
+		// 세션에서 userId 가져오기
+		String userId = (String) session.getAttribute("userId");
+		
+		boolean result = mService.updatePassword(userId, userPw);
+		
+		if(result) {
+			return "redirect:/member/login";
+		} else {
+			model.addAttribute("error", "비밀번호 변경에 실패했습니다.");
+			return "member/createNewPw";
+		}
 	}
 	
 	// 아이디찾기결과 페이지 이동

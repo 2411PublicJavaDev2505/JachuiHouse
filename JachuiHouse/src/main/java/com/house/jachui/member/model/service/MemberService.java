@@ -64,6 +64,8 @@ public interface MemberService {
 
 	Boolean sendEmailPw(String email);
 
+	boolean updatePassword(String userId, String userPw);
+		
 	
 	
 }
