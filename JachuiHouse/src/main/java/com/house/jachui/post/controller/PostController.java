@@ -29,8 +29,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/post")
 public class PostController {
 	
-	@Autowired
-	private PostService pService;
+	private final PostService pService;
 	
 	@GetMapping("/list")//게시글 전체 정보 조회
 	public String showPostList(

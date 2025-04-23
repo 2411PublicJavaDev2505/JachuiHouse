@@ -23,6 +23,9 @@ public interface PostService {
 
 	int getTotalCount();
 
+	List<PostVO> getPostsByUserId(String userId);
+
+
 
 }
 	

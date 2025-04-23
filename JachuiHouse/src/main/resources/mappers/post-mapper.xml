@@ -34,7 +34,16 @@
 	<select id="selectcList" resultType="CommentVO">
 		SELECT * FROM "COMMENT"
 	</select>
-	
+	<select id="selectOneByIdEmail" resultType="Member">
+		SELECT USER_ID, USER_EMAIL FROM MEMBER
+	    WHERE USER_ID = #{userId}
+	    AND USER_EMAIL = #{userEmail}
+	    AND DELETE_YN = 'N'
+	</select>
+	<select id="selectPostsByUserId" resultType="PostVO">
+		SELECT POST_NO, USER_ID, POST_TYPE, POST_TITLE, POST_CONTENT, WRITE_DATE, UPDATE_DATE
+		FROM POST WHERE USER_ID = #{userId} ORDER BY WRITE_DATE DESC
+	</select>
 	<insert id="insertComment">
 		INSERT INTO "COMMENT" VALUES(COMMENT_SEQ.NEXTVAL, #{userId}, #{commentContent}, SYSDATE, SYSDATE, #{postNo})
 	</insert>

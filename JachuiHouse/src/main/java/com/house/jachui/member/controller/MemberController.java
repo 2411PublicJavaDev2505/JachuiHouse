@@ -35,6 +35,8 @@ import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
+import com.house.jachui.post.domain.PostVO;
+import com.house.jachui.post.service.PostService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -45,6 +47,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
+	
+	private final PostService pService;
 	
 	private final MemberService mService;
 	//회원 관리 리스트 - 페이지네이션
@@ -269,7 +273,10 @@ public class MemberController {
 			if("M".equals(userRole)) {
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
+				List<PostVO> pList = pService.getPostsByUserId(userId);
+				
 				model.addAttribute("member", member);
+				model.addAttribute("pList", pList);
 				return "member/myPage";
 			}else {
 				model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");

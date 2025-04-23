@@ -30,4 +30,8 @@ public interface PostMapper {
 
 	int getTotalCount();
 
+	String getPostContentByUserId(String userId);
+
+	List<PostVO> selectPostsByUserId(String userId);
+
 }
