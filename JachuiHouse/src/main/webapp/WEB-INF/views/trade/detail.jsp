@@ -48,6 +48,48 @@
                 <div class="label">상세내용</div>
                 <div class="value description">${trade.tradeContent}</div>
             </div>
+            
+            
+            
+            <!-- 거래 상태 표시 및 변경 버튼 -->
+                <div class="info-row">
+                    <div class="label">상태</div>
+                    <div class="value">
+                        <c:choose>
+                            <c:when test="${trade.tradeYn == 'Y'}">판매중</c:when>
+                            <c:otherwise>거래완료</c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+
+                <!-- 상태 변경 버튼 (작성자만 가능) -->
+                <c:if test="${trade.userId eq sessionScope.userId}">
+  <form id="statusForm" method="post" action="${pageContext.request.contextPath}/trade/updateYn">
+    <input type="hidden" name="tradeNo" value="${trade.tradeNo}" />
+    <input type="hidden" name="tradeYn" id="tradeYnInput" />
+    <button type="button" class="custom-button" onclick="submitTradeStatus()">
+        <c:choose>
+            <c:when test="${trade.tradeYn == 'Y'}">거래완료로 변경</c:when>
+            <c:otherwise>판매중으로 변경</c:otherwise>
+        </c:choose>
+    </button>
+  </form>
+</c:if>
+
+<script>
+  function submitTradeStatus() {
+      const current = '${trade.tradeYn}';
+      const next = current === 'Y' ? 'N' : 'Y';
+      const confirmed = confirm("정말 거래 상태를 변경하시겠습니까?");
+      if (confirmed) {
+          document.getElementById("tradeYnInput").value = next;
+          document.getElementById("statusForm").submit();
+      }
+  }
+</script>
+            
+            
+            
               
               <%-- <div class="info-row">
                 <div class="label">이미지 변경</div>
@@ -82,6 +124,10 @@
 			      location.href = "/trade/delete?tradeNo=" + tradeNo;
 			    }
 			  }
+
+			 			  
+			  
+			  
 			</script>
           
           

@@ -23,8 +23,6 @@
 		update TRADE set VIEW_COUNT = VIEW_COUNT +1 WHERE TRADE_NO = #{tradeNo}
 	</update>
 	
-	
-	
 	<select id="selectOneByNo" parameterType="int" resultMap="tradeResultMap">
 	    SELECT * FROM TRADE WHERE TRADE_NO = #{tradeNo}
 	</select>
@@ -63,6 +61,9 @@
 	        <when test="category == 'writer'">
 	           	USER_ID LIKE '%' || #{searchKeyword} || '%'
 	        </when>
+	        <when test="category == 'tradeYn'">
+            TRADE_YN = #{searchKeyword}  <!-- tradeYn 필터링 -->
+        </when>
         <otherwise>
             1=1
         </otherwise>
@@ -73,7 +74,7 @@
     
 	<insert id="insertTrade">
 		INSERT INTO TRADE VALUES(SEQ_TRADE_NO.NEXTVAL, #{userId}, #{tradeTitle}, #{tradeContent}, #{tradePrice},
-		 default, default, #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath}, 'N', default, 'N')
+		 default, default, #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath}, 'Y', default, 'N')
 	</insert>
 	<update id="updateTrade">
 		UPDATE TRADE
@@ -89,4 +90,14 @@
 		SET DEL_YN = 'Y'
 		WHERE TRADE_NO = #{tradeNo}
 	</delete>
+	
+	
+	
+	<update id="updateTradeYn">
+    UPDATE TRADE
+    SET TRADE_YN = #{tradeYn}
+    WHERE TRADE_NO = #{tradeNo}
+</update>
+	
+	
 </mapper>

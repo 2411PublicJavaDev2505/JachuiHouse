@@ -76,4 +76,10 @@ public class TradeServiceImpl implements TradeService {
 	
 	
 	
+	@Override
+	public int updateTradeYn(int tradeNo, char tradeYn) {
+	    return mapper.updateTradeYn(tradeNo, tradeYn);
+	}
+	
+	
 }

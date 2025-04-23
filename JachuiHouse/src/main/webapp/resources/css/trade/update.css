@@ -43,7 +43,7 @@ h2 {
 
 input[type="text"],
 input[type="file"],
-input[type="number"]
+input[type="number"],
 textarea {
   width: 90%;
   padding: 8px;
