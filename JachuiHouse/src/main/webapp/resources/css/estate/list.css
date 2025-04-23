@@ -103,11 +103,12 @@ body {
     font-weight: bold;
 }
 
-.estate-list {
+.estate-grid {
     margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-row-gap: 40px;
+    grid-column-gap: 20px;
 }
 
 .estate {
@@ -171,4 +172,5 @@ body {
     font-size: 14px;
     color: #555;
 }
+
 

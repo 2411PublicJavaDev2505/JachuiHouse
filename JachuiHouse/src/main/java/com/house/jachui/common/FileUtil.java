@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -45,6 +47,21 @@ public class FileUtil {
 		return result;
 
 	}
+	
+	public List<Map<String, String>> saveFiles(List<MultipartFile> uploadFiles, HttpSession session, String type) throws IllegalStateException, IOException {
+	    List<Map<String, String>> fileList = new ArrayList<>();
+
+	    for (MultipartFile file : uploadFiles) {
+	        if (!file.isEmpty()) {
+	            Map<String, String> fileInfo = saveFile(file, session, type); // 기존 메서드 재사용
+	            fileList.add(fileInfo);
+	        }
+	    }
+
+	    return fileList;
+	}
+
+	
 	public static String fileRename(String originalFileName) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String date = sdf.format(new Date(System.currentTimeMillis()));
