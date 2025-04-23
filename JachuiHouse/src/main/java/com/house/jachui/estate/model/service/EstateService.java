@@ -19,4 +19,6 @@ public interface EstateService {
 
 	int insertEstate(EstateAddRequest estate, List<MultipartFile> images, List<Integer> optionCodes, HttpSession session) throws IllegalStateException, IOException;
 
+	void deleteEstate(int estateNo);
+
 }

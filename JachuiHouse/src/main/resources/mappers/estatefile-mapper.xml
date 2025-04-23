@@ -13,5 +13,8 @@
 	<select id="selectImageList" resultType="com.house.jachui.estate.model.vo.EstateFile">
 		SELECT * FROM ESTATE_FILE WHERE ESTATE_NO = #{estateNo} ORDER BY ESTATE_FILE_NO DESC
 	</select>
-
+	<delete id="deleteFilesByEstateNo">
+	    DELETE FROM ESTATE_FILE
+	    WHERE ESTATE_NO = #{estateNo}
+	</delete>
 </mapper>

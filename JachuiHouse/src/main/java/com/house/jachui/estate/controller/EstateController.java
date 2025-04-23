@@ -3,7 +3,6 @@ package com.house.jachui.estate.controller;
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.estate.controller.dto.EstateAddRequest;
-import com.house.jachui.estate.controller.dto.OptionAddrequest;
 import com.house.jachui.estate.model.mapper.EstateFileMapper;
+import com.house.jachui.estate.model.mapper.OptionMapper;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.estate.model.vo.EstateFile;
@@ -31,10 +30,15 @@ public class EstateController {
 	
 	  private final EstateService estService;
 	  private final EstateFileMapper fileMapper;
+	  private final OptionMapper oMapper;
 
     @GetMapping("/list")
     public String showEstateList(Model model) {
         List<Estate> estList = estService.getEstateList();
+        for (Estate est : estList) {
+            List<EstateFile> fileList = fileMapper.selectImageList(est.getEstateNo());
+            est.setEstateFileList(fileList);
+        }
         model.addAttribute("estList", estList);
         return "estate/list";
     }
@@ -66,5 +70,21 @@ public class EstateController {
 	    int result = estService.insertEstate(estate, images, optionCodes, session);
 	    
 	    return "redirect:/chazabang/list";
+	}
+	
+	@GetMapping("/delete/{estateNo}")
+	public String DeleteEstateByNo(@PathVariable("estateNo") int estateNo, HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+	    Estate estate = estService.selectOneByNo(estateNo);
+	    if (estate != null && userId.equals(estate.getUserId())) {
+	    	fileMapper.deleteFilesByEstateNo(estateNo);
+	    	oMapper.deleteOptionByEstateNo(estateNo);
+	        estService.deleteEstate(estateNo);
+	    }
+	    return "redirect:/chazabang/deletecomplete";
+	}
+	@GetMapping("/deletecomplete")
+	public String DeleteComplete() {
+		return "estate/deleteComplete";
 	}
 }

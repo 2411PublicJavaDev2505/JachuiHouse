@@ -75,4 +75,10 @@ public class EstateServiceImpl implements EstateService {
 
         return estateNo;
     }
+
+
+	@Override
+	public void deleteEstate(int estateNo) {
+		estMapper.deleteEstate(estateNo);		
+	}
 }
