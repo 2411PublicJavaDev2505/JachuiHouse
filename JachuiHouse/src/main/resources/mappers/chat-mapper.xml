@@ -14,4 +14,13 @@
   		<result property="recieverId" column="RECEIVER_ID"/>
   	</resultMap>
   	
+  	<select id="selectList" resultMap="chatResultMap">
+		SELECT * FROM CHAT WHERE (WRITER_ID=#{writerId} AND RECEIVER_ID=#{recieverId}) 
+		OR (RECEIVER_ID=#{writerId} AND WRITER_ID=#{recieverId}) ORDER BY CHAT_SEND_DATE
+	</select>
+	<insert id="sendChat">
+		INSERT INTO CHAT VALUES(SEQ_CHAT_NO.NEXTVAL,#{writerId}, SYSTIMESTAMP, #{chatContent},
+		#{chatFileName}, #{chatFilePath}, #{chatFileRename}, #{recieverId})
+	</insert>
+	
   </mapper>

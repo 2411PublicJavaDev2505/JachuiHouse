@@ -128,11 +128,7 @@ public class MemberServiceImpl implements MemberService {
 		return mMapper.updateProfileImage(userId, newFileName);
 	}
 
-	@Override
-	public String selectNameById(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 

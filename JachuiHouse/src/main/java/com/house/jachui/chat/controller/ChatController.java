@@ -51,35 +51,38 @@ public class ChatController {
 		return "/chat/torealtor";
 	}
 	
-	@GetMapping("/chat")
+	@GetMapping("/main")
 	public String showChatRoom(Model model
-			, @RequestParam("writerId") String writerId
-			, @RequestParam("recieverId") String recieverId) {
+			, @RequestParam("recieverId") String recieverId
+			, HttpSession session) {
 		Map<String, String> map = new HashMap<String, String>();
+		String writerId = (String)session.getAttribute("userId");
 		map.put("recieverId", recieverId);
 		map.put("writerId", writerId);
 		List<Chat> cList = cService.selectList(map);
-		String recieverName = mService.selectNameById("recieverId");
+//		String recieverName = mService.selectNameById(recieverId);
 		model.addAttribute("cList", cList);
-		model.addAttribute("recieverId",map.get("recieverId"));
-		model.addAttribute("writerId",map.get("writerId"));
-		model.addAttribute("recieverName", recieverName);
-		return "chat/chat";
+		model.addAttribute("recieverId", recieverId);
+		model.addAttribute("writerId", writerId);
+//		model.addAttribute("recieverName", recieverName);
+		return "chat/main";
 	}
 	@PostMapping("/send")
 	public String sendChat(Model model
 			,@ModelAttribute SendRequest chat
 			, HttpSession session
 			, @RequestParam(value = "images", required = false)
-	List<MultipartFile> images) {
-		int result = cService.sendChat(chat, images, session);
+			 List<MultipartFile> images) {
+		int result = cService.sendChat(chat, images);
 		String role = (String)session.getAttribute("role");
 		if(result > 0) {
-			return "redirect:/chat/chat?writerId="+chat.getWriterId()+"&recieverId="+chat.getRecieverId();
+			return "redirect:/chat/main?writerId="+chat.getWriterId()+"&recieverId="+chat.getRecieverId();
 		}else {
 			return "common/error";
 		}
 	}
-	
+//	@GetMapping("/list")
+//	public String chatList(Model model
+//			, )
 	
 }

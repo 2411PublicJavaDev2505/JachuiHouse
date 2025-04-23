@@ -14,6 +14,6 @@ public interface ChatService {
 
 	List<Chat> selectList(Map<String, String> map);
 
-	int sendChat(SendRequest chat, List<MultipartFile> images, HttpSession session);
+	int sendChat(SendRequest chat, List<MultipartFile> images);
 
 }

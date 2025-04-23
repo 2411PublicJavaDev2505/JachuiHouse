@@ -48,7 +48,9 @@
             <div id="mainRight">
                 <div id="content-intro">
                     <b>나의 게시글</b>
-                    <button type="submit" id="chatList">채팅 내역</button>
+                    <a href="/chat/chat?writerId=${userId }">
+                    	<button type="submit" id="chatList">채팅 내역</button>
+                    </a>
                 </div>
                 <div id="content">
                     <div id="roomImg">
