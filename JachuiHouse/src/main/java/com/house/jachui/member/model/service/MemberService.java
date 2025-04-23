@@ -65,6 +65,8 @@ public interface MemberService {
 
 	Boolean sendEmailPw(String email);
 
+	boolean updatePassword(String userId, String userPw);
+		
 	
 	
 	//회원 관리 검색 - 페이지네이션

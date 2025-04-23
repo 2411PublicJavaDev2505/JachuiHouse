@@ -18,7 +18,7 @@
         	
 	        <div class="form-group">
 	            <label for="userEmail">이메일</label>
-	                <input type="email" name="userEmail" placeholder="이메일 주소를 입력해주세요." class="form-control" required>
+	                <input type="email" name="userEmail" placeholder="가입 시 기재한 이메일 주소를 입력해주세요." class="form-control" required>
         	</div>
         	<button type="submit">변경하기</button>
         </form>

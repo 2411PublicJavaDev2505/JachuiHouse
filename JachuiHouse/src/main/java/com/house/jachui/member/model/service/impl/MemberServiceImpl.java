@@ -21,6 +21,8 @@ import com.house.jachui.member.model.mapper.MemberMapper;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.notice.model.vo.NoticeVO;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +32,7 @@ public class MemberServiceImpl implements MemberService {
 	
     private final MemberMapper mMapper;
     private final JavaMailSender javaMailSender;
+    private final PasswordEncoder passwordEncoder;
 
     // 자취생 회원가입
     @Override
@@ -164,13 +167,20 @@ public class MemberServiceImpl implements MemberService {
 			message.setTo(email); // 받는 사람 이메일
 			message.setFrom("cothgud@gmail.com"); // 발신자 이메일
 			message.setSubject("[자취하우스] 임시 비밀번호 안내");
-			message.setText("비밀번호 재설정 링크: <a href='/member/createNewPw'></a>");
+			message.setText("비밀번호 재설정 링크: http://localhost:7777/member/createNewPw");
 			javaMailSender.send(message);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public boolean updatePassword(String userId, String userPw) {
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encryptedPw = encoder.encode(userPw);
+	    return mMapper.updateUserPassword(userId, encryptedPw) > 0;
 	}
 
 

@@ -13,12 +13,12 @@
         <form role="form" action="/member/createNewPw" method="post">
         	<div class="form-group">
 	            <label for="userPw">비밀번호 재설정</label>
-	                <input type="text" name="userPw" placeholder="새비밀번호를 입력해주세요." class="form-control" required>
+	                <input type="password" name="userPw" placeholder="새비밀번호를 입력해주세요." class="form-control" required>
         	</div>
         	
 	        <div class="form-group">
 	            <label for="userPwCheck">비밀번호 확인</label>
-	                <input type="email" name="userPwCheck" placeholder="다시 한 번 입력해주세요." class="form-control" required>
+	                <input type="password" name="userPwCheck" placeholder="다시 한 번 입력해주세요." class="form-control" required>
         	</div>
         	<button type="submit">변경하기</button>
         </form>
