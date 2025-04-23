@@ -68,7 +68,9 @@ public class ServiceImpl implements PostService{
 	public int getTotalCount() {
 		return pMapper.getTotalCount();
 	}
-
-
+	@Override
+	public List<PostVO> getPostsByUserId(String userId) {
+		return pMapper.selectPostsByUserId(userId);
+	}
 	
 }
