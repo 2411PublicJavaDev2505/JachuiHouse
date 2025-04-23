@@ -198,6 +198,12 @@ public class MemberServiceImpl implements MemberService {
 		return mMapper.selectSearchList(searchKeyword, currentPage, rowBounds);
 	}
 
+	//관리자 승인
+	@Override
+	public int approveMember(String userId) {
+		return mMapper.updateApproveYn(userId);
+	}
+
 	@Override
 	public int updateProfileImage(String userId, String newFileName) {	
 		return mMapper.updateProfileImage(userId, newFileName);

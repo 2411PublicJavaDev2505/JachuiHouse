@@ -21,6 +21,5 @@ public class NoticeVO {
 	private String noticeFileRename;
 	private String noticeFilePath;
 	private String userId;
-
 	
 }
