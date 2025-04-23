@@ -19,8 +19,8 @@
                 </select>
             </label><br/>
 
-            <label>보증금: <input type="text" name="estateDeposit"/></label><br/>
-            <label>월세: <input type="text" id="monthlyRent" name="estateMonthlyRent"/></label><br/>
+            <label>보증금: <input type="text" name="estateDeposit" placeholder="만 단위로 적어주세요(10000=1억)"/></label><br/>
+            <label>월세: <input type="text" id="monthlyRent" name="estateMonthlyRent" placeholder="만 단위로 적어주세요"/></label><br/>
 
             <label>주소: <input type="text" name="estateAddress"/></label><br/>
 
@@ -34,7 +34,6 @@
             </label><br/>
             
             <label>면적(㎡): <input type="text" name="estateWidth"/></label><br/>
-
 
             <label>층수: <input type="text" name="estateFloor"/></label><br/>
 

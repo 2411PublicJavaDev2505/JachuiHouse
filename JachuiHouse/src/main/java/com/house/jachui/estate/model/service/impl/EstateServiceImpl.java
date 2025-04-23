@@ -2,9 +2,12 @@ package com.house.jachui.estate.model.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import com.house.jachui.estate.model.mapper.EstateFileMapper;
 import com.house.jachui.estate.model.mapper.EstateMapper;
 import com.house.jachui.estate.model.mapper.OptionMapper;
 import com.house.jachui.estate.model.service.EstateService;
+import com.house.jachui.estate.model.service.ImageService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.estate.model.vo.EstateFile;
 
@@ -32,20 +36,23 @@ public class EstateServiceImpl implements EstateService {
     private final EstateMapper estMapper;
     private final OptionMapper optionMapper;
     private final EstateFileMapper estFileMapper;
+    private final ImageService estFileService;
     private final SqlSession session;
-    private final FileUtil fileutil;
 	
-	private String webPath = "/images/estate/";
-	private String folderPath = "C:/uploadImage/chazabang/";
-    
     @Override
     public List<Estate> getEstateList() {
-        return estMapper.selectEstateList();
+        List<Estate> list = estMapper.selectEstateList();
+        for (Estate estate : list) {
+            estate.setTransformPrices();
+        }
+        return list;
     }
+
     
     @Override
     public Estate selectOneByNo(int estateNo) {
     	Estate estate = estMapper.selectOneByNo(estateNo);
+    	 estate.setTransformPrices();
     	return estate;
     }
     
@@ -60,21 +67,8 @@ public class EstateServiceImpl implements EstateService {
         int result = estMapper.insertEstate(estate);
         int estateNo = estate.getEstateNo();
 
-        if (images != null) {
-            for (int i=0;i< images.size();i++) {
-            	MultipartFile file = images.get(i);
-            	if (file != null && !file.isEmpty()) {
-	                Map<String, String> saved = fileutil.saveFile(file, session, "estate");
-	                EstateFile estateFile = new EstateFile();
-	                estateFile.setEstateNo(estateNo);
-	                estateFile.setEstateFileName(saved.get("eFilename"));
-	                estateFile.setEstateFileRename(saved.get("eFileRename"));
-	                estateFile.setEstateFilePath(webPath);
-	                estFileMapper.insertEstateFile(estateFile);
-	                System.out.println(images.size());
-            	}
-            }
-        }
+        estFileService.saveEstateImages(estateNo, images);
+        
         for(int i=0;i< optionCodes.size();i++) {
         	result += optionMapper.insertOptionList(estateNo, optionCodes.get(i));
         }

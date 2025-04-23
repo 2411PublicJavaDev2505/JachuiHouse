@@ -21,27 +21,35 @@
 					</a>
 				</c:if>
 				<div class="image-placeholder">
-                    <button>◁</button>
-					<img src="${pageContext.request.contextPath}/resources/images/estate/좋아보이느집.jpg" alt="등록된 사진이 없습니다."/>
-                    <button>▷</button>
+				    <button id="prevBtn">◁</button>
+				    <div class="image-slider">
+				        <c:forEach items="${estateImageList}" var="file">
+				            <img class="estate-image"
+				                 src="${file.estateFilePath}"
+				                 alt="매물 이미지"
+				                 style="${status.index == 0 ? '' : 'display:none;'}"/>
+				        </c:forEach>
+				    </div>
+				    <button id="nextBtn">▷</button>
+				    <button id="toggleAuto">⏸</button>
 				</div>
 				<div class="estate-conatact">
                     <div class="chat-btn">
                         <button>1:1 채팅문의</button>
                     </div>
-					<div class="realtor-phone">
-                        ${estate.userPhone }
-                    </div>
+					<div class="realtor-phone" id="phoneNumber">
+					    ${estate.userPhone}
+					</div>
 				</div>
                 <div class="estate-info">
                     <div class="estate-info-1">
                         <span class="info-title">거래정보</span>
                         <c:if test="${estate.estateRentType eq 'charter'}">
-                        	<div class="estate-rent">전세 ${estate.estateDeposit }</div>
-                        </c:if>
-                        <c:if test="${estate.estateRentType eq 'monthly'}">
-                        	<div class="estate-rent">월세 ${estate.estateDeposit }/${estate.estateMonthlyRent }</div>
-                        </c:if>
+						    <div class="estate-rent">전세 ${estate.transformEstateDeposit}</div>
+						</c:if>
+						<c:if test="${estate.estateRentType eq 'monthly'}">
+						    <div class="estate-rent">월세 ${estate.transformEstateDeposit}/${estate.transformMonthlyRent}</div>
+						</c:if>
                     </div>
                     <div class="estate-info-2">
                         <span class="info-title">주소</span>
@@ -101,5 +109,68 @@
        		</main>
     	</div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+        <script>
+		    let currentIndex = 0;
+		    const images = document.querySelectorAll(".estate-image");
+		    const totalImages = images.length;
+		    let autoSlide = true;
+		    let intervalId;
+		
+		    function showImage(index) {
+		        images.forEach((img, i) => {
+		            img.style.display = i === index ? "block" : "none";
+		        });
+		    }
+		
+		    function nextImage() {
+		        currentIndex = (currentIndex + 1) % totalImages;
+		        showImage(currentIndex);
+		    }
+		
+		    function prevImage() {
+		        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+		        showImage(currentIndex);
+		    }
+		
+		    function toggleAutoSlide() {
+		        autoSlide = !autoSlide;
+		        document.getElementById("toggleAuto").innerText = autoSlide ? "⏸" : "▶";
+		
+		        if (autoSlide) {
+		            startSlide();
+		        } else {
+		            clearInterval(intervalId);
+		        }
+		    }
+		
+		    function startSlide() {
+		        intervalId = setInterval(() => {
+		            if (autoSlide) {
+		                nextImage();
+		            }
+		        }, 3000); // 3초 간격
+		    }
+		
+		    // 초기 슬라이드 시작
+		    window.onload = () => {
+		        showImage(0); // 첫 번째 이미지 바로 표시
+		        startSlide();
+		        document.getElementById("nextBtn").addEventListener("click", nextImage);
+		        document.getElementById("prevBtn").addEventListener("click", prevImage);
+		        document.getElementById("toggleAuto").addEventListener("click", toggleAutoSlide);
+		    };
+		        // 전화번호 가르기
+		    document.addEventListener("DOMContentLoaded", () => {
+		        const phoneEl = document.getElementById("phoneNumber");
+		        const rawPhone = phoneEl.textContent.trim();
+
+		        const digits = rawPhone.replace(/\D/g, '');
+
+		        if (digits.length === 11) {
+		            const formatted = digits.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+		            phoneEl.textContent = formatted;
+		        }
+		    });
+		</script>
 	</body>
 </html>

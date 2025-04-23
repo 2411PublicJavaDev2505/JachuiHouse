@@ -1,16 +1,18 @@
 @charset "UTF-8";
+
 body {
     margin: 0;
     padding: 0;
     background-color: #FFF9E9;
     font-family: 'Noto Sans KR', sans-serif;
-  }
-  
-  .main-container {
+}
+
+.main-container {
     width: 100%;
     padding: 50px 0;
-  }
-  .edit-btn {
+}
+
+.edit-btn {
     background-color: #FF7C45;
     color: #fff;
     border: none;
@@ -20,8 +22,9 @@ body {
     font-weight: bold;
     font-size: 15px;
     margin-bottom: 14px;
-  }
-  .estate-card {
+}
+
+.estate-card {
     width: 800px;
     margin: 0 auto;
     background-color: #fff;
@@ -30,47 +33,81 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     overflow: hidden;
     padding: 20px;
-  }
-  
-  .image-placeholder {
+}
+
+.image-placeholder {
     position: relative;
-    text-align: center;
-  }
-  
-  .image-placeholder img {
     width: 100%;
-    height: auto;
+    height: 400px;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
-  }
-  
-  .image-placeholder button {
+}
+
+.image-slider {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.estate-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.image-placeholder button {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.5);
     border: none;
     font-size: 24px;
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 50%;
-  }
-  
-  .image-placeholder button:first-of-type {
+    color: rgba(0,0,0,0.5);
+}
+
+#prevBtn {
     left: 10px;
-  }
-  
-  .image-placeholder button:last-of-type {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#nextBtn {
     right: 10px;
-  }
-  
-  .estate-conatact {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#toggleAuto {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    font-size: 10px;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    height: 30px;
+}
+
+
+.estate-conatact {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-  }
-  
-  .chat-btn button {
+}
+
+.chat-btn button {
     background-color: #FF7C45;
     color: #fff;
     border: none;
@@ -79,66 +116,65 @@ body {
     cursor: pointer;
     font-weight: bold;
     font-size: 14px;
-  }
-  
-  .realtor-phone {
+}
+
+.realtor-phone {
     font-size: 20px;
     color: #333;
-  }
-  
-  .estate-info {
+}
+
+.estate-info {
     margin-top: 20px;
     font-size: 16px;
     color: #333;
-  }
-  
-  .estate-info > div {
+}
+
+.estate-info > div {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #eee;
     padding: 8px 0;
-  }
-  
-  .info-title {
+}
+
+.info-title {
     font-weight: bold;
     color: #555;
-  }
- .option-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 고정 4열 */
-  grid-row-gap: 20px;
-  grid-column-gap: 60px;
-  margin-top: 16px;
+}
+
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 고정 4열 */
+    grid-row-gap: 20px;
+    grid-column-gap: 60px;
+    margin-top: 16px;
 }
 
 .option-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .option-img-box {
-  width: 50px;
-  height: 50px;
-  background-color: #fafafa;
-  border: 1px solid #eee;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .option-img-box img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
 }
 
 .option-name {
-  font-size: 14px;
-  color: #333;
-  text-align: center;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
 }
-
-

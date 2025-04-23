@@ -42,19 +42,18 @@
             </div>
         </div>
         <div class="estate-grid">
-        <c:forEach items="${estList }" var="est">
-	        <div class="estate-list">
+        	<c:forEach items="${estList }" var="est">
 	            <a href="/chazabang/detail/${est.estateNo }" class="estate">
 	                <div class="estate-style">
 	                    <img src="../resources/images/estate/좋아보이느집.jpg" alt="이미지 준비중입니다...">
 	                        <section class="estate-inf">
 	                            <div class="estate-inf-header">
 	                            <c:if test="${est.estateRentType eq 'charter'}">
-	                                <p class="estate-rent">전세 ${est.estateDeposit }</p>
-	                            </c:if>
-	                            <c:if test="${est.estateRentType eq 'monthly'}">
-	                                <p class="estate-rent">월세 ${est.estateDeposit }/${est.estateMonthlyRent }</p>
-	                            </c:if>
+								    <div class="estate-rent">전세 ${est.transformEstateDeposit}</div>
+								</c:if>
+								<c:if test="${est.estateRentType eq 'monthly'}">
+								    <div class="estate-rent">월세 ${est.transformEstateDeposit}/${est.transformMonthlyRent}</div>
+								</c:if>
 	                            <span class="estate-type">
 	                            	<c:if test="${est.estateType eq 'onetwo'}">
 			                        	<span class="estate-type">원룸/투룸</span>
@@ -75,8 +74,7 @@
 	                    </section>
 	                </div>
 	            </a>
-	        </div>
-        </c:forEach>
+        	</c:forEach>
         </div>
     </main>
 	</div>
