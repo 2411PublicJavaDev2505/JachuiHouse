@@ -95,7 +95,11 @@
 	
 	<update id="updateTradeYn">
     UPDATE TRADE
-    SET TRADE_YN = #{tradeYn}
+    SET TRADE_YN = #{tradeYn},
+        TRADE_DATE = CASE
+                        WHEN #{tradeYn} = 'N' THEN SYSDATE
+                        ELSE NULL
+                     END
     WHERE TRADE_NO = #{tradeNo}
 </update>
 	

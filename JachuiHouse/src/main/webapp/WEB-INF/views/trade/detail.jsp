@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> <!-- fmt 태그 라이브러리 추가 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,11 @@
             <div class="info-row">
               <div class="label">작성자</div>
               <div class="value">${trade.userId}</div>
+            </div>
+            
+            <div class="info-row">
+              <div class="label">작성일</div>
+              <div class="value">${trade.writeDate}</div>
             </div>
       
             <div class="info-row">
@@ -57,36 +63,47 @@
                     <div class="value">
                         <c:choose>
                             <c:when test="${trade.tradeYn == 'Y'}">판매중</c:when>
-                            <c:otherwise>거래완료</c:otherwise>
+                            <c:otherwise>
+						        <div class="trade-status complete">거래완료</div>
+						        <div class="trade-date">
+						            <strong>거래 완료일:</strong>
+                                    <c:if test="${not empty trade.tradeDate}">
+                                        <fmt:formatDate value="${trade.tradeDate}" pattern="yyyy-MM-dd"/>
+                                    </c:if>
+                                    <c:if test="${empty trade.tradeDate}">
+                                        <span>날짜 없음</span> <!-- tradeDate가 없는 경우 -->
+                                    </c:if>
+                                </div>
+                            </c:otherwise>
                         </c:choose>
                     </div>
                 </div>
 
                 <!-- 상태 변경 버튼 (작성자만 가능) -->
                 <c:if test="${trade.userId eq sessionScope.userId}">
-  <form id="statusForm" method="post" action="${pageContext.request.contextPath}/trade/updateYn">
-    <input type="hidden" name="tradeNo" value="${trade.tradeNo}" />
-    <input type="hidden" name="tradeYn" id="tradeYnInput" />
-    <button type="button" class="custom-button" onclick="submitTradeStatus()">
-        <c:choose>
-            <c:when test="${trade.tradeYn == 'Y'}">거래완료로 변경</c:when>
-            <c:otherwise>판매중으로 변경</c:otherwise>
-        </c:choose>
-    </button>
-  </form>
-</c:if>
+				  <form id="statusForm" method="post" action="${pageContext.request.contextPath}/trade/updateYn">
+				    <input type="hidden" name="tradeNo" value="${trade.tradeNo}" />
+				    <input type="hidden" name="tradeYn" id="tradeYnInput" />
+				    <button type="button" class="custom-button" onclick="submitTradeStatus()">
+				        <c:choose>
+				            <c:when test="${trade.tradeYn == 'Y'}">거래완료로 변경</c:when>
+				            <c:otherwise>판매중으로 변경</c:otherwise>
+				        </c:choose>
+				    </button>
+				  </form>
+				</c:if>
 
-<script>
-  function submitTradeStatus() {
-      const current = '${trade.tradeYn}';
-      const next = current === 'Y' ? 'N' : 'Y';
-      const confirmed = confirm("정말 거래 상태를 변경하시겠습니까?");
-      if (confirmed) {
-          document.getElementById("tradeYnInput").value = next;
-          document.getElementById("statusForm").submit();
-      }
-  }
-</script>
+				<script>
+				  function submitTradeStatus() {
+				      const current = '${trade.tradeYn}';
+				      const next = current === 'Y' ? 'N' : 'Y';
+				      const confirmed = confirm("정말 거래 상태를 변경하시겠습니까?");
+				      if (confirmed) {
+				          document.getElementById("tradeYnInput").value = next;
+				          document.getElementById("statusForm").submit();
+				      }
+				  }
+				</script>
             
             
             
@@ -123,16 +140,11 @@
 			    if (confirmed) {
 			      location.href = "/trade/delete?tradeNo=" + tradeNo;
 			    }
-			  }
-
-			 			  
-			  
-			  
+			  }  
 			</script>
-          
-          
+   
         </main>
-         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+         	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
         </div>
-      </body>
-      </html>
+	</body>
+</html>
