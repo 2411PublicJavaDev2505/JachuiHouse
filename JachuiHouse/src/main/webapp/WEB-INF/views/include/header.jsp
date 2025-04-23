@@ -28,7 +28,7 @@
             </c:if>
             <c:if test="${sessionScope.userId ne null }">
             	<c:if test="${sessionScope.userRole eq 'A' }">
-            		<a href="/admin/report">관리자 페이지</a>
+            		<a href="/admin/rlist">관리자 페이지</a>
             	</c:if>
             	<c:if test="${sessionScope.userRole eq 'R' }">
             		<a href="/member/realtor/myPage">마이페이지</a>

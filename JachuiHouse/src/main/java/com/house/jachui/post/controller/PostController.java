@@ -1,6 +1,7 @@
 package com.house.jachui.post.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.house.jachui.common.PageUtil;
 import com.house.jachui.post.controller.dto.CommentInsertRequest;
 import com.house.jachui.post.controller.dto.PostInsertRequest;
 import com.house.jachui.post.domain.CommentVO;
@@ -31,13 +33,24 @@ public class PostController {
 	private PostService pService;
 	
 	@GetMapping("/list")//게시글 전체 정보 조회
-	public String showPostList(Model model) {
+	public String showPostList(
+			@RequestParam(value="page", defaultValue="1") int currentPage,
+			Model model) {
 		try {
-			List<PostVO> pList = pService.selectList();
-			model.addAttribute("pList", pList);
-		return "post/list";
+			List<PostVO> pList = pService.selectList(currentPage);
+			int totalCount = pService.getTotalCount();
+			Map<String, Integer> pageInfo = PageUtil.generatePageInfo(totalCount, currentPage);
+			if(!pList.isEmpty()) {
+				model.addAttribute("maxPage", pageInfo.get("maxPage"));
+				model.addAttribute("startNavi", pageInfo.get("startNavi"));
+				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				model.addAttribute("pList", pList);
+				return "post/list";
+			}else {
+				model.addAttribute("errorMessage", "데이터가 존재하지 않습니다.");
+				return "common/error";
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
 			return "common/error.jsp";

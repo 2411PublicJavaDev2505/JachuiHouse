@@ -9,7 +9,7 @@ import com.house.jachui.post.domain.PostVO;
 
 public interface PostService {
 
-	List<PostVO> selectList();//게시글 전체 조회
+	List<PostVO> selectList(int currentPage);//게시글 전체 조회
 
 	int insertPost(PostInsertRequest post);//게시글 작성
 
@@ -20,6 +20,9 @@ public interface PostService {
 	int insertcomment(CommentInsertRequest comment);//댓글 작성
 
 	List<CommentVO> selectcList(); //댓글 조회
+
+	int getTotalCount();
+
 
 }
 	

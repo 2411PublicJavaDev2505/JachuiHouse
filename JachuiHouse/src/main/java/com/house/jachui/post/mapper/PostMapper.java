@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.house.jachui.post.controller.dto.CommentInsertRequest;
@@ -15,7 +16,7 @@ import com.house.jachui.post.domain.PostVO;
 @Mapper
 public interface PostMapper {
 
-	List<PostVO> selectList(); //게시글 전체 조회
+	List<PostVO> selectList(RowBounds rowBounds); //게시글 전체 조회
 
 	int insertPost(PostInsertRequest post);//게시글 작성
 
@@ -26,5 +27,7 @@ public interface PostMapper {
 	int insertComment(CommentInsertRequest comment);//댓글 작성
 
 	List<CommentVO> selectcList();//댓글 조회
+
+	int getTotalCount();
 
 }

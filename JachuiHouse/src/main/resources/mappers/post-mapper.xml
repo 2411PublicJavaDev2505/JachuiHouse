@@ -12,7 +12,9 @@
 		<result property="writeDate" column="WRITE_DATE" />
 		<result property="updateDate" column="UPDATE_DATE" />
 	</resultMap>
-	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM POST
+	</select>
 	<select id="selectList" resultMap="postResultMap">
 		SELECT * FROM POST
 	</select>
