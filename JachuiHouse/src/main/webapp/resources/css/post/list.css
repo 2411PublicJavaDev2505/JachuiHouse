@@ -3,7 +3,6 @@
     margin: 0 auto;
     text-align: center;
     background-color: #FFF9E9;
-    height:550px;
 }
 #title{
     border-radius: 15px;
@@ -35,7 +34,10 @@
     padding: 3px;
     width: 100px;
 }
+
 .boardtbl{
+	border-radius : 15px;
+	width : 1200px;
     margin: 0 auto;
     margin-top: 5px;
     border-collapse: collapse;
@@ -45,4 +47,23 @@
 .boardtbl th, tr, td{
     padding: 10px;
     border: 1px solid black;
+}
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 6px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #ff7733;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.pagination a:hover {
+    background-color: #ffe3d3;
 }

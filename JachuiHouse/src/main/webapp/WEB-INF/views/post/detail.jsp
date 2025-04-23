@@ -61,13 +61,13 @@
                                </c:forEach>
                            </table>
                        </div>
+						   <c:if test="${sessionScope.userId ne result.userId }">
+							   <button class="reportbtn2" onClick="showReort();">신고하기</button>
+						   </c:if>
                        <form action="/post/cinsert" method="post">
 						   <input type="hidden" name="postNo" value="${result.postNo}">
 						   <input type="hidden" name="userId" value="${sessionScope.userId }">
 						   <div class="underbar">
-						   <c:if test="${sessionScope.userId ne result.userId }">
-							   <button class="reportbtn2">신고하기</button>
-						   </c:if>
 						   <c:if test="${sessionScope.userId eq result.userId }">
 						   		<button class="updatebtn2">수정하기</button>
 						   		<button class="deletebtn2" type="submit"><a href="/post/delete?postNo=${result.postNo }">삭제하기</a></button>		

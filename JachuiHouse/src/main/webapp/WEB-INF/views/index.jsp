@@ -32,7 +32,7 @@
 	                <!-- 주요 기능 소개 -->
 	                <div class="main-menu">
 	                    <div class="left-menu">
-	                        <a href="#">
+	                        <a href="post/list">
 	                            <div class="user-story">
 	                                <h3>자취록 </h3>
 	                                <p>우리들의 자취 이야기</p>
@@ -52,7 +52,7 @@
 	                        </a>
 	                    </div>
 	                    <div class="right-menu">
-	                        <a href="#">
+	                        <a href="notice/list">
 	                            <div class="notice-board">
 	                                <h3>공지사항</h3>
 	                                <li>감기 조심하세요</li>

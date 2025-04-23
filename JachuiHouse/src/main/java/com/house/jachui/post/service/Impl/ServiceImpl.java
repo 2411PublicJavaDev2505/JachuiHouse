@@ -2,6 +2,7 @@ package com.house.jachui.post.service.Impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,11 @@ public class ServiceImpl implements PostService{
 	}
 	//게시글 전체 조회
 	@Override
-	public List<PostVO> selectList() {
-		List<PostVO> pList = pMapper.selectList();
+	public List<PostVO> selectList(int currentPage) {
+		int limit = 10;
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<PostVO> pList = pMapper.selectList(rowBounds);
 		return pList;
 	}
 	//게시글 작성
@@ -59,6 +63,10 @@ public class ServiceImpl implements PostService{
 	public List<CommentVO> selectcList() {
 		List<CommentVO> cList = pMapper.selectcList();
 		return cList;
+	}
+	@Override
+	public int getTotalCount() {
+		return pMapper.getTotalCount();
 	}
 
 
