@@ -42,25 +42,49 @@
                     </a>
                     <div class="product-title">${trade.tradeTitle}</div>
                     <div class="product-price">${trade.tradePrice}원</div>
-                    <div class="product-views">조회수 ${trade.viewCount}</div>
+                	<div class="product-views">조회수 ${trade.viewCount}</div>
+               		<div class="product-yn">
+					    상태:
+					    <c:choose>
+						    <c:when test="${trade.tradeYn == 'Y'}">판매중</c:when>
+						    <c:when test="${trade.tradeYn == 'N'}">거래완료</c:when>
+						    <c:otherwise>상태 미지정</c:otherwise>
+					    </c:choose>
+					</div>
                 </div>
             </c:forEach>
         </div>
 
+		<c:if test="${empty searchList}">
+		    <div class="no-result">검색 결과가 없습니다.</div>
+		</c:if>
+		
+		<c:if test="${not empty searchList}">
+		    <div class="pagination-container">
+		        <div class="pagination">
+		            <!-- 첫 페이지가 아닐 때만 '처음', '이전' 버튼 표시 -->
+		            <c:if test="${currentPage > 1}">
+		                <a href="/trade/search?page=1&category=${param.category}&searchKeyword=${param.searchKeyword}" class="first">◁◁</a>
+		                <a href="/trade/search?page=${startNavi - 1}&category=${param.category}&searchKeyword=${param.searchKeyword}" class="prev">◀</a>
+		            </c:if>
+		
+		            <!-- 페이지 숫자 -->
+		            <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+		                <a href="/trade/search?page=${p}&category=${param.category}&searchKeyword=${param.searchKeyword}" 
+		                   class="${p == currentPage ? 'active' : ''}">${p}</a>
+		            </c:forEach>
+		
+		            <!-- 마지막 페이지가 아닐 때만 '다음', '끝' 버튼 표시 -->
+		            <c:if test="${currentPage < maxPage}">
+		                <a href="/trade/search?page=${endNavi + 1}&category=${param.category}&searchKeyword=${param.searchKeyword}" class="next">▶</a>
+		                <a href="/trade/search?page=${maxPage}&category=${param.category}&searchKeyword=${param.searchKeyword}" class="last">▷▷</a>
+		            </c:if>
+		        </div>
+		    </div>
+		</c:if>
 
-        <div class="pagination-container">
-				<div class="pagination">
-					<c:if test="${startNavi ne 1 }">
-						<a href="//list?page=${startNavi - 1 }" class="prev">&lt;</a>
-					</c:if>
-					<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-						<a href="/trade/list?page=${p }">${p }</a>
-					</c:forEach>
-					<c:if test="${endNavi ne maxPage }">
-						<a href="/trade/list?page=${endNavi + 1 }" class="next">&gt;</a>
-					</c:if>
-				</div>
-			</div>
+		    </div>
+		</div>
     
     </main>
    	 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />

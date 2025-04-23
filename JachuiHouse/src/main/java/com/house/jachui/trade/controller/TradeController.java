@@ -216,6 +216,38 @@ public class TradeController {
 			return "common/error";
 		}
 	}
+	
+	// 거래 상태 변경
+	@PostMapping("/updateYn")
+	public String updateTradeYn(@RequestParam("tradeNo") int tradeNo, 
+	                                 @RequestParam("tradeYn") char tradeYn, // 거래 완료 여부 파라미터 추가
+	                                 Model model) {
+	    try {
+	        int result = tService.updateTradeYn(tradeNo, tradeYn); // 상태 변경
+	        if (result > 0) {
+	            return "redirect:/trade/list"; // 성공 시 목록으로 이동
+	        } else {
+	            model.addAttribute("errorMessage", "상태 변경 실패");
+	            return "common/error"; // 실패 시 에러 페이지로 이동
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("errorMessage", e.getMessage());
+	        return "common/error"; // 예외 발생 시 에러 페이지로 이동
+	    }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 채팅페이지
 	@GetMapping("/chat/{tradeNo}")

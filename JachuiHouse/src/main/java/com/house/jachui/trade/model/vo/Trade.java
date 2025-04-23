@@ -25,7 +25,7 @@ public class Trade {
 	private String tradeFilename;
 	private String tradeFileRename;
 	private String tradeFilepath;
-	private char tradeYn;
+	private String tradeYn;
 	private Date tradeDate;
 	private char delYn;
 

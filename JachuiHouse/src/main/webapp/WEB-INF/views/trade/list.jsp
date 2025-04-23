@@ -43,6 +43,18 @@
                     <div class="product-title">${trade.tradeTitle}</div>
                     <div class="product-price">${trade.tradePrice}원</div>
                 	<div class="product-views">조회수 ${trade.viewCount}</div>
+               		<div class="product-yn">
+					    상태:
+					    <c:choose>
+						    <c:when test="${trade.tradeYn == 'Y'}">판매중</c:when>
+						    <c:when test="${trade.tradeYn == 'N'}">거래완료</c:when>
+						    <c:otherwise>상태 미지정</c:otherwise>
+					    </c:choose>
+					</div>
+               		
+               		
+               		
+               
                 </div>
             </c:forEach>
         </div>
