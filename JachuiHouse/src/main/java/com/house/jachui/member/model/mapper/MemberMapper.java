@@ -59,6 +59,8 @@ public interface MemberMapper {
 
 	void sendEmailPw();
 
+	int updateUserPassword(String userId, String encryptedPw);
+
 	
 
 
@@ -67,6 +69,9 @@ public interface MemberMapper {
 	int getTotalCountByKeyword(@Param("searchKeyword") String searchKeyword);
 	//회원 관리 검색
 	List<Member> selectSearchList(@Param("searchKeyword") String searchKeyword, @Param("currentPage") int currentPage, RowBounds rowBounds);
+
+	//관리자 승인
+	int updateApproveYn(String userId);
 
 
 

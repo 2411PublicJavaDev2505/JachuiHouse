@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Notice - list</title>
+		<title>Report - list</title>
 		<link rel="stylesheet" href="../resources/css/include/header.css">
 		<link rel="stylesheet" href="../resources/css/notice/list.css">
 		<link rel="stylesheet" href="../resources/css/include/footer.css">
@@ -17,7 +17,7 @@
 	<main class="main">
     	<div id="notice-div">
 
-	        	<form class="report-form" action="/notice/search" method="get">
+	        	<form class="report-form" action="/admin/search" method="get">
 <!-- 	        	'신고종류' 옵션추가 -->
 	        		 <div class="search">
 		        		 <input class="searchplace" name="searchKeyword" type="text" placeholder="   검색어를 입력하세요.">
@@ -33,7 +33,7 @@
         			<th>작성자</th>
         			<th>작성일</th>
         		</tr>	
-        		<c:forEach var="noticeVO" items="${nList}" varStatus="i">
+        		<c:forEach var="noticeVO" items="${rList}" varStatus="i">
         			<tr>
         				<td>
 						    <c:choose>

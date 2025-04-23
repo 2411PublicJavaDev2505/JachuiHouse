@@ -65,6 +65,8 @@ public interface MemberService {
 
 	Boolean sendEmailPw(String email);
 
+	boolean updatePassword(String userId, String userPw);
+		
 	
 	
 	//회원 관리 검색 - 페이지네이션
@@ -72,7 +74,7 @@ public interface MemberService {
 	//회원 관리 검색
 	List<Member> searchListByKeyword(String searchKeyword, int currentPage);
 	int updateProfileImage(String userId, String newFileName);
-
-
+	//관리자 승인
+	int approveMember(String userId);
 	
 }

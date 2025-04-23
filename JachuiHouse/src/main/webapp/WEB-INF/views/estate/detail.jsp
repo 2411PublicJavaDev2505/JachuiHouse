@@ -16,8 +16,12 @@
 		<main class="main-container">
             <div class="estate-card">
                 <c:if test="${userId eq estate.userId}">
-                    <a href="/chazabang/modify">
+                    <a href="/chazabang/modify/${estateNo }">
                         <button class="edit-btn" >수정</button>
+					</a>
+					
+					<a href="/chazabang/delete/${estateNo }">
+						<button class="del-btn">삭제</button>
 					</a>
 				</c:if>
 				<div class="image-placeholder">

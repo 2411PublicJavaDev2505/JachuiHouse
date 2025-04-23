@@ -11,4 +11,8 @@
 		VALUES
 	    (#{estateNo}, #{optionCode})
 	</insert>
+	<delete id="deleteOptionByEstateNo">
+	    DELETE FROM OPTION_LIST
+	    WHERE ESTATE_NO = #{estateNo}
+	</delete>
  </mapper>

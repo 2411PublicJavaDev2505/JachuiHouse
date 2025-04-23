@@ -91,6 +91,13 @@
 		SET USER_PW = #{newPassword}
 		WHERE USER_ID = #{userId}
 	</update>
+
+	<update id="updateUserPassword">
+		UPDATE MEMBER
+		SET USER_PW = #{newPassword}
+		WHERE USER_ID = #{userId}
+
+	</update>
 	
 	<select id="selectFindId" resultType="Member">
 		SELECT USER_ID, CREATE_DATE
@@ -189,4 +196,11 @@
 	<select id="selectNameById" resultType="string">
 		SELECT USER_NAME FROM MEMBER WHERE ID = #{userId}
 	</select>
+	<!-- 관리자 승인 -->
+	<update id="updateApproveYn" parameterType="String">
+	  UPDATE MEMBER
+	  SET APPROVE_YN = 'Y'
+	  WHERE USER_ID = #{userId}
+	</update>
+	
 </mapper>

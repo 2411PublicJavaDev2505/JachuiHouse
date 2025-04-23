@@ -22,13 +22,13 @@
 	        </div>
 	        <div class="chat-content">
 	        	<c:forEach var="chat" items="${cList }">
-	        		<c:if test="${chat.writerId eq sessionScope.id}">
+	        		<c:if test="${chat.writerId ne sessionScope.id}">
 	        			<div class="my-msg">
 	        				<div class="me">나</div>
 	        				<div class="my-msg-detail">${chat.chatContent }</div>
 	        			</div>
 	        		</c:if>
-	        		<c:if test="${chat.writerId ne sessionScope.id}">
+	        		<c:if test="${chat.writerId eq sessionScope.id}">
 	        			<div class="not-my-msg">
 	        				<div class="receiver-name">${recieverName }</div>
 	        				<div class="receive-msg">${chat.chatContent }</div>

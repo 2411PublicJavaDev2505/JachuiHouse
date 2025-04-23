@@ -16,4 +16,7 @@ public interface EstateFileMapper {
 	void insertEstateImage(EstateFile file);
 
 
+	void deleteFilesByEstateNo(int estateNo);
+
+
 }

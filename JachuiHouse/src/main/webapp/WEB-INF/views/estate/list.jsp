@@ -45,7 +45,8 @@
         	<c:forEach items="${estList }" var="est">
 	            <a href="/chazabang/detail/${est.estateNo }" class="estate">
 	                <div class="estate-style">
-	                    <img src="../resources/images/estate/좋아보이느집.jpg" alt="이미지 준비중입니다...">
+	                    <img src="${est.estateFileList[0].estateFilePath}" alt="이미지 준비중">
+
 	                        <section class="estate-inf">
 	                            <div class="estate-inf-header">
 	                            <c:if test="${est.estateRentType eq 'charter'}">

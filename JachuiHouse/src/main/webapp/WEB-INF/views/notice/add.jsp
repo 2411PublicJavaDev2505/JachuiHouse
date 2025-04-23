@@ -44,8 +44,8 @@
               	<div class="info-row">
 	                <div class="label">첨부파일</div>
 	                <div class="add">
-		                <span><a href="..${NoticeVO.filePath }">${NoticeVO.fileName }</a></span>
-						<input type="file" name="uploadFile" onchange="readURL(this)">
+<%-- 		                <span><a href="..${NoticeVO.filePath }">${NoticeVO.fileName }</a></span> --%>
+						<input type="file" name="uploadFile" onchange="readURL(this)" />
                 	</div>
               	</div>
                 <hr>

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.ContactRequest;
@@ -35,6 +34,8 @@ import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
+import com.house.jachui.post.domain.PostVO;
+import com.house.jachui.post.service.PostService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -45,6 +46,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
+	
+	private final PostService pService;
 	
 	private final MemberService mService;
 	//회원 관리 리스트 - 페이지네이션
@@ -201,17 +204,36 @@ public class MemberController {
 //		return "/member/findPwResult";
 	}
 	
-	// 비밀번호 찾기 결과 페이지로 이동
-	@GetMapping("/findPwResult")
-	public String resetPwCom(@RequestParam(value="password", required=false) String encryptedPassword, Model model) {
-		if(encryptedPassword != null) {
-			String originalPassword = new String(Base64.getDecoder().decode(encryptedPassword), StandardCharsets.UTF_8);
-			model.addAttribute("password", originalPassword);
-		}else if (encryptedPassword==null) {
-			model.addAttribute("password",null);
-		}
+	// 비밀번호 찾기 페이지로 이동
+	@GetMapping("/createNewPw")
+	public String showCreateNewPwPage() {
+		return "member/createNewPw";
+	}
+	
+	
+	// 비밀번호 재설정 처리
+	@PostMapping("/createNewPw")
+	public String insertNewPw(
+			@RequestParam("userPw") String userPw,
+			@RequestParam("userPwCheck") String userPwCheck,
+			HttpSession session,
+			Model model) {
 		
-		return "member/findPwResult";
+		if(!userPw.equals(userPwCheck)) {
+			model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+			return "member/createNewPw";
+		}
+		// 세션에서 userId 가져오기
+		String userId = (String) session.getAttribute("userId");
+		
+		boolean result = mService.updatePassword(userId, userPw);
+		
+		if(result) {
+			return "redirect:/member/login";
+		} else {
+			model.addAttribute("error", "비밀번호 변경에 실패했습니다.");
+			return "member/createNewPw";
+		}
 	}
 	
 	// 아이디찾기결과 페이지 이동
@@ -269,7 +291,10 @@ public class MemberController {
 			if("M".equals(userRole)) {
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
+				List<PostVO> pList = pService.getPostsByUserId(userId);
+				
 				model.addAttribute("member", member);
+				model.addAttribute("pList", pList);
 				return "member/myPage";
 			}else {
 				model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
@@ -385,6 +410,9 @@ public class MemberController {
 	public String memberList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
 		try {
 			List<Member> mList = mService.selectListAll(currentPage);
+			for (Member m : mList) {
+				System.out.println(">>> member: " + m);
+			}
 			int totalCount = mService.getTotalCount();
 			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
 			
@@ -431,5 +459,23 @@ public class MemberController {
 				return "common/error";
 		}
 	}
+	
+	//관리자가 비번 없이 삭제
+	@PostMapping("/delete-by-admin")
+	@ResponseBody
+	public String deleteMemberByAdmin(@RequestParam("userId") String userId) {
+		System.out.println("삭제 요청 받은 userId: " + userId); 
+		int result = mService.deleteMember(userId);
+		return (result > 0) ? "success" : "fail";
+	}
+
+	//관리자 승인
+	@PostMapping("/approve")
+	@ResponseBody
+	public String approveMember(@RequestParam("userId") String userId) {
+	    int result = mService.approveMember(userId);
+	    return result > 0 ? "success" : "fail";
+	}
+
 	
 }
