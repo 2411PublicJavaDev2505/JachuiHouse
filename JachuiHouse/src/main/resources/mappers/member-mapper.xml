@@ -185,4 +185,8 @@
 			   	</if>
 			</where>
 	</select>
+	
+	<select id="selectNameById" resultType="string">
+		SELECT USER_NAME FROM MEMBER WHERE ID = #{userId}
+	</select>
 </mapper>

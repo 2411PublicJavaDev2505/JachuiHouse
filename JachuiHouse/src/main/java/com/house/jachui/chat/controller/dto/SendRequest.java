@@ -12,7 +12,7 @@ public class SendRequest {
 	private String writerId;
 	private String recieverId;
 	private String chatContent;
-	private String fileName;
-	private String fileRename;
-	private String filePath;
+	private String chatFileName;
+	private String chatFileRename;
+	private String chatFilePath;
 }

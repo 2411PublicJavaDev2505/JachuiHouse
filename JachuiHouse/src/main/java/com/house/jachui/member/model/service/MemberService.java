@@ -73,7 +73,6 @@ public interface MemberService {
 	List<Member> searchListByKeyword(String searchKeyword, int currentPage);
 	int updateProfileImage(String userId, String newFileName);
 
-	String selectNameById(String string);
 
 	
 }

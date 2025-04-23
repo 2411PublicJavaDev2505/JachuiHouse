@@ -17,7 +17,7 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	    <main>
 	        <div class="title">
-	            <h1>${recieverName }님과의 채팅</h1>
+	            <h1>${recieverId }님과의 채팅</h1>
 	            <h2><i class="fa-light fa-paper-plane"></i></h2>
 	        </div>
 	        <div class="chat-content">
@@ -36,14 +36,15 @@
 	        		</c:if>
 	        	</c:forEach>
 	        </div>
-        	<form action="/chat/send" method="post">
+        	<form action="/chat/send" method="post" enctype="multipart/form-data">
         		<div class="message">
 	        		<input type="hidden" value="${writerId }" name="writerId">
-	        		<input type="hidden" value="${recieverId }" name="receiverId">
-	        		<input type="text" placeholder="메세지를 입력해주세요" name="chatDetail" id="input" required="required">
-		            <button type="submit" id="submitbtn">
-		                <img src="../resources/image/send.256x233.png" alt="send">
-		            </button>	        		
+	        		<input type="hidden" value="${recieverId }" name="recieverId">
+	        		<input type="text" placeholder="메세지를 입력해주세요" name="chatContent" id="input" required="required">
+	        		<input type="file" name="images" multiple>
+		            	<button type="submit" id="submitbtn">
+		                	<img src="../resources/image/send.256x233.png" alt="send">
+		            	</button>	        	
         		</div>
         	</form>
 	        <div class="btn">

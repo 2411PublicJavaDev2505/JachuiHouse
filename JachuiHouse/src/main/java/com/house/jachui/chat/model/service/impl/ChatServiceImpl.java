@@ -14,27 +14,27 @@ import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
 	
-	private ChatMapper cMapper;
-	private SqlSession session;
+	private final ChatMapper cMapper;
 	
-	@Autowired
-	public ChatServiceImpl(ChatMapper cMapper, SqlSession session) {
-		this.cMapper = cMapper;
-		this.session = session;
-	}
+//	@Autowired
+//	public ChatServiceImpl(ChatMapper cMapper, SqlSession session) {
+//		this.cMapper = cMapper;
+//		this.session = session;
+//	}
 
 	@Override
 	public List<Chat> selectList(Map<String, String> map) {
-		return cMapper.selectList(session, map);
+		return cMapper.selectList(map);
 	}
 
 	@Override
-	public int sendChat(SendRequest chat, List<MultipartFile> images, HttpSession session) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int sendChat(SendRequest chat, List<MultipartFile> images) {
+		return cMapper.sendChat(chat);
 	}
 
 
