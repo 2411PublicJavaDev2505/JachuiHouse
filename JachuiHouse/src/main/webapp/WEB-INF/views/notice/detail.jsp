@@ -48,7 +48,7 @@
 	                <div class="value">
 	                    <span class="file-button">첨부파일</span>
 	                    <span class="file-name">
-                    		<a href="../..${notice.noticeFileName}" download>${notice.noticeFileName}</a>
+                    		<a href="../..${notice.noticeFilePath}" download>${notice.noticeFileName}</a>
                 		</span>
                 	</div>
               	</div>
