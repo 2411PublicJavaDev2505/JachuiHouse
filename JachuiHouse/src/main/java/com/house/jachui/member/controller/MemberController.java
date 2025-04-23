@@ -175,18 +175,26 @@ public class MemberController {
 	// 비밀번호 찾기 처리	
 	@PostMapping("/resetPw")
 	public String updateResetPw(
-			MemberPasswordRequest MemberPasswordRequest,
+			MemberPasswordRequest memberPasswordRequest,
 			Model model) {
-		String password = mService.resetPw(MemberPasswordRequest.getUserId(), MemberPasswordRequest.getUserEmail());  // 입력한 비밀번호를 URL 표시할 때 암호화 한다.  
-		
-		if(password != null) {
-			String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes(StandardCharsets.UTF_8)); // 암호화 된 비밀번호를 복호화 한다.  
-			model.addAttribute("password", encryptedPassword);
- 		}else if(password==null) {
- 			model.addAttribute("password", null);
-		}
-		
-		return "/member/findPwResult";
+		// 아이디와 이메일로 회원인지 아닌지 확인 후 
+		Member member = mService.selectOneByIdEmail(memberPasswordRequest);
+		//String password = mService.resetPw(memberPasswordRequest);  // 입력한 비밀번호를 URL 표시할 때 암호화 한다.
+		// 회원이 맞다면 
+		if(member != null) {
+			// 메일 보내기 가동, 메일은 비밀번호 재설정 링크가 보내지는 것임.
+			mService.sendEmailPw(memberPasswordRequest.getUserEmail());
+			// 이메일 보낸 후 로그인 페이지로 이동
+			return "redirect:/member/login";
+
+ 		}else {
+ 			return null;
+ 		}
+//		else if(password==null) {
+// 			model.addAttribute("password", null);
+//		}
+//		
+//		return "/member/findPwResult";
 	}
 	
 	// 비밀번호 찾기 결과 페이지로 이동
