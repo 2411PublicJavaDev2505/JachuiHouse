@@ -57,5 +57,8 @@ public interface MemberService {
 	int getTotalCountByKeyword(@Param("searchKeyword")String searchKeyword);
 	//회원 관리 검색
 	List<Member> searchListByKeyword(String searchKeyword, int currentPage);
+
+	//관리자 승인
+	int approveMember(String userId);
 	
 }

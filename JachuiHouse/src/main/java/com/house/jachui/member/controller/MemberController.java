@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.MemberLoginRequest;
@@ -307,6 +308,9 @@ public class MemberController {
 	public String memberList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
 		try {
 			List<Member> mList = mService.selectListAll(currentPage);
+			for (Member m : mList) {
+				System.out.println(">>> member: " + m);
+			}
 			int totalCount = mService.getTotalCount();
 			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
 			
@@ -352,5 +356,23 @@ public class MemberController {
 				return "common/error";
 		}
 	}
+	
+	//관리자가 비번 없이 삭제
+	@PostMapping("/delete-by-admin")
+	@ResponseBody
+	public String deleteMemberByAdmin(@RequestParam("userId") String userId) {
+		System.out.println("삭제 요청 받은 userId: " + userId); 
+		int result = mService.deleteMember(userId);
+		return (result > 0) ? "success" : "fail";
+	}
+
+	//관리자 승인
+	@PostMapping("/approve")
+	@ResponseBody
+	public String approveMember(@RequestParam("userId") String userId) {
+	    int result = mService.approveMember(userId);
+	    return result > 0 ? "success" : "fail";
+	}
+
 	
 }

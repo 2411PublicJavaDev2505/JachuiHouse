@@ -51,4 +51,7 @@ public interface MemberMapper {
 	//회원 관리 검색
 	List<Member> selectSearchList(@Param("searchKeyword") String searchKeyword, @Param("currentPage") int currentPage, RowBounds rowBounds);
 
+	//관리자 승인
+	int updateApproveYn(String userId);
+
 }

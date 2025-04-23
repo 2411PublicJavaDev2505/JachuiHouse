@@ -150,4 +150,12 @@
 			   	</if>
 			</where>
 	</select>
+	
+	<!-- 관리자 승인 -->
+	<update id="updateApproveYn" parameterType="String">
+	  UPDATE MEMBER
+	  SET APPROVE_YN = 'Y'
+	  WHERE USER_ID = #{userId}
+	</update>
+	
 </mapper>

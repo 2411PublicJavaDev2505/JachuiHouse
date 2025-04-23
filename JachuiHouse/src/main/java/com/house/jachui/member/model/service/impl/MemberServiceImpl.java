@@ -121,4 +121,10 @@ public class MemberServiceImpl implements MemberService {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return mMapper.selectSearchList(searchKeyword, currentPage, rowBounds);
 	}
+
+	//관리자 승인
+	@Override
+	public int approveMember(String userId) {
+		return mMapper.updateApproveYn(userId);
+	}
 }
