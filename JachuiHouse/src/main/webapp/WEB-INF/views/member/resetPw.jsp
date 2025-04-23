@@ -9,18 +9,18 @@
 </head>
 <body>
     <div class="container">
-        <h2>비밀번호 찾기</h2>
+        <h2>비밀번호 재설정</h2>
         <form role="form" action="/member/resetPw" method="post">
-	        <div class="form-group">
-	            <label for="userEmail">이메일</label>
-	                <input type="email" name="userEmail" placeholder="이메일 주소를 입력해주세요." class="form-control" required>
-        	</div>
-        
         	<div class="form-group">
 	            <label for="userId">아이디</label>
 	                <input type="text" name="userId" placeholder="아이디를 입력해주세요." class="form-control" required>
         	</div>
-        	<button type="submit">비밀번호 찾기</button>
+        	
+	        <div class="form-group">
+	            <label for="userEmail">이메일</label>
+	                <input type="email" name="userEmail" placeholder="이메일 주소를 입력해주세요." class="form-control" required>
+        	</div>
+        	<button type="submit">변경하기</button>
         </form>
     </div>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>

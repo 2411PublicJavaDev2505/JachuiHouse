@@ -59,12 +59,37 @@
             #{userDetailAddress}, 'R', #{realtorName}, '1', DEFAULT, DEFAULT, DEFAULT
         )
     </insert>
+    
+    <insert id="contactInquiry" parameterType="map">
+	    INSERT INTO CONTACT (
+	        USER_ID,
+	        USER_EMAIL,
+	        TITLE,
+	        CONTENT,
+	        IMAGE_PATH,
+	        INQUIRY_DATE
+	    ) VALUES (
+	        #{contactRequest.userId},
+	        #{contactRequest.userEmail},
+	        #{contactRequest.title},
+	        #{contactRequest.content},
+	        #{imagePath},
+	        NOW()
+	    )
+	</insert>
+    
 	
 	<update id="resetPw" parameterType="Member">
 		UPDATE MEMBER 
 		SET USER_PW = #{userPw}
 		WHERE USER_ID = #{userId}
 		AND USER_EMAIL = #{userEmail}
+	</update>
+	
+	<update id="updatePassword">
+		UPDATE MEMBER
+		SET USER_PW = #{newPassword}
+		WHERE USER_ID = #{userId}
 	</update>
 	
 	<select id="selectFindId" resultType="Member">
@@ -90,6 +115,13 @@
 	    SELECT USER_ID, USER_NAME, USER_ROLE FROM MEMBER
 	    WHERE USER_ID = #{userId}
 	    AND USER_PW = #{userPw}
+	    AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="selectOneByIdEmail" resultType="Member">
+		SELECT USER_ID, USER_EMAIL FROM MEMBER
+	    WHERE USER_ID = #{userId}
+	    AND USER_EMAIL = #{userEmail}
 	    AND DELETE_YN = 'N'
 	</select>
 	

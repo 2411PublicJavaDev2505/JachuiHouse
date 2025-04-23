@@ -5,8 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.house.jachui.member.dto.ContactRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
+import com.house.jachui.member.dto.MemberPasswordRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.UpdateRealtorRequest;
@@ -29,7 +32,7 @@ public interface MemberMapper {
 
 	Member selectFoundId(Member member);
 
-	String resetPw(String userId, String userEmail);
+	String resetPw(MemberPasswordRequest memberPasswordRequest);
 
 	int updateMember(UpdateRequest member);
 
@@ -47,6 +50,17 @@ public interface MemberMapper {
 	List<Member> selectListAll(RowBounds rowBounds);
 	//회원 관리 조회 - 페이지네이션
 	int getTotalCount();
+
+	Object contactInquiry(List<MultipartFile> contactImage, ContactRequest contactRequest);
+
+	void updatePassword(String userId, String tempPassword);
+
+	Member selectOneByIdEmail(MemberPasswordRequest memberPasswordRequest);
+
+	void sendEmailPw();
+
+	
+
 
 
 	//회원 관리 검색 - 페이지네이션
