@@ -79,4 +79,6 @@ public interface MemberService {
 
 	int getTotalCount(String userId);
 	
+	String selectNameById(String receiverId);
+	
 }

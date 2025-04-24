@@ -37,14 +37,18 @@
 				    <button id="nextBtn">▷</button>
 				    <button id="toggleAuto">⏸</button>
 				</div>
-				<div class="estate-conatact">
-                    <div class="chat-btn">
-                        <button>1:1 채팅문의</button>
-                    </div>
-					<div class="realtor-phone" id="phoneNumber">
-					    ${estate.userPhone}
+				<c:if test="${userRole ne 'R' }">
+					<div class="estate-conatact">
+	                    <div class="chat-btn">
+	                    	<a href="/chat/torealtor">
+	                        	<button>1:1 채팅문의</button>
+	                    	</a>
+	                    </div>
+						<div class="realtor-phone" id="phoneNumber">
+						    ${estate.userPhone}
+						</div>
 					</div>
-				</div>
+				</c:if>
                 <div class="estate-info">
                     <div class="estate-info-1">
                         <span class="info-title">거래정보</span>

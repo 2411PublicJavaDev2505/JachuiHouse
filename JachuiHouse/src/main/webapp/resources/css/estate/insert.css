@@ -159,4 +159,31 @@ legend {
   left: 0;
   border-radius: 8px;
 }
+.photo-upload-input {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+.photo-preview {
+    display: block;
+    width: 120px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
 

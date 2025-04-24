@@ -217,6 +217,10 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalCount(String userId) {
 		return mMapper.getTotalCount();
 	}
+	@Override
+	public String selectNameById(String receiverId) {
+		return mMapper.selectNameById(receiverId);
+	}
 
 	
 

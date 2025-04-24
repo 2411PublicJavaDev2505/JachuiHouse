@@ -77,6 +77,8 @@ public interface MemberMapper {
 	//관리자 승인
 	int updateApproveYn(String userId);
 
+	String selectNameById(String receiverId);
+
 
 
 

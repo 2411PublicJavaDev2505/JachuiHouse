@@ -17,7 +17,7 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	    <main>
 	        <div class="title">
-	            <h1>${recieverId }님과의 채팅</h1>
+	            <h1>${recieverName }님과의 채팅</h1>
 	            <h2><i class="fa-light fa-paper-plane"></i></h2>
 	        </div>
 	        <div class="chat-content">
