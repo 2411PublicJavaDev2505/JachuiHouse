@@ -1,10 +1,6 @@
 package com.house.jachui.member.controller;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
@@ -17,21 +13,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.ContactRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.MemberPasswordRequest;
-import com.house.jachui.member.dto.UpdateRealtorRequest;
-import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
-import com.house.jachui.member.dto.SignupRealtorRequest;
+import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.post.domain.PostVO;
@@ -40,7 +33,6 @@ import com.house.jachui.post.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/member")
@@ -265,23 +257,7 @@ public class MemberController {
 
         return new RedirectView("/gds/contact");
     }
-
 	
-	//공인중개사 마이페이지 이동
-	@GetMapping("/realtor/myPage")
-	public String showRealtorMypageForm(HttpSession session, Model model) {
-		String userRole = (String)session.getAttribute("userRole");
-		if("R".equals(userRole)) {
-			String userId = (String)session.getAttribute("userId");
-			Member member = mService.selectRealtorById(userId);
-			if(member != null) {
-				model.addAttribute("member", member);
-				return "member/realtor/mypage";
-			}
-		}
-		return "member/realtor/page";
-	}
-
 	// 자취생 마이페이지
 	@GetMapping("/myPage")
 	public String showAloneDetail(
@@ -302,11 +278,6 @@ public class MemberController {
 			}
 	}
 	
-	// 공인중개사 채팅 목록
-	@GetMapping("/realtor/chatlist")
-	public String showRealtorChatList() {
-		return "member/realtor/chatlist";
-	}
 	// 회원탈퇴
 	@GetMapping("/delete")
 	public String showDleteMember() {
@@ -336,31 +307,7 @@ public class MemberController {
 	public String showAccountBook() {
 		return "member/accountBook";
 	}
-	// 공인중개사 정보 수정 페이지로 이동
-	@GetMapping("/realtor/update")
-	public String showRealtorUpdate(HttpSession session, Model model) {
-		String userId = (String)session.getAttribute("userId");
-		Member member = mService.selectRealtorById(userId);
-		if(member != null) {
-			model.addAttribute("member", member);
-			return "member/realtor/update";
-		}
-		return "common/error";
-	}
-	//에러메시지가 뜨는이유, userRole로 본인확인을 하려면 Request, mapper에 userRole관련된 코드가 있어야 하는지
-	// 공인중개사 정보 수정 기능
-	@PostMapping("/realtor/update")
-	public String realtorUpdate(HttpSession session, @ModelAttribute UpdateRealtorRequest realtor
-			, Model model) {
-		int result = mService.updateRealtor(realtor);
-		String userRole = (String)session.getAttribute("userRole");
-		if(result > 0) {
-			if("R".equals(userRole)) {
-				return "redirect:/member/realtor/myPage";
-			}
-		}
-		return "common/error";
-	}
+
 	// 회원정보 수정
 	@GetMapping("/update")
 	public String showMemberUpdate(HttpSession session, Model model) {
