@@ -32,15 +32,15 @@ public class RealtorServiceImpl implements RealtorService{
 		return result;
 	}
 
-	@Override
-	public List<Estate> selectEstatesById(String userId, int currentPage) {
-		return rMapper.selectEstatesById(userId);
-	}
 
 	@Override
 	public int getTotalCount(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return rMapper.getTotalCount();
+	}
+
+	@Override
+	public List<Estate> selectEstatesById(String userId, int currentPage, int i) {
+		return rMapper.selectEstatesById(userId);
 	}
 
 }
