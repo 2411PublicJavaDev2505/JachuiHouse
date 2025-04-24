@@ -90,6 +90,17 @@ public class ServiceImpl implements PostService{
 		int result = pMapper.deleteComment(commentNo);
 		return result;
 	}
+	@Override
+	public int getTotalCount(String searchKeyword, String category) {
+		return pMapper.getTotalCount(searchKeyword, category);
+	}
+	@Override
+	public List<PostVO> searchListByKeyword(String searchKeyword, String category, int currentPage) {
+		int limit = 8;
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return pMapper.selectSearchList(searchKeyword, category, rowBounds);
+	}
 
 	
 }

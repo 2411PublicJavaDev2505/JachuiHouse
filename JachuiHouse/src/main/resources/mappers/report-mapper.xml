@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.jachui.report.mapper.ReportMapper">
+	<resultMap type="ReportVO" id="ReportResultMap">
+		<id property="reportNo" column="REPORT_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="reportDate" column="REPORT_DATE"/>
+		<result property="reportContent" column="REPORT_CONTENT"/>
+		<result property="reportReason" column="REPORT_REASON"/>
+		<result property="postNo" column="POST_NO"/>
+	</resultMap>
+	
+	<insert id="reportcInsert">
+		INSERT INTO REPORT VALUES(REPORT_SEQ.NEXTVAL, #{userId}, SYSDATE, #{reportContent}, #{reportReason}, #{postNo})
+	</insert>
+</mapper>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.house.jachui.common.FileUtil;
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.post.controller.dto.CommentInsertRequest;
 import com.house.jachui.post.controller.dto.PostInsertRequest;
@@ -31,6 +32,10 @@ import lombok.RequiredArgsConstructor;
 public class PostController {
 	
 	private final PostService pService;
+    private final PageUtil page;
+    private final FileUtil file;
+	private String toTalCount;
+	private List<PostVO> searchList;
 	
 	@GetMapping("/list")//게시글 전체 정보 조회
 	public String showPostList(
@@ -214,4 +219,39 @@ public class PostController {
 		}
 	}
 	
+	@GetMapping("/search")
+	public String postSearch(Model model,
+			@RequestParam("searchKeyword") String searchKeyword,
+	        @RequestParam("category") String category,
+	        @RequestParam(value="page", defaultValue="1") int currentPage) {
+			
+		try {
+			int totalCount = pService.getTotalCount(searchKeyword, category);
+			List<PostVO> searchList = pService.searchListByKeyword(searchKeyword, category, currentPage);
+			
+			if(searchList == null || searchList.isEmpty()) {
+				model.addAttribute("searchList", null);
+				model.addAttribute("errorMessage", "검색 결과가 없습니다.");
+			}else {
+				Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage);
+				model.addAttribute("maxPage", pageInfo.get("maxPage"));
+				model.addAttribute("startNavi", pageInfo.get("startNavi"));
+				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				
+				model.addAttribute("searchList", searchList);
+			}
+			
+			model.addAttribute("searchKeyword", searchKeyword);
+			model.addAttribute("category", category);
+			model.addAttribute("currentPage", currentPage);
+			
+			return "post/search";
+			
+		} catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "검색 중 오류 발생: " + e.getMessage());
+            return "common/error";
+
+		}
+	}
 }
