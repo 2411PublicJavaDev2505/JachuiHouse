@@ -23,8 +23,18 @@ public interface PostMapper {
 
 	int deletePost(int postNo);//게시글 삭제
 
+	PostVO updateOneDetail(int postNo);//게시글 수정 GET
+
+	int postUpdate(PostInsertRequest post);//게시글 수정 POST
+
 	int insertComment(CommentInsertRequest comment);//댓글 작성
 
 	List<CommentVO> selectcList();//댓글 조회
+
+	int deleteComment(int commentNo);//댓글 삭제
+
+
+
+
 
 }

@@ -48,6 +48,18 @@ public class ServiceImpl implements PostService{
 		int result = pMapper.deletePost(postNo);
 		return result;
 	}
+	//게시글 수정 GET
+	@Override
+	public PostVO updateOneDetail(int postNo) {
+		PostVO result = pMapper.updateOneDetail(postNo);
+		return result;
+	}
+	//게시글 수정 POST
+	@Override
+	public int postUpdate(PostInsertRequest post) {
+		int result = pMapper.postUpdate(post);
+		return result;
+	}
 	//댓글작성
 	@Override
 	public int insertcomment(CommentInsertRequest comment) {
@@ -60,7 +72,15 @@ public class ServiceImpl implements PostService{
 		List<CommentVO> cList = pMapper.selectcList();
 		return cList;
 	}
+	//댓글 삭제
+	@Override
+	public int deleteComment(int commentNo) {
+		int result = pMapper.deleteComment(commentNo);
+		return result;
+	}
 
+
+	
 
 	
 }

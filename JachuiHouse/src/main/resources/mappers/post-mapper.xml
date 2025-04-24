@@ -18,7 +18,7 @@
 	</select>
 	
 	<insert id="insertPost">
-		INSERT INTO POST VALUES(SEQ_POST_NO.NEXTVAL, 'user01', #{postType}, #{postTitle}, #{postContent}, SYSDATE, SYSDATE)
+		INSERT INTO POST VALUES(SEQ_POST_NO.NEXTVAL, #{userId}, #{postType}, #{postTitle}, #{postContent}, SYSDATE, SYSDATE)
 	</insert>
 	
 	<select id="selectOneDetail" resultMap="postResultMap">
@@ -29,6 +29,14 @@
 		DELETE FROM POST WHERE POST_NO = #{postNo}
 	</delete>
 	
+	<select id="updateOneDetail" resultMap = "postResultMap">
+		SELECT * FROM POST WHERE POST_NO = #{postNo}
+	</select>
+	
+	<update id="postUpdate">
+		UPDATE POST SET POST_TYPE=#{postType}, POST_TITLE=#{postTitle}, POST_CONTENT=#{postContent}
+	</update>
+	
 	<select id="selectcList" resultType="CommentVO">
 		SELECT * FROM "COMMENT"
 	</select>
@@ -36,4 +44,9 @@
 	<insert id="insertComment">
 		INSERT INTO "COMMENT" VALUES(COMMENT_SEQ.NEXTVAL, #{userId}, #{commentContent}, SYSDATE, SYSDATE, #{postNo})
 	</insert>
+	
+	<delete id="deleteComment">
+		DELETE FROM "COMMENT" WHERE COMMENT_NO = #{commentNo}
+	</delete>
+		
 </mapper>  
