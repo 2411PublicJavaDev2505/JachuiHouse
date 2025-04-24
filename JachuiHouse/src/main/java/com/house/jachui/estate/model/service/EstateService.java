@@ -21,4 +21,10 @@ public interface EstateService {
 
 	void deleteEstate(int estateNo);
 
+	List<Estate> searchEstatesByAddress(String keyword);
+
+	void updateEstate(EstateAddRequest estate, List<MultipartFile> newImages, List<Integer> optionCodes, List<Integer> deleteImageIds) throws IllegalStateException, IOException;
+
+	String selectIdByEstateNo(int estateNo);
+
 }

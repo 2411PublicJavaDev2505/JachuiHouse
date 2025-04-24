@@ -1,4 +1,4 @@
-package com.house.jachui.member.dto;
+package com.house.jachui.realtor.controller.dto;
 
 import lombok.Getter;
 import lombok.Setter;

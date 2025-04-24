@@ -24,11 +24,10 @@
 	                        <option value="꿀팁">꿀팁 게시판</option>
 	                        <option value="질문">질문 게시판</option>
 	                    </select>
-	                    <input class="searchplace" type="text" placeholder="제목으로 검색어를 입력하세요.">
-	                    <button class="searchbtn" type="submit">검색</button>
+	                    <input class="searchplace" name="searchTitle" type="text" placeholder="제목으로 검색어를 입력하세요.">
+	                    <button class="searchbtn" type="button"><a href="/post/search">검색</a></button>
 	                </div>
 	                <div class="board">
-	                	
 	                    	<button class="writebtn" ><a href="/post/insert">작성하기</a></button>
 	                    	<div class="table">
 			                    <table class="boardtbl">
@@ -73,10 +72,8 @@
 					</c:if>
 				</div>
 			</div>
-	                </div>
             </div>
 	        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
         </div>
-
 	</body>
 </html>

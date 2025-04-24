@@ -177,37 +177,52 @@
         });
         // 사진 추가 
         let maxPhotos = 20;
-        function addNextImageInput(currentInput) {
-          const container = document.getElementById('photo-upload-container');
-          const inputs = container.querySelectorAll('input[type="file"]');
-          if (inputs.length >= maxPhotos) return;
-          if (currentInput.files && currentInput.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              const previewImg = document.createElement('img');
-              previewImg.src = e.target.result;
-              previewImg.classList.add('photo-preview');
-              const wrapper = currentInput.closest('.photo-upload-input');
-              wrapper.classList.add('has-image');
-              wrapper.appendChild(previewImg);
-            };
-            reader.readAsDataURL(currentInput.files[0]);
-          }
 
-          if (currentInput.files.length > 0) {
-            const newWrapper = document.createElement('div');
-            newWrapper.classList.add('photo-upload-input');
-            const newInput = document.createElement('input');
-            newInput.type = 'file';
-            newInput.name = 'images';
-            newInput.accept = 'image/*';
-            newInput.onchange = function () {
-              addNextImageInput(this);
-            };
-            newWrapper.appendChild(newInput);
-            container.appendChild(newWrapper);
-          }
-        }
+		function addNextImageInput(currentInput) {
+		    const container = document.getElementById('photo-upload-container');
+		    const inputs = container.querySelectorAll('input[type="file"]');
+		    if (inputs.length >= maxPhotos) return;
+		
+		    if (currentInput.files && currentInput.files[0]) {
+		        const reader = new FileReader();
+		        reader.onload = function (e) {
+		            const wrapper = currentInput.closest('.photo-upload-input');
+		            wrapper.classList.add('has-image');
+		
+		            // 이미지 미리보기
+		            const previewImg = document.createElement('img');
+		            previewImg.src = e.target.result;
+		            previewImg.classList.add('photo-preview');
+		
+		            // 삭제 버튼
+		            const removeBtn = document.createElement('button');
+		            removeBtn.type = 'button';
+		            removeBtn.textContent = 'X';
+		            removeBtn.classList.add('remove-btn');
+		            removeBtn.onclick = function () {
+		                wrapper.remove();
+		            };
+		
+		            wrapper.appendChild(previewImg);
+		            wrapper.appendChild(removeBtn);
+		        };
+		        reader.readAsDataURL(currentInput.files[0]);
+		    }
+		
+		    if (currentInput.files.length > 0) {
+		        const newWrapper = document.createElement('div');
+		        newWrapper.classList.add('photo-upload-input');
+		        const newInput = document.createElement('input');
+		        newInput.type = 'file';
+		        newInput.name = 'images';
+		        newInput.accept = 'image/*';
+		        newInput.onchange = function () {
+		            addNextImageInput(this);
+		        };
+		        newWrapper.appendChild(newInput);
+		        container.appendChild(newWrapper);
+		    }
+		}
     </script>
 </body>
 </html>

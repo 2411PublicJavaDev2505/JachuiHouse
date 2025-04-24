@@ -15,12 +15,13 @@ import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.MemberPasswordRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
-import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.mapper.MemberMapper;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.notice.model.vo.NoticeVO;
+import com.house.jachui.realtor.controller.dto.UpdateRealtorRequest;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -53,11 +54,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member selectRealtorById(String userId) {
-        return mMapper.selectRealtorById(userId);
-    }
-
-    @Override
     public Member selectFindId(Member member) {
         return mMapper.selectFindId(member);
     }
@@ -73,6 +69,20 @@ public class MemberServiceImpl implements MemberService {
 	public String resetPw(MemberPasswordRequest memberPasswordRequest) {
     	return mMapper.resetPw(memberPasswordRequest);
 	}
+    
+    @Override
+    public Member getMemberById(String userId) {
+        return mMapper.selectMemberById(userId);
+    }
+    
+    @Override
+    public boolean updatePw(String userId, String userPw) {
+        Member member = new Member();
+        member.setUserId(userId);
+        member.setUserPw(userPw);
+        int result = mMapper.updatePw(member);
+        return result > 0;
+    }
     
  // 문의 메일 기능 api
  	@Override
@@ -97,12 +107,6 @@ public class MemberServiceImpl implements MemberService {
         String check = mMapper.selectPassword(userId);
         return check != null && check.equals(userPw);
     }
-
-	@Override
-	public int updateRealtor(UpdateRealtorRequest realtor) {
-		int result = mMapper.updateRealtor(realtor);
-		return result;
-	}
 
 	// 자취생 마이페이지
 	@Override
@@ -161,13 +165,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Boolean sendEmailPw(String email) {
+	public Boolean sendEmailPw(MemberPasswordRequest memberPasswordRequest) {
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();
-			message.setTo(email); // 받는 사람 이메일
+			message.setTo(memberPasswordRequest.getUserEmail()); // 받는 사람 이메일
 			message.setFrom("cothgud@gmail.com"); // 발신자 이메일
 			message.setSubject("[자취하우스] 임시 비밀번호 안내");
-			message.setText("비밀번호 재설정 링크: http://localhost:7777/member/createNewPw");
+			message.setText("비밀번호 재설정 링크: http://localhost:7777/member/createNewPw?userId="+memberPasswordRequest.getUserId());
 			javaMailSender.send(message);
 			return true;
 		} catch (Exception e) {
@@ -207,6 +211,15 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateProfileImage(String userId, String newFileName) {	
 		return mMapper.updateProfileImage(userId, newFileName);
+	}
+
+	@Override
+	public int getTotalCount(String userId) {
+		return mMapper.getTotalCount();
+	}
+	@Override
+	public String selectNameById(String receiverId) {
+		return mMapper.selectNameById(receiverId);
 	}
 
 	

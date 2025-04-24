@@ -81,4 +81,36 @@ public class EstateServiceImpl implements EstateService {
 	public void deleteEstate(int estateNo) {
 		estMapper.deleteEstate(estateNo);		
 	}
+
+
+	@Override
+	public List<Estate> searchEstatesByAddress(String keyword) {
+		return estMapper.searchByAddress("%" + keyword + "%");
+	}
+
+
+	@Override
+	public void updateEstate(EstateAddRequest estate, List<MultipartFile> newImages, List<Integer> optionCodes, List<Integer> deleteImageIds) throws IllegalStateException, IOException {
+		estMapper.updateEstate(estate);
+		optionMapper.deleteOptionByEstateNo(estate.getEstateNo());
+	    if (optionCodes != null) {
+	        for (Integer code : optionCodes) {
+	        	optionMapper.insertOptionCode(estate.getEstateNo(), code);
+	        }
+	    }
+	    if (deleteImageIds != null && !deleteImageIds.isEmpty()) {
+	    	estFileService.deleteImageByIdList(deleteImageIds);
+	    }
+	    if (newImages != null && !newImages.isEmpty()) {
+	    	estFileService.saveNewImages(estate.getEstateNo(), newImages); // 새 이미지 저장
+	    }
+
+	}
+
+
+	@Override
+	public String selectIdByEstateNo(int estateNo) {
+		return estMapper.selectIdByEmployNo(estateNo);
+	}
+
 }

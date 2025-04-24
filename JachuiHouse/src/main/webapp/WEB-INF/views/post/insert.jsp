@@ -29,11 +29,11 @@
 	                        <input name="postTitle" type="text" class="inputtitle" placeholder="제목을 입력하세요">
 	                    </div>
 	                    <div class="content">
-	                        <input name="postContent" type="text" class="inputcontent" placeholder="내용을 입력하세요">
+	                        <textarea cols="" rows="" name="postContent" type="text" class="inputcontent" placeholder="내용을 입력하세요"></textarea>
 	                    </div>
 	                    <div class="btn">
 	                        <button class="writebtn" type="submit">작성하기</button>
-	                        <button class="backbtn" type="submit">뒤로가기</button>
+	                        <button class="backbtn" type="button" onclick="location.href='/post/list'">뒤로가기</button>
 	                    </div>
 	                </div>
                 </form>

@@ -29,5 +29,7 @@ public interface TradeService {
 
 
 	int updateTradeYn(int tradeNo, char tradeYn);
+
+	List<Trade> getTradeByUserId(String userId);
 	
 }

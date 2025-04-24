@@ -7,7 +7,7 @@
 <title>비밀번호 재설정 메일 보내기</title>
 </head>
 <body>
-	<form th:action="@{/gds/contact/inquiry}" th:method="post"
-	enctype="multipart"
+<!-- 	<form th:action="@{/gds/contact/inquiry}" th:method="post" -->
+<!-- 	enctype="multipart" -->
 </body>
 </html>
