@@ -18,7 +18,7 @@ import com.house.jachui.realtor.controller.dto.UpdateRealtorRequest;
 
 public interface MemberService {
 
-    // 자취생 회원가입
+	// 자취생 회원가입
     boolean signupJachui(SignupJachuiRequest request);
 
     // 공인중개사 회원가입
@@ -36,6 +36,12 @@ public interface MemberService {
     // 비밀번호 찾기
     String resetPw(MemberPasswordRequest MemberPasswordRequest);
 
+	// 사용자 정보 조회
+	Member getMemberById(String userId);
+	
+	// 비밀번호 업데이트
+	boolean updatePw(String userId, String encodedPw);
+	
     // 회원정보 수정
     int updateMember(UpdateRequest member);
 
@@ -58,7 +64,7 @@ public interface MemberService {
 
 	Member selectOneByIdEmail(MemberPasswordRequest memberPasswordRequest);
 
-	Boolean sendEmailPw(String email);
+	Boolean sendEmailPw(MemberPasswordRequest memberPasswordRequest);
 
 	boolean updatePassword(String userId, String userPw);
 		
@@ -72,5 +78,7 @@ public interface MemberService {
 	int approveMember(String userId);
 
 	int getTotalCount(String userId);
+	
+	String selectNameById(String receiverId);
 	
 }

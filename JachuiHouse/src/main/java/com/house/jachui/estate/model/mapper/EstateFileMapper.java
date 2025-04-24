@@ -9,14 +9,13 @@ import com.house.jachui.estate.model.vo.EstateFile;
 @Mapper
 public interface EstateFileMapper {
 
-
 	List<EstateFile> selectImageList(int estateNo);
-
 
 	void insertEstateImage(EstateFile file);
 
-
 	void deleteFilesByEstateNo(int estateNo);
 
+	EstateFile selectFileById(int fileNo);
 
+	void deleteFileById(int fileNo);
 }

@@ -33,6 +33,10 @@ public interface MemberMapper {
 	Member selectFoundId(Member member);
 
 	String resetPw(MemberPasswordRequest memberPasswordRequest);
+	
+	Member selectMemberById(String userId);
+	
+	int updatePw(Member member);
 
 	int updateMember(UpdateRequest member);
 
@@ -44,7 +48,7 @@ public interface MemberMapper {
 
 	int updateRealtor(UpdateRealtorRequest realtor);
 
-	Member selectMemberById(String userId);
+
 	
 	//회원 관리 조회
 	List<Member> selectListAll(RowBounds rowBounds);
@@ -72,6 +76,8 @@ public interface MemberMapper {
 
 	//관리자 승인
 	int updateApproveYn(String userId);
+
+	String selectNameById(String receiverId);
 
 
 

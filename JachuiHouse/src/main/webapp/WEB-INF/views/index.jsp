@@ -2,14 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>자취스크립트</title>
-<link rel="stylesheet" href="../resources/css/include/header.css">
-<link rel="stylesheet" href="../resources/css/include/index.css">
-<link rel="stylesheet" href="../resources/css/include/footer.css">
-    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 		캐러셀 추가 -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	    
+		<title>자취스크립트</title>
+			<link rel="stylesheet" href="../resources/css/include/header.css">
+			<link rel="stylesheet" href="../resources/css/include/index.css">
+			<link rel="stylesheet" href="../resources/css/include/footer.css">
+	    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+	</head>
 <body>
 	<main>
 		 <div class="container">    
@@ -19,16 +22,77 @@
 	            <div class="main">
 	                <section class="banner">
 	                   <div class="left-image-container">
-						    <button class="arrow left" onclick="changeImage(-1)">&#10094;</button>
-						    <img id="leftImage" src="https://octapi.lxzin.com/imageBlockProp/image/202210/12/720/0/ad6e0563-7903-4c48-8b70-45821992255c.jpg" alt="image" class="left-image">
-						    <button class="arrow right" onclick="changeImage(1)">&#10095;</button>
+<!-- 						    <button class="arrow left" onclick="changeImage(-1)">&#10094;</button> -->
+							<!-- 		캐러셀 추가 -->
+							<div class="carousel_main">
+							    <div class="carousel_wrapper">
+							        <div class="carousel_slide">
+							            <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MzBfNTUg%2FMDAxNjMyOTg3MzU1Mjg4.LbF4Exn6nnxxE2qvzmlEYgMKZh4fige3O3DH5nEdq2Qg.5HpjCmRosQHCCYj2M7B-8dXjHcUw6EWr2jBpwklRAfIg.JPEG.dreamcampus%2F%25C7%25D1%25C0%25E5%25C0%25E7%25C0%25DA%25C3%25EB%25BB%25FD_%25B2%25DC%25C6%25C1.jpg&type=a340" alt="#" />
+							        </div>
+							        <div class="carousel_slide">
+							            <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA3MjBfMTcg%2FMDAxNjI2NzYzMTEwOTIw.AsB2J8LNr8UG_iW5KZZEcDatHJ4iM7PkunXQo-P94hAg.mUl_4vATjWFI_pIISh6Qx9Mp-WoRcKGHkzmwlVs7uV8g.PNG.dreamcampus%2F%25C7%25D1%25C0%25E5%25C0%25E7%25C0%25DA%25C3%25EB%25BB%25FD%25C3%25DF%25C3%25B5%25BF%25E4%25B8%25AE_01.png&type=a340" alt="#" />
+							        </div>
+							        <div class="carousel_slide">
+							            <img src="https://octapi.lxzin.com/imageBlockProp/image/202210/12/720/0/ad6e0563-7903-4c48-8b70-45821992255c.jpg" alt="#" />
+							        </div>
+							    </div>
+							
+							    <!-- 캐러셀 사이드 버튼 -->
+							    <div class="carousel_button_container">
+							        <button type="button" class="carousel_prev">
+							            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+							                <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+							                <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+							            </svg>
+							        </button>
+							        <button type="button" class="carousel_next">
+							            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+							                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+							                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+							            </svg>
+							        </button>
+							    </div>
+							
+							    <!-- 캐러셀 중앙 버튼 -->
+							    <div class="carousel_pagination">
+							        <div class="carousel_circle"></div>
+							        <div class="carousel_circle"></div>
+							        <div class="carousel_circle"></div>
+							    </div>
+							</div>
+<!-- 							    <div class="carousel-wrapper"> -->
+<!-- 							      <div class="carousel"> -->
+<!-- 							        <img -->
+<!-- 							          src="https://octapi.lxzin.com/imageBlockProp/image/202210/12/720/0/ad6e0563-7903-4c48-8b70-45821992255c.jpg" -->
+<!-- 							          alt="" -->
+<!-- 							        /> -->
+<!-- 							        <img -->
+<!-- 							          src="https://images.unsplash.com/photo-1583434987437-1b9dcbe44c9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" -->
+<!-- 							          alt="" -->
+<!-- 							        /> -->
+<!-- 							        <img -->
+<!-- 							          src="https://images.unsplash.com/photo-1603052227529-e8ed43c7af99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" -->
+<!-- 							          alt="" -->
+<!-- 							        /> -->
+<!-- 							      </div> -->
+<!-- 							    </div> -->
+
+<!-- 원래 우리 오리지널 -->
+<!-- 						    <img id="leftImage" src="https://octapi.lxzin.com/imageBlockProp/image/202210/12/720/0/ad6e0563-7903-4c48-8b70-45821992255c.jpg" alt="image" class="left-image"> -->
+<!-- 						    <button class="arrow right" onclick="changeImage(1)">&#10095;</button> -->
 						</div>
+<!-- 			    <button class="prev" type="button">prev</button> -->
+<!-- 			    <button class="next" type="button">next</button> -->
+
 	                    <h2 class="main-hello">
 	                    </h2>
 	                    <div>
 	                        <img src="../resources/image/main-right.png" alt="house" class="right-image">
 	                    </div>
-	                </section>            
+	                </section>
+
+                
+	                            
 	                <!-- 주요 기능 소개 -->
 	                <div class="main-menu">
 	                    <div class="left-menu">
@@ -94,6 +158,66 @@
 
             document.getElementById("leftImage").src = images[currentImageIndex];
         }
+        
+//         캐러셀
+//         const prevButton = document.querySelector('.prev');
+//         const nextButton = document.querySelector('.next');
+//         const carousel = document.querySelector('.carousel');
+        
+//         let index = 0;//첫 리소스의 값은 0:첫 리소스에 접근해 있을 때 이전 버튼이 클릭이 되면 안됨
+
+//         //translate3d를 활용하여 제어:숫자값인 index와 이전, 이후에 클릭 이벤트를 등록
+//         prevButton.addEventListener('click', () => {
+//         	if (index === 0) return;//이벤트 무효화:이전 버튼 이벤트에는 index가 0이면 return을 하여
+//         	index -= 1;//각자 끝에 있는 리소스가 아닐 경우
+//         	//이전 버튼에는 한 번 클릭마다 index가 1씩 감소, 이후 버튼에는 1씩 증가하면 끝 리소스에서는 이벤트가 실행x
+// 			carousel.style.transform = `translate3d(-${500 * index}px, 0, 0)`;//현재 캐러셀의 넓이가 500px
+//         });
+
+//         nextButton.addEventListener('click', () => {
+//         	if (index === 2) return;//이벤트 무효화:리소스는 총 3개이기 때문에-> index가 2일 때 return
+//         	index += 1;
+//         	carousel.style.transform = `translate3d(-${500 * index}px, 0, 0)`;
+//         });
+//전체 코드
+
+			//캐러셀2
+			document.addEventListener("DOMContentLoaded", function () {
+		      const swiper = document.querySelector('.carousel_wrapper');
+		      const slides = document.querySelectorAll('.carousel_slide');
+		      const prevBtn = document.querySelector('.carousel_prev');
+		      const nextBtn = document.querySelector('.carousel_next');
+		      const bullets = document.querySelectorAll('.carousel_circle');
+// 		      const slideWidth = slides[0].offsetWidth;
+		          let slideWidth;
+				  let currentSlide = 0;
+				
+				  function updateSlideWidth() {
+				    slideWidth = slides[0].clientWidth;
+				  }
+		
+		      function showSlide(index) {
+		        swiper.style.transform = `translateX(-${index * slideWidth}px)`;
+		        currentSlide = index;
+		        bullets.forEach((bullet, i) => {
+		          bullet.classList.toggle('active', i === index);
+		        });
+		      }
+		
+		      prevBtn.addEventListener('click', () => {
+		        if (currentSlide > 0) showSlide(currentSlide - 1);
+		      });
+		
+		      nextBtn.addEventListener('click', () => {
+		        if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
+		      });
+		
+		      bullets.forEach((bullet, i) => {
+		        bullet.addEventListener('click', () => showSlide(i));
+		      });
+		
+		      showSlide(0);
+		    });
         </script>
 
 </body>

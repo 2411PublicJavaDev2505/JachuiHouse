@@ -34,7 +34,6 @@
 	<select id="getTotalCountKeyword" resultType="_int">
 		SELECT COUNT(*) FROM TRADE WHERE DEL_YN ='N' AND TRADE_TITLE LIKE '%'||#{searchKeyword}||'%' 
 	</select>
-
 	<select id="getTotalCount" resultType="_int">
 	    SELECT COUNT(*) FROM TRADE
 	    WHERE DEL_YN ='N' AND
@@ -70,7 +69,9 @@
     </choose>
     ORDER BY VIEW_COUNT DESC, TRADE_NO DESC
 </select>
-    
+    <select id="getTradeByUserId" resultType="Trade">
+    	SELECT * FROM TRADE WHERE USER_ID = #{userId} AND DEL_YN != 'Y' ORDER BY WRITE_DATE DESC
+    </select>
     
 	<insert id="insertTrade">
 		INSERT INTO TRADE VALUES(SEQ_TRADE_NO.NEXTVAL, #{userId}, #{tradeTitle}, #{tradeContent}, #{tradePrice},

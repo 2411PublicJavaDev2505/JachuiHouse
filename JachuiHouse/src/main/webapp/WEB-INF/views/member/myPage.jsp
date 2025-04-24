@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,19 +49,55 @@
 	                </div>
 	                <div class="notice-content">
 	                   <c:forEach var="post" items="${pList}">
-						    <p>${post.postContent}</p>
+	                   		<a href="/post/detail?postNo=${post.postNo }">
+						    <p>${post.postTitle}</p>
+	                   		</a>
 						</c:forEach>
 	                </div>
 	                <div class="thing">
 	                    <h3>내가 올린 물건</h3>
 	                </div>
-	                <div class="thing-content">
-	                    <span><img src="" alt=""></span>
-	                    <span><img src="" alt=""></span>
+						<div class="show-more-wrap">
+						    <button id="showMoreBtn" onclick="toggleTradeList()">더보기</button>
+						</div>
+	                <div class="thing-content" id="tradeList">
+		                <c:if test="${empty tList}">
+						      <p>등록된 거래글이 없습니다.</p>
+						</c:if>
+						<c:forEach var="trade" items="${tList}" varStatus="status">
+    						<c:if test="${trade.delYn != 'Y'}">
+								<div class="trade-item <c:if test='${status.index >= 6}'>hidden</c:if>">					            
+									<a href="/trade/detail/${trade.tradeNo}">
+						                <img src="/resources/bUploadFiles/${trade.tradeFileRename}" alt="상품 이미지" class="trade-thumb">
+						                <p class="trade-title">${trade.tradeTitle}</p>
+						            </a>
+						        </div>
+							</c:if>
+						</c:forEach>
 	                </div>
 	            </div>
 	        </main>
 	        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	</div>	
+	</div>
+	<script type="text/javascript">
+		function toggleTradeList() {
+		    const allItems = document.querySelectorAll('.trade-item');
+		    const button = document.getElementById("showMoreBtn");
+	
+		    if (button.innerText === "더보기") {
+		        // 전부 보이게
+		        allItems.forEach(item => item.classList.remove('hidden'));
+		        button.innerText = "간략히 보기";
+		    } else {
+		        // 6개만 보이게
+		        allItems.forEach((item, index) => {
+		            if (index >= 6) {
+		                item.classList.add('hidden');
+		            }
+		        });
+		        button.innerText = "더보기";
+		    }
+		}
+	</script>	
 </body>
 </html>

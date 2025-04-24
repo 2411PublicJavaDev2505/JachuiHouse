@@ -102,3 +102,116 @@ section {
     background-color: #6A9D81;
     padding: 20px 35px 20px 35px;
 }
+
+
+/* 캐러셀 */
+/* * { */
+/*   box-sizing: border-box; */
+/* } */
+
+/* .carousel-wrapper { */
+/*   width: 500px; */
+/*   height: 300px; */
+/*   overflow: hidden;   다른 사진 뒤에 감추기 */
+/* } */
+
+/* .carousel-wrapper > .carousel { */
+/*   display: flex; 가로정렬 */
+/*   transform: translate3d(0, 0, 0);부드럽게 진행 */
+/*   transition: transform 0.2s; */
+/* } */
+
+/* .carousel-wrapper > .carousel > img { */
+/*   width: 500px; */
+/*   height: 300px; 높이 맞추기 */
+/* } */
+
+/*캐러셀 2*/
+/* 캐러셀 전체 구조  */
+.carousel_main {
+    width: 400px; /* 이미지 크기 설정  */
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    user-select: none;
+    margin-left: 40px;
+}
+
+.carousel_wrapper {
+    display: flex;
+    transition: transform 1s;
+}
+
+.carousel_slide {
+    flex: 0 0 400px; /* 이미지 크기 설정  */
+    position: relative;
+}
+
+.carousel_slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* 캐러셀 사이드 버튼 */
+.carousel_button_container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.carousel_button {
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.carousel_prev {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.carousel_next {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+/* 캐러셀 중앙 버튼 */
+.carousel_pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.carousel_circle {
+    width: 10px;
+    height: 10px;
+    background-color: #aaa;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.carousel_circle.active {
+    background-color: #333;
+}

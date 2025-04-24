@@ -33,13 +33,21 @@ public class EstateController {
 	  private final OptionMapper oMapper;
 
     @GetMapping("/list")
-    public String showEstateList(Model model) {
-        List<Estate> estList = estService.getEstateList();
+    public String showEstateList(@RequestParam(value = "keyword", required = false) String keyword,
+            Model model) {
+				List<Estate> estList;
+				if (keyword != null && !keyword.trim().isEmpty()) {
+				estList = estService.searchEstatesByAddress(keyword);
+				} else {
+				estList = estService.getEstateList();
+				}
+
         for (Estate est : estList) {
             List<EstateFile> fileList = fileMapper.selectImageList(est.getEstateNo());
             est.setEstateFileList(fileList);
         }
         model.addAttribute("estList", estList);
+        model.addAttribute("keyword", keyword);
         return "estate/list";
     }
 	
@@ -86,5 +94,34 @@ public class EstateController {
 	@GetMapping("/deletecomplete")
 	public String DeleteComplete() {
 		return "estate/deleteComplete";
+	}
+	
+	@GetMapping("/modify/{estateNo}")
+	public String showModifyForm(@PathVariable("estateNo") int estateNo, HttpSession session, Model model) {
+	    String userId = (String) session.getAttribute("userId");
+	    Estate estate = estService.selectOneByNo(estateNo);
+
+	    if (estate != null && estate.getUserId().equals(userId)) {
+	        List<EstateFile> estateImageList = fileMapper.selectImageList(estateNo);
+	        model.addAttribute("estate", estate);
+	        model.addAttribute("estateImageList", estateImageList);
+	        return "estate/modify";
+	    }
+
+	    return "redirect:/chazabang/list";
+	}
+	@PostMapping("/modify")
+	public String updateEstate(@ModelAttribute EstateAddRequest estate,
+						        @RequestParam(value = "optionCodes", required = false) List<Integer> optionCodes,
+						        @RequestParam(value = "images", required = false) List<MultipartFile> newImages,
+						        @RequestParam(value = "deleteImageIds", required = false) List<Integer> deleteImageIds,
+						        HttpSession session
+								) throws IOException {
+	    String userId = (String) session.getAttribute("userId");
+	    estate.setUserId(userId);
+
+	    estService.updateEstate(estate, newImages, optionCodes, deleteImageIds);
+
+	    return "redirect:/chazabang/detail/" + estate.getEstateNo();
 	}
 }

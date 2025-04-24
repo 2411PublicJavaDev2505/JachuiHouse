@@ -19,4 +19,10 @@ public interface EstateMapper {
 
 	void deleteEstate(int estateNo);
 
+	List<Estate> searchByAddress(String string);
+
+	void updateEstate(EstateAddRequest estate);
+
+	String selectIdByEmployNo(int estateNo);
+
 }

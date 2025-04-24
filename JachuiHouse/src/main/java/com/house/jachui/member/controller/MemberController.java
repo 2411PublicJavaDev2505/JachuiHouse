@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,8 @@ import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.post.domain.PostVO;
 import com.house.jachui.post.service.PostService;
+import com.house.jachui.trade.model.service.TradeService;
+import com.house.jachui.trade.model.vo.Trade;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -40,10 +44,13 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 	
 	private final PostService pService;
-	
+	private final TradeService tService;
 	private final MemberService mService;
 	//회원 관리 리스트 - 페이지네이션
 	private final PageUtil pageUtil;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
@@ -182,7 +189,7 @@ public class MemberController {
 		// 회원이 맞다면 
 		if(member != null) {
 			// 메일 보내기 가동, 메일은 비밀번호 재설정 링크가 보내지는 것임.
-			mService.sendEmailPw(memberPasswordRequest.getUserEmail());
+			mService.sendEmailPw(memberPasswordRequest);
 			// 이메일 보낸 후 로그인 페이지로 이동
 			return "redirect:/member/login";
 
@@ -196,9 +203,10 @@ public class MemberController {
 //		return "/member/findPwResult";
 	}
 	
-	// 비밀번호 찾기 페이지로 이동
+	// 비밀번호 재설정 페이지로 이동
 	@GetMapping("/createNewPw")
-	public String showCreateNewPwPage() {
+	public String showCreateNewPwPage(@RequestParam("userId") String userId, Model model) {
+		model.addAttribute("userId", userId);
 		return "member/createNewPw";
 	}
 	
@@ -206,28 +214,57 @@ public class MemberController {
 	// 비밀번호 재설정 처리
 	@PostMapping("/createNewPw")
 	public String insertNewPw(
-			@RequestParam("userPw") String userPw,
+			@RequestParam("userId") String userId,
 			@RequestParam("userPwCheck") String userPwCheck,
+			@RequestParam("userPwCheck2") String userPwCheck2,
 			HttpSession session,
 			Model model) {
 		
-		if(!userPw.equals(userPwCheck)) {
-			model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
-			return "member/createNewPw";
+		// 1. 세션에서 userId 가져오기. 현재 비밀번호 맞는지 체크.
+//		String userId = (String) session.getAttribute("userId");
+		if (userId == null) {
+			model.addAttribute("error", "비밀번호 재설정 링크가 유효하지 않습니다.");
+			return "member/resetPw";
 		}
-		// 세션에서 userId 가져오기
-		String userId = (String) session.getAttribute("userId");
 		
-		boolean result = mService.updatePassword(userId, userPw);
+		// 2. 현재 비밀번호 확인
 		
-		if(result) {
-			return "redirect:/member/login";
+		// 3. 새 비밀번호, 새 비밀번호 확인 맞는지 비밀번호 체크
+		if(!userPwCheck.equals(userPwCheck2)) { // 새비밀번호, 새비밀번호 확인이 서로 다름 
+			model.addAttribute("error", "새 비밀번호와 새 비밀번호 확인 서로 일치하지 않습니다.");
+			return "member/createNewPw?userId="+userId;
+		}
+		
+		// 4. 새 비밀번호 유효성 검사
+		if (!userPwCheck.matches("^[a-zA-Z0-9]{8,20}$")) {
+	        model.addAttribute("error", "새 비밀번호는 영어 소문자, 대문자, 숫자만 입력 가능하며 8~20자리여야 합니다.");
+	        return "member/createNewPw?userId="+userId;
+	    }
+		
+		// 5. 비밀번호 암호화 및 DB 비밀번호 변경
+		String hashPw = passwordEncoder.encode(userPwCheck);
+		boolean result = mService.updatePw(userId, userPwCheck);
+		
+		if (result) {
+			// 6. 완료 메시지 및 로그아웃
+			session.invalidate();
+			model.addAttribute("success", "비밀번호 변경 완료. 다시 로그인해주세요.");
+			return "member/login";
 		} else {
 			model.addAttribute("error", "비밀번호 변경에 실패했습니다.");
 			return "member/createNewPw";
 		}
+		
+//			boolean result = mService.updatePassword(userId, userPw);
+//			
+//			if(result) {
+//				return "redirect:/member/login";
+//			} else {
+//				model.addAttribute("error", "비밀번호 변경에 실패했습니다.");
+//				return "member/createNewPw";
+//			}
 	}
-	
+		
 	// 아이디찾기결과 페이지 이동
 	@GetMapping("/foundId")
 	public String selectFoundIdForm() {
@@ -268,7 +305,9 @@ public class MemberController {
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
 				List<PostVO> pList = pService.getPostsByUserId(userId);
+				List<Trade> tList = tService.getTradeByUserId(userId);
 				
+				model.addAttribute("tList", tList);
 				model.addAttribute("member", member);
 				model.addAttribute("pList", pList);
 				return "member/myPage";
