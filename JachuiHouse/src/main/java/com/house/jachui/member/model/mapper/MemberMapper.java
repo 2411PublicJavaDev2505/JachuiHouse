@@ -32,6 +32,10 @@ public interface MemberMapper {
 	Member selectFoundId(Member member);
 
 	String resetPw(MemberPasswordRequest memberPasswordRequest);
+	
+	Member selectMemberById(String userId);
+	
+	int updatePw(Member member);
 
 	int updateMember(UpdateRequest member);
 
@@ -40,8 +44,6 @@ public interface MemberMapper {
 	String selectPassword(String userId);
 
 	int updateRealtor(UpdateRealtorRequest realtor);
-
-	Member selectMemberById(String userId);
 
 	List<NoticeVO> selectListAll(RowBounds rowBounds);
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,15 +13,21 @@
         <h2>비밀번호 재설정 하기</h2>
         <form role="form" action="/member/createNewPw" method="post">
         	<div class="form-group">
-	            <label for="userPw">비밀번호 재설정</label>
-	                <input type="password" name="userPw" placeholder="새비밀번호를 입력해주세요." class="form-control" required>
+	            <label for="userPw">현재 비밀번호</label>
+	                <input type="password" name="userPw" id="userPw" placeholder="새비밀번호를 입력해주세요." class="form-control" required>
         	</div>
         	
 	        <div class="form-group">
-	            <label for="userPwCheck">비밀번호 확인</label>
-	                <input type="password" name="userPwCheck" placeholder="다시 한 번 입력해주세요." class="form-control" required>
+	            <label for="userPwCheck">새 비밀번호</label>
+	                <input type="password" name="userPwCheck" id="userPwCheck" placeholder="다시 한 번 입력해주세요." class="form-control" required>
         	</div>
-        	<button type="submit">변경하기</button>
+        	
+        	<div class="form-group">
+	            <label for="userPwCheck2">새 비밀번호 확인</label>
+	                <input type="password" name="userPwCheck2" id="userPwCheck2" placeholder="다시 한 번 입력해주세요." class="form-control" required>
+        	</div>
+        	
+        	<button type="submit" class="signUpBtn">비밀번호 변경하기</button>
         </form>
     </div>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
@@ -29,10 +36,12 @@
      signUpBtn.addEventListener("click", function (event) {
      	const userPw = document.querySelector("#userPw");
      	const userPwCheck = document.querySelector("#userPwCheck");
+     	const userPwCheck2 = document.querySelector("#userPwCheck2");
     	const msgTag = document.querySelector("#msgTag"); // 오류 메시지 출력용
     	
-    	const userPwExp = /[a-zA-Z0-9]{8,20}/;
-    	const userPwCheckExp = /[a-zA-Z0-9]{8,20}$/;
+    	const userPwExp = /^[a-zA-Z0-9]{8,20}$/;
+    	const userPwCheckExp = /^[a-zA-Z0-9]{8,20}$/;
+    	const userPwCheckExp = /^[a-zA-Z0-9]{8,20}$/;
     	
     	if(!userPwExp.test(userPw.value.trim())){
 			//msgTag.innerText = "비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다"

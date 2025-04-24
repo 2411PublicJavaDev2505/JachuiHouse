@@ -73,6 +73,20 @@ public class MemberServiceImpl implements MemberService {
     	return mMapper.resetPw(memberPasswordRequest);
 	}
     
+    @Override
+    public Member getMemberById(String userId) {
+        return mMapper.selectMemberById(userId);
+    }
+    
+    @Override
+    public boolean updatePw(String userId, String encodedPw) {
+        Member member = new Member();
+        member.setUserId(userId);
+        member.setUserPw(encodedPw);
+        int result = mMapper.updatePw(member);
+        return result > 0;
+    }
+    
  // 문의 메일 기능 api
  	@Override
  	public void contactInquiry(List<MultipartFile> contactImage, ContactRequest contactRequest) {
