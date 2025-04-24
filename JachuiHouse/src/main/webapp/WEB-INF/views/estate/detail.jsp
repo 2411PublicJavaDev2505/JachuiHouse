@@ -155,9 +155,9 @@
 		        }, 3000); // 3초 간격
 		    }
 		
-		    // 초기 슬라이드 시작
+		    // 슬라이드 시작
 		    window.onload = () => {
-		        showImage(0); // 첫 번째 이미지 바로 표시
+		        showImage(0); // 첫 번째 이미지 표시
 		        startSlide();
 		        document.getElementById("nextBtn").addEventListener("click", nextImage);
 		        document.getElementById("prevBtn").addEventListener("click", prevImage);
