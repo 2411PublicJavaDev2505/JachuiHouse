@@ -100,7 +100,10 @@ pageEncoding="UTF-8"%>
                             </div>
                         </div>
                 </div>
-                <div class="pagination">
+                
+                </div>
+            </c:forEach>
+            <div class="pagination">
 					<c:if test="${startNavi ne 1 }">
 						<a href="/realtor/myPage?page=${startNavi - 1 }" class="prev">&lt;</a>
 					</c:if>
@@ -111,8 +114,6 @@ pageEncoding="UTF-8"%>
 						<a href="/realtor/myPage?page=${endNavi + 1 }" class="next">&gt;</a>
 					</c:if>
 				</div>
-                </div>
-            </c:forEach>
         </div>
     </main>
     <footer>

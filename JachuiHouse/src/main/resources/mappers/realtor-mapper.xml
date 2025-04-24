@@ -42,13 +42,13 @@
 	</select>
 	
 	<select id="selectEstatesById" resultType="Estate">
-		SELECT * FROM ESTATE WHERE USER_ID=#{userId}
+		SELECT * FROM ESTATE WHERE USER_ID=#{userId} 
 	</select>
 	
 	<!-- 회원 관리 조회 - 페이지네이션-->
-	<select id="getTotalCount" resultType="_int">
+	<!-- <select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
-	</select>
+	</select> -->
 	
 	<select id="getTotalCount">
 		SELECT COUNT(*) FROM ESTATE WHERE USER_ID=#{userId}

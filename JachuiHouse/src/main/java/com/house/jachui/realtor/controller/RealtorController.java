@@ -40,7 +40,7 @@ public class RealtorController {
 		if("R".equals(userRole)) {
 			String userId = (String)session.getAttribute("userId");
 			Member member = rService.selectRealtorById(userId);
-			List<Estate> eList = rService.selectEstatesById(userId, currentPage);
+			List<Estate> eList = rService.selectEstatesById(userId, currentPage, 3);
 			int totalCount = rService.getTotalCount(userId);
 			Map<String, Integer>pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
 			model.addAttribute("maxPage", pageInfo.get("maxPage"));
