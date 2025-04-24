@@ -195,7 +195,7 @@ public class MemberController {
 		// 회원이 맞다면 
 		if(member != null) {
 			// 메일 보내기 가동, 메일은 비밀번호 재설정 링크가 보내지는 것임.
-			mService.sendEmailPw(memberPasswordRequest.getUserEmail());
+			mService.sendEmailPw(memberPasswordRequest);
 			// 이메일 보낸 후 로그인 페이지로 이동
 			return "redirect:/member/login";
 
@@ -210,62 +210,57 @@ public class MemberController {
 	}
 	
 	// 비밀번호 재설정 페이지로 이동
-		@GetMapping("/createNewPw")
-		public String showCreateNewPwPage() {
+	@GetMapping("/createNewPw")
+	public String showCreateNewPwPage(@RequestParam("userId") String userId, Model model) {
+		model.addAttribute("userId", userId);
+		return "member/createNewPw";
+	}
+	
+	
+	// 비밀번호 재설정 처리
+	@PostMapping("/createNewPw")
+	public String insertNewPw(
+			@RequestParam("userId") String userId,
+			@RequestParam("userPwCheck") String userPwCheck,
+			@RequestParam("userPwCheck2") String userPwCheck2,
+			HttpSession session,
+			Model model) {
+		
+		// 1. 세션에서 userId 가져오기. 현재 비밀번호 맞는지 체크.
+//		String userId = (String) session.getAttribute("userId");
+		if (userId == null) {
+			model.addAttribute("error", "비밀번호 재설정 링크가 유효하지 않습니다.");
+			return "member/resetPw";
+		}
+		
+		// 2. 현재 비밀번호 확인
+		
+		// 3. 새 비밀번호, 새 비밀번호 확인 맞는지 비밀번호 체크
+		if(!userPwCheck.equals(userPwCheck2)) { // 새비밀번호, 새비밀번호 확인이 서로 다름 
+			model.addAttribute("error", "새 비밀번호와 새 비밀번호 확인 서로 일치하지 않습니다.");
+			return "member/createNewPw?userId="+userId;
+		}
+		
+		// 4. 새 비밀번호 유효성 검사
+		if (!userPwCheck.matches("^[a-zA-Z0-9]{8,20}$")) {
+	        model.addAttribute("error", "새 비밀번호는 영어 소문자, 대문자, 숫자만 입력 가능하며 8~20자리여야 합니다.");
+	        return "member/createNewPw?userId="+userId;
+	    }
+		
+		// 5. 비밀번호 암호화 및 DB 비밀번호 변경
+		String hashPw = passwordEncoder.encode(userPwCheck);
+		boolean result = mService.updatePw(userId, userPwCheck);
+		
+		if (result) {
+			// 6. 완료 메시지 및 로그아웃
+			session.invalidate();
+			model.addAttribute("success", "비밀번호 변경 완료. 다시 로그인해주세요.");
+			return "member/login";
+		} else {
+			model.addAttribute("error", "비밀번호 변경에 실패했습니다.");
 			return "member/createNewPw";
 		}
 		
-		
-		// 비밀번호 재설정 처리
-		@PostMapping("/createNewPw")
-		public String insertNewPw(
-				@RequestParam("userPw") String userPw,
-				@RequestParam("userPwCheck") String userPwCheck,
-				@RequestParam("userPwCheck2") String userPwCheck2,
-				HttpSession session,
-				Model model) {
-			
-			// 1. 세션에서 userId 가져오기. 현재 비밀번호 맞는지 체크.
-			String userId = (String) session.getAttribute("userId");
-			if (userId == null) {
-				model.addAttribute("error", "비밀번호 재설정 링크가 유효하지 않습니다.");
-				return "member/resetPw";
-			}
-			
-			
-			// 2. 현재 비밀번호 확인
-			Member member = mService.getMemberById(userId);
-			if(member == null || !passwordEncoder.matches(userPw, member.getUserPw())) {
-				model.addAttribute("error", "현재 비밀번호가 틀렸습니다.");
-				return "member/createNewPw";
-			}
-			
-			// 3. 새 비밀번호, 새 비밀번호 확인 맞는지 비밀번호 체크
-			if(userPwCheck.equals(userPwCheck2)) { // 새비밀번호, 새비밀번호 확인이 서로 다름 
-				model.addAttribute("error", "새 비밀번호와 새 비밀번호 확인 서로 일치하지 않습니다.");
-				return "member/createNewPw";
-			}
-			
-			// 4. 새 비밀번호 유효성 검사
-			if (!userPwCheck.matches("^[a-zA-Z0-9]{8,20}$")) {
-	            model.addAttribute("error", "새 비밀번호는 영어 소문자, 대문자, 숫자만 입력 가능하며 8~20자리여야 합니다.");
-	            return "member/createNewPw";
-	        }
-			
-			// 5. 비밀번호 암호화 및 DB 비밀번호 변경
-			String hashPw = passwordEncoder.encode(userPwCheck);
-			boolean result = mService.updatePw(userId, userPw);
-			
-			if (result) {
-				// 6. 완료 메시지 및 로그아웃
-				session.invalidate();
-				model.addAttribute("success", "비밀번호 변경 완료. 다시 로그인해주세요.");
-				return "member/login";
-			} else {
-				model.addAttribute("error", "비밀번호 변경에 실패했습니다.");
-				return "member/createNewPw";
-			}
-			
 //			boolean result = mService.updatePassword(userId, userPw);
 //			
 //			if(result) {
@@ -274,7 +269,7 @@ public class MemberController {
 //				model.addAttribute("error", "비밀번호 변경에 실패했습니다.");
 //				return "member/createNewPw";
 //			}
-		}
+	}
 		
 	// 아이디찾기결과 페이지 이동
 	@GetMapping("/foundId")

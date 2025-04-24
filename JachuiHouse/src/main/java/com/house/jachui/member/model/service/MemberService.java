@@ -69,7 +69,7 @@ public interface MemberService {
 
 	Member selectOneByIdEmail(MemberPasswordRequest memberPasswordRequest);
 
-	Boolean sendEmailPw(String email);
+	Boolean sendEmailPw(MemberPasswordRequest memberPasswordRequest);
 
 	boolean updatePassword(String userId, String userPw);
 		

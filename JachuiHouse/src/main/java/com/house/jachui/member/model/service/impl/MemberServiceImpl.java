@@ -80,10 +80,10 @@ public class MemberServiceImpl implements MemberService {
     }
     
     @Override
-    public boolean updatePw(String userId, String encodedPw) {
+    public boolean updatePw(String userId, String userPw) {
         Member member = new Member();
         member.setUserId(userId);
-        member.setUserPw(encodedPw);
+        member.setUserPw(userPw);
         int result = mMapper.updatePw(member);
         return result > 0;
     }
@@ -175,13 +175,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Boolean sendEmailPw(String email) {
+	public Boolean sendEmailPw(MemberPasswordRequest memberPasswordRequest) {
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();
-			message.setTo(email); // 받는 사람 이메일
+			message.setTo(memberPasswordRequest.getUserEmail()); // 받는 사람 이메일
 			message.setFrom("cothgud@gmail.com"); // 발신자 이메일
 			message.setSubject("[자취하우스] 임시 비밀번호 안내");
-			message.setText("비밀번호 재설정 링크: http://localhost:7777/member/createNewPw");
+			message.setText("비밀번호 재설정 링크: http://localhost:7777/member/createNewPw?userId="+memberPasswordRequest.getUserId());
 			javaMailSender.send(message);
 			return true;
 		} catch (Exception e) {

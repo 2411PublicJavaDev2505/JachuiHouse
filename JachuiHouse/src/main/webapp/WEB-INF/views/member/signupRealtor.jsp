@@ -90,6 +90,14 @@
                     <label for="realtorNo">공인중개사 등록번호</label>
                     <input type="text" name="realtorNo" id="realtorNo" required>
                 </div>
+                
+                <div>
+                <a>중개등록증 또는 사업자등록증을 첨부해주세요</a>
+                <%-- <button href=..${dm.filePath }">${dm.fileName }>파일첨부</button> --%>
+                <span><a href="..${dm.filePath }">${dm.fileName }</a></span>
+                <input type="file" name="dUploadFiles" onchange="readURL(this)"> <br>
+                </div>
+                
 
                 <button type="submit" class="signUpBtn">가입신청하기</button>
             </form>
