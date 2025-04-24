@@ -17,4 +17,5 @@ public interface RealtorService {
 	int getTotalCount(String userId);
 
 	List<Estate> selectEstatesById(String userId, int currentPage, int i);
+	int updateProfileImage(String userId, String newFileName);
 }
