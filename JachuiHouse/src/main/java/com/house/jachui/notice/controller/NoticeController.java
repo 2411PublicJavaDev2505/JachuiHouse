@@ -1,5 +1,6 @@
 package com.house.jachui.notice.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,6 +112,16 @@ public class NoticeController {
 			try {
 				// 1. 파일 저장 처리
 				if(uploadFile != null && !uploadFile.getOriginalFilename().isBlank()) {
+					String uploadDir = session.getServletContext().getRealPath("/resources/nUploadFiles/");
+		            File dir = new File(uploadDir);
+		            if (!dir.exists()) dir.mkdirs(); // 디렉토리 없으면 생성
+		            
+		            String originalFilename = uploadFile.getOriginalFilename();
+		            String renamedFilename = System.currentTimeMillis() + "_" + originalFilename;
+		            File destination = new File(uploadDir, renamedFilename);
+
+		            uploadFile.transferTo(destination); // 실제 파일 저장
+					
 					Map<String, String> fileInfo = fileUtil.saveFile(uploadFile, session, "notice");
 					notice.setNoticeFileName(fileInfo.get("nFilename"));
 					notice.setNoticeFileRename(fileInfo.get("nFileRename"));
@@ -131,7 +142,10 @@ public class NoticeController {
 		        }
 
 		        // 3. 저장
-				int result = nService.addNotice(notice);
+		        System.out.println("등록할 notice 정보: " + notice);
+		        int result = nService.addNotice(notice);
+		        System.out.println("등록 결과: " + result);
+
 				return "redirect:/notice/list";				
 			} catch (Exception e) {
 				e.printStackTrace();

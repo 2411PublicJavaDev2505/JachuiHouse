@@ -59,38 +59,14 @@
 							        <div class="carousel_circle"></div>
 							    </div>
 							</div>
-<!-- 							    <div class="carousel-wrapper"> -->
-<!-- 							      <div class="carousel"> -->
-<!-- 							        <img -->
-<!-- 							          src="https://octapi.lxzin.com/imageBlockProp/image/202210/12/720/0/ad6e0563-7903-4c48-8b70-45821992255c.jpg" -->
-<!-- 							          alt="" -->
-<!-- 							        /> -->
-<!-- 							        <img -->
-<!-- 							          src="https://images.unsplash.com/photo-1583434987437-1b9dcbe44c9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" -->
-<!-- 							          alt="" -->
-<!-- 							        /> -->
-<!-- 							        <img -->
-<!-- 							          src="https://images.unsplash.com/photo-1603052227529-e8ed43c7af99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" -->
-<!-- 							          alt="" -->
-<!-- 							        /> -->
-<!-- 							      </div> -->
-<!-- 							    </div> -->
-
-<!-- 원래 우리 오리지널 -->
-<!-- 						    <img id="leftImage" src="https://octapi.lxzin.com/imageBlockProp/image/202210/12/720/0/ad6e0563-7903-4c48-8b70-45821992255c.jpg" alt="image" class="left-image"> -->
-<!-- 						    <button class="arrow right" onclick="changeImage(1)">&#10095;</button> -->
 						</div>
-<!-- 			    <button class="prev" type="button">prev</button> -->
-<!-- 			    <button class="next" type="button">next</button> -->
 
 	                    <h2 class="main-hello">
 	                    </h2>
 	                    <div>
 	                        <img src="../resources/image/main-right.png" alt="house" class="right-image">
 	                    </div>
-	                </section>
-
-                
+	                </section>                
 	                            
 	                <!-- 주요 기능 소개 -->
 	                <div class="main-menu">
@@ -178,7 +154,6 @@
 //         	index += 1;
 //         	carousel.style.transform = `translate3d(-${500 * index}px, 0, 0)`;
 //         });
-//전체 코드
 
 			//캐러셀2
 			document.addEventListener("DOMContentLoaded", function () {
@@ -219,6 +194,7 @@
 		        updateSlideWidth()
 		      });
 		    });
+		    
         </script>
 
 </body>
