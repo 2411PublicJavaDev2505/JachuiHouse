@@ -28,7 +28,12 @@ public interface PostService {
 	int getTotalCount();
 
 	List<PostVO> getPostsByUserId(String userId);
+	
 	int deleteComment(int commentNo);//댓글 삭제
+
+	int getTotalCount(String searchKeyword, String category);
+
+	List<PostVO> searchListByKeyword(String searchKeyword, String category, int currentPage);
 
 }
 	

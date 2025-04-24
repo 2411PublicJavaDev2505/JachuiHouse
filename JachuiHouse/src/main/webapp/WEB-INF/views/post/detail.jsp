@@ -51,7 +51,6 @@
 	                                    </c:if>
 	                                     <c:if test="${sessionScope.userId eq comment.userId }">
 	                                     	<td>
-		                                     	<button class="updatebtn"><a href="#">수정하기</a></button>
 		                                     	<button class="deletebtn"><a href="/post/cdelete?commentNo=${comment.commentNo }&postNo=${result.postNo}">삭제하기</a></button>
 	                                     	</td>
 	                                     </c:if>	
