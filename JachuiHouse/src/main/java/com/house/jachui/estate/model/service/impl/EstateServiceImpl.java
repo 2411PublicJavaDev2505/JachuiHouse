@@ -110,7 +110,7 @@ public class EstateServiceImpl implements EstateService {
 
 	@Override
 	public String selectIdByEstateNo(int estateNo) {
-		return estMapper.selectIdByEmployNo(estateNo);
+		return estMapper.selectIdByEstateNo(estateNo);
 	}
 
 }

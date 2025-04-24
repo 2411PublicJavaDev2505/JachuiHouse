@@ -41,7 +41,8 @@ public class ChatController {
         try {
             String writerId = (String) session.getAttribute("userId"); // 현재 로그인한 사람
             String receiverId = eService.selectIdByEstateNo(estateNo); // 매물 번호로 중개사 ID 조회
-
+            System.out.println(writerId);
+            System.out.println(receiverId);
             return "redirect:/chat/chat?writerId=" + writerId + "&receiverId=" + receiverId;
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,12 +78,19 @@ public class ChatController {
                            @RequestParam(value = "images", required = false)
                            List<MultipartFile> images,
                            Model model) {
+    	System.out.println("DEBUG - writerId: " + chat.getWriterId());
+        System.out.println("DEBUG - receiverId: " + chat.getReceiverId());
+        System.out.println("DEBUG - chatContent: " + chat.getChatContent());
         int result = cService.sendChat(chat, images);
         if (result > 0) {
-            return "redirect:/chat/chat?writerId=" + chat.getWriterId() + "&receiverId=" + chat.getRecieverId();
+            return "redirect:/chat/chat?writerId=" + chat.getWriterId() + "&receiverId=" + chat.getReceiverId();
         } else {
             model.addAttribute("errorMessage", "메시지 전송 실패");
             return "common/error";
         }
+    }
+    @GetMapping("/list")
+    public String showChatList() {
+    	return "chat/list";
     }
 }

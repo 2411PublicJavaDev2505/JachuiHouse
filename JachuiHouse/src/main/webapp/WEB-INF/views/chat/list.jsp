@@ -11,22 +11,7 @@
 
 </head>
 <body>
-	<header>
-        <a href="/">
-            <div class="logo">
-                <img src="../resources/image/logo.png" alt="logo">
-            </div>
-            </a> 
-            <div class="nav">
-                <a href="/">홈</a> 
-                <a href="/post/list">자취록</a>
-                <a href="/chazabang/list">찾아방</a>
-                <a href="#">사방팔방</a>
-            </div>
-            <div class="loginBtn">
-                <a href="/member/login">로그인</a>
-            </div>
-    </header>
+    <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
     <main>
         <div id="mainAll">
             <div id="mainLeft">
@@ -116,8 +101,6 @@
                 </div>
         </div>
     </main>
-    <footer>
-		이용약관 | 광고문의 | 개인정보처리방침 | 찾아오시는길 | 회사명: 자취스크립트(주) | 대표자 : 강우혁 | 문의 전화: 010-2222-3333
-    </footer>
+    <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>

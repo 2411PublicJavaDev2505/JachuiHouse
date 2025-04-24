@@ -20,5 +20,5 @@ public class Chat {
 	private String chatFileName;
 	private String chatFilePath;
 	private String chatFileRename;
-	private String recieverId;
+	private String receiverId;
 }
