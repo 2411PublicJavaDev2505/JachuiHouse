@@ -64,6 +64,7 @@
         			</tr>
         		</c:forEach>		 
         	</table>
+        	
         	<div class="pagination-container">
 				<div class="pagination">
 					<c:if test="${startNavi ne 1 }">

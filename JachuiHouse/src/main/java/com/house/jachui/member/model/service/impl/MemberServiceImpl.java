@@ -3,6 +3,7 @@ package com.house.jachui.member.model.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -124,20 +125,15 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
-	@Override
-	public String selectNameById(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	//회원 관리 리스트
 	@Override
-	public List<NoticeVO> selectListAll(int currentPage) {
+	public List<Member> selectListAll(int currentPage) {
 		int limit = 10;
 		int offset = (currentPage-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return mMapper.selectListAll(rowBounds);
 	}
-
+	//회원 관리 조회 - 페이지네이션
 	@Override
 	public int getTotalCount() {
 		return mMapper.getTotalCount();
@@ -200,5 +196,35 @@ public class MemberServiceImpl implements MemberService {
 		String encryptedPw = encoder.encode(userPw);
 	    return mMapper.updateUserPassword(userId, encryptedPw) > 0;
 	}
+
+
+	//회원 관리 검색 - 페이지네이션
+	@Override
+	public int getTotalCountByKeyword(@Param("searchKeyword")String searchKeyword) {
+		return mMapper.getTotalCountByKeyword(searchKeyword);
+	}
+	//회원 관리 검색
+	@Override
+	public List<Member> searchListByKeyword(String searchKeyword, int currentPage) {
+		int limit = 10;
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return mMapper.selectSearchList(searchKeyword, currentPage, rowBounds);
+	}
+
+	//관리자 승인
+	@Override
+	public int approveMember(String userId) {
+		return mMapper.updateApproveYn(userId);
+	}
+
+	@Override
+	public int updateProfileImage(String userId, String newFileName) {	
+		return mMapper.updateProfileImage(userId, newFileName);
+	}
+
+	
+
+
 
 }

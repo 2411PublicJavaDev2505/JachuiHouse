@@ -13,6 +13,14 @@ main {
 .main-contents {
     margin: 2rem 3rem;
 }
+.form-main {
+	display: flex;
+	align-items: center;
+}
+.profile-preview {
+	position: absolute;
+	margin-left: 400px;
+}
 .main-contents input{
     width: 100%;
     margin-top : 5px;

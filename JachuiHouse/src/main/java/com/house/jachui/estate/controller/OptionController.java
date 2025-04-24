@@ -18,7 +18,6 @@ public class OptionController {
 	
 	@GetMapping("/option/list")
 	public List<EstateOption> selectOptionList(int estateNo) {
-		System.out.println();
 		return oService.selectOptionList(estateNo);
 	}
 }

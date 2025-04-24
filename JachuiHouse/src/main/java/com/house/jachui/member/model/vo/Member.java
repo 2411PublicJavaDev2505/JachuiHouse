@@ -32,4 +32,5 @@ public class Member {
 	private String deleteYn;	
 	private String approveYn;  
 	private Date joinDate;		//추가 erd에도 추가하기.
+	private String profileImage; // 이미지 관련 추가
 }

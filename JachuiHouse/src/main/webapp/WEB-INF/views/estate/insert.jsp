@@ -19,8 +19,8 @@
                 </select>
             </label><br/>
 
-            <label>보증금: <input type="text" name="estateDeposit"/></label><br/>
-            <label>월세: <input type="text" id="monthlyRent" name="estateMonthlyRent"/></label><br/>
+            <label>보증금: <input type="text" name="estateDeposit" placeholder="만 단위로 적어주세요(10000=1억)"/></label><br/>
+            <label>월세: <input type="text" id="monthlyRent" name="estateMonthlyRent" placeholder="만 단위로 적어주세요"/></label><br/>
 
             <label>주소: <input type="text" name="estateAddress"/></label><br/>
 
@@ -34,7 +34,6 @@
             </label><br/>
             
             <label>면적(㎡): <input type="text" name="estateWidth"/></label><br/>
-
 
             <label>층수: <input type="text" name="estateFloor"/></label><br/>
 
@@ -148,7 +147,7 @@
 					  <label>매물 사진 (최대 20장)</label>
 					  <div id="photo-upload-container" class="photo-upload-container">
 					  	<div class="photo-upload-input">
-					  		<input type="file" name="estateImages" accept="image/*" onchange="addNextImageInput(this)"/>
+					  		<input type="file" name="images" accept="image/*" onchange="addNextImageInput(this)"/>
 					   </div>
 					</div>
 				</div>
@@ -200,7 +199,7 @@
             newWrapper.classList.add('photo-upload-input');
             const newInput = document.createElement('input');
             newInput.type = 'file';
-            newInput.name = 'estateImages';
+            newInput.name = 'images';
             newInput.accept = 'image/*';
             newInput.onchange = function () {
               addNextImageInput(this);

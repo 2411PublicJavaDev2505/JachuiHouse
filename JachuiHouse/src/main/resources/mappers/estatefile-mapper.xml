@@ -2,15 +2,19 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.house.jachui.estate.model.mapper.EstateFileMapper">
 
- <insert id="insertEstateFiles" parameterType="java.util.List">
- 	INSERT INTO ESTATE_FILE (ESTATE_NO, ESTATE_FILE_NO, ESTATE_FILE_NAME, ESTATE_FILE_RENAME, ESTATE_FILE_PATH)
-	VALUES
-  	<foreach collection="estateFileList" item="file" separator=",">
-    	(#{file.estateNo}, SEQ_ESTATE_FILE_NO.NEXTVAL, #{file.estateFileName}, #{file.estateFileReName}, #{file.estateFilePath})
-  	</foreach>
-</insert>
-
+	<insert id="insertEstateImage">
+	 	INSERT INTO ESTATE_FILE (ESTATE_NO, ESTATE_FILE_NO, ESTATE_FILE_NAME, ESTATE_FILE_RENAME, ESTATE_FILE_PATH)
+		VALUES
+	    (#{estateNo}, SEQ_ESTATE_FILE_NO.NEXTVAL, #{estateFileName}, #{estateFileRename}, #{estateFilePath})
+	</insert>
+	
+	<select id="selectImageList" resultType="com.house.jachui.estate.model.vo.EstateFile">
+		SELECT * FROM ESTATE_FILE WHERE ESTATE_NO = #{estateNo} ORDER BY ESTATE_FILE_NO DESC
+	</select>
+	<delete id="deleteFilesByEstateNo">
+	    DELETE FROM ESTATE_FILE
+	    WHERE ESTATE_NO = #{estateNo}
+	</delete>
 </mapper>

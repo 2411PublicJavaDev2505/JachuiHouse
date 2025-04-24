@@ -37,31 +37,49 @@
             <c:forEach var="trade" items="${tList}">
                 <div class="product-card">
                     <a href="/trade/detail/${trade.tradeNo}" class="trade">
-                        <img src="${pageContext.request.contextPath}/resources/img/${empty trade.tradeFileRename ? 'default.png' : trade.tradeFileRename}" 
+                        <img src="${pageContext.request.contextPath}/resources/bUploadFiles/${empty trade.tradeFileRename ? 'default.png' : trade.tradeFileRename}" 
      						alt="${trade.tradeTitle}">
                     </a>
                     <div class="product-title">${trade.tradeTitle}</div>
                     <div class="product-price">${trade.tradePrice}원</div>
+                	<div class="product-views">조회수 ${trade.viewCount}</div>
+               		<div class="product-yn">
+					    상태:
+					    <c:choose>
+						    <c:when test="${trade.tradeYn == 'Y'}">판매중</c:when>
+						    <c:when test="${trade.tradeYn == 'N'}">거래완료</c:when>
+						    <c:otherwise>상태 미지정</c:otherwise>
+					    </c:choose>
+					</div>
+               		
+               		
+               		
+               
                 </div>
             </c:forEach>
         </div>
 
 
-        <div class="pagination">
-            <a href="#" class="arrow">◀◁</a>
-            <a href="#" class="page-num active">1</a>
-            <a href="#" class="page-num active">2</a>
-            <a href="#" class="page-num active">3</a>
-            <a href="#" class="page-num active">4</a>
-            <a href="#" class="page-num active">5</a>
-            <a href="#" class="page-num active">6</a>
-            <a href="#" class="page-num active">7</a>
-            <a href="#" class="page-num active">8</a>
-            <a href="#" class="page-num active">9</a>
-            <a href="#" class="page-num active">10</a>
-            <a href="#" class="arrow">▷▶</a>
-        </div>
-    
+        <div class="pagination-container">
+		    <div class="pagination">
+		        <!-- 첫 페이지가 아닐 때만 '처음', '이전' 버튼 표시 -->
+		        <c:if test="${currentPage > 1}">
+		            <a href="/trade/list?page=1" class="first">◁◁</a>
+		            <a href="/trade/list?page=${startNavi - 1}" class="prev">◀</a>
+		        </c:if>
+		
+		        <!-- 페이지 숫자 -->
+		        <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+		            <a href="/trade/list?page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
+		        </c:forEach>
+		
+		        <!-- 마지막 페이지가 아닐 때만 '다음', '끝' 버튼 표시 -->
+		        <c:if test="${currentPage < maxPage}">
+		            <a href="/trade/list?page=${endNavi + 1}" class="next">▶</a>
+		            <a href="/trade/list?page=${maxPage}" class="last">▷▷</a>
+		        </c:if>
+		    </div>
+		</div>
     </main>
    	 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>

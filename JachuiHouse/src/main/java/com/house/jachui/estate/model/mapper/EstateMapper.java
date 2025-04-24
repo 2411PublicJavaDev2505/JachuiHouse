@@ -17,4 +17,6 @@ public interface EstateMapper {
 
 	int insertEstate(EstateAddRequest estate);
 
+	void deleteEstate(int estateNo);
+
 }

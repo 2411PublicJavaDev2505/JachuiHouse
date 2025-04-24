@@ -76,7 +76,7 @@ public class NoticeController {
 			, Model model) {
 		try {
 			
-			int totalCount = nService.getTotalCount(searchKeyword);
+			int totalCount = nService.getTotalCountByKeyword(searchKeyword);
 			List<NoticeVO> searchList = nService.searchListByKeyword(searchKeyword, currentPage); 
 			
 			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);

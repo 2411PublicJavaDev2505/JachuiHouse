@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,4 +31,22 @@ public class Estate {
 	private List<EstateOption>estateOptionList;
 	private List<EstateFile>estateFileList;
 	
+	
+	private String transformEstateDeposit;
+    private String transformMonthlyRent;
+
+    public void setTransformPrices() {
+        this.transformEstateDeposit = transformToEokMan(this.estateDeposit);
+        this.transformMonthlyRent = transformToEokMan(this.estateMonthlyRent);
+    }
+
+    private String transformToEokMan(int amount) {
+        if (amount >= 10000) {
+            int eok = amount / 10000;
+            int man = amount % 10000;
+            return man == 0 ? eok + "억" : eok + "억 " + man + "만";
+        } else {
+            return amount + "만";
+        }
+    }
 }

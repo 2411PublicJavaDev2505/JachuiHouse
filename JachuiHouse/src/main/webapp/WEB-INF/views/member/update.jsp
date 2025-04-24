@@ -13,11 +13,19 @@
 	<div class="container">
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		<main>
+               <form action="/member/update" method="post"  enctype="multipart/form-data" class="form-main">
+	            <div class="profile-preview">
+		            <label for="profileImageInput">
+		                <img id="profileImage" src="/resources/image/${member.profileImage}" 
+		                     alt="사진을 선택해주세요" style="width:200px; height:200px; border-radius:100%; cursor:pointer;">
+		            </label>
+		            <input type="file" name="profileImage" id="profileImageInput" accept="image/*" style="display:none;" onchange="previewImage(event)">
+		            <p>위에 이미지를 눌러주세요.</p>
+		        </div>
             <div class="main-container">
                 <div class="main-header">
                     <h1>회원 정보 수정</h1>
                 </div>
-                <form action="/member/update" method="post">
                 <div class="main-contents">
                  <label>
                         ID
@@ -52,13 +60,17 @@
 	                            <button type="submit">수정</button>
 	                        </div>
 	                   </div>
+		            </div>
                 </form>
-            </div>
         </main>	
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 	<script type="text/javascript">
-		
+		function previewImage(event) {
+	        const reader = new FileReader();
+	        reader.onload = e => document.getElementById('profileImage').src = e.target.result;
+	        reader.readAsDataURL(event.target.files[0]);
+	    }
 	</script>
 </body>
 </html>

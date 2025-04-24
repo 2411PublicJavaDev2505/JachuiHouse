@@ -12,12 +12,39 @@
 		<result property="writeDate" column="WRITE_DATE" />
 		<result property="updateDate" column="UPDATE_DATE" />
 	</resultMap>
-	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM POST
+	</select>
 	<select id="selectList" resultMap="postResultMap">
 		SELECT * FROM POST
 	</select>
 	
 	<insert id="insertPost">
-		INSERT INTO POST VALUES(SEQ_POST_NO.NEXTVAL, #{userId}, #{postType}, #{postTitle}, #{postContent}, SYSDATE, SYSDATE)
+		INSERT INTO POST VALUES(SEQ_POST_NO.NEXTVAL, 'user01', #{postType}, #{postTitle}, #{postContent}, SYSDATE, SYSDATE)
+	</insert>
+	
+	<select id="selectOneDetail" resultMap="postResultMap">
+		SELECT * FROM POST WHERE POST_NO = #{postNo}
+	</select>
+	
+	<delete id="deletePost">
+		DELETE FROM POST WHERE POST_NO = #{postNo}
+	</delete>
+	
+	<select id="selectcList" resultType="CommentVO">
+		SELECT * FROM "COMMENT"
+	</select>
+	<select id="selectOneByIdEmail" resultType="Member">
+		SELECT USER_ID, USER_EMAIL FROM MEMBER
+	    WHERE USER_ID = #{userId}
+	    AND USER_EMAIL = #{userEmail}
+	    AND DELETE_YN = 'N'
+	</select>
+	<select id="selectPostsByUserId" resultType="PostVO">
+		SELECT POST_NO, USER_ID, POST_TYPE, POST_TITLE, POST_CONTENT, WRITE_DATE, UPDATE_DATE
+		FROM POST WHERE USER_ID = #{userId} ORDER BY WRITE_DATE DESC
+	</select>
+	<insert id="insertComment">
+		INSERT INTO "COMMENT" VALUES(COMMENT_SEQ.NEXTVAL, #{userId}, #{commentContent}, SYSDATE, SYSDATE, #{postNo})
 	</insert>
 </mapper>  

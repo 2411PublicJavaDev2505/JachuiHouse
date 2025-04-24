@@ -97,7 +97,8 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!--log4jdbc 로깅 라이브러리 추가-->
+		
+		<!--log4dbc 로깅 라이브러리 추가-->
 		<dependency>
 		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
 		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>

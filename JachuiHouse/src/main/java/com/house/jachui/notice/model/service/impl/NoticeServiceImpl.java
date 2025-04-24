@@ -3,6 +3,7 @@ package com.house.jachui.notice.model.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
@@ -54,13 +55,16 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int getTotalCount(String searchKeyword) {
-		return mapper.getTotalCount(searchKeyword);
+	public int getTotalCountByKeyword(@Param("searchKeyword")String searchKeyword) {
+		return mapper.getTotalCountByKeyword(searchKeyword);
 	}
 
 	@Override
 	public List<NoticeVO> searchListByKeyword(String searchKeyword, int currentPage) {
-		return mapper.selectSearchList(searchKeyword, currentPage);
+		int limit = 10;
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return mapper.selectSearchList(searchKeyword, currentPage, rowBounds);
 	}
 
 }

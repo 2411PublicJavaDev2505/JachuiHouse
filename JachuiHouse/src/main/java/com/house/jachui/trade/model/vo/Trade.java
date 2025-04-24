@@ -20,12 +20,12 @@ public class Trade {
 	private String tradeTitle;
 	private String tradeContent;
 	private String tradePrice;
-	private String viewCount;
+	private int viewCount;
 	private Date writeDate;
 	private String tradeFilename;
 	private String tradeFileRename;
 	private String tradeFilepath;
-	private char tradeYn;
+	private String tradeYn;
 	private Date tradeDate;
 	private char delYn;
 

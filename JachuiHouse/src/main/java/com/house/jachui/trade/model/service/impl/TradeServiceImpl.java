@@ -68,4 +68,18 @@ public class TradeServiceImpl implements TradeService {
 	public int deleteTrade(int tradeNo) {
 		return mapper.deleteTrade(tradeNo);
 	}
+	
+	@Override
+	public int countViewUpdate(int tradeNo) {
+	    return mapper.countViewUpdate(tradeNo);
+	}
+	
+	
+	
+	@Override
+	public int updateTradeYn(int tradeNo, char tradeYn) {
+	    return mapper.updateTradeYn(tradeNo, tradeYn);
+	}
+	
+	
 }

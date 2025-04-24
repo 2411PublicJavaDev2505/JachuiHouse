@@ -3,6 +3,7 @@ package com.house.jachui.member.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,14 +40,19 @@ public interface MemberMapper {
 
 	int updateMember(UpdateRequest member);
 
+	int updateProfileImage(@Param("userId") String userId, @Param("profileImage") String newFileName);
+	
 	int deleteMember(String userId);
 
 	String selectPassword(String userId);
 
 	int updateRealtor(UpdateRealtorRequest realtor);
 
-	List<NoticeVO> selectListAll(RowBounds rowBounds);
 
+	
+	//회원 관리 조회
+	List<Member> selectListAll(RowBounds rowBounds);
+	//회원 관리 조회 - 페이지네이션
 	int getTotalCount();
 
 	Object contactInquiry(List<MultipartFile> contactImage, ContactRequest contactRequest);
@@ -60,6 +66,17 @@ public interface MemberMapper {
 	int updateUserPassword(String userId, String encryptedPw);
 
 	
+
+
+
+	//회원 관리 검색 - 페이지네이션
+	int getTotalCountByKeyword(@Param("searchKeyword") String searchKeyword);
+	//회원 관리 검색
+	List<Member> selectSearchList(@Param("searchKeyword") String searchKeyword, @Param("currentPage") int currentPage, RowBounds rowBounds);
+
+	//관리자 승인
+	int updateApproveYn(String userId);
+
 
 
 

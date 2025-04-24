@@ -2,6 +2,8 @@ package com.house.jachui.member.model.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.member.dto.ContactRequest;
@@ -56,10 +58,9 @@ public interface MemberService {
 
 	Member selectMemberById(String userId);
 
-	String selectNameById(String string);
-	//회원 관리 리스트
-	List<NoticeVO> selectListAll(int currentPage);
-	//회원 관리 리스트 - 페이지네이션
+	//회원 관리 조회
+	List<Member> selectListAll(int currentPage);
+	//회원 관리 조회 - 페이지네이션
 	int getTotalCount();
 
 	void contactInquiry(List<MultipartFile> contactImage, ContactRequest contactRequest);
@@ -73,5 +74,13 @@ public interface MemberService {
 	boolean updatePassword(String userId, String userPw);
 		
 	
+	
+	//회원 관리 검색 - 페이지네이션
+	int getTotalCountByKeyword(@Param("searchKeyword")String searchKeyword);
+	//회원 관리 검색
+	List<Member> searchListByKeyword(String searchKeyword, int currentPage);
+	int updateProfileImage(String userId, String newFileName);
+	//관리자 승인
+	int approveMember(String userId);
 	
 }

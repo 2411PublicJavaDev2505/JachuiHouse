@@ -15,7 +15,7 @@
 		<main>
 	         <div class="left-inform">
 	                <div class="left-image">
-	                    <img src="../resources/image/profile.jpeg" alt="image">
+		                    <img src="/resources/image/${member.profileImage}" alt="image" id="profileImage">	                			           
 	                </div>
 	                <div>
 	                    <h3>${member.userId }</h3>
@@ -47,9 +47,9 @@
 	                    <h3>내가 쓴 글</h3>
 	                </div>
 	                <div class="notice-content">
-	                    <p>4/7(월) 저녁 8시에 술 한잔 하실분?</p>
-	                    <p>이중 창 아닌 집 결로 안생기게 하는 꿀팁</p>
-	                    <p>집에 날파리 안나오게 하는 방법 뭐있을까</p>
+	                   <c:forEach var="post" items="${pList}">
+						    <p>${post.postContent}</p>
+						</c:forEach>
 	                </div>
 	                <div class="thing">
 	                    <h3>내가 올린 물건</h3>
@@ -61,6 +61,6 @@
 	            </div>
 	        </main>
 	        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	</div>
+	</div>	
 </body>
 </html>

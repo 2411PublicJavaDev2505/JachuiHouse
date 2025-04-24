@@ -19,22 +19,25 @@
 		<result property="delYn" 			column="DEL_YN" />
 	</resultMap>
 	
+	<update id="countViewUpdate" parameterType="_int">
+		update TRADE set VIEW_COUNT = VIEW_COUNT +1 WHERE TRADE_NO = #{tradeNo}
+	</update>
 	
 	<select id="selectOneByNo" parameterType="int" resultMap="tradeResultMap">
 	    SELECT * FROM TRADE WHERE TRADE_NO = #{tradeNo}
 	</select>
 
     <select id="selectListAll" resultMap="tradeResultMap">
-	    SELECT * FROM TRADE ORDER BY TRADE_NO
+	    SELECT * FROM TRADE WHERE DEL_YN = 'N' ORDER BY TRADE_NO
 	</select>
 
 	<select id="getTotalCountKeyword" resultType="_int">
-		SELECT COUNT(*) FROM TRADE WHERE TRADE_TITLE LIKE '%'||#{searchKeyword}||'%' 
+		SELECT COUNT(*) FROM TRADE WHERE DEL_YN ='N' AND TRADE_TITLE LIKE '%'||#{searchKeyword}||'%' 
 	</select>
 
 	<select id="getTotalCount" resultType="_int">
 	    SELECT COUNT(*) FROM TRADE
-	    WHERE
+	    WHERE DEL_YN ='N' AND
 	    <choose>
 	        <when test="category == 'title'">
 	            TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
@@ -50,7 +53,7 @@
 	
     <select id="selectSearchList" resultType="Trade">
 	    SELECT * FROM TRADE
-	    WHERE 
+	    WHERE DEL_YN ='N' AND
 	    <choose>
 	        <when test="category == 'title'">
 	            TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
@@ -58,13 +61,20 @@
 	        <when test="category == 'writer'">
 	           	USER_ID LIKE '%' || #{searchKeyword} || '%'
 	        </when>
-	    </choose>
-	</select>
+	        <when test="category == 'tradeYn'">
+            TRADE_YN = #{searchKeyword}  <!-- tradeYn 필터링 -->
+        </when>
+        <otherwise>
+            1=1
+        </otherwise>
+    </choose>
+    ORDER BY VIEW_COUNT DESC, TRADE_NO DESC
+</select>
     
     
 	<insert id="insertTrade">
 		INSERT INTO TRADE VALUES(SEQ_TRADE_NO.NEXTVAL, #{userId}, #{tradeTitle}, #{tradeContent}, #{tradePrice},
-		 default, default, #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath}, 'N', default. 'N')
+		 default, default, #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath}, 'Y', default, 'N')
 	</insert>
 	<update id="updateTrade">
 		UPDATE TRADE
@@ -80,4 +90,14 @@
 		SET DEL_YN = 'Y'
 		WHERE TRADE_NO = #{tradeNo}
 	</delete>
+	
+	
+	
+	<update id="updateTradeYn">
+    UPDATE TRADE
+    SET TRADE_YN = #{tradeYn}
+    WHERE TRADE_NO = #{tradeNo}
+</update>
+	
+	
 </mapper>

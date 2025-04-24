@@ -103,11 +103,12 @@ body {
     font-weight: bold;
 }
 
-.estate-list {
+.estate-grid {
     margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-row-gap: 40px;
+    grid-column-gap: 20px;
 }
 
 .estate {
@@ -120,14 +121,14 @@ body {
     border-radius: 10px;
     overflow: hidden;
     background-color: #fff;
-    transition: box-shadow 0.3s ease;
+    transition: transform 0.2s;
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
 .estate-style:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
 }
 
 .estate-style img {
@@ -171,4 +172,5 @@ body {
     font-size: 14px;
     color: #555;
 }
+
 

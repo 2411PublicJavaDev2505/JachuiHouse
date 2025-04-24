@@ -3,8 +3,12 @@ package com.house.jachui.member.controller;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.ContactRequest;
@@ -31,7 +36,8 @@ import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
-import com.house.jachui.notice.model.vo.NoticeVO;
+import com.house.jachui.post.domain.PostVO;
+import com.house.jachui.post.service.PostService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -42,6 +48,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
+	
+	private final PostService pService;
 	
 	private final MemberService mService;
 	//회원 관리 리스트 - 페이지네이션
@@ -323,7 +331,10 @@ public class MemberController {
 			if("M".equals(userRole)) {
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
+				List<PostVO> pList = pService.getPostsByUserId(userId);
+				
 				model.addAttribute("member", member);
+				model.addAttribute("pList", pList);
 				return "member/myPage";
 			}else {
 				model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
@@ -407,8 +418,23 @@ public class MemberController {
 	@PostMapping("/update")
 	public String updateMember(
 			HttpSession session,
-			@ModelAttribute UpdateRequest member
-			,Model model){
+			@ModelAttribute UpdateRequest member,
+			@RequestParam(value = "profileImage", required = false) MultipartFile file,
+			Model model) throws IOException{
+		String userId = member.getUserId();
+		 // 새 프로필 이미지가 있는 경우 저장 처리
+	    if (file != null && !file.isEmpty()) {
+	        String uploadDir = "C:\\Users\\user1\\Desktop\\backend\\bootprojectworkspace\\JachuiHouse\\JachuiHouse\\src\\main\\webapp\\resources\\image"; // 원하는 경로로 설정
+	        String originalFilename = file.getOriginalFilename();
+	        String newFileName = UUID.randomUUID() + "_" + originalFilename;
+	          
+	        // 이미지 저장 (예외는 GlobalExceptionHandler에서 처리)
+	        file.transferTo(Path.of(uploadDir, newFileName));
+	    
+	        // 이미지 변경이 없는 경우, 기존 이미지 유지
+	    	 mService.updateProfileImage(userId, newFileName); 
+	    }
+		
 		int result = mService.updateMember(member);
 		String userRole = (String)session.getAttribute("userRole");
 		if(result > 0) {
@@ -419,20 +445,23 @@ public class MemberController {
 	    return "common/error";
 	}
 	
-	//회원 관리 리스트
+	//회원 관리 조회
 	@GetMapping("/list")
-	public String noticeList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
+	public String memberList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
 		try {
-			List<NoticeVO> nList = mService.selectListAll(currentPage);
+			List<Member> mList = mService.selectListAll(currentPage);
+			for (Member m : mList) {
+				System.out.println(">>> member: " + m);
+			}
 			int totalCount = mService.getTotalCount();
 			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
 			
-			if(!nList.isEmpty()) {
+			if(!mList.isEmpty()) {
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));
-				model.addAttribute("nList", nList);
-				return "notice/list";
+				model.addAttribute("mList", mList);
+				return "member/list";
 			}else {
 				model.addAttribute("errorMessage", "데이터가 존재하지 않습니다.");
 				return "common/error";
@@ -444,4 +473,49 @@ public class MemberController {
 		}
 		
 	}
+	
+	//회원 관리 검색
+	@GetMapping("/search")
+	public String memberSearch(
+			@RequestParam("searchKeyword") String searchKeyword
+			, @RequestParam(value="page", defaultValue="1") int currentPage
+			, Model model) {
+		try {
+			int totalCount = mService.getTotalCountByKeyword(searchKeyword);
+			List<Member> searchList = mService.searchListByKeyword(searchKeyword, currentPage);
+			
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+				model.addAttribute("maxPage", pageInfo.get("maxPage"));
+				model.addAttribute("startNavi", pageInfo.get("startNavi"));
+				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				
+				model.addAttribute("searchList", searchList);
+				model.addAttribute("searchKeyword", searchKeyword);
+				
+				return "member/search";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+				return "common/error";
+		}
+	}
+	
+	//관리자가 비번 없이 삭제
+	@PostMapping("/delete-by-admin")
+	@ResponseBody
+	public String deleteMemberByAdmin(@RequestParam("userId") String userId) {
+		System.out.println("삭제 요청 받은 userId: " + userId); 
+		int result = mService.deleteMember(userId);
+		return (result > 0) ? "success" : "fail";
+	}
+
+	//관리자 승인
+	@PostMapping("/approve")
+	@ResponseBody
+	public String approveMember(@RequestParam("userId") String userId) {
+	    int result = mService.approveMember(userId);
+	    return result > 0 ? "success" : "fail";
+	}
+
+	
 }
