@@ -36,6 +36,8 @@ import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.post.domain.PostVO;
 import com.house.jachui.post.service.PostService;
+import com.house.jachui.trade.model.service.TradeService;
+import com.house.jachui.trade.model.vo.Trade;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -48,7 +50,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	
 	private final PostService pService;
-	
+	private final TradeService tService;
 	private final MemberService mService;
 	//회원 관리 리스트 - 페이지네이션
 	private final PageUtil pageUtil;
@@ -292,7 +294,9 @@ public class MemberController {
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
 				List<PostVO> pList = pService.getPostsByUserId(userId);
+				List<Trade> tList = tService.getTradeByUserId(userId);
 				
+				model.addAttribute("tList", tList);
 				model.addAttribute("member", member);
 				model.addAttribute("pList", pList);
 				return "member/myPage";
