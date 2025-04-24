@@ -79,7 +79,7 @@ public class ChatController {
                            Model model) {
         int result = cService.sendChat(chat, images);
         if (result > 0) {
-            return "redirect:/chat/chat?writerId=" + chat.getWriterId() + "&receiverId=" + chat.getReceiverId();
+            return "redirect:/chat/chat?writerId=" + chat.getWriterId() + "&receiverId=" + chat.getRecieverId();
         } else {
             model.addAttribute("errorMessage", "메시지 전송 실패");
             return "common/error";
