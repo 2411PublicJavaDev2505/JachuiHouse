@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../../resources/css/include/header.css">
-<link rel="stylesheet" href="../../resources/css/member/update.css">
-<link rel="stylesheet" href="../../resources/css/include/footer.css">
+<link rel="stylesheet" href="../resources/css/include/header.css">
+<link rel="stylesheet" href="../resources/css/member/update.css">
+<link rel="stylesheet" href="../resources/css/include/footer.css">
 </head>
 <body>
 	<div class="container">
@@ -17,7 +17,7 @@
                 <div class="main-header">
                     <h1>회원 정보 수정</h1>
                 </div>
-                <form action="/member/realtor/update" method="post">
+                <form action="/realtor/update" method="post">
                 <div class="main-contents">
                 
                     <label>
@@ -60,7 +60,7 @@
 	</div>
 	<!-- <script type="text/javascript">
 		backToPage = () => {
-			location.href = "/member/realtor/mypage"
+			location.href = "/realtor/mypage"
 		}
 	</script> -->
 </body>

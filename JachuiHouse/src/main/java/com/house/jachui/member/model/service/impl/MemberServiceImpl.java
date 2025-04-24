@@ -15,12 +15,13 @@ import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.MemberPasswordRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
-import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.mapper.MemberMapper;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.notice.model.vo.NoticeVO;
+import com.house.jachui.realtor.controller.dto.UpdateRealtorRequest;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -50,11 +51,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member selectOneByLogin(MemberLoginRequest member) {
         return mMapper.selectOneByLogin(member);
-    }
-
-    @Override
-    public Member selectRealtorById(String userId) {
-        return mMapper.selectRealtorById(userId);
     }
 
     @Override
@@ -111,12 +107,6 @@ public class MemberServiceImpl implements MemberService {
         String check = mMapper.selectPassword(userId);
         return check != null && check.equals(userPw);
     }
-
-	@Override
-	public int updateRealtor(UpdateRealtorRequest realtor) {
-		int result = mMapper.updateRealtor(realtor);
-		return result;
-	}
 
 	// 자취생 마이페이지
 	@Override
@@ -221,6 +211,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateProfileImage(String userId, String newFileName) {	
 		return mMapper.updateProfileImage(userId, newFileName);
+	}
+
+	@Override
+	public int getTotalCount(String userId) {
+		return mMapper.getTotalCount();
 	}
 
 	

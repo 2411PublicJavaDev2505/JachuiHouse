@@ -12,10 +12,10 @@ import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.MemberPasswordRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
 import com.house.jachui.member.dto.SignupRealtorRequest;
-import com.house.jachui.member.dto.UpdateRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.notice.model.vo.NoticeVO;
+import com.house.jachui.realtor.controller.dto.UpdateRealtorRequest;
 
 @Mapper
 public interface MemberMapper {

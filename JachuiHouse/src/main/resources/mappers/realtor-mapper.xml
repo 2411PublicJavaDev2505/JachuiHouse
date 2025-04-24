@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.jachui.realtor.model.mapper.RealtorMapper">
+	<!-- 로그인 시에 필요한 것 -->
+	<resultMap type="Member" id="loginResultMap">
+		<id property="userId" 	column="USER_ID" />
+		<result property="userPw"	column="USER_PW"/>
+	</resultMap>
+	
+	<resultMap type="Member" id="memberResultMap">
+		<id		property="userId"				column="USER_ID"/>
+		<result property="userPw"				column="USER_PW"/>
+		<result property="userName"				column="USER_NAME"/>
+		<result property="userEmail"			column="USER_EMAIL"/>
+		<result property="userPhone"			column="USER_PHONE"/>
+		<result property="userGender"			column="USER_GENDER"/>
+		<result property="userAddress"			column="USER_ADDRESS"/>
+		<result property="userBirth"			column="USER_BIRTH"/>
+		<result property="userPostcode"			column="USER_POSTCODE"/>
+		<result property="userDetailAddress"	column="USER_DETAILADDRESS"/>
+		<result property="aloneLiving"			column="ALONE_LIVING"/>
+		<result property="userRole"				column="USER_ROLE"/>
+		<result property="realtorName"			column="REALTOR_NAME"/>
+		<result property="realtorNo"			column="REALTOR_NO"/>
+		<result property="deleteYn"				column="DELETE_YN"/>
+		<result property="approveYn"			column="APPROVE_YN"/>
+		<result property="joinDate"				column="JOIN_DATE"/>
+		<result property="profileImage"			column="PROFILE_IMAGE"/>
+	</resultMap>
+	
+	<update id="updateRealtor">
+		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, USER_ADDRESS=#{userAddress}, REALTOR_NAME=#{realtorName} WHERE USER_ID=#{userId} 
+	</update>
+	<!-- 	마이페이지 이미지 수정 -->
+	<update id="updateProfileImage" parameterType="map">
+		UPDATE MEMBER SET PROFILE_IMAGE = #{profileImage} WHERE USER_ID = #{userId}
+	</update>
+	<select id="selectRealtorById" resultType="Member">
+		SELECT * FROM MEMBER WHERE USER_ID= #{userId}
+	</select>
+	
+	<select id="selectEstatesById" resultType="Estate">
+		SELECT * FROM ESTATE WHERE USER_ID=#{userId}
+	</select>
+	
+	<!-- 회원 관리 조회 - 페이지네이션-->
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	
+</mapper>
