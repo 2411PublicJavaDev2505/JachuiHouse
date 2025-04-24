@@ -220,7 +220,4 @@
 	
 	
 	<!-- 채팅용 -->
-	<select id="selectNameById" resultType="Member">
-		SELECT USER_NAME FORM MEMBER WHERE USER_ID + ${userId}
-	</select>
 </mapper>
