@@ -17,7 +17,6 @@
 	<main>
 		 <div class="container">    
 		 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
-		 .
 	        <!-- 배너 슬라이드 -->
 	            <div class="main">
 	                <section class="banner">
@@ -189,34 +188,36 @@
 		      const nextBtn = document.querySelector('.carousel_next');
 		      const bullets = document.querySelectorAll('.carousel_circle');
 // 		      const slideWidth = slides[0].offsetWidth;
-		          let slideWidth;
-				  let currentSlide = 0;
+	          let slideWidth;
+			  let currentSlide = 0;
 				
-				  function updateSlideWidth() {
-				    slideWidth = slides[0].clientWidth;
-				  }
+			  function updateSlideWidth() {
+			    slideWidth = slides[0].clientWidth;
+			  }
 		
-		      function showSlide(index) {
-		        swiper.style.transform = `translateX(-${index * slideWidth}px)`;
-		        currentSlide = index;
+		      function showSlide(value) {
+		    	const setValue = "-" + (value * slideWidth) + "px"; 
+		        swiper.style.transform = `translateX(`+setValue+`)`;
+		        currentSlide = value;
 		        bullets.forEach((bullet, i) => {
-		          bullet.classList.toggle('active', i === index);
+		          bullet.classList.toggle('active', i === value);
 		        });
 		      }
 		
 		      prevBtn.addEventListener('click', () => {
 		        if (currentSlide > 0) showSlide(currentSlide - 1);
+		        updateSlideWidth()
 		      });
 		
 		      nextBtn.addEventListener('click', () => {
 		        if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
+		        updateSlideWidth()
 		      });
 		
 		      bullets.forEach((bullet, i) => {
 		        bullet.addEventListener('click', () => showSlide(i));
+		        updateSlideWidth()
 		      });
-		
-		      showSlide(0);
 		    });
         </script>
 
