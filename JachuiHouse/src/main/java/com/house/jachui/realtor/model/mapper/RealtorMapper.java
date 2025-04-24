@@ -17,4 +17,6 @@ public interface RealtorMapper {
 
 	List<Estate> selectEstatesById(String userId);
 
+	int getTotalCount();
+
 }

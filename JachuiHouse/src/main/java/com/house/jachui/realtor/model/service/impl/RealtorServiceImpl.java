@@ -39,8 +39,7 @@ public class RealtorServiceImpl implements RealtorService{
 
 	@Override
 	public int getTotalCount(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return rMapper.getTotalCount();
 	}
 
 }

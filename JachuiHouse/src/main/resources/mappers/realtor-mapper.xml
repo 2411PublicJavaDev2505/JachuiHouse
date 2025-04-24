@@ -50,5 +50,9 @@
 		SELECT COUNT(*) FROM MEMBER
 	</select>
 	
+	<select id="getTotalCount">
+		SELECT COUNT(*) FROM ESTATE WHERE USER_ID=#{userId}
+	</select>
+	
 	
 </mapper>
