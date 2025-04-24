@@ -22,5 +22,6 @@
 		<a href="/member/login" class="btn">로그인하기</a>
 		<a href="/member/resetPw" class="btn">비밀번호 재설정</a>
 	</div>
+	
 </body>
 </html>

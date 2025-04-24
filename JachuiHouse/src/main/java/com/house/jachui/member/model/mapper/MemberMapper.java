@@ -65,7 +65,11 @@ public interface MemberMapper {
 
 	int updateUserPassword(String userId, String encryptedPw);
 
-	
+	// 아이디찾기 페이지에서 자취생/공인중개사 선택 시 
+	Member findMemberByEmailOrName1(
+	        @Param("userEmail") String userEmail, 
+	        @Param("userName") String userName
+	    );
 
 
 
@@ -78,6 +82,8 @@ public interface MemberMapper {
 	int updateApproveYn(String userId);
 
 	String selectNameById(String receiverId);
+
+	Member findMemberByEmailOrName(String userEmail, String userName);
 
 
 

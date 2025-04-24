@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.house.jachui.common.PageUtil;
@@ -162,12 +163,17 @@ public class MemberController {
 	@PostMapping("/findId")
 	public String selectFindId(
 			@ModelAttribute Member member
-			,HttpServletRequest request) {
+			,RedirectAttributes redirectAttributes) {
 		Member result = mService.selectFindId(member);
 		if(result != null) {
+			// 성공 시 홈으로 리다이렉트 
+			redirectAttributes.addFlashAttribute("successMessage", "아이디: " + result.getUserId());
 			return "redirect:/";
 		}else {
-			return "common/error";
+			// 실패 시 에러 메시지 추가 후 아이디찾기 페이지로 리다이렉트
+			String errorMessage = mService.getFindIdErrorMessage(member);
+			redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
+			return "redirect:/findId";
 		}
 		
 	}
@@ -278,7 +284,8 @@ public class MemberController {
 			model.addAttribute("member", foundMember);
 			return "member/foundId";
 		}else {
-			return "member/error";
+			model.addAttribute("errorMsg", "존재하지 않는 회원입니다.");
+			return "member/findId";
 		}
 	}
 	

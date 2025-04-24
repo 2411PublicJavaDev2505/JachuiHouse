@@ -108,7 +108,7 @@
 	</update>
 	
 	<select id="selectFindId" resultType="Member">
-		SELECT USER_ID, CREATE_DATE
+		SELECT USER_ID, CREATED_DATE
         FROM MEMBER
         WHERE USER_NAME = #{userName}
             AND USER_EMAIL = #{userEmail}
@@ -139,6 +139,13 @@
 	    AND USER_EMAIL = #{userEmail}
 	    AND DELETE_YN = 'N'
 	</select>
+	
+	<select id="findMemberByEmailOrName1" resultType="Member">
+        SELECT USER_ID, USER_EMAIL, USER_NAME, USER_ROLE, DELETE_YN
+        FROM MEMBER
+        WHERE (USER_EMAIL = #{userEmail} OR USER_NAME = #{userName})
+        AND DELETE_YN = 'N'
+    </select>
 	
 	<!-- <select id="selectMemberById" resultType="Member">
 	SELECT USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_PHONE, USER_GENDER, USER_ADDRESS, USER_BIRTH,
