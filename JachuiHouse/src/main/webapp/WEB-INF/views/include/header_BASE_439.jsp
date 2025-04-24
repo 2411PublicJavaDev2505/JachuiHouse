@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/header.css">
+</head>
+<body>
  <!-- 헤더 -->
-
         <header>
             <a href="/">
             <div class="logo">
@@ -24,7 +31,7 @@
             		<a href="/admin/rlist">관리자 페이지</a>
             	</c:if>
             	<c:if test="${sessionScope.userRole eq 'R' }">
-            		<a href="/realtor/myPage">마이페이지</a>
+            		<a href="/member/realtor/myPage">마이페이지</a>
             	</c:if>
             	<c:if test="${sessionScope.userRole eq 'M' }">
             		<a href="/member/myPage">마이페이지</a>
