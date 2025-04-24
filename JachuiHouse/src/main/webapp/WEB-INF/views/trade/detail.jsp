@@ -19,6 +19,15 @@
           <h2>사방팔아방 상세페이지</h2>
       
           <div class="detail-box">
+          	<div class="view-count-wrapper">
+			  <span class="view-count-label"> 
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="#f38b3f" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+				  <circle cx="12" cy="12" r="3"/>
+				</svg>		  
+			  조회수</span>
+			  <span class="view-count-number">${trade.viewCount}</span>
+			</div>
             <div class="info-row">
               <div class="label">작성자</div>
               <div class="value">${trade.userId}</div>
