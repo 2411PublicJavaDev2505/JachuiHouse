@@ -26,5 +26,8 @@ public class SignupRealtorRequest {
 	private String userRole;
 	private String realtorName;
 	private String realtorNo;
+	private String fileName;
+	private String fileRename;
+	private String filePath;
 	
 }

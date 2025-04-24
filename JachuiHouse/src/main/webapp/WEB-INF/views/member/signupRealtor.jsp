@@ -139,10 +139,10 @@
 	                    extraAddr = ' (' + extraAddr + ')';
 	                }
 	                // 조합된 참고항목을 해당 필드에 넣는다.
-	                document.getElementById("extraAddress").value = extraAddr;
+	                //document.getElementById("extraAddress").value = extraAddr;
 	            
 	            } else {
-	                document.getElementById("extraAddress").value = '';
+	                //document.getElementById("extraAddress").value = '';
 	            }
 				
 	        	// 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -154,6 +154,15 @@
 	        
 	        }).open();
 	    }
+	    
+	 	// SweetAlert
+        function showMessage(msg) {
+        	Swal.fire({            		
+         		title: '다시 한 번 확인해주세요.',
+         		text: msg,
+         		icon: 'error',
+       		});
+        }
     
         const signUpBtn = document.querySelector(".signUpBtn");
         signUpBtn.addEventListener("click", function (event) {
@@ -178,7 +187,7 @@
         	const userPhoneExp = /^010\d{8}$/;
         	const userPostcodeExp = /^\d{5}$/;
         	const userAddressExp = /^[가-힣\s]{5,20}/;
-        	const userDetailAddressExp = /^[가-힣\s]{5,20}/;
+        	const userDetailAddressExp = /^[가-힣0-9\s]{5,20}/;
         	const realtorNameExp = /[a-zA-Z0-9ㄱ-힣]{2,20}/;
         	const realtorNoExp = /^[0-9]{6,15}$/;
         	
