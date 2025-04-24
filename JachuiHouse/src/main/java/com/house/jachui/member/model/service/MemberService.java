@@ -79,5 +79,10 @@ public interface MemberService {
 	int getTotalCount(String userId);
 	
 	String selectNameById(String receiverId);
+
+	// 아이디찾기 페이지에서 자취생/공인중개사 선택 시 
+	String getFindIdErrorMessage(Member member);
+
+	Member selectFindId1(Member member);
 	
 }
