@@ -32,9 +32,17 @@
 .commenttbl th, td{
     border: 1px solid black;
     text-align: center;
+        padding: 8px;
+    vertical-align: middle;
+    word-break: break-word;
+    white-space: normal;
 }
-.commenttbl{
-    width: 580px;
+.commenttbl td:nth-child(2) { /* 댓글 내용 열 */
+    max-width: 250px; /* 적절한 최대 너비 */
+}
+.commenttbl{ 
+    width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     height: 200px;
     background-color: #FFF9E9;

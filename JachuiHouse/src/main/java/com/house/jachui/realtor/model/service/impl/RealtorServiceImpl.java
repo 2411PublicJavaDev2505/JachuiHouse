@@ -43,4 +43,10 @@ public class RealtorServiceImpl implements RealtorService{
 		return 0;
 	}
 
+	@Override
+	public int updateProfileImage(String userId, String newFileName) {
+		return rMapper.updateProfileImage(userId, newFileName);
+		
+	}
+
 }

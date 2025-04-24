@@ -29,18 +29,6 @@
                                 <th>관리</th>
                                 <th>작성일</th>
                             </tr>
-<!--                                <tr> -->
-<!--                                    <td>user11</td> -->
-<!--                                    <td>치우고 사세요</td> -->
-<!--                                    <td><button class="reportbtn">신고하기</button></td> -->
-<!--                                    <td>25/04/05</td> -->
-<!--                                </tr> -->
-<!--                                <tr> -->
-<!--                                    <td>user22</td> -->
-<!--                                    <td>여름이니까 많죠</td> -->
-<!--                                    <td><button class="reportbtn">신고하기</button></td> -->
-<!--                                    <td>25/04/06</td> -->
-<!--                                </tr> -->
                                <c:forEach items="${cList }" var="comment">
 	                               <c:if test="${comment.postNo == result.postNo}">
 	                                <tr>

@@ -34,7 +34,7 @@
 		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, USER_ADDRESS=#{userAddress}, REALTOR_NAME=#{realtorName} WHERE USER_ID=#{userId} 
 	</update>
 	<!-- 	마이페이지 이미지 수정 -->
-	<update id="updateProfileImage" parameterType="map">
+	<update id="updateProfileImage">
 		UPDATE MEMBER SET PROFILE_IMAGE = #{profileImage} WHERE USER_ID = #{userId}
 	</update>
 	<select id="selectRealtorById" resultType="Member">

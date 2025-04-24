@@ -17,9 +17,9 @@
         <div id="mainAll">
             <div id="mainLeft">
                 <div id="profile">
-                    <div id="photo">
-                        <img src="/Image20250120123326.png">
-                    </div>
+                    <div class="left-image">
+		                  <img src="/resources/image/${member.profileImage}" alt="image" id="profileImage" style="width:200px; height:200px; margin-left:50px; border-radius:100%;">	                			           
+	                </div>
                 </div>
                 <div id="name">
                     <b>${member.userId }</b>
