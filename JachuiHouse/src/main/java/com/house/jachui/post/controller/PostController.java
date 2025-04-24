@@ -21,6 +21,7 @@ import com.house.jachui.post.domain.CommentVO;
 import com.house.jachui.post.domain.PostVO;
 import com.house.jachui.post.service.PostService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -69,10 +70,12 @@ public class PostController {
 	}
 	
 	@PostMapping("/insert")//게시글 작성 (POST)
-	public String insertPost(Model model,
+	public String insertPost(HttpSession session, Model model,
 			@ModelAttribute PostInsertRequest post) {
 		try {
-			System.out.println(post);
+			
+			String userId = (String)session.getAttribute("userId");
+			post.setUserId(userId);
 			int result = pService.insertPost(post);
 			if(result > 0) {
 				return "redirect:/post/list";
@@ -126,6 +129,36 @@ public class PostController {
 			return "common/error";
 		}
 	}
+
+	@GetMapping("/update")//게시글 수정하기 GET
+	public String showPostUpdate(Model model,
+			@RequestParam(value = "postNo", required = false) Integer postNo) {
+		
+			PostVO post = pService.updateOneDetail(postNo);
+			model.addAttribute("result", post);
+			return "/post/update";
+	
+	}
+	
+	@PostMapping("/update")//게시글 수정하기 POST
+	public String postUpdate(Model model,
+			@ModelAttribute PostInsertRequest post) {
+		try {
+			int result = pService.postUpdate(post);
+			if(result > 0) {
+				return "redirect:/post/detail?postNo="+post.getPostNo();
+			}else {
+				return "common/error";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	
 	
 	@ResponseBody
 	@GetMapping("/cList")//댓글 조회
@@ -162,6 +195,23 @@ public class PostController {
 			return "common/error";
 		}
 	}
-
-
+	
+	@GetMapping("/cdelete")//댓글 삭제
+	public String deleteComment(Model model, 
+			@ModelAttribute CommentInsertRequest comment) {
+		try {
+			int result = pService.deleteComment(comment.getCommentNo());
+			if(result > 0) {
+				return "redirect:/post/detail?postNo="+comment.getPostNo();
+			}else {
+				return "common/error";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
+	}
+	
 }

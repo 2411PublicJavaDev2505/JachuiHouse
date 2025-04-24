@@ -80,6 +80,11 @@ public class TradeServiceImpl implements TradeService {
 	public int updateTradeYn(int tradeNo, char tradeYn) {
 	    return mapper.updateTradeYn(tradeNo, tradeYn);
 	}
+
+	@Override
+	public List<Trade> getTradeByUserId(String userId) {
+		return mapper.getTradeByUserId(userId);
+	}
 	
 	
 }

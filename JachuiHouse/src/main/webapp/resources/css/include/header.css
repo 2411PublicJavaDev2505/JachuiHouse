@@ -1,9 +1,11 @@
 @charset "UTF-8";
 
+
 body{
     margin: 0;
     background-color: #fff9e9;
 }
+
 .logo img{
     width: 100px;
     height: 70px;

@@ -36,25 +36,29 @@
                     </div>
                 </div>
                 <div id="name">
-                    <b>강우혁</b>
+                    <b>${member.userId }</b>
                 </div>
                 <div id="intro">
-                    공인중개사 강우혁입니다.
+                    공인중개사 ${member.userName }입니다.
                 </div>
                 <div id="company">
-                    kh공인중개사 사무소
+                   ${member.realtorName}
                 </div>
                 <div id="phone">
-                    010-1919-9191
+                     ${member.userPhone }
                 </div>
                 <div id="email">
-                    kh@kh.com
+                    ${member.userEmail }
                 </div>
                 <div id="modi">
-                    <button type="submit" id="modify">정보 수정</button>
+                	<a href="/realtor/update">
+                    	<button type="submit" id="modify">정보 수정</button>
+                    </a>
                 </div>
                 <div id="del">
-                    <button type="submit" id="delete">회원 탈퇴</button>
+                	<a href="/member/delete">
+                    	<button type="submit" id="delete">회원 탈퇴</button>
+                    </a>
                 </div>
             </div>
             <div id="mainRight">
