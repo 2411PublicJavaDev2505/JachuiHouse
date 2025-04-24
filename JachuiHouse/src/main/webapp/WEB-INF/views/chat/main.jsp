@@ -17,7 +17,7 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	    <main>
 	        <div class="title">
-	            <h1>${recieverName }님과의 채팅</h1>
+	            <h1>${receiverName } 님과의 채팅</h1>
 	            <h2><i class="fa-light fa-paper-plane"></i></h2>
 	        </div>
 	        <div class="chat-content">
@@ -30,7 +30,7 @@
 	        		</c:if>
 	        		<c:if test="${chat.writerId eq sessionScope.id}">
 	        			<div class="not-my-msg">
-	        				<div class="receiver-name">${recieverName }</div>
+	        				<div class="receiver-name">${receiverName }</div>
 	        				<div class="receive-msg">${chat.chatContent }</div>
 	        			</div>
 	        		</c:if>
@@ -39,7 +39,7 @@
         	<form action="/chat/send" method="post" enctype="multipart/form-data">
         		<div class="message">
 	        		<input type="hidden" value="${writerId }" name="writerId">
-	        		<input type="hidden" value="${recieverId }" name="recieverId">
+	        		<input type="hidden" value="${receiverId }" name="receiverId">
 	        		<input type="text" placeholder="메세지를 입력해주세요" name="chatContent" id="input" required="required">
 	        		<input type="file" name="images" multiple>
 		            	<button type="submit" id="submitbtn">
