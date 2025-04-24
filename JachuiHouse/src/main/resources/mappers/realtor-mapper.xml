@@ -34,7 +34,7 @@
 		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, USER_ADDRESS=#{userAddress}, REALTOR_NAME=#{realtorName} WHERE USER_ID=#{userId} 
 	</update>
 	<!-- 	마이페이지 이미지 수정 -->
-	<update id="updateProfileImage" parameterType="map">
+	<update id="updateProfileImage">
 		UPDATE MEMBER SET PROFILE_IMAGE = #{profileImage} WHERE USER_ID = #{userId}
 	</update>
 	<select id="selectRealtorById" resultType="Member">
@@ -42,12 +42,16 @@
 	</select>
 	
 	<select id="selectEstatesById" resultType="Estate">
-		SELECT * FROM ESTATE WHERE USER_ID=#{userId}
+		SELECT * FROM ESTATE WHERE USER_ID=#{userId} 
 	</select>
 	
 	<!-- 회원 관리 조회 - 페이지네이션-->
-	<select id="getTotalCount" resultType="_int">
+	<!-- <select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
+	</select> -->
+	
+	<select id="getTotalCount">
+		SELECT COUNT(*) FROM ESTATE WHERE USER_ID=#{userId}
 	</select>
 	
 	

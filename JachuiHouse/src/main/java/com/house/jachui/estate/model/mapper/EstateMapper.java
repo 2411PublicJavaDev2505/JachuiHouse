@@ -23,6 +23,6 @@ public interface EstateMapper {
 
 	void updateEstate(EstateAddRequest estate);
 
-	String selectIdByEmployNo(int estateNo);
+	String selectIdByEstateNo(int estateNo);
 
 }

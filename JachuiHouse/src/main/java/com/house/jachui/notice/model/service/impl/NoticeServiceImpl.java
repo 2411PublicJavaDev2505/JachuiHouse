@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class NoticeServiceImpl implements NoticeService{
 	
 	private final NoticeMapper mapper;
-
+	
 	@Override
 	public List<NoticeVO> selectListAll(int currentPage) {
 		int limit = 10;

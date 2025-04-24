@@ -28,6 +28,10 @@
 		<result property="approveYn"			column="APPROVE_YN"/>
 		<result property="joinDate"				column="JOIN_DATE"/>
 		<result property="profileImage"			column="PROFILE_IMAGE"/>
+		<result property="fileName"				column="FILE_NAME"/>
+		<result property="fileRename"			column="FILE_RENAME"/>
+		<result property="filePath"				column="FILE_PATH"/>
+		
 	</resultMap>
 	
 	<!-- 자취생 회원가입 -->
@@ -36,13 +40,15 @@
             USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_PHONE, 
             USER_GENDER, USER_ADDRESS, USER_BIRTH, USER_POSTCODE, 
             USER_DETAILADDRESS, ALONE_LIVING, USER_ROLE, 
-            REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE
+            REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE,
+            FILE_NAME, FILE_RENAME, FILE_PATH
         )
         VALUES (
             #{userId}, #{userPw}, #{userName}, #{userEmail}, #{userPhone}, 
             #{userGender}, #{userAddress}, #{userBirth}, #{userPostcode}, 
             #{userDetailAddress}, #{aloneLiving}, 'M', 
-            'X', 0, DEFAULT, DEFAULT, DEFAULT
+            'X', 0, DEFAULT, DEFAULT, DEFAULT,
+            #{fileName}, #{fileRename}, #{filePath}
         )
     </insert>
 
@@ -51,12 +57,14 @@
         INSERT INTO MEMBER (
             USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_PHONE, 
             USER_GENDER, USER_ADDRESS, USER_POSTCODE, 
-            USER_DETAILADDRESS, USER_ROLE, REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE
+            USER_DETAILADDRESS, USER_ROLE, REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE,
+            FILE_NAME, FILE_RENAME, FILE_PATH
         )
         VALUES (
             #{userId}, #{userPw}, #{userName}, #{userEmail}, #{userPhone}, 
             'M', #{userAddress}, #{userPostcode}, 
-            #{userDetailAddress}, 'R', #{realtorName}, '1', DEFAULT, DEFAULT, DEFAULT
+            #{userDetailAddress}, 'R', #{realtorName}, '1', DEFAULT, DEFAULT, DEFAULT,
+            #{fileName}, #{fileRename}, #{filePath}
         )
     </insert>
     
@@ -100,7 +108,7 @@
 	</update>
 	
 	<select id="selectFindId" resultType="Member">
-		SELECT USER_ID, CREATE_DATE
+		SELECT USER_ID, CREATED_DATE
         FROM MEMBER
         WHERE USER_NAME = #{userName}
             AND USER_EMAIL = #{userEmail}
@@ -132,6 +140,13 @@
 	    AND DELETE_YN = 'N'
 	</select>
 	
+	<select id="findMemberByEmailOrName1" resultType="Member">
+        SELECT USER_ID, USER_EMAIL, USER_NAME, USER_ROLE, DELETE_YN
+        FROM MEMBER
+        WHERE (USER_EMAIL = #{userEmail} OR USER_NAME = #{userName})
+        AND DELETE_YN = 'N'
+    </select>
+	
 	<!-- <select id="selectMemberById" resultType="Member">
 	SELECT USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_PHONE, USER_GENDER, USER_ADDRESS, USER_BIRTH,
           USER_POSTCODE, USER_DETAIL_ADDRESS, ALONE_LIVING, USER_ROLE, REALTOR_NAME, REALTOR_NO,
@@ -149,11 +164,16 @@
 	</select>
 	
 	<update id="updateMember"> 
-		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, USER_ADDRESS=#{userAddress} WHERE USER_ID=#{userId} 
+		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, 
+		USER_ADDRESS=#{userAddress}, FILE_NAME = #{fileName}, FILE_RENAME = #{fileRename}, FILE_PATH = #{filePath} 
+		WHERE USER_ID=#{userId} 
 	</update>
 	
 	<update id="updateRealtor">
-		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, USER_ADDRESS=#{userAddress}, REALTOR_NAME=#{realtorName} WHERE USER_ID=#{userId} 
+		UPDATE MEMBER SET USER_PW=#{userPw}, USER_NAME=#{userName}, USER_PHONE=#{userPhone}, USER_ADDRESS=#{userAddress}, REALTOR_NAME=#{realtorName},
+		    FILE_NAME = #{fileName},
+		    FILE_RENAME = #{fileRename},
+		    FILE_PATH = #{filePath} WHERE USER_ID=#{userId} 
 	</update>
 	
 	<update id="updatePw">
@@ -209,7 +229,7 @@
 	</select>
 	
 	<select id="selectNameById" resultType="string">
-		SELECT USER_NAME FROM MEMBER WHERE ID = #{userId}
+		SELECT USER_NAME FROM MEMBER WHERE USER_ID = #{userId}
 	</select>
 	<!-- 관리자 승인 -->
 	<update id="updateApproveYn" parameterType="String">

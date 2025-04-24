@@ -40,7 +40,7 @@
 				<c:if test="${userRole ne 'R' }">
 					<div class="estate-conatact">
 	                    <div class="chat-btn">
-	                    	<a href="/chat/torealtor">
+	                    	<a href="/chat/torealtor?estateNo=${estateNo }">
 	                        	<button>1:1 채팅문의</button>
 	                    	</a>
 	                    </div>

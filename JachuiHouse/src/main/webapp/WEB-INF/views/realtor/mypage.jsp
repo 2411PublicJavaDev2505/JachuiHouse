@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-        <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+pageEncoding="UTF-8"%>
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
 <!DOCTYPE html>
 <html>
@@ -17,9 +17,9 @@
         <div id="mainAll">
             <div id="mainLeft">
                 <div id="profile">
-                    <div id="photo">
-                        <img src="/Image20250120123326.png">
-                    </div>
+                    <div class="left-image">
+		                  <img src="/resources/image/${member.profileImage}" alt="image" id="profileImage" style="width:200px; height:200px; margin-left:50px; border-radius:100%;">	                			           
+	                </div>
                 </div>
                 <div id="name">
                     <b>${member.userId }</b>
@@ -96,12 +96,24 @@
                         </div>
                         <div id="bot">
                             <div id="top-in">
-                                <text>원룸</text>
+                                <text>${estate.estateFloor }층, ${estate.estateWidth }㎡</text>
                             </div>
                         </div>
                 </div>
+                
                 </div>
-                </c:forEach>
+            </c:forEach>
+            <div class="pagination">
+					<c:if test="${startNavi ne 1 }">
+						<a href="/realtor/myPage?page=${startNavi - 1 }" class="prev">&lt;</a>
+					</c:if>
+					<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
+						<a href="/realtor/myPage?page=${p }">${p }</a>
+					</c:forEach>
+					<c:if test="${endNavi ne maxPage }">
+						<a href="/realtor/myPage?page=${endNavi + 1 }" class="next">&gt;</a>
+					</c:if>
+				</div>
         </div>
     </main>
     <footer>

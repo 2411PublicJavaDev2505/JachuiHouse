@@ -16,17 +16,19 @@
         <div id="container">
 			<jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <div class="main">
-            	<form action="/post/list"></form>
-	                <div class="search">
-	                    <select name="postType" id="postType">
-	                        <option value="none">전체 게시판</option>
-	                        <option value="자유">자유 게시판</option>
-	                        <option value="꿀팁">꿀팁 게시판</option>
-	                        <option value="질문">질문 게시판</option>
-	                    </select>
-	                    <input class="searchplace" name="searchTitle" type="text" placeholder="제목으로 검색어를 입력하세요.">
-	                    <button class="searchbtn" type="button"><a href="/post/search">검색</a></button>
-	                </div>
+            	<form action="/post/search" method="get">
+				   <div class="search">
+				       <select name="category" id="postType">
+				           <option value="none">전체 게시판</option>
+				           <option value="free">자유 게시판</option>
+				           <option value="tip">꿀팁 게시판</option>
+				           <option value="qna">질문 게시판</option>
+				       </select>
+				       <input class="searchplace" name="searchKeyword" type="text" placeholder="제목으로 검색어를 입력하세요.">
+				       
+				        <button class="searchbtn" type="submit">검색</button>
+				    </div>
+				</form>
 	                <div class="board">
 	                    	<button class="writebtn" ><a href="/post/insert">작성하기</a></button>
 	                    	<div class="table">
@@ -37,6 +39,7 @@
 			                            <th>작성자</th>
 			                            <th>작성일</th>
 			                        </tr>
+									
 		                       		<c:forEach var="post" items="${pList }">
 				                        <tr>
 				                            <td style="width : 150px;">${post.postType }</td>

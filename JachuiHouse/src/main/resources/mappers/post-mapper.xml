@@ -12,9 +12,7 @@
 		<result property="writeDate" column="WRITE_DATE" />
 		<result property="updateDate" column="UPDATE_DATE" />
 	</resultMap>
-	<select id="getTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM POST
-	</select>
+
 	<select id="selectList" resultMap="postResultMap">
 		SELECT * FROM POST
 	</select>
@@ -59,5 +57,44 @@
 	<delete id="deleteComment">
 		DELETE FROM "COMMENT" WHERE COMMENT_NO = #{commentNo}
 	</delete>
+	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM POST
+		WHERE
+		<choose>
+			<when test="category == 'free'">
+				POST_TYPE = 'free' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>
+			<when test="category == 'tip'">
+				POST_TYPE = 'tip' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>
+			<when test="category == 'qna'">
+				POST_TYPE = 'qna' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>
+			<otherwise>
+				1=1
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectSearchList" resultType="PostVO">
+		SELECT * FROM POST
+		WHERE
+		<choose>
+			<when test="category == 'free'">
+				POST_TYPE = '자유' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>
+			<when test="category == 'tip'">
+				POST_TYPE = '꿀팁' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>
+			<when test="category == 'qna'">
+				POST_TYPE = '질문' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>
+			<otherwise>
+				POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</otherwise>
+		</choose>
+		ORDER BY WRITE_DATE DESC
+	</select>
 		
 </mapper>  

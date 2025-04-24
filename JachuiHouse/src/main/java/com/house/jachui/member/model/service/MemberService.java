@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import org.springframework.web.multipart.MultipartFile;
-
 import com.house.jachui.member.dto.ContactRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.MemberPasswordRequest;
@@ -80,5 +79,10 @@ public interface MemberService {
 	int getTotalCount(String userId);
 	
 	String selectNameById(String receiverId);
+
+	// 아이디찾기 페이지에서 자취생/공인중개사 선택 시 
+	String getFindIdErrorMessage(Member member);
+
+	Member selectFindId1(Member member);
 	
 }

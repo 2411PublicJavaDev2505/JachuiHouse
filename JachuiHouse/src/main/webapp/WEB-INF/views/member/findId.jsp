@@ -28,14 +28,50 @@
             <label><input type="radio" name="userRole" value="R" required> 공인중개사</label>
           </div>
           
-          <label>인증방식</label>
-          <div class="confirm-group">
-            <label><input type="radio" name="confirmType" value="email" required>이메일 인증</label>
-            <label><input type="radio" name="confirmType" value="phone" required>휴대폰 인증</label>
+<!--           <label>인증방식</label> -->
+<!--           <div class="confirm-group"> -->
+<!--             <label><input type="radio" name="confirmType" value="email" required>이메일 인증</label> -->
+<!--             <label><input type="radio" name="confirmType" value="phone" required>휴대폰 인증</label> -->
             
             <button type="submit" class="btn">아이디 찾기</button>
           </div>
         </form>
       </div>
+      <script>
+	      const errorMsg = "${errorMsg }";
+			if(errorMsg) {
+				alert(errorMsg);
+// 				Swal.fire({
+//       				icon: 'error',
+//       				title: '아이디 찾기 실패',
+//       				text: errorMsg,
+//       				confirmButtonText: '확인',
+//       				confirmButtonColor: '#4f46e5'
+//       			});
+			}
+      		//에러 메시지 처리
+//       		<c:if test="${not empty errorMsg}">
+// 	      		Swal.fire({
+// 	  				icon: 'error',
+// 	  				title: '아이디 찾기 실패',
+// 	  				text: errorMsg,
+// 	  				confirmButtonText: '확인',
+// 	  				confirmButtonColor: '#4f46e5'
+// 	  			});
+//       		</c:if>
+      		
+//       		// 성공 메시지 처리
+//       		<c:if test="${not empty errorMsg}">
+// 	      		Swal.fire({
+// 	  				icon: 'success',
+// 	  				title: '아이디 찾기 실패',
+// 	  				text: '${errorMsg}',
+// 	  				confirmButtonText: '홈으로 이동',
+// 	  				confirmButtonColor: '#4f46e5'
+//   			}).then(() => {
+//   				window.location.href='/';
+//   			});
+//       		</c:if>
+      </script>
     </body>
     </html>

@@ -64,7 +64,49 @@ public class MemberServiceImpl implements MemberService {
         return mMapper.selectFoundId(member);
     }
 
-    // 비밀번호 재설정
+    
+    @Override
+    public Member selectFindId1(Member member) {
+        Member dbMember = mMapper.findMemberByEmailOrName(
+            member.getUserEmail(), 
+            member.getUserName()
+        );
+        
+        if (dbMember == null || "Y".equals(dbMember.getDeleteYn())) {
+            return null;
+        }
+        
+        if (!dbMember.getUserRole().equals(member.getUserRole())) {
+            return null;
+        }
+        
+        return dbMember;
+    }
+    
+	// 아이디찾기 페이지에서 자취생/공인중개사 선택 시 
+	@Override
+	public String getFindIdErrorMessage(Member member) {
+		Member dbMember = mMapper.findMemberByEmailOrName1(
+	            member.getUserEmail(), 
+	            member.getUserName()
+	        );
+	        
+	        // 계정 없거나 삭제된 경우
+	        if (dbMember == null || "Y".equals(dbMember.getDeleteYn())) {
+	            return "해당 이메일 또는 이름으로 등록된 계정이 없습니다.";
+	        }
+	        
+	        // 역할 불일치
+	        if (!dbMember.getUserRole().equals(member.getUserRole())) { // "만약 dbMember 객체의 사용자 역할(UserRole)이 member 객체의 사용자 역할과 다르다면"
+	            String selectedRole = "M".equals(member.getUserRole()) ? "자취생" : "공인중개사"; // member의 역할이 "M"이면 자취생, 아니면 공인중개사. selectedRole 변수에 해당 조건 결과로 "자취생" 또는 "공인중개사"가 저장 됨.
+	            return "\"" + selectedRole + "\"이 아닙니다. 다시 확인하여 주십시오.";
+	        }
+	        
+	        return "알 수 없는 오류가 발생했습니다.";
+	    }
+    
+
+	// 비밀번호 재설정
     @Override
 	public String resetPw(MemberPasswordRequest memberPasswordRequest) {
     	return mMapper.resetPw(memberPasswordRequest);
@@ -222,8 +264,11 @@ public class MemberServiceImpl implements MemberService {
 		return mMapper.selectNameById(receiverId);
 	}
 
+
+	}
+
 	
 
 
 
-}
+
