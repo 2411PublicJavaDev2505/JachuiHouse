@@ -52,7 +52,7 @@
 	                                     <c:if test="${sessionScope.userId eq comment.userId }">
 	                                     	<td>
 		                                     	<button class="updatebtn"><a href="#">수정하기</a></button>
-		                                     	<button class="deletebtn"><a href="#">삭제하기</a></button>
+		                                     	<button class="deletebtn"><a href="/post/cdelete?commentNo=${comment.commentNo }&postNo=${result.postNo}">삭제하기</a></button>
 	                                     	</td>
 	                                     </c:if>	
 	                                    <td>${comment.writeDate}</td>
@@ -69,8 +69,8 @@
 						   <input type="hidden" name="userId" value="${sessionScope.userId }">
 						   <div class="underbar">
 						   <c:if test="${sessionScope.userId eq result.userId }">
-						   		<button class="updatebtn2">수정하기</button>
-						   		<button class="deletebtn2" type="submit"><a href="/post/delete?postNo=${result.postNo }">삭제하기</a></button>		
+						   		<button class="updatebtn2" onclick="location.href='/post/update?postNo=${result.postNo }'">수정하기</button>
+						   		<button class="deletebtn2" type="submit" onclick="/post/delete?postNo=${result.postNo }'">삭제하기</button>		
 						   </c:if>
 							   <input id="commentInput" type="text" placeholder="댓글을 입력하세요." class="commentbox" name="commentContent">
 							   <button class="commentbtn" type="submit">댓글달기</button>
