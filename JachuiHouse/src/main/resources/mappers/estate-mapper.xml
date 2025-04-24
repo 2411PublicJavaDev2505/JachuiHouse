@@ -50,38 +50,46 @@
 	  	JOIN MEMBER M ON E.USER_ID = M.USER_ID
 	  	WHERE E.ESTATE_NO = #{estateNo}
 	</select>
+	<select id="searchByAddress" resultType="com.house.jachui.estate.model.vo.Estate">
+	    SELECT * FROM ESTATE 
+	    WHERE ESTATE_ADDRESS LIKE #{keyword}
+	</select>
 	<insert id="insertEstate" parameterType="Estate">
-    <selectKey keyProperty="estateNo" resultType="_int" order="BEFORE">
-        SELECT SEQ_ESTATE_NO.NEXTVAL FROM DUAL
-    </selectKey>
-    
-    INSERT INTO estate (
-        ESTATE_NO, ESTATE_RENT_TYPE, ESTATE_DEPOSIT,
-        ESTATE_MONTHLY_RENT, ESTATE_ADDRESS, ESTATE_TYPE,
-        ESTATE_WIDTH, ESTATE_FLOOR, MOVEIN_NOW_YN, ESTATE_MOVEIN_DATE,
-        USER_ID
-    ) VALUES (
-        #{estateNo},
-        #{estateRentType},
-        #{estateDeposit},
-        <choose>
-            <when test='estateRentType == "charter"'>NULL</when>
-            <otherwise>#{estateMonthlyRent}</otherwise>
-        </choose>,
-        #{estateAddress},
-        #{estateType},
-        #{estateWidth},
-        #{estateFloor},
-        default,
-        <choose>
-            <when test='moveinNowYN == "Y"'>NULL</when>
-            <otherwise>#{estateMoveinDate}</otherwise>
-        </choose>,
-        #{userId}
-    )
-</insert>
+	    <selectKey keyProperty="estateNo" resultType="_int" order="BEFORE">
+	        SELECT SEQ_ESTATE_NO.NEXTVAL FROM DUAL
+	    </selectKey>
+	    INSERT INTO estate (
+	        ESTATE_NO, ESTATE_RENT_TYPE, ESTATE_DEPOSIT,
+	        ESTATE_MONTHLY_RENT, ESTATE_ADDRESS, ESTATE_TYPE,
+	        ESTATE_WIDTH, ESTATE_FLOOR, MOVEIN_NOW_YN, ESTATE_MOVEIN_DATE,
+	        USER_ID
+	    ) VALUES (
+	        #{estateNo},
+	        #{estateRentType},
+	        #{estateDeposit},
+	        <choose>
+	            <when test='estateRentType == "charter"'>NULL</when>
+	            <otherwise>#{estateMonthlyRent}</otherwise>
+	        </choose>,
+	        #{estateAddress},
+	        #{estateType},
+	        #{estateWidth},
+	        #{estateFloor},
+	        default,
+	        <choose>
+	            <when test='moveinNowYN == "Y"'>NULL</when>
+	            <otherwise>#{estateMoveinDate}</otherwise>
+	        </choose>,
+	        #{userId}
+	    )
+	</insert>
 	<delete id="deleteEstate">
 	    DELETE FROM ESTATE
 	    WHERE ESTATE_NO = #{estateNo}
 	</delete>
+	<select id="selectIdByEstateNo" resultType="string" parameterType="int">
+	    SELECT USER_ID
+	    FROM ESTATE
+	    WHERE ESTATE_NO = #{estateNo}
+	</select>
 </mapper>

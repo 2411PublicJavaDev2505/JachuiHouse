@@ -1,6 +1,7 @@
 package com.house.jachui.estate.model.service.impl;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ImageServiceImpl implements ImageService{
 	}
 
 	@Override
-	 public void saveEstateImages(int estateNo, List<MultipartFile> images) throws IOException {
+	 public void saveEstateImages(int estateNo, List<MultipartFile> images) throws IllegalStateException, IOException {
         int order = 1;
         for (MultipartFile image : images) {
             if (!image.isEmpty()) {
@@ -50,4 +51,40 @@ public class ImageServiceImpl implements ImageService{
         }
     }
 
+	@Override
+	public void saveNewImages(int estateNo, List<MultipartFile> newImages) throws IllegalStateException, IOException {
+		for (MultipartFile image : newImages) {
+            if (!image.isEmpty()) {
+                String originalFilename = image.getOriginalFilename();
+                String uuid = UUID.randomUUID().toString();
+                String saveFileName = uuid + "_" + originalFilename;
+                Path path = Paths.get(uploadDir, saveFileName);
+                image.transferTo(path.toFile());
+
+                EstateFile file = new EstateFile();
+                file.setEstateNo(estateNo);
+                file.setEstateFileName(originalFilename);
+                file.setEstateFileRename(saveFileName);
+                file.setEstateFilePath("/resources/images/" + saveFileName);
+
+                fileMapper.insertEstateImage(file);
+            }
+        }
+	}
+
+	@Override
+	public void deleteImageByIdList(List<Integer> deleteImageIds) {
+		    for (int fileNo : deleteImageIds) {
+		        EstateFile file = fileMapper.selectFileById(fileNo); // 경로 조회
+		        if (file != null) {
+		            try {
+		                Path path = Paths.get(uploadDir, file.getEstateFileRename());
+		                Files.deleteIfExists(path);
+		            } catch (IOException e) {
+		                e.printStackTrace();
+		            }
+		            fileMapper.deleteFileById(fileNo); // DB 삭제
+		        }
+		    }
+	}
 }

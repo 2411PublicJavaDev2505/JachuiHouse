@@ -209,6 +209,11 @@ public class MemberServiceImpl implements MemberService {
 		return mMapper.updateProfileImage(userId, newFileName);
 	}
 
+	@Override
+	public String selectNameById(String receiverId) {
+		return mMapper.selectNameById(receiverId);
+	}
+
 	
 
 

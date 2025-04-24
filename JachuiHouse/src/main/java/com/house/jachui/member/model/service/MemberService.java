@@ -76,5 +76,7 @@ public interface MemberService {
 	int updateProfileImage(String userId, String newFileName);
 	//관리자 승인
 	int approveMember(String userId);
+
+	String selectNameById(String receiverId);
 	
 }

@@ -15,4 +15,6 @@ public interface OptionMapper {
 	int insertOptionList (int estateNo, int optionCode );
 
 	void deleteOptionByEstateNo(int estateNo);
+
+	void insertOptionCode(int estateNo, Integer code);
 }
