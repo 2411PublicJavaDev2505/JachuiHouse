@@ -10,9 +10,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="reportContent" column="REPORT_CONTENT"/>
 		<result property="reportReason" column="REPORT_REASON"/>
 		<result property="postNo" column="POST_NO"/>
+		<result property="commentNo" column="COMMENT_NO"/>
 	</resultMap>
 	
 	<insert id="reportcInsert">
-		INSERT INTO REPORT VALUES(REPORT_SEQ.NEXTVAL, #{userId}, SYSDATE, #{reportContent}, #{reportReason}, #{postNo})
+		INSERT INTO REPORT VALUES(REPORT_SEQ.NEXTVAL, #{userId}, SYSDATE, #{reportContent}, #{reportReason}, #{postNo}, #{commentNo})
 	</insert>
+	<insert id="reportpInsert">
+		INSERT INTO REPORT(REPORT_NO, USER_ID, REPORT_DATE, REPORT_CONTENT, REPORT_REASON, POST_NO) VALUES(REPORT_SEQ.NEXTVAL, #{userId}, SYSDATE, #{reportContent}, #{reportReason}, #{postNo})
+	</insert>
+	
+	
+	
+	
 </mapper>
