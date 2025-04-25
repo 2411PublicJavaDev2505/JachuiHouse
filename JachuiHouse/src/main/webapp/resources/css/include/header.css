@@ -21,10 +21,17 @@ header {
     padding: 10px;
     font-size: 20px;
 }
-header a{
+header a {
     text-decoration: none;
     color: white;
     padding: 30px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header a:hover {
+    background-color: #D4693B;
+    color: #FFAB87;
+    border-radius: 10px;
 }
 header .logo {
     font-size: 24px;

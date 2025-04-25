@@ -43,7 +43,7 @@
                 즉시입주: <input type="checkbox" name="moveinNowYN" value="Y" ${estate.moveinNowYN == 'Y' ? 'checked' : ''}/>
             </label><br/>
             <label>
-                입주가능일: <input type="date" id="moveinDate" name="estateMoveinDate" value="${estate.estateMoveinDate}"/>
+                입주가능일: <input type="date" name="estateMoveinDate" value="${estate.estateMoveinDate}" ${estate.moveinNowYN == 'Y' ? 'disabled' : ''}/>
             </label><br/>
 
             <label>기존 이미지</label><br/>
@@ -60,14 +60,16 @@
             <fieldset>
                 <legend>옵션 선택</legend>
                 <div class="option-grid">
-                    <label class="option-item">
-                        <input type="checkbox" name="optionCodes" value="1"
-                               ${fn:contains(estate.estateOptionListAsString, '1') ? 'checked' : ''}/>
-                        <div class="option-img-box">
-                            <img src="/resources/images/estate/option/세탁기.png" alt="세탁기"/>
-                        </div>
-                        <span class="option-name">세탁기</span>
-                    </label>
+                    <c:forEach items="${estate.estateOptionList}" var="option">
+					    <label class="option-item">
+					        <input type="checkbox" name="optionCodes" value="${option.optionNo}"
+					            ${fn:contains(estateOptionListAsString, ',' + option.optionNo + ',') ? 'checked' : ''} />
+					        <div class="option-img-box">
+					            <img src="/resources/images/estate/option/${option.optionName}.png" alt="${option.optionName}"/>
+					        </div>
+					        <span class="option-name">${option.optionName}</span>
+					    </label>
+					</c:forEach>
                 </div>
             </fieldset>
 
@@ -75,5 +77,23 @@
             <button type="submit">수정 완료</button>
         </form>
     </div>
+    <script>
+		document.addEventListener("DOMContentLoaded", function () {
+		    const checkbox = document.querySelector("input[name='moveinNowYN']");
+		    const dateInput = document.querySelector("input[name='estateMoveinDate']");
+		
+		    function toggleMoveinDate() {
+		        if (checkbox.checked) {
+		            dateInput.disabled = true;
+		            dateInput.value = ""; // 서버로 빈 값 전송
+		        } else {
+		            dateInput.disabled = false;
+		        }
+		    }
+		
+		    checkbox.addEventListener("change", toggleMoveinDate);
+		    toggleMoveinDate(); // 페이지 로드 시 초기 적용
+		});
+	</script>
 </body>
 </html>

@@ -107,44 +107,26 @@ public class NoticeController {
 			, @RequestParam("uploadFile") MultipartFile uploadFile
 			, HttpSession session, Model model) {
 
-//	    // ✅ 여기! 메서드 호출 여부 체크
-//	    System.out.println(">>> noticeAdd() controller called!");
 			try {
 				// 1. 파일 저장 처리
 				if(uploadFile != null && !uploadFile.getOriginalFilename().isBlank()) {
-					String uploadDir = session.getServletContext().getRealPath("/resources/nUploadFiles/");
-		            File dir = new File(uploadDir);
-		            if (!dir.exists()) dir.mkdirs(); // 디렉토리 없으면 생성
-		            
-		            String originalFilename = uploadFile.getOriginalFilename();
-		            String renamedFilename = System.currentTimeMillis() + "_" + originalFilename;
-		            File destination = new File(uploadDir, renamedFilename);
-
-		            uploadFile.transferTo(destination); // 실제 파일 저장
-					
 					Map<String, String> fileInfo = fileUtil.saveFile(uploadFile, session, "notice");
 					notice.setNoticeFileName(fileInfo.get("nFilename"));
 					notice.setNoticeFileRename(fileInfo.get("nFileRename"));
-					notice.setNoticeFilePath(fileInfo.get("nFilepath"));
+					notice.setNoticeFilePath("/resources/nUploadFiles/"+fileInfo.get("nFileRename"));
 				}
 				
-		        // 2. 세션에서 userId 가져와서 세팅
-				String UserId = (String) session.getAttribute("userId");
-//		        Member userId = (Member) session.getAttribute("userId");
-		        if (UserId != null) {
-//		            notice.setUserId(userId.getUserId());  // ✨ 여기가 중요 ✨
-		        System.out.println("세션에서 가져온 userId: " + UserId);
-		        notice.setUserId(UserId);
-		            
+		         //2. 세션에서 userId 가져와서 세팅
+				String userId = (String) session.getAttribute("userId");
+		        if (userId != null) {
+		        notice.setUserId(userId);          
 		        } else {
 		            model.addAttribute("errorMessage", "로그인이 필요합니다.");
 		            return "common/error";
 		        }
 
 		        // 3. 저장
-		        System.out.println("등록할 notice 정보: " + notice);
 		        int result = nService.addNotice(notice);
-		        System.out.println("등록 결과: " + result);
 
 				return "redirect:/notice/list";				
 			} catch (Exception e) {
@@ -153,6 +135,32 @@ public class NoticeController {
 				return "common/error";
 			}
 	}
+//	//다운로드 처리용 메서드
+//	@GetMapping("/download")
+//	public void downloadFile(
+//	    @RequestParam("filepath") String filepath,
+//	    @RequestParam("filename") String filename,
+//	    HttpServletRequest request,
+//	    HttpServletResponse response) {
+//
+//	    try {
+//	        // 저장된 실제 경로
+//	        String savePath = request.getServletContext().getRealPath(filepath);
+//	        File file = new File(savePath, filename);
+//
+//	        if (file.exists()) {
+//	            response.setContentType("application/octet-stream");
+//	            response.setHeader("Content-Disposition", "attachment;filename=\"" + java.net.URLEncoder.encode(filename, "UTF-8") + "\"");
+//	            response.setContentLength((int) file.length());
+//
+//	            java.nio.file.Files.copy(file.toPath(), response.getOutputStream());
+//	            response.getOutputStream().flush();
+//	        }
+//	    } catch (Exception e) {
+//	        e.printStackTrace();
+//	    }
+//	}
+
 	
 	@GetMapping("/detail/{noticeNo}")
 	public String noticeDetail(@PathVariable int noticeNo, Model model) {
@@ -207,11 +215,10 @@ public class NoticeController {
 				// 📌 2. 파일 저장 결과 확인 로그
 				System.out.println("✅ 저장된 파일 원본명: " + fileInfo.get("nFilename"));
 				System.out.println("✅ 저장된 파일 리네임: " + fileInfo.get("nFileRename"));
-				System.out.println("✅ 저장된 파일 경로: " + fileInfo.get("nFilePath"));
 	            
 	            notice.setNoticeFileName(fileInfo.get("nFilename"));
 	            notice.setNoticeFileRename(fileInfo.get("nFileRename"));
-	            notice.setNoticeFilePath(fileInfo.get("nFilepath"));
+	            notice.setNoticeFilePath("/resources/nUploadFiles/"+fileInfo.get("nFileRename"));
 	        } else {
 				System.out.println("📎 새 파일 없음. 기존 파일 유지할 예정");
 	        	

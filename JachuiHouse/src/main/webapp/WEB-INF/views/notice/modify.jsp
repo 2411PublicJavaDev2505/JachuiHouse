@@ -52,7 +52,6 @@
 		                <div class="add">
 			                <span><a href="..${notice.noticeFilePath }">${notice.noticeFileName }</a></span>
 							<input type="file" name="reloadFile" onchange="readURL(this)">
-
 	                	</div>
 	              	</div>
 	            

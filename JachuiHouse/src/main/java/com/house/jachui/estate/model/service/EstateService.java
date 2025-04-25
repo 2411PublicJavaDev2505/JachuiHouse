@@ -23,8 +23,12 @@ public interface EstateService {
 
 	List<Estate> searchEstatesByAddress(String keyword);
 
-	void updateEstate(EstateAddRequest estate, List<MultipartFile> newImages, List<Integer> optionCodes, List<Integer> deleteImageIds) throws IllegalStateException, IOException;
 
 	String selectIdByEstateNo(int estateNo);
+
+	int updateEstate(Estate estate, List<MultipartFile> newImages, List<Integer> optionCodes,
+			List<Integer> deleteImageIds, HttpSession session) throws IOException;
+
+	int updateEstate(Estate estate, List<MultipartFile> images, List<Integer> optionCodes, HttpSession session);
 
 }

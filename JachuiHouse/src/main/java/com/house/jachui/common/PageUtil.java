@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class PageUtil {
 	public static Map<String, Integer> generatePageInfo(int totalCount, int currentPage) {
 		Map<String, Integer> pageInfo = new HashMap<String, Integer>();
-		int boardLimit = 10;
+		int boardLimit = 3;
 		int maxPage = 0;
 		if(totalCount % boardLimit !=0) {
 			maxPage = totalCount /boardLimit +1;

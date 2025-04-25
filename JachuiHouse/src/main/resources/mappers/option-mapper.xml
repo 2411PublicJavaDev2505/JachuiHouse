@@ -6,13 +6,23 @@
  	<select id="selectOptionList" resultType="EstateOption">
  		SELECT * FROM "OPTION" WHERE ESTATE_NO = #{estateNo} ORDER BY OPTION_NO DESC
  	</select>
+    <select id="getAllOptions" parameterType="int" resultType="int">
+        SELECT OPTION_NO
+        FROM OPTION_LIST
+        WHERE ESTATE_NO = #{estateNo}
+    </select>
  	<insert id="insertOptionList">
 		INSERT INTO  OPTION_LIST (estate_no, option_no)
 		VALUES
 	    (#{estateNo}, #{optionCode})
 	</insert>
+	<insert id="insertOptionCode" parameterType="map">
+        INSERT INTO estate_option (estate_no, option_no)
+        VALUES (#{estateNo}, #{optionNo})
+    </insert>
 	<delete id="deleteOptionByEstateNo">
 	    DELETE FROM OPTION_LIST
 	    WHERE ESTATE_NO = #{estateNo}
 	</delete>
+
  </mapper>

@@ -1,13 +1,15 @@
-package com.house.jachui.report.vo;
+package com.house.jachui.report.controller.dto;
 
 import java.sql.Date;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
 @ToString
-public class ReportVO {
+public class CreportInsertRequest {
 	private int reportNo;
 	private String userId;
 	private Date reportDate;

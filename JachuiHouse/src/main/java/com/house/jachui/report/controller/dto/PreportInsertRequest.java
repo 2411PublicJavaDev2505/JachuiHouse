@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ReportInsertRequest {
+public class PreportInsertRequest {
 	private int reportNo;
 	private String userId;
 	private Date reportDate;

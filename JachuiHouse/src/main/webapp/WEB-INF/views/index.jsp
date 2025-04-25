@@ -7,7 +7,7 @@
 		<!-- 		캐러셀 추가 -->
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	    
-		<title>자취스크립트</title>
+		<title>자취하우스</title>
 			<link rel="stylesheet" href="../resources/css/include/header.css">
 			<link rel="stylesheet" href="../resources/css/include/index.css">
 			<link rel="stylesheet" href="../resources/css/include/footer.css">
@@ -94,8 +94,8 @@
 	                        <a href="notice/list">
 	                            <div class="notice-board">
 	                                <h3>공지사항</h3>
-	                                <li>감기 조심하세요</li>
-	                                <li>사기 예방 안내</li>
+	                                <li><a href="http://localhost:7777/notice/detail/219">감기 조심하세요</a></li>
+	                                <li><a href="http://localhost:7777/notice/detail/220">사기 예방 안내</a></li>
 	                            </div>
 	                        </a>
 	                    </div>
