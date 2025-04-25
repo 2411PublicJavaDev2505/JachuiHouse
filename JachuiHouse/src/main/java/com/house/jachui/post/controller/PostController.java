@@ -141,7 +141,7 @@ public class PostController {
 		
 			PostVO post = pService.updateOneDetail(postNo);
 			model.addAttribute("result", post);
-			return "/post/update";
+			return "post/update";
 	
 	}
 	

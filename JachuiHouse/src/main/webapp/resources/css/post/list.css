@@ -1,69 +1,171 @@
 @charset "UTF-8";
-.main{
-    margin: 0 auto;
-    text-align: center;
-    background-color: #FFF9E9;
-}
-#title{
+.search {
+    margin: 50px auto 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #FFF4EC;
     border-radius: 15px;
-    padding: 5px;
-    background-color: #B68973;
-    border: 1px solid #eee;
-    margin-top: 30px;
+    width: fit-content;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
-.searchplace{
-    padding: 5px;
+
+#postType {
+    background-color: #B68973;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    width: 140px;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.free{
+	color: green;
+}
+.tip{
+	color: yellow;
+}
+.qna{
+	color: red;
+}
+.searchplace {
+    padding: 10px 15px;
     width: 300px;
-    border-radius: 15px;
-    background-color: #B68973;
-    border: 1px solid #eee;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FFF;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
 }
-.searchbtn{
-    padding: 5px;
-    border-radius: 15px;
-    border: 1px solid #eee;
-    width: 80px;
-    background-color: #FFA37C;
-}
-.writebtn{
-    margin-left: 500px;
-    margin-top: 40px;
-    border-radius: 15px;
-    border: 1px solid #eee;
-    background-color: #F65009;
-    padding: 3px;
+
+.searchbtn {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
     width: 100px;
+    height: 40px;
+    background-color: #FFA37C;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
-
-.boardtbl{
-	border-radius : 15px;
-	width : 1200px;
+.searchbtn:hover {
+    background-color: #D4693B;
+    color: #FFF4EC;
+}
+.writebtn-container {
+    width: 1200px;
     margin: 0 auto;
-    margin-top: 5px;
-    border-collapse: collapse;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+.writebtn-container{
+	margin: 0 auto;
+}
+.writebtn {
+    border-radius: 10px;
+    border: none;
+    background-color: #F65009;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.writebtn a{
+	text-decoration:none;
+	color: white;
+}
+.writebtn:hover {
+    background-color: #D14000;
+}
+.boardtbl {
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: white;
+    text-align: center;
+    font-family: 'Pretendard', sans-serif;
 }
 
-.boardtbl th, tr, td{
-    padding: 10px;
-    border: 1px solid black;
+.boardtbl th {
+    background-color: #FFA37C;
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+    border-bottom: 2px solid #FFD6BB;
+}
+
+.boardtbl td {
+    padding: 15px;
+    font-size: 15px;
+    color: #333;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.boardtbl tr:hover {
+    background-color: #FFF4EC;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.boardtbl a {
+    color: #F65009;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.boardtbl a:hover {
+    text-decoration: underline;
+    color: #D4693B;
 }
 .pagination-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    margin: 40px auto 60px;
+}
+
+.pagination {
+    display: flex;
+    gap: 10px;
+    background-color: #FFF4EC;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .pagination a {
-    margin: 0 6px;
-    padding: 6px 10px;
-    border-radius: 5px;
+    padding: 8px 12px;
+    border-radius: 8px;
     text-decoration: none;
-    color: #ff7733;
-    font-weight: bold;
+    color: #F65009;
+    font-weight: 600;
     font-size: 16px;
+    transition: all 0.2s ease-in-out;
 }
 
 .pagination a:hover {
-    background-color: #ffe3d3;
+    background-color: #FFD6BB;
+    color: white;
+}
+
+.pagination .prev,
+.pagination .next {
+    font-weight: bold;
+    font-size: 18px;
 }

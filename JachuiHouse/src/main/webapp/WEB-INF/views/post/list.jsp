@@ -20,9 +20,9 @@
 				   <div class="search">
 				       <select name="category" id="postType">
 				           <option value="none">전체 게시판</option>
-				           <option value="free">자유 게시판</option>
-				           <option value="tip">꿀팁 게시판</option>
-				           <option value="qna">질문 게시판</option>
+				           <option value="free" class="free">자유 게시판</option>
+				           <option value="tip" class="tip">꿀팁 게시판</option>
+				           <option value="qna" class="qna">질문 게시판</option>
 				       </select>
 				       <input class="searchplace" name="searchKeyword" type="text" placeholder="제목으로 검색어를 입력하세요.">
 				       
@@ -30,7 +30,9 @@
 				    </div>
 				</form>
 	                <div class="board">
-	                    	<button class="writebtn" ><a href="/post/insert">작성하기</a></button>
+	                	<div class="writebtn-container">
+	                    	<button class="writebtn" onclick="location.href='/post/insert'">작성하기</button>
+	                    </div>	
 	                    	<div class="table">
 			                    <table class="boardtbl">
 			                        <tr>
@@ -63,19 +65,19 @@
 			                    </table>	                    	
 	                    	</div>					
 	                    <div class="pagination-container">
-				<div class="pagination">
-					<c:if test="${startNavi ne 1 }">
-						<a href="/post/list?page=${startNavi - 1 }" class="prev">&lt;</a>
-					</c:if>
-					<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-						<a href="/post/list?page=${p }">${p }</a>
-					</c:forEach>
-					<c:if test="${endNavi ne maxPage }">
-						<a href="/post/list?page=${endNavi + 1 }" class="next">&gt;</a>
-					</c:if>
-				</div>
-			</div>
-            </div>
+							<div class="pagination">
+								<c:if test="${startNavi ne 1 }">
+									<a href="/post/list?page=${startNavi - 1 }" class="prev">&lt;</a>
+								</c:if>
+								<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
+									<a href="/post/list?page=${p }">${p }</a>
+								</c:forEach>
+								<c:if test="${endNavi ne maxPage }">
+									<a href="/post/list?page=${endNavi + 1 }" class="next">&gt;</a>
+								</c:if>
+							</div>
+						</div>
+          			</div>
 	        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
         </div>
 	</body>
