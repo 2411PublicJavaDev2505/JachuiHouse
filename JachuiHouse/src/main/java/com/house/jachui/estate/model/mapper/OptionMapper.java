@@ -10,17 +10,16 @@ import com.house.jachui.estate.model.vo.EstateOption;
 @Mapper
 public interface OptionMapper {
 
+
+	List<EstateOption> selectAllOptions();
+
 	List<EstateOption> selectOptionList(int estateNo);
 
-	int insertOptionList (int estateNo, int optionCode );
+	List<Integer> getOptionCodesByEstateNo(int estateNo);
 
 	void deleteOptionByEstateNo(int estateNo);
 
 	void insertOptionCode(int estateNo, Integer code);
 
-	List<EstateOption> getAllOptions();
-
-	void deleteEstateOptions(int estateNo);
-
-	void insertEstateOption(int estateNo, Integer code);
+	int insertOptionList(int estateNo, Integer integer);
 }

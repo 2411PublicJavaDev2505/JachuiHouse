@@ -54,7 +54,7 @@
 				     	</div>
 				      	<span class="option-name">세탁기</span>
 				    </label>
-				  
+				    
 				    <label class="option-item">
 				      <input type="checkbox" name="optionCodes" value="3" hidden/>
 				      	<div class="option-img-box">
