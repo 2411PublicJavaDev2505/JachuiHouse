@@ -20,6 +20,9 @@ main{
     font-weight: bold;
     font-size: 20px;
 }
+.updateBtn button:hover {
+	background-color: #D4693B; 
+}
 
 .dleteBtn button{
     width: 100%;
@@ -31,6 +34,10 @@ main{
     font-weight: bold;
     font-size: 20px;
 }
+.dleteBtn button:hover {
+	background-color: #D4693B;
+}
+
 .calculatorBtn {
     margin-top: 20px;
 }
@@ -43,6 +50,9 @@ main{
     color: white;
     font-weight: bold;
     font-size: 20px;
+}
+.calculatorBtn button:hover {
+	background-color: #D4693B;
 }
 .updateBtn button, .dleteBtn button, .calculatorBtn button:hover{
     cursor: pointer;

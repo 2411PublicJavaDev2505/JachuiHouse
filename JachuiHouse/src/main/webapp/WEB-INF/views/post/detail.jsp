@@ -21,33 +21,41 @@
                         <div class="p1"><div class="posttxt">공고글 제목 :</div> ${result.postTitle }</div> <br> 
                     </div>
                     <div class="postcontent"> ${result.postContent }</div>
-                    <div class="comment">
-                        <table class="commenttbl">
-                            <tr>
-                                <th>작성자</th>
-                                <th>내용</th>
-                                <th>관리</th>
-                                <th>작성일</th>
-                            </tr>
-                               <c:forEach items="${cList }" var="comment">
-	                               <c:if test="${comment.postNo == result.postNo}">
-	                                <tr>
-	                                    <td>${comment.userId}</td>
-	                                    <td>${comment.commentContent}</td>
-	                                    <c:if test="${sessionScope.userId ne comment.userId }">
-	                                    	<td><button class="reportbtn"><a href="#">신고하기</a></button></td>
-	                                    </c:if>
-	                                     <c:if test="${sessionScope.userId eq comment.userId }">
-	                                     	<td>
-		                                     	<button class="deletebtn"><a href="/post/cdelete?commentNo=${comment.commentNo }&postNo=${result.postNo}">삭제하기</a></button>
-	                                     	</td>
-	                                     </c:if>	
-	                                    <td>${comment.writeDate}</td>
-	                                </tr> 
-	                               </c:if>
-                               </c:forEach>
-                           </table>
-                       </div>
+                    <c:set var="hasComments" value="false" />
+						<c:forEach items="${cList}" var="comment">
+						    <c:if test="${comment.postNo == result.postNo}">
+						        <c:set var="hasComments" value="true" />
+						    </c:if>
+						</c:forEach>					
+					<c:if test="${hasComments}">
+	                    <div class="comment">
+	                        <table class="commenttbl">
+	                            <tr>
+	                                <th>작성자</th>
+	                                <th>내용</th>
+	                                <th>관리</th>
+	                                <th>작성일</th>
+	                            </tr>
+	                               <c:forEach items="${cList }" var="comment">
+		                               <c:if test="${comment.postNo == result.postNo}">
+		                                <tr>
+		                                    <td>${comment.userId}</td>
+		                                    <td>${comment.commentContent}</td>
+		                                    <c:if test="${sessionScope.userId ne comment.userId }">
+		                                    	<td><button class="reportbtn"><a href="#">신고하기</a></button></td>
+		                                    </c:if>
+		                                     <c:if test="${sessionScope.userId eq comment.userId }">
+		                                     	<td>
+			                                     	<button class="deletebtn"><a href="/post/cdelete?commentNo=${comment.commentNo }&postNo=${result.postNo}">삭제하기</a></button>
+		                                     	</td>
+		                                     </c:if>	
+		                                    <td>${comment.writeDate}</td>
+		                                </tr> 
+		                               </c:if>
+	                               </c:forEach>
+	                           </table>
+	                       </div>                   
+                    </c:if>
 						   <c:if test="${sessionScope.userId ne result.userId }">
 							   <button class="reportbtn2" onClick="showReort();">신고하기</button>
 						   </c:if>

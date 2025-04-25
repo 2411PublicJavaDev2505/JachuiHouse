@@ -1,1 +1,27 @@
 @charset "UTF-8";
+
+.main-container {
+	height: 780px;
+	display : flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.main-container img{
+	width: 250px;
+	height: 250px;
+	background-color: #fff9e9;
+}
+.message {
+	border-radius : 0.5rem;
+	text-align: center;
+	margin-bottom : 5rem;
+}
+
+.mainPageBtn {
+	text-decoration: none;
+	border : 1px solid #eee;
+	border-radius : 0.5rem;	
+	background-color:  #FF804A;
+	padding : 0.5rem;
+}
