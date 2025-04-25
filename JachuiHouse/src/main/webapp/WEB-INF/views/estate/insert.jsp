@@ -157,7 +157,7 @@
         </form>
     </div>
     <script>
-    	// 옵션 선택
+    	// input null처리
         function toggleFields() {
             const rentType = document.querySelector('select[name="estateRentType"]').value;
             const monthlyInput = document.getElementById("monthlyRent");

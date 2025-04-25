@@ -92,4 +92,26 @@
 	    FROM ESTATE
 	    WHERE ESTATE_NO = #{estateNo}
 	</select>
+	<update id="updateEstate" parameterType="com.house.jachui.estate.model.vo.Estate">
+	    UPDATE ESTATE
+	    SET
+	        ESTATE_RENT_TYPE = #{estateRentType},
+	        ESTATE_DEPOSIT = #{estateDeposit},
+	        ESTATE_MONTHLY_RENT =
+	            <choose>
+	                <when test='estateRentType == "charter"'>NULL</when>
+	                <otherwise>#{estateMonthlyRent}</otherwise>
+	            </choose>,
+	        ESTATE_ADDRESS = #{estateAddress},
+	        ESTATE_TYPE = #{estateType},
+	        ESTATE_WIDTH = #{estateWidth},
+	        ESTATE_FLOOR = #{estateFloor},
+	        MOVEIN_NOW_YN = #{moveinNowYN},
+	        ESTATE_MOVEIN_DATE =
+	            <choose>
+	                <when test='moveinNowYN == "Y"'>NULL</when>
+	                <otherwise>#{estateMoveinDate}</otherwise>
+	            </choose>
+	    WHERE ESTATE_NO = #{estateNo}
+	</update>
 </mapper>

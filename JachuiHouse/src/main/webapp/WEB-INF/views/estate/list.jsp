@@ -30,7 +30,7 @@
 			</c:if>
             <div class="search-container">
                 <form method="get" action="/chazabang/list" class="search-container">
-				    <input type="text" name="keyword" class="input-keyword" placeholder="주소 검색" value="${param.keyword}">
+				    <input type="text" name="keyword" class="input-keyword" placeholder="원하는 지역을 입력해주세요" value="${param.keyword}">
 				    <button type="submit" class="search-btn">검색</button>
 				</form>
             </div>
@@ -40,7 +40,6 @@
 	            <a href="/chazabang/detail/${est.estateNo }" class="estate" data-type="${est.estateType}">
 	                <div class="estate-style">
 	                    <img src="${est.estateFileList[0].estateFilePath}" alt="이미지 준비중">
-
 	                        <section class="estate-inf">
 	                            <div class="estate-inf-header">
 	                            <c:if test="${est.estateRentType eq 'charter'}">

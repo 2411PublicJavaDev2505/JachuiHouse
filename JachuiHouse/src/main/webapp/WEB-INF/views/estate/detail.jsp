@@ -37,7 +37,7 @@
 				    <button id="nextBtn">▷</button>
 				    <button id="toggleAuto">⏸</button>
 				</div>
-				<c:if test="${userRole ne 'R' }">
+				<c:if test="${userRole eq 'M' }">
 					<div class="estate-conatact">
 	                    <div class="chat-btn">
 	                    	<a href="/chat/torealtor?estateNo=${estateNo }">

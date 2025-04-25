@@ -17,4 +17,10 @@ public interface OptionMapper {
 	void deleteOptionByEstateNo(int estateNo);
 
 	void insertOptionCode(int estateNo, Integer code);
+
+	List<EstateOption> getAllOptions();
+
+	void deleteEstateOptions(int estateNo);
+
+	void insertEstateOption(int estateNo, Integer code);
 }
