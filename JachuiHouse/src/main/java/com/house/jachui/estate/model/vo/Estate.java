@@ -30,6 +30,7 @@ public class Estate {
 	private String userPhone;
 	private List<EstateOption>estateOptionList;
 	private List<EstateFile>estateFileList;
+	private String estateOptionListAsString;
 	
 	
 	private String transformEstateDeposit;

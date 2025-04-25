@@ -36,10 +36,8 @@ public class ImageServiceImpl implements ImageService{
                 String originalFilename = image.getOriginalFilename();
                 String uuid = UUID.randomUUID().toString();
                 String saveFileName = uuid + "_" + originalFilename;
-
                 Path filePath = Paths.get(uploadDir, saveFileName);
                 image.transferTo(filePath.toFile());
-
                 EstateFile file = new EstateFile();
                 file.setEstateNo(estateNo);
                 file.setEstateFileName(originalFilename);

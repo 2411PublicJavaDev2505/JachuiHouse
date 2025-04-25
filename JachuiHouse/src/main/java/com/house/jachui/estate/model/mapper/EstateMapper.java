@@ -21,8 +21,12 @@ public interface EstateMapper {
 
 	List<Estate> searchByAddress(String string);
 
-	void updateEstate(EstateAddRequest estate);
+	int updateEstate(Estate estate);
 
 	String selectIdByEstateNo(int estateNo);
+
+	void deleteEstateOptions(int estateNo);
+
+	void insertEstateOption(int estateNo, Integer code);
 
 }

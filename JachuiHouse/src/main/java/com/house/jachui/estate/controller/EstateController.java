@@ -2,6 +2,7 @@ package com.house.jachui.estate.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import com.house.jachui.estate.model.mapper.OptionMapper;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.estate.model.vo.EstateFile;
+import com.house.jachui.estate.model.vo.EstateOption;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -97,31 +99,26 @@ public class EstateController {
 	}
 	
 	@GetMapping("/modify/{estateNo}")
-	public String showModifyForm(@PathVariable("estateNo") int estateNo, HttpSession session, Model model) {
-	    String userId = (String) session.getAttribute("userId");
+	public String showEstateUpdateForm(@PathVariable("estateNo") int estateNo, Model model) {
 	    Estate estate = estService.selectOneByNo(estateNo);
-
-	    if (estate != null && estate.getUserId().equals(userId)) {
-	        List<EstateFile> estateImageList = fileMapper.selectImageList(estateNo);
-	        model.addAttribute("estate", estate);
-	        model.addAttribute("estateImageList", estateImageList);
-	        return "estate/modify";
-	    }
-
-	    return "redirect:/chazabang/list";
+	    model.addAttribute("estate", estate);
+	    List<EstateFile> estateImageList = fileMapper.selectImageList(estateNo);
+	    model.addAttribute("estateImageList", estateImageList);
+	    return "estate/update";
 	}
-	@PostMapping("/modify")
-	public String updateEstate(@ModelAttribute EstateAddRequest estate,
-						        @RequestParam(value = "optionCodes", required = false) List<Integer> optionCodes,
-						        @RequestParam(value = "images", required = false) List<MultipartFile> newImages,
-						        @RequestParam(value = "deleteImageIds", required = false) List<Integer> deleteImageIds,
-						        HttpSession session
-								) throws IOException {
+
+	@PostMapping("/update")
+	public String updateEstate(@ModelAttribute Estate  estate,
+	                           @RequestParam(value = "optionCodes", required = false) List<Integer> optionCodes,
+	                           @RequestParam("images") List<MultipartFile> images,
+	                           HttpSession session,
+	                           Model model) throws IOException {
 	    String userId = (String) session.getAttribute("userId");
 	    estate.setUserId(userId);
-
-	    estService.updateEstate(estate, newImages, optionCodes, deleteImageIds);
-
+	    
+	    int result = estService.updateEstate(estate, images, optionCodes, session);
+	    
 	    return "redirect:/chazabang/detail/" + estate.getEstateNo();
 	}
+
 }
