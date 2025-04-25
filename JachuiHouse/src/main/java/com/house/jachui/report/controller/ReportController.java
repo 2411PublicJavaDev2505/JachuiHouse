@@ -7,13 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.house.jachui.common.FileUtil;
 import com.house.jachui.common.PageUtil;
+import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.post.service.PostService;
-import com.house.jachui.report.controller.dto.ReportInsertRequest;
+import com.house.jachui.report.controller.dto.CreportInsertRequest;
+import com.house.jachui.report.controller.dto.PreportInsertRequest;
 import com.house.jachui.report.service.ReportService;
+import com.house.jachui.report.vo.ReportVO;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 
@@ -28,6 +33,8 @@ public class ReportController {
 	
 	@GetMapping("/cinsert")
 	public String showReportcInsert(Model model) {
+		
+		
 		try {
 			return "/post/detail";
 		} catch (Exception e) {
@@ -39,9 +46,47 @@ public class ReportController {
 	
 	@PostMapping("/cinsert")
 	public String reportcInsert(Model model,
-			@ModelAttribute ReportInsertRequest report) {
+			@ModelAttribute CreportInsertRequest report,
+			HttpSession session) {
+		
+		String userId = (String)session.getAttribute("userId");
+		report.setUserId(userId);
+		
 		try {
 			int result = rService.reportcInsert(report);
+			if(result > 0) {
+				return "redirect:/";
+			}else {
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	@GetMapping("/pinsert")
+	public String showReportpInsert(Model model) {
+		try {
+			return "/post/detail";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";	
+		}
+	}
+	
+	@PostMapping("/pinsert")
+	public String reportpInsert(Model model,
+			@ModelAttribute PreportInsertRequest report,
+			HttpSession session) {
+		
+		String userId = (String)session.getAttribute("userId");
+		report.setUserId(userId);
+		
+		try {
+			int result = rService.reportpInsert(report);
 			if(result > 0) {
 				return "redirect:/";
 			}else {

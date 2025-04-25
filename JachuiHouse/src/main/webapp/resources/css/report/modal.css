@@ -1,0 +1,57 @@
+@charset "UTF-8";
+.report {
+	position: absolute;
+	display: none;
+	
+	justify-content: center;
+	
+	top: 0;
+	left: 0;
+	
+	width: 100%;
+	height: 100%;
+}
+
+.report-body {
+	position: absolute;
+	top: 30%;
+	
+	width: 500px;
+	height: 600px;
+	background-color: white;
+	border: 1px solid #222;
+	border-radius: 10px;
+}
+.report-body h1{
+	margin-left: 130px;
+	margin-bottom: 20px;
+}
+.reportBtn{
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+}
+.reportBtn button{
+	padding : 15px 30px;
+	border-radius : 20px;
+	margin-top : 10px;
+	background-color : #A8A81F;
+	border : none;
+	cursor : pointer;
+}
+.report-content {
+	text-align : center;
+	width: 300px;
+	margin-left: 100px;
+}
+.report-content placeholder{
+	width:200px;
+}
+.report-content input {
+	padding : 15px;
+	border-radius : 20px;
+}
+.report-area {
+	text-align : center;
+	margin-top: 30px;
+}
