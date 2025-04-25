@@ -13,6 +13,14 @@
 </head>
 <body>
     <div id="container">
+<meta charset="UTF-8">
+<title>사방팔아방 상세페이지</title>
+        <link rel="stylesheet" href="/resources/css/include/header.css">
+	    <link rel="stylesheet" href="/resources/css/trade/detail.css">
+	    <link rel="stylesheet" href="/resources/css/include/footer.css">
+      </head>
+      <body>
+         <div id="container">
         <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
         <main class="detail-container">

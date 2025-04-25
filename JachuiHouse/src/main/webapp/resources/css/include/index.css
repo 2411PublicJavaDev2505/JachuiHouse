@@ -75,10 +75,6 @@ section {
 .main-menu a{
     text-decoration: none;
 }
-.main-menu a:hover {
-    background-color: #FF7337;
-    border-radius: 10px;
-}
 .left-menu {
     display: flex;
 }

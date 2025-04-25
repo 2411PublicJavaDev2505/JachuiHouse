@@ -63,6 +63,12 @@
 		    <artifactId>jakarta.servlet-api</artifactId>
 		    <scope>provided</scope>
 		</dependency>
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.38</version> <!-- 버전은 최신으로 -->
+		    <scope>provided</scope>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
 		<dependency>
 		    <groupId>org.glassfish.web</groupId>

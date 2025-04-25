@@ -16,4 +16,7 @@ public class UpdateRealtorRequest {
 	private String userAddress;
 	private String userRole;
 	private String realtorName;
+	private String fileName;
+	private String fileRename;
+	private String filePath;
 }
