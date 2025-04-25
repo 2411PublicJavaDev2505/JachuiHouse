@@ -7,7 +7,7 @@
 		<title>Insert title here</title>
 	    <link rel="stylesheet" href="../resources/css/include/header.css">
 	    <link rel="stylesheet" href="../resources/css/include/footer.css">
-	    <link rel="stylesheet" href="../resources/css/post/detail.css">	
+	    <link rel="stylesheet" href="../resources/css/post/update.css">	
 	</head>
 	<body>
         <div id="container">
