@@ -106,7 +106,7 @@
 	        ESTATE_TYPE = #{estateType},
 	        ESTATE_WIDTH = #{estateWidth},
 	        ESTATE_FLOOR = #{estateFloor},
-	        MOVEIN_NOW_YN = #{moveinNowYN},
+	        MOVEIN_NOW_YN = DEFAULT,
 	        ESTATE_MOVEIN_DATE =
 	            <choose>
 	                <when test='moveinNowYN == "Y"'>NULL</when>

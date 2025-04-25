@@ -26,9 +26,8 @@ public interface EstateService {
 
 	String selectIdByEstateNo(int estateNo);
 
-	int updateEstate(Estate estate, List<MultipartFile> newImages, List<Integer> optionCodes,
-			List<Integer> deleteImageIds, HttpSession session) throws IOException;
+	void updateEstate(Estate estate, List<MultipartFile> newImages, List<Integer> optionCodes,
+			List<Integer> deleteImageIds) throws IOException;
 
-	int updateEstate(Estate estate, List<MultipartFile> images, List<Integer> optionCodes, HttpSession session);
 
 }

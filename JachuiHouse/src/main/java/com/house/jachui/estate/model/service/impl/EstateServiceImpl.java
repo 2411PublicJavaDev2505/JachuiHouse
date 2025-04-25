@@ -88,42 +88,32 @@ public class EstateServiceImpl implements EstateService {
 		return estMapper.searchByAddress("%" + keyword + "%");
 	}
 
-
-	@Override
-	public int updateEstate(Estate estate, List<MultipartFile> newImages, List<Integer> optionCodes, List<Integer> deleteImageIds, HttpSession session) throws IOException {
-	    // 1. 매물 기본 정보 업데이트
-	    int result = estMapper.updateEstate(estate);
-
-	    // 2. 기존 옵션 삭제 후 재등록
-	    optionMapper.deleteEstateOptions(estate.getEstateNo());
-	    if (optionCodes != null && !optionCodes.isEmpty()) {
-	        for (Integer code : optionCodes) {
-	        	optionMapper.insertEstateOption(estate.getEstateNo(), code);
-	        }
-	    }
-
-	    // 3. 삭제할 이미지가 있다면 삭제
-	    if (deleteImageIds != null && !deleteImageIds.isEmpty()) {
-	    	estFileService.deleteImageByIdList(deleteImageIds);
-	    }
-
-	    // 4. 새 이미지가 있다면 저장
-	    if (newImages != null && !newImages.isEmpty()) {
-	    	estFileService.saveNewImages(estate.getEstateNo(), newImages);
-	    }
-
-	    return result;
-	}
-
-
+	
 	@Override
 	public String selectIdByEstateNo(int estateNo) {
 		return estMapper.selectIdByEstateNo(estateNo);
 	}
 
+
 	@Override
-	public int updateEstate(Estate estate, List<MultipartFile> images, List<Integer> optionCodes, HttpSession session) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void updateEstate(Estate estate, List<MultipartFile> newImages, List<Integer> optionCodes,
+			List<Integer> deleteImageIds) throws IOException {
+		estMapper.updateEstate(estate);
+
+		optionMapper.deleteOptionByEstateNo(estate.getEstateNo());
+	    if (optionCodes != null && !optionCodes.isEmpty()) {
+	        for (Integer code : optionCodes) {
+	        	optionMapper.insertOptionCode(estate.getEstateNo(), code);
+	        }
+	    }
+
+	    if (deleteImageIds != null && !deleteImageIds.isEmpty()) {
+	    	estFileService.deleteImageByIdList(deleteImageIds);
+	    }
+
+	    if (newImages != null && !newImages.isEmpty()) {
+	    	estFileService.saveEstateImages(estate.getEstateNo(), newImages);
+	    }
 	}
+
 }
