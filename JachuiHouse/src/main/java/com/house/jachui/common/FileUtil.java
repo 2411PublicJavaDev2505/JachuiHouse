@@ -16,10 +16,10 @@ import jakarta.servlet.http.HttpSession;
 
 @Component
 public class FileUtil {
-
+	
 	public Map<String, String> saveFile(MultipartFile uploadFile, HttpSession session, String type) throws IllegalStateException, IOException{
 		Map<String, String> result = new HashMap<String, String>();
-		String folderName = type.equals("board") ? "nUploadFiles":"bUploadFiles";
+		String folderName = type.equals("board") ? "bUploadFiles":"nUploadFiles";
 		String prefix = type.toLowerCase().substring(0,1);
 		String tradeFilename = uploadFile.getOriginalFilename();
 		String tradeFileRename;
