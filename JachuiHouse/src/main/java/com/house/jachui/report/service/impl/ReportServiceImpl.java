@@ -1,5 +1,8 @@
 package com.house.jachui.report.service.impl;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +10,7 @@ import com.house.jachui.report.controller.dto.CreportInsertRequest;
 import com.house.jachui.report.controller.dto.PreportInsertRequest;
 import com.house.jachui.report.mapper.ReportMapper;
 import com.house.jachui.report.service.ReportService;
+import com.house.jachui.report.vo.ReportVO;
 
 @Service
 public class ReportServiceImpl implements ReportService{
@@ -27,6 +31,21 @@ public class ReportServiceImpl implements ReportService{
 	public int reportpInsert(PreportInsertRequest report) {
 		int result = rMapper.reportpInsert(report);
 		return result;
+	}
+
+	
+	//신고관리 조회
+	@Override
+	public List<ReportVO> selectListAll(int currentPage) {
+		int limit = 10;
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return rMapper.selectListAll(rowBounds);
+	}
+
+	@Override
+	public int getTotalCount() {
+		return rMapper.getTotalCount();
 	}
 
 }

@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="../resources/css/include/footer.css">
 	</head>   
 <body>
-    	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+    <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 	<main class="main">
     	<div id="notice-div">
