@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.common.PageUtil;
+import com.house.jachui.estate.model.mapper.EstateFileMapper;
 import com.house.jachui.estate.model.vo.Estate;
+import com.house.jachui.estate.model.vo.EstateFile;
 import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.post.service.PostService;
 import com.house.jachui.realtor.controller.dto.UpdateRealtorRequest;
@@ -31,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class RealtorController {
 
 	private final PostService pService;
-	
+	private final EstateFileMapper fileMapper;
 	private final RealtorService rService;
 	//회원 관리 리스트 - 페이지네이션
 	private final PageUtil pageUtil;
@@ -46,11 +48,16 @@ public class RealtorController {
 			Member member = rService.selectRealtorById(userId);
 			List<Estate> eList = rService.selectEstatesById(userId, currentPage, 3);
 			int totalCount = rService.getTotalCount(userId);
-			Map<String, Integer>pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
 			model.addAttribute("maxPage", pageInfo.get("maxPage"));
 			model.addAttribute("startNavi", pageInfo.get("startNavi"));
 			model.addAttribute("endNavi", pageInfo.get("endNavi"));
 			model.addAttribute("eList", eList);
+			
+			for (Estate est : eList) {
+	            List<EstateFile> fileList = fileMapper.selectImageList(est.getEstateNo());
+	            est.setEstateFileList(fileList);
+	        }
 			if(member != null) {
 				model.addAttribute("member", member);
 				return "realtor/mypage";

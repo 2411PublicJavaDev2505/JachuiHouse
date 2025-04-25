@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.member.model.vo.Member;
@@ -17,10 +18,11 @@ public interface RealtorMapper {
 
 	int updateRealtor(UpdateRealtorRequest realtor);
 
-	List<Estate> selectEstatesById(String userId);
 
-	int getTotalCount();
+	int getTotalCount(String userId);
 
     int updateProfileImage(@Param("userId") String userId, 
             @Param("profileImage") String profileImage);
+
+	List<Estate> selectEstatesById(String userId, RowBounds rowBounds);
 }
