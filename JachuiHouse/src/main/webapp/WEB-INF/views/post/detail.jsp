@@ -97,7 +97,7 @@
 		                                    </c:if>
 		                                     <c:if test="${sessionScope.userId eq comment.userId }">
 		                                     	<td>
-			                                     	<button class="deletebtn"><a href="/post/cdelete?commentNo=${comment.commentNo }&postNo=${result.postNo}">삭제하기</a></button>
+			                                     	<div class="deletebtn"><a href="/post/cdelete?commentNo=${comment.commentNo }&postNo=${result.postNo}">삭제하기</a></div>
 		                                     	</td>
 		                                     </c:if>	
 		                                    <td>${comment.writeDate}</td>

@@ -186,3 +186,32 @@ body {
   color: #666;
   text-decoration: none;
 }
+
+
+
+.view-count-wrapper {
+  display: flex;
+  justify-content: flex-end;  /* 왼쪽 정렬 */
+  align-items: center;  /* 세로 중앙 정렬 */
+  gap: 8px;  /* 아이콘과 텍스트 사이에 간격을 넣어줌 */
+  font-size: 16px;  /* 기본 글자 크기 설정 */
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 24px;  /* 아래쪽에 간격 추가 */
+}
+
+.view-count-label {
+  display: flex;
+  align-items: center;  /* 아이콘과 텍스트가 수평 정렬되도록 */
+  color: #cd814a;
+}
+
+.view-count-number {
+  background-color: #f9f1e7;
+  color: #333;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
