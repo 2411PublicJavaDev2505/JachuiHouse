@@ -20,7 +20,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO REPORT(REPORT_NO, USER_ID, REPORT_DATE, REPORT_CONTENT, REPORT_REASON, POST_NO) VALUES(REPORT_SEQ.NEXTVAL, #{userId}, SYSDATE, #{reportContent}, #{reportReason}, #{postNo})
 	</insert>
 	
-	
+<!-- 	신고관리 조회 -->
+	<select id="selectListAll" resultType="ReportVO">
+		SELECT * FROM REPORT ORDER BY REPORT_NO DESC
+	</select>
+<!-- 	신고관리 페이지네이션 -->
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT
+	</select>
 	
 	
 </mapper>
