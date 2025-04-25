@@ -40,15 +40,13 @@
             USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_PHONE, 
             USER_GENDER, USER_ADDRESS, USER_BIRTH, USER_POSTCODE, 
             USER_DETAILADDRESS, ALONE_LIVING, USER_ROLE, 
-            REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE,
-            FILE_NAME, FILE_RENAME, FILE_PATH
+            REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE
         )
         VALUES (
             #{userId}, #{userPw}, #{userName}, #{userEmail}, #{userPhone}, 
             #{userGender}, #{userAddress}, #{userBirth}, #{userPostcode}, 
             #{userDetailAddress}, #{aloneLiving}, 'M', 
-            'X', 0, DEFAULT, DEFAULT, DEFAULT,
-            #{fileName}, #{fileRename}, #{filePath}
+            'X', 0, DEFAULT, DEFAULT, DEFAULT
         )
     </insert>
 

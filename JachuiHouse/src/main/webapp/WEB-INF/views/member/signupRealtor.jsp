@@ -71,12 +71,12 @@
                     </div>
 
 
-                    <div class="signUp-input-area">
+                    <div class="form-group">
                         <input type="text" name="businessAddress" placeholder="도로명/지번 주소" id="userAddress" required>
                     </div>
 
 
-                    <div class="signUp-input-area">
+                    <div class="form-group">
                         <input type="text" name="businessAddress" placeholder="상세 주소" id="userDetailAddress" required>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                     <input type="text" name="realtorNo" id="realtorNo" required>
                 </div>
                 
-                <div>
+                <div class="upload-area"> 
                 <a>중개등록증 또는 사업자등록증을 첨부해주세요</a>
                 <%-- <button href=..${dm.filePath }">${dm.fileName }>파일첨부</button> --%>
                 <span><a href="..${dm.filePath }">${dm.fileName }</a></span>

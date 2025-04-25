@@ -18,7 +18,7 @@ import com.house.jachui.realtor.controller.dto.UpdateRealtorRequest;
 public interface MemberService {
 
 	// 자취생 회원가입
-    boolean signupJachui(SignupJachuiRequest request);
+    int signupJachui(SignupJachuiRequest request);
 
     // 공인중개사 회원가입
     int signupRealtor(SignupRealtorRequest request);

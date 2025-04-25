@@ -37,8 +37,8 @@ public class MemberServiceImpl implements MemberService {
 
     // 자취생 회원가입
     @Override
-    public boolean signupJachui(SignupJachuiRequest request) {
-        return mMapper.signupJachui(request) > 0;
+    public int signupJachui(SignupJachuiRequest request) {
+        return mMapper.signupJachui(request);
     }
 
     // 공인중개사 회원가입

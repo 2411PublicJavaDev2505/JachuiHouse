@@ -68,20 +68,20 @@
                         <label for="userAddress">주소</label>
                         <div class="signUp-input-area">
                             <input type="text" name="userPostcode" placeholder="우편번호" maxlength="6" id="userPostcode" >
-                            <input type="button" onclick="business_execDaumPostcode()" value="우편번호 찾기"><br>
+                            <input type="button" id="userPostcodeBtn" onclick="business_execDaumPostcode()" value="우편번호 찾기"><br>
                         </div>
         
         
-                        <div class="signUp-input-area">
+                        <div class="form-group">
                             <input type="text" name="userAddress" placeholder="도로명/지번 주소" id="userAddress" ><br>
                         </div>
         
         
-                        <div class="signUp-input-area">
+                        <div class="form-group">
                             <input type="text" name="userDetailAddress" placeholder="상세 주소" id="userDetailAddress" ><br>
                         </div>
                         
-                        <div class="signUp-input-area">
+                        <div class="form-group">
 					        <input type="text" name="extraAddress" placeholder="참고 항목" id="extraAddress" readonly><br>
 					    </div>
                     </div>
@@ -91,11 +91,26 @@
                         <input type="date" name="userBirth" >
                     </div>
                     
-                    <div class="form-group">
+                    <ul class="register-radio-group">
+						<li class="register-radio">
+							<label for="male">
+							<img src="../resources/images/male.png" alt="남">
+							<input type="radio" id="male" name="gender" value="M" checked>
+							</label>
+						</li>
+						<li class="register-radio">
+							<label for="female">
+							<img src="../resources/images/female.png" alt="여">
+							<input type="radio" id="female" name="gender" value="F">
+							</label>
+						</li>
+					</ul>
+                    
+                    <!-- <div class="form-group">
                         <label for="gender">성별</label>
-                        <input type="radio" name="gender" value="M" >남
-                        <input type="radio" name="gender" value="W" >여
-                    </div>
+                        <input type="radio" id="Gender" name="gender" value="M" >남</input>
+                        <input type="radio" id="Gender" name="gender" value="W" >여
+                    </div> -->
         
                     <div class="form-group">
                         <label for="aloneLiving">자취년차</label>
@@ -158,7 +173,7 @@
             }).open();
         }
 
-        // id 입력 후 버튼 클릭 시 dbCheckId.do로 controller에 요청
+        /* // id 입력 후 버튼 클릭 시 dbCheckId.do로 controller에 요청
         function fn_dbCheckId() {
             var signup_form = document.signup_form;
             var id = signup_form.id.value;
@@ -168,7 +183,7 @@
             }else {
             window.open("${contextPath}/member/dbCheckId.do?user_id="+id,"","width=500, height=300");
     		}
-        } 
+        }  */
         
      	// SweetAlert
         function showMessage(msg) {
@@ -193,7 +208,7 @@
         	const userBirth =  document.querySelector("#userBirth");
         	//const userGender = document.querySelector("#userGender");
         	const aloneLiving =  document.querySelector("#aloneLiving");
-        	//const msgTag = document.querySelector("#msgTag"); // 오류 메시지 출력용
+        	const msgTag = document.querySelector("#msgTag"); // 오류 메시지 출력용
         	
         	const userIdExp = /^[a-z][a-z0-9]{3,11}$/;
         	const userEmailExp = /^[a-zA-Z0-9._%+-]{4,12}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
