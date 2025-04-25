@@ -2,6 +2,7 @@ package com.house.jachui.realtor.model.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,15 @@ public class RealtorServiceImpl implements RealtorService{
 
 	@Override
 	public int getTotalCount(String userId) {
-		return rMapper.getTotalCount();
+		return rMapper.getTotalCount(userId);
 	}
 
 	@Override
 	public List<Estate> selectEstatesById(String userId, int currentPage, int i) {
-		return rMapper.selectEstatesById(userId);
+		int limit = 3;
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return rMapper.selectEstatesById(userId, rowBounds);
 	}
 
 	@Override

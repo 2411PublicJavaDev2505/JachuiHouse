@@ -42,7 +42,26 @@
 	</select>
 	
 	<select id="selectEstatesById" resultType="Estate">
-		SELECT * FROM ESTATE WHERE USER_ID=#{userId} 
+		SELECT 
+    		E.*,
+    		EF.ESTATE_FILE_NO,
+    		EF.ESTATE_FILE_NAME,
+    		EF.ESTATE_FILE_PATH,
+    		EF.ESTATE_FILE_RENAME
+		FROM 
+    		ESTATE E
+		LEFT JOIN (
+    		SELECT *
+    		FROM ESTATE_FILE
+    		WHERE (ESTATE_NO, ESTATE_FILE_NO) IN (
+        		SELECT ESTATE_NO, MIN(ESTATE_FILE_NO)
+        		FROM ESTATE_FILE
+        		GROUP BY ESTATE_NO
+   			 )
+		) EF
+		ON E.ESTATE_NO = EF.ESTATE_NO
+		WHERE 
+    		E.USER_ID = #{userId}
 	</select>
 	
 	<!-- 회원 관리 조회 - 페이지네이션-->
