@@ -220,3 +220,30 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 .signUpBtn:hover{
   background-color: #FFA37C;
 }
+
+
+.register-radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.register-radio {
+  display: flex;
+  align-items: center;
+}
+
+.register-radio input[type="radio"] {
+  margin-right: 10px;
+}
+
+.register-radio img {
+  width: 40px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.register-radio input[type="radio"]:checked + img {
+  border: 2px solid #007bff;
+  border-radius: 50%;
+}
