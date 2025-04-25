@@ -55,34 +55,50 @@ pageEncoding="UTF-8"%>
                     </a>
                 </div>
                 <c:forEach items="${eList }" var="estate">
-                <a href="/chazabang/detail/${estate.estateNo }" class="estate" data-type="${est.estateType}">
+                
                 <div id="content">
                 
                     <div id="roomImg">
-						<img src="${estate.estateFileList[0].estateFilePath}" alt="이미지 준비중">
-						                    	
+                    	<a href="/chazabang/detail/${estate.estateNo }" class="estate" data-type="${est.estateType}">
+							<img src="${estate.estateFileList[0].estateFilePath}" alt="이미지 준비중">
+						</a>                 	
                     </div>
                     <div id="roomIntro">
                         <div id="top">
                             <div id="top-in">
                                 <div id="jongro">
-                                    <b>${estate.estateAddress}</b> 
-                                    <c:if test="${estate.estateRentType eq 'charter' }">
-                                    	<b>전세 ${estate.estateDeposit }</b>                                    	
-                                    </c:if>
-                                   	<c:if test="${estate.estateRentType eq 'monthly' }">
-                                   		<b>월세 ${estate.estateDeposit }/${estate.estateMonthlyRent }</b>
-                                   	</c:if>
-                                    
+                                	<a href="/chazabang/detail/${estate.estateNo }" class="estate" data-type="${est.estateType}">
+                                    	<b>${estate.estateAddress}</b> 
+                                    	
+                                  	</a>
                                 </div>
                                 <div id="button-box">
-                                    <button type="submit" id="update">수정</button>
-                                    <button type="submit" id="x">삭제</button>
+                                	<c:if test="${userId eq estate.userId}">
+                                		<a href="/chazabang/modify/${estate.estateNo }">
+                                    		<button type="button" id="update">수정</button>
+                                		</a>
+                               		 	<a href="/chazabang/delete/${estate.estateNo }">
+                                    		<button type="button" id="x">삭제</button>
+                                		</a>
+                                	</c:if>
                                 </div>
                             </div>
                         </div>
                         <div id="mid">
                             <div id="top-in">
+                            	<a href="/chazabang/detail/${estate.estateNo }" class="estate" data-type="${est.estateType}">
+                                	<c:if test="${estate.estateRentType eq 'charter' }">
+                                    	<b>전세 ${estate.estateDeposit }</b>                                    	
+                                    	</c:if>
+                                   	<c:if test="${estate.estateRentType eq 'monthly' }">
+                                   		<b>월세 ${estate.estateDeposit }/${estate.estateMonthlyRent }</b>
+                                   	</c:if>
+                        		</a>
+                            </div>
+                        </div>
+                        <div id="bot">
+                            <div id="top-in">
+                                <text><a href="/chazabang/detail/${estate.estateNo }" class="estate" data-type="${est.estateType}">
                                 	<c:if test="${estate.estateType eq 'onetwo'}">
                                 		<b>원룸/투룸</b>
                         			</c:if>
@@ -95,18 +111,14 @@ pageEncoding="UTF-8"%>
                         			<c:if test="${estate.estateType eq 'officetel'}">
                         				<b>오피스텔</b>
                         			</c:if>
-                            </div>
-                        </div>
-                        <div id="bot">
-                            <div id="top-in">
-                                <text>${estate.estateFloor }층, ${estate.estateWidth }㎡</text>
+                        	</a> ${estate.estateFloor }층, ${estate.estateWidth }㎡</text>
                             </div>
                         </div>
                 </div>
                 
                 </div>
             	
-            	</a>
+            	
             </c:forEach>
             <div class="pagination">
 					<c:if test="${startNavi ne 1 }">
