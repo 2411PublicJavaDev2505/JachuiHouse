@@ -7,6 +7,7 @@
     <title>아이디 찾기</title>
       <link rel="stylesheet" href="../resources/css/footer.css">
       <link rel="stylesheet" href="../resources/css/member/findId.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
     </head>
     <body>
       <div class="container">
@@ -37,18 +38,13 @@
           </div>
         </form>
       </div>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
       <script>
 	      const errorMsg = "${errorMsg }";
 			if(errorMsg) {
-				alert(errorMsg);
-// 				Swal.fire({
-//       				icon: 'error',
-//       				title: '아이디 찾기 실패',
-//       				text: errorMsg,
-//       				confirmButtonText: '확인',
-//       				confirmButtonColor: '#4f46e5'
-//       			});
+				showMessage(errorMsg)
 			}
+			
       		//에러 메시지 처리
 //       		<c:if test="${not empty errorMsg}">
 // 	      		Swal.fire({
@@ -72,6 +68,19 @@
 //   				window.location.href='/';
 //   			});
 //       		</c:if>
+
+
+				// SweetAlert2 이게 띄우는 거. 
+		        function showMessage(msg) {
+		        	Swal.fire({            		
+		         		title: '다시 한 번 확인해주세요.',
+		         		text: msg,
+		         		icon: 'error',
+		       		});
+		        }
+
+		
+		
       </script>
     </body>
     </html>
