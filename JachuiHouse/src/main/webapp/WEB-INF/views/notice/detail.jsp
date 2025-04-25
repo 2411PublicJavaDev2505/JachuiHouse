@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title> Notice - add </title>
+		<title> Notice - 상세페이지 </title>
 			<link rel="stylesheet" href="../../resources/css/include/header.css">
 			<link rel="stylesheet" href="../../resources/css/notice/detail.css">
 			<link rel="stylesheet" href="../../resources/css/include/footer.css">
@@ -48,8 +48,9 @@
 	                <div class="value">
 	                    <span class="file-button">첨부파일</span>
 	                    <span class="file-name">
-                    		<a href="../..${notice.noticeFilePath}" download>${notice.noticeFileName}</a>
-                		</span>
+				            <a href="${notice.noticeFilePath}" download>
+				                ${notice.noticeFileName}</a>
+                    	</span>
                 	</div>
               	</div>
           	</div><br>

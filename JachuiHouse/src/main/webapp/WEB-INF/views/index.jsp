@@ -94,8 +94,8 @@
 	                        <a href="notice/list">
 	                            <div class="notice-board">
 	                                <h3>공지사항</h3>
-	                                <li>감기 조심하세요</li>
-	                                <li>사기 예방 안내</li>
+	                                <li><a href="http://localhost:7777/notice/detail/219">감기 조심하세요</a></li>
+	                                <li><a href="http://localhost:7777/notice/detail/220">사기 예방 안내</a></li>
 	                            </div>
 	                        </a>
 	                    </div>
