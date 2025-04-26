@@ -264,8 +264,19 @@ public class MemberServiceImpl implements MemberService {
 		return mMapper.selectNameById(receiverId);
 	}
 
-
+	// 자취생, 공인중개사 id 중복확인
+	@Override
+	public int overlappedID(String userId) throws Exception {
+		return mMapper.overlappedID(userId);
 	}
+	// 회원가입 email 중복확인
+	@Override
+	public int overlappedEmail(String email) throws Exception {
+		return mMapper.overlappedEmail(email);
+	}
+
+
+}
 
 	
 

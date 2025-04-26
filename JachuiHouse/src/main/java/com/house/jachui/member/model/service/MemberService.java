@@ -84,5 +84,11 @@ public interface MemberService {
 	String getFindIdErrorMessage(Member member);
 
 	Member selectFindId1(Member member);
+
+	// 자취생, 공인중개사 id 중복확인
+	int overlappedID(String userId) throws Exception;
 	
+     // 자취생, 공인중개사 email 중복확인
+  	int overlappedEmail(String userId) throws Exception;
 }
+

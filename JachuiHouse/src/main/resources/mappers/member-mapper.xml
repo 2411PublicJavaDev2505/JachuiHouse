@@ -83,7 +83,6 @@
 	        NOW()
 	    )
 	</insert>
-    
 	
 	<update id="resetPw" parameterType="Member">
 		UPDATE MEMBER 
@@ -143,6 +142,16 @@
         FROM MEMBER
         WHERE (USER_EMAIL = #{userEmail} OR USER_NAME = #{userName})
         AND DELETE_YN = 'N'
+    </select>
+    
+    <!-- 자취생, 공인중개사 id 중복확인 -->
+    <select id="overlappedID" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM MEMBER WHERE USER_ID = #{userId}
+    </select>
+    
+    <!-- 회원가입 email 중복확인 -->
+    <select id="overlappedEmail" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM MEMBER WHERE USER_EMAIL = #{userEmail}
     </select>
 	
 	<!-- <select id="selectMemberById" resultType="Member">
