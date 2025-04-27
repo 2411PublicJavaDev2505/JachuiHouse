@@ -92,6 +92,7 @@
                     </div>
                     
                     <ul class="register-radio-group">
+                    	<label for="gender">성별</label>
 						<li class="register-radio">
 							<label for="male">
 							<img src="../resources/images/male.png" alt="남">
