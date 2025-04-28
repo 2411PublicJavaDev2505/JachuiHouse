@@ -31,34 +31,53 @@ body {
   
 }
 
+.signup{
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.logo-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	
+	
+}
+
+.login-image img {
+	width: 130px;
+	height: 90px;
+}
+
 /* div {
   display: block;
   unicode-bidi: isolate;
 } */
 
+.agreements {
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
 .inner {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  --height: 100%;
   border: 1px solid #a3a0a0;
   border-radius: 10px;
   overflow: hidden;
   box-sizing: border-box;
   box-shadow: 2px 5px 10px 3px rgb(165, 162, 162);
-  justify-content: center;
   padding: 40px 0px;
-  box-sizing: border-box;
   margin-top: auto;
-
   width: 100%;
   --height: 650px;
   max-width: 700px;
 
   background-color: white;
-  border: 1px solid #a3a0a0;
-  border-radius: 10px;
-  align-items: center;
   overflow-wrap: break-word;
   word-break: break-word;
 }
@@ -75,13 +94,15 @@ h1 {
 }
 
 /* olmessagef는 중복된 아이디일 경우 빨간색의 문구로, .olmessaget는 사용 가능한 아이디일 경우 파란색 문구로 */
+/* 
 #overlappedID {background-color: GhostWhite; width: 15%; height: 40px;}
 .olmessagef {color: red; font-style: Italic;}
-.olmessaget {color: blue; font-style: Italic;}
+.olmessaget {color: blue; font-style: Italic;} */
 
 .content {
   flex: 1 1 auto;
   padding-top: 30px;
+  width: 400px;
   /* border-top-left-radius: 6px;
   border-top-right-radius: 6px; */
   
@@ -94,9 +115,11 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 
 .form-group input {
   width: 100%;
+  max-width: 400px;
   padding: 10px;
   border: 1px solid #c0baba;
   border-radius: 5px;
+  box-sizing: border-box; /* 패딩과 보더가 너비에 포함되도록 */
 }
 
 
@@ -112,8 +135,12 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 
 
 .form-group{
-	margin-bottom: 3px;
+	display: felx;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 10px;
 	padding: 1px;
+	width: 100%;
 	overflow-wrap: break-word;
 	word-break: break-word;
 }
@@ -123,10 +150,38 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
   font-weight: bold;
   font-size: 15px;
   margin-bottom: 5px;
+  --text-align: center;
 
   /* overflow-wrap: break-word;
   word-break: break-word;
   width: 100%; */
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 입력칸과 버튼 사이 간격 */
+    width: 100%;
+  	max-width: 400px; /* 입력 필드와 버튼을 포함한 전체 너비 제한 */
+	justify-centent: center;
+}
+
+.input-wrapper input {
+    flex: 1; /* 입력칸이 남은 공간을 채우도록 */
+}
+
+.input-wrapper button {
+    padding: 8px 12px;
+    background-color: #FF7337;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.input-wrapper button:hover {
+    background-color: #FFA37C;
 }
 
 .signUp-input-area {
@@ -135,6 +190,8 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
+	max-width: 400px;
 }
 
 .signUp-input-area input{
@@ -146,23 +203,34 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 	width: 80px;
 	height: 37px;
 	margin-left: 10px;
-	font-size: 15px;
+	--font-size: 15px;
     font-weight: bold;
     color: white;
     background-color: #FF7337;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.signUp-input-area button:hover {
+    background-color: #FFA37C;
 }
 
 #userPostcode{
-	width: 495px;
+	--width: 495px;
+	width: 100%;
+ 	max-width: 400px; /* 우편번호 입력 필드도 동일한 너비로 제한 */
 }
+
 
 .signUpBtn{
 	display: flex;
 	justify-content: center;
 	align-items: center;
- 	width: 80%;
+ 	width: 100%;
+ 	max-width: 400px;
     padding: 10px 20px;
     margin-bottom: 15px;
     font-size: 15px;
@@ -171,7 +239,7 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
     background-color: #FF7337;
     border: none;
     border-radius: 5px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin: 0 auto;
 }
 

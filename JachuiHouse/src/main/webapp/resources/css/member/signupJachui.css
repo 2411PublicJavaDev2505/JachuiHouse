@@ -14,23 +14,23 @@ body {
 	font-weight: bold;
 }
 
-.logo_jachuiHouse {
-  flex-grow: 0 0 auto;
-  padding: 19px 115px 19px 20px;
-}
 
 .logo-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 50px;
+	padding: 5px;
 	
 	
 }
 
 .login-image img {
-	width: 100px;
-	height: 70px;
+	width: 130px;
+	height: 90px;
+}
+
+.agreements {
+	margin-bottom: 10px;
 }
 
 .container{
@@ -58,26 +58,21 @@ body {
 .inner {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  --height: 100%;
   border: 1px solid #a3a0a0;
   border-radius: 10px;
   overflow: hidden;
   box-sizing: border-box;
   box-shadow: 2px 5px 10px 3px rgb(165, 162, 162);
-  justify-content: center;
   padding: 40px 0px;
-  box-sizing: border-box;
   margin-top: auto;
-
   width: 100%;
   --height: 650px;
   max-width: 700px;
 
   background-color: white;
-  border: 1px solid #a3a0a0;
-  border-radius: 10px;
-  align-items: center;
   overflow-wrap: break-word;
   word-break: break-word;
 }
@@ -111,6 +106,54 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 	padding: 10px;
 	border: 1px solid #c0baba;
 	border-radius: 5px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 입력칸과 버튼 사이 간격 */
+}
+
+.input-wrapper input {
+    flex: 1; /* 입력칸이 남은 공간을 채우도록 */
+}
+
+.input-wrapper button {
+    padding: 8px 12px;
+    background-color: #FF7337;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.input-wrapper button:hover {
+    background-color: #FFA37C;
+}
+
+.address-input-wrapper {
+	display: flex;
+    align-items: center;
+    gap: 1px; /* 입력칸과 버튼 사이 간격 */
+}
+
+.address-input-wrapper input {
+    flex: 1; /* 입력칸이 남은 공간을 채우도록 */
+}
+
+.address-input-wrapper button {
+    padding: 8px 12px;
+    background-color: #FF7337;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.address-input-wrapper button:hover {
+    background-color: #FFA37C;
 }
 
 /* input {
@@ -168,6 +211,26 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
   padding: 0 10px 0 45px;
 } */
 
+#overlappedID {
+	width: 80px;
+	height: 37px;
+	margin-left: 10px;
+	--font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background-color: #FF7337;
+    border: none;
+    border-radius: 4px;
+    
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#overlappedID:hover {
+    background-color: #FFA37C;
+}
+
+
 .form-group input {
   width: 100%;
   padding: 10px;
@@ -208,14 +271,21 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 	--width: 80px;
 	height: 37px;
 	margin-left: 10px;
-	font-size: 15px;
+	--font-size: 15px;
     font-weight: bold;
     color: white;
     background-color: #FF7337;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     margin: 4px;
-	padding: 1px;
+	--padding: 1px;
+	
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#userPostcodeBtn button:hover {
+    background-color: #FFA37C;
 }
 
 
@@ -244,6 +314,14 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 .register-radio-group {
   display: flex;
   gap: 20px;
+}
+
+.register-radio-group label{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 
 .register-radio {
