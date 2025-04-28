@@ -28,7 +28,7 @@
 	</select>
 
     <select id="selectListAll" resultMap="tradeResultMap">
-	    SELECT * FROM TRADE WHERE DEL_YN = 'N' ORDER BY TRADE_NO
+	    SELECT * FROM TRADE WHERE DEL_YN = 'N' ORDER BY TRADE_NO DESC
 	</select>
 
 	<select id="getTotalCountKeyword" resultType="_int">
