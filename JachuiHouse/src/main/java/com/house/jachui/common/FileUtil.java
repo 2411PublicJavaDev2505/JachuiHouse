@@ -36,7 +36,7 @@ public class FileUtil {
 		
 		String folderPath = session.getServletContext().getRealPath("/resources/"+folderName);
 		File dir = new File(folderPath); 
-		if (!dir.exists()) { // 디렉토리없을 시 자동생성
+		if (!dir.exists()) { // 디렉토리(폴더) 없을 시 자동생성
 			dir.mkdirs();
 		}
 		

@@ -106,7 +106,7 @@
 			  	<p><strong>신고내용:</strong>`+reportVO.reportContent+`</p>
 			  	<p><strong>원본번호:</strong>`+reportVO.postNo+`</p>
 			  	<p><strong>[게시글]:</strong>`+reportVO.postTitle+`</p>
-			  	<p><strong>[댓글]:</strong>`+reportVO.commentContent+`</p>
+			  	<p><strong>[댓글]:</strong>`+reportVO.commentContent||'이 글은 게시글 신고'+`</p>
 			  </div>
 			  `,
 			  showCloseButton: true,

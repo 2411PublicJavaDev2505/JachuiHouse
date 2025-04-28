@@ -11,6 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="reportReason" column="REPORT_REASON"/>
 		<result property="postNo" column="POST_NO"/>
 		<result property="commentNo" column="COMMENT_NO"/>
+		<!-- 신고관리를 위한 추가 -->
+	    <result property="postTitle" column="POST_TITLE"/>
+	    <result property="postContent" column="POST_CONTENT"/>
+	    <result property="commentContent" column="COMMENT_CONTENT"/>
 	</resultMap>
 	
 	<insert id="reportcInsert">
@@ -21,9 +25,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 <!-- 	신고관리 조회 -->
-	<select id="selectListAll" resultType="ReportVO">
-		SELECT * FROM REPORT ORDER BY REPORT_NO DESC
+<!-- 	<select id="selectListAll" resultType="ReportVO"> -->
+<!-- 		SELECT * FROM REPORT ORDER BY REPORT_NO DESC -->
+<!-- 	</select> -->
+	<select id="selectListAll" resultMap="ReportResultMap">
+	    SELECT 
+	        R.REPORT_NO,
+	        R.USER_ID,
+	        R.REPORT_DATE,
+	        R.REPORT_CONTENT,
+	        R.REPORT_REASON,
+	        R.POST_NO,
+	        R.COMMENT_NO,
+	        P.POST_TITLE,
+	        P.POST_CONTENT,
+	        C.COMMENT_CONTENT
+	    FROM REPORT R
+	    LEFT JOIN POST P ON R.POST_NO = P.POST_NO
+	    LEFT JOIN "COMMENT" C ON R.COMMENT_NO = C.COMMENT_NO
+	    ORDER BY R.REPORT_NO DESC
 	</select>
+
 <!-- 	신고관리 페이지네이션 -->
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM REPORT
