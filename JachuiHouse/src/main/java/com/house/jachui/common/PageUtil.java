@@ -7,10 +7,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PageUtil {
-	public static Map<String, Integer> generatePageInfo(int totalCount, int currentPage) {
+	public static Map<String, Integer> generatePageInfo(int totalCount, int currentPage, int boardLimit) {
 		Map<String, Integer> pageInfo = new HashMap<String, Integer>();
-		int boardLimit = 3;
 		int maxPage = 0;
+		//현서님도 컨트롤러에서 이부분을 3으로 고치세요
+		//Map<String, Integer> pageInfo = PageUtil.generatePageInfo(totalCount, currentPage, 3);
 		if(totalCount % boardLimit !=0) {
 			maxPage = totalCount /boardLimit +1;
 		}else {

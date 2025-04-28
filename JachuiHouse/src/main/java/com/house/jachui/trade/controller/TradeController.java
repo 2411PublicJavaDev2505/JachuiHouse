@@ -86,7 +86,7 @@ public class TradeController {
                 model.addAttribute("searchList", null);
                 model.addAttribute("errorMessage", "검색 결과가 없습니다.");
             } else {
-                Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage);
+                Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage, 8);
                 model.addAttribute("maxPage", pageInfo.get("maxPage"));
                 model.addAttribute("startNavi", pageInfo.get("startNavi"));
                 model.addAttribute("endNavi", pageInfo.get("endNavi"));

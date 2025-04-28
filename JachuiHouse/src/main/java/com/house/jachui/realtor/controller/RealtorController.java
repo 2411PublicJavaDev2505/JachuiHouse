@@ -48,7 +48,7 @@ public class RealtorController {
 			Member member = rService.selectRealtorById(userId);
 			List<Estate> eList = rService.selectEstatesById(userId, currentPage, 3);
 			int totalCount = rService.getTotalCount(userId);
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
 			model.addAttribute("maxPage", pageInfo.get("maxPage"));
 			model.addAttribute("startNavi", pageInfo.get("startNavi"));
 			model.addAttribute("endNavi", pageInfo.get("endNavi"));

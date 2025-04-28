@@ -107,7 +107,8 @@ public class ReportController {
 		try {
 			List<ReportVO> rList = rService.selectListAll(currentPage);
 			int totalCount = rService.getTotalCount();
-			Map<String, Integer> pageInfo = PageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = PageUtil.generatePageInfo(totalCount, currentPage, 10);
+			//현서님도 3으로 고치세요
 			
 			if(!rList.isEmpty()) {
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
@@ -131,6 +132,6 @@ public class ReportController {
 	@ResponseBody
 	public String deleteReport(@RequestParam("reportNo") String reportNo) {
 		int result = rService.deleteReport(reportNo);
-		return (result>0) ? "sucess" : "fail";
+		return (result>0) ? "success" : "fail";
 	}
 }
