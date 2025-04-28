@@ -28,6 +28,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM REPORT
 	</select>
-	
+<!-- 	신고반려 -->
+	<delete id="deleteReport">
+		DELETE FROM REPORT WHERE REPORT_NO = #{reportNo}
+	</delete>
 	
 </mapper>

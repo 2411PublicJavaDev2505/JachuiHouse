@@ -42,10 +42,15 @@ public class ReportServiceImpl implements ReportService{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return rMapper.selectListAll(rowBounds);
 	}
-
+	//신고관리 페이지네이션
 	@Override
 	public int getTotalCount() {
 		return rMapper.getTotalCount();
+	}
+	//신고반려
+	@Override
+	public int deleteReport(String reportNo) {
+		return rMapper.deleteReport(reportNo);
 	}
 
 }

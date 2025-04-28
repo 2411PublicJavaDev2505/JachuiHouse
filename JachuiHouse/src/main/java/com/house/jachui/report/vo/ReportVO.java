@@ -15,4 +15,8 @@ public class ReportVO {
 	private String reportReason;
 	private int postNo;
 	private int commentNo;
+	
+	//조인을 위한 추가
+	private String postTitle;
+	private String postContent;
 }

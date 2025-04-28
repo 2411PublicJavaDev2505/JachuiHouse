@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.house.jachui.common.FileUtil;
 import com.house.jachui.common.PageUtil;
@@ -123,5 +124,13 @@ public class ReportController {
 			model.addAttribute("errorMessage", e.getMessage());
 			return "common/error";
 		}
+	}
+	
+	//신고반려(신고글 삭제)
+	@PostMapping("/delete")
+	@ResponseBody
+	public String deleteReport(@RequestParam("reportNo") String reportNo) {
+		int result = rService.deleteReport(reportNo);
+		return (result>0) ? "sucess" : "fail";
 	}
 }

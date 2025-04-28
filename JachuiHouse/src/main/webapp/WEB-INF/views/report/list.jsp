@@ -35,9 +35,8 @@
         		</tr>	
         		<c:forEach var="reportVO" items="${rList}" varStatus="i">
 <!-- 	        					자바스크립트로 창열리게 하기:회원관리처럼 -->
-	        		<a href="/report/detail/${reportVO.reportNo}">
         			<tr
-        			class="report-row"
+        			class="member-row"
         				onclick="showReportInfo(event)"
         				data-reportreason="${reportVO.reportReason }"
         				data-userid="${reportVO.userId }"
@@ -128,7 +127,7 @@
 				}
 					method: 'POST',
 					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
+						'Content-Type': 'application/x-www-form-urlencoded'//보내는 데이터 형식
 		    	    },
 		    	    body: `postNo=`+postVO.postNo
 		    	  })
@@ -150,37 +149,34 @@
 		    	
 		        // 🔽 신고 반려 로직
 		        Swal.fire({
-		          title: "정말로 삭제하시겠습니까?",
+		          title: "정말로 신고 반려하시겠습니까?",
 		          icon: "warning",
-		          showCancelButton: true,// 🟡 '취소' 버튼
-		          confirmButtonText: "삭제",
+		          showCancelButton: true,
+		          confirmButtonText: "신고 반려",
 		          cancelButtonText: "취소"
-		        }).then((res) => {// 🟢 알림창에서 사용자가 뭘 눌렀는지 결과(res)를 받아와
-		          if (res.isConfirmed) {// 🟢 사용자가 '삭제'를 눌렀다면
-		        	// 🧹 진짜로 회원을 삭제하는 요청을 서버에 보내는 부분
-		              console.log("삭제할 회원 ID: ", member.userId);
-		        	
-		        	fetch('/member/delete-by-admin', {// 🔵 서버의 이 주소에 요청을 보낼 거야
-		              method: 'POST',// 🔵 'POST'는 서버에 뭔가를 보내는 방식(삭제할 ID 같은 정보)
+		        }).then((res) => {
+		          if (res.isConfirmed) {
+		              console.log("신고 반려 No: ", reportVO.reportNo);
+		        	fetch('/report/delete', {
+		              method: 'POST',
 		              headers: {
-		                'Content-Type': 'application/x-www-form-urlencoded'// 🔵 보내는 데이터 형식을 알려주는 거야
+		                'Content-Type': 'application/x-www-form-urlencoded'
 		              },
-		              body: `userId=`+member.userId // 🔵 삭제할 회원의 ID를 서버에 보내는 거야
+		              body: `reportNo=`+reportVO.reportNo 
 		            })
-		            .then(response => response.text())// 🔵 서버가 보낸 응답을 글자로 바꿔
-		            .then(data => {// 🟢 삭제가 성공하면 다시 알림창을 띄워
+		            .then(response => response.text())
+		            .then(data => {
 	                	if (data === "success") {
-			              Swal.fire("삭제 완료", "회원이 삭제되었습니다.", "success").then(() => {
-			                location.reload(); // 🟢 알림창 닫히면 화면을 새로고침해서 바뀐 걸 보여줘
+			              Swal.fire("신고 반려", "신고 반려되었습니다.", "success").then(() => {
+			                location.reload(); 
 			              });
 		                } else {
-		                    Swal.fire("오류", "삭제에 실패했습니다.", "error");
+		                    Swal.fire("오류", "실패했습니다.", "error");
 		                }
 		            })
 		            .catch(error => {
-		            	 // 🔴 만약 삭제하는 도중에 문제가 생기면
-		              console.error("삭제 중 오류 발생:", error);// 🔴 오류를 콘솔에 보여줘 (개발자용)
-		              Swal.fire("오류", "삭제에 실패했습니다.", "error");// 🔴 사용자에게 실패했다고 알려줘
+		              console.error("삭제 중 오류 발생:", error);
+		              Swal.fire("오류", "실패했습니다.", "error");
 		            });
 		          }
 		        });
