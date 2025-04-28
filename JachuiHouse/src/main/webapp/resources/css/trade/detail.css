@@ -215,3 +215,38 @@ body {
   font-size: 14px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+
+
+
+
+
+
+/* 기존의 chat-btn 스타일을 수정하여 버튼 스타일을 통일 */
+.chat-btn a button {
+    background-color: #ff7a40; /* 수정 및 삭제 버튼과 같은 색상 */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-btn a button:hover {
+    background-color: #45a049; /* 버튼 호버 효과 */
+}
+
+/* 수정 및 삭제 버튼 스타일 */
+.button-container button {
+    background-color: #ff7a40; /* 동일한 색상 */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
