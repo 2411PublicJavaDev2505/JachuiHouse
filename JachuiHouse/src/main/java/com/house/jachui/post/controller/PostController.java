@@ -44,11 +44,12 @@ public class PostController {
 		try {
 			List<PostVO> pList = pService.selectList(currentPage);
 			int totalCount = pService.getTotalCount();
-			Map<String, Integer> pageInfo = PageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = page.generatePageInfoTrade(totalCount, currentPage);
 			if(!pList.isEmpty()) {
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				model.addAttribute("currentPage", currentPage);
 				model.addAttribute("pList", pList);
 				return "post/list";
 			}else {

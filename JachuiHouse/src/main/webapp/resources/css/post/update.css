@@ -18,6 +18,13 @@
 .head{
     margin-bottom: 50px;
 }
+#postType{
+	    background-color: #B68973;
+        padding: 5px;
+   		border-radius: 15px;
+   		border: 1px solid #eee;
+   		width: 70px;
+}
 #title{
     padding: 5px;
     border-radius: 15px;

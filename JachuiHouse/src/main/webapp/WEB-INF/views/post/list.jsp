@@ -64,19 +64,25 @@
 			                        </tr>-->
 			                    </table>	                    	
 	                    	</div>					
-	                    <div class="pagination-container">
-							<div class="pagination">
-								<c:if test="${startNavi ne 1 }">
-									<a href="/post/list?page=${startNavi - 1 }" class="prev">&lt;</a>
-								</c:if>
-								<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-									<a href="/post/list?page=${p }">${p }</a>
-								</c:forEach>
-								<c:if test="${endNavi ne maxPage }">
-									<a href="/post/list?page=${endNavi + 1 }" class="next">&gt;</a>
-								</c:if>
-							</div>
-						</div>
+				            <div class="pagination-container">
+				                <div class="pagination">
+				
+				                    <c:if test="${currentPage > 1}">
+				                        <a href="/post/list?page=1" class="first">◁◁</a>
+				                        <a href="/post/list?page=${startNavi - 1}" class="prev">◀</a>
+				                    </c:if>
+				
+				                    <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+				                        <a href="/post/list?page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
+				                    </c:forEach>
+				
+				                    <c:if test="${currentPage < maxPage}">
+				                        <a href="/post/list?page=${endNavi + 1}" class="next">▶</a>
+				                        <a href="/post/list?page=${maxPage}" class="last">▷▷</a>
+				                    </c:if>
+				
+				                </div>
+           				 </div>
           			</div>
 	        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
         </div>
