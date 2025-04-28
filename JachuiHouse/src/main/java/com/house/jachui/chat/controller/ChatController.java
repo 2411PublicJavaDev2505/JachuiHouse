@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.chat.controller.dto.SendRequest;
@@ -22,6 +21,7 @@ import com.house.jachui.common.PageUtil;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.post.service.PostService;
+import com.house.jachui.trade.model.service.TradeService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +33,7 @@ public class ChatController {
 	
 	private final MemberService mService;
 	private final EstateService eService;
+	private final TradeService tService;
 	private final ChatService cService;
 	
 	@GetMapping("/torealtor")
@@ -51,6 +52,25 @@ public class ChatController {
             return "common/error";
         }
     }
+	
+	@GetMapping("/totrade")
+	public String showTtoTChat(Model model,
+	                           @RequestParam("tradeNo") int tradeNo,
+	                           HttpSession session) {
+	    try {
+	        String writerId = (String) session.getAttribute("userId"); // 현재 로그인한 사람
+	        String receiverId = tService.selectIdByTradeNo(tradeNo); // 상품 번호로 판매자 ID 조회
+	        System.out.println(writerId);
+	        System.out.println(receiverId);
+	        return "redirect:/chat/chat?writerId=" + writerId + "&receiverId=" + receiverId;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("errorMessage", e.getMessage());
+	        return "common/error";
+	    }
+	}
+	
+	
 
     // 실제 채팅방으로 진입
     @GetMapping("/chat")
@@ -90,19 +110,8 @@ public class ChatController {
             return "common/error";
         }
     }
-    
-    @GetMapping("/fetch")
-    @ResponseBody
-    public List<Chat> fetchNewMessages(
-        @RequestParam("writerId") String writerId,
-        @RequestParam("receiverId") String receiverId,
-        @RequestParam("lastChatId") int lastChatId) {
-        
-        Map<String, Object> map = new HashMap<>();
-        map.put("writerId", writerId);
-        map.put("receiverId", receiverId);
-        map.put("lastChatId", lastChatId);
-
-        return cService.selectNewMessages(map);
+    @GetMapping("/list")
+    public String showChatList() {
+    	return "chat/list";
     }
 }

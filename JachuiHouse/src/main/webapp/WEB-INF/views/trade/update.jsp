@@ -15,7 +15,7 @@
             <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
             <main class="detail-container">
-                <h2>사방팔아방 수정페이지</h2>
+               
                 <input type="hidden" name="tradeNo" value="${trade.tradeNo}" />
 
                 <div class="detail-box">
