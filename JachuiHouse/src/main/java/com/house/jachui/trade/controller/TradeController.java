@@ -180,7 +180,7 @@ public class TradeController {
 				trade.setTradeFileRename(fileInfo.get("tFileRename"));
 				System.out.println("tFileRename:"+fileInfo.get("tFileRename"));
 				
-				trade.setTradeFilepath(fileInfo.get("tFilePath"));
+				trade.setTradeFilepath(fileInfo.get("tFilepath"));
 				System.out.println("tFilePath:"+fileInfo.get("tFilePath"));
 				
 
@@ -236,16 +236,6 @@ public class TradeController {
 	        return "common/error"; // 예외 발생 시 에러 페이지로 이동
 	    }
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 

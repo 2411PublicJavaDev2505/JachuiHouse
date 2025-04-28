@@ -6,11 +6,22 @@
  	<select id="selectOptionList" resultType="EstateOption">
  		SELECT * FROM "OPTION" WHERE ESTATE_NO = #{estateNo} ORDER BY OPTION_NO DESC
  	</select>
-    <select id="getAllOptions" parameterType="int" resultType="int">
-        SELECT OPTION_NO
-        FROM OPTION_LIST
-        WHERE ESTATE_NO = #{estateNo}
-    </select>
+    <select id="selectAllOptions" resultType="com.house.jachui.estate.model.vo.EstateOption">
+	    SELECT
+	        OPTION_NO AS optionNo,
+	        OPTION_NAME AS optionName,
+	        OPTION_IMG AS optionImg
+	    FROM
+	        ESTATE_OPTION
+	</select>
+	<select id="getOptionCodesByEstateNo" resultType="int">
+	    SELECT
+	        OPTION_NO
+	    FROM
+	        OPTION_LIST
+	    WHERE
+	        ESTATE_NO = #{estateNo}
+	</select>
  	<insert id="insertOptionList">
 		INSERT INTO  OPTION_LIST (estate_no, option_no)
 		VALUES
@@ -24,5 +35,5 @@
 	    DELETE FROM OPTION_LIST
 	    WHERE ESTATE_NO = #{estateNo}
 	</delete>
-
+	
  </mapper>

@@ -1,85 +1,234 @@
-@charset "UTF-8";
-.main{
-    background-color: #FFF9E9;
-    height: 1000px;
-    padding-top: 50px;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fefaf6;
+    color: #333;
 }
-.post{
-    width: 600px;
-    background-color: #fff;
-    border: 1px solid black;
-    border-radius: 15px;
+
+.main {
+    background-color: #fdf6ec;
+    min-height: 1000px;
+    padding: 50px 0;
+}
+
+.post {
+    width: 1000px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     margin: 0 auto;
-    padding: 30px;
+    padding: 40px;
 }
-.p1{
+
+.p1 {
     display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
-.posttxt{
-    font-weight: bold;
-    
+
+.posttxt {
+    font-weight: 600;
+    margin-right: 8px;
+    color: #5a5a5a;
 }
-.postcontent{
-    background-color: #FFF9E9;
-    height:150px;
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 15px;
+
+.postcontent {
+    background-color: #fff6e7;
+    min-height: 150px;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    line-height: 1.6;
 }
-.comment{
-    margin: 15px;
+
+.comment {
+    margin: 30px 0;
 }
-.commenttbl th, td{
-    border: 1px solid black;
+
+.commenttbl {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff8ef;
+    table-layout: fixed;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.commenttbl th,
+.commenttbl td {
+    border: 1px solid #ddd;
     text-align: center;
-        padding: 8px;
+    padding: 12px;
     vertical-align: middle;
     word-break: break-word;
     white-space: normal;
 }
-.commenttbl td:nth-child(2) { /* 댓글 내용 열 */
-    max-width: 250px; /* 적절한 최대 너비 */
+
+.commenttbl th {
+    background-color: #ffe4c4;
+    font-weight: bold;
 }
-.commenttbl{ 
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-    height: 200px;
-    background-color: #FFF9E9;
+
+.commenttbl td:nth-child(2) {
+    max-width: 250px;
 }
-.reportbtn{
-    border-radius: 15px;
-    padding: 7px;
-    background-color: #FFA37C;
-    border: 1px solid #eee;
+.commenttbl th:nth-child(1), /* 작성자 */
+.commenttbl td:nth-child(1) {
+    width: 70px;
 }
-.underbar{
-    text-align: center;
+
+.commenttbl th:nth-child(2), /* 내용 */
+.commenttbl td:nth-child(2) {
+    width: 310px;
 }
-.reportbtn2{
-    border-radius: 15px;
-    padding: 7px;
+
+.commenttbl th:nth-child(3), /* 관리 */
+.commenttbl td:nth-child(3) {
+    width: 80px;
+}
+
+.commenttbl th:nth-child(4), /* 작성일 */
+.commenttbl td:nth-child(4) {
     width: 100px;
-    margin-right: 20px;
-    background-color: #FFA37C;
-    border: 1px solid #eee;
 }
-.commentbox{
-    padding: 8px;
-    border-radius: 15px;
-    width: 300px;
-    background-color: #B68973;
-    border: 1px solid #eee;
+
+.underbar {
+    text-align: center;
+    margin-top: 30px;
+    display: flex;
 }
-.commentbtn{
-    padding: 8px;
-    border-radius: 15px;
-    background-color: #FFA37C;
-    border: 1px solid #eee;
+.commentbox {
+    padding: 10px;
+    border-radius: 25px;
+    width: 60%;
+    background-color: #f1d4c9;
+    border: 1px solid #ccc;
+    margin-right: 10px;
 }
-.backbtn{
-    padding: 8px;
-    border-radius: 15px;
+
+.commentbtn,
+.backbtn,
+.updatebtn2,
+.deletebtn2,
+.reportbtn2 {
+    padding: 10px 16px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px;
+    transition: 0.2s all ease-in-out;
+}
+
+.commentbtn {
+    background-color: #ffad84;
+    color: white;
+}
+
+.commentbtn:hover {
+    background-color: #ff8e5e;
+}
+
+.backbtn {
     background-color: #eee;
-    border: 1px solid #eee;
+}
+
+.backbtn:hover {
+    background-color: #ddd;
+}
+
+.updatebtn2,
+.deletebtn2 {
+    background-color: #ffa37c;
+    color: white;
+}
+
+.updatebtn2:hover,
+.deletebtn2:hover {
+    background-color: #ff875a;
+}
+
+.reportbtn,
+.reportbtn2 {
+    background-color: #ffb9a2;
+    color: white;
+}
+
+.reportbtn:hover,
+.reportbtn2:hover {
+    background-color: #ff977a;
+}
+
+/* 신고 폼 영역 */
+.report, .report2 {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.report-body {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    width: 500px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.report h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #ff7b54;
+}
+
+.report-content input,
+.report-area textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    resize: none;
+    font-size: 14px;
+}
+
+.reportBtn button {
+    padding: 6px;
+    margin: 5px;
+    border-radius: 15px;
+    background-color: #ffa37c;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+.reportbtn {
+	padding: 8px 12px;
+	text-decoration : none;
+    margin: 5px;
+    border-radius: 15px;
+    background-color: #ffa37c;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+.deletebtn a {
+	padding: 6px;
+	text-decoration : none;
+    margin: 5px;
+    border-radius: 15px;
+    background-color: #ffa37c;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+.deletebtn a:hover {
+	    background-color: #ff8d5e;
+	
+}
+.reportBtn button:hover {
+    background-color: #ff8d5e;
 }

@@ -13,4 +13,7 @@ public class UpdateRequest {
 	private String userName;
 	private String userPhone;
 	private String userAddress;
+	private String fileName;
+	private String fileRename;
+	private String filePath;
 }

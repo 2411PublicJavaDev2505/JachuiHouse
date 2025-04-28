@@ -84,40 +84,40 @@
 	                            <tr>
 	                                <th>작성자</th>
 	                                <th>내용</th>
-	                                <th>관리</th>
 	                                <th>작성일</th>
+	                                <th>관리</th>
 	                            </tr>
 	                               <c:forEach items="${cList }" var="comment">
 		                               <c:if test="${comment.postNo == result.postNo}">
 		                                <tr>
 		                                    <td>${comment.userId}</td>
 		                                    <td>${comment.commentContent}</td>
+		                                    <td>${comment.writeDate}</td>
 		                                    <c:if test="${sessionScope.userId ne comment.userId }">
 		                                    	<td><button class="reportbtn" onclick="showReport();">신고하기</button></td>
 		                                    </c:if>
 		                                     <c:if test="${sessionScope.userId eq comment.userId }">
 		                                     	<td>
-			                                     	<button class="deletebtn"><a href="/post/cdelete?commentNo=${comment.commentNo }&postNo=${result.postNo}">삭제하기</a></button>
+			                                     	<div class="deletebtn"><a href="/post/cdelete?commentNo=${comment.commentNo }&postNo=${result.postNo}">삭제하기</a></div>
 		                                     	</td>
 		                                     </c:if>	
-		                                    <td>${comment.writeDate}</td>
 		                                </tr> 
 		                               </c:if>
 	                               </c:forEach>
 	                           </table>
 	                       </div>                   
-                    </c:if>
-						   <c:if test="${sessionScope.userId ne result.userId }">
-							   <button class="reportbtn2" onClick="showReport2();">신고하기</button>
-						   </c:if>
+                    	</c:if>
+					    <c:if test="${sessionScope.userId ne result.userId }">
+						   <button class="reportbtn2" onClick="showReport2();">신고하기</button>
+					    </c:if>
                        <form action="/post/cinsert" method="post">
 						   <input type="hidden" name="postNo" value="${result.postNo}">
 						   <input type="hidden" name="userId" value="${sessionScope.userId }">
 						   <div class="underbar">
-						   <c:if test="${sessionScope.userId eq result.userId }">
-						   		<button class="updatebtn2" onclick="location.href='/post/update?postNo=${result.postNo }'">수정하기</button>
-						   		<button class="deletebtn2" type="submit" onclick="/post/delete?postNo=${result.postNo }'">삭제하기</button>		
-						   </c:if>
+							   <c:if test="${sessionScope.userId eq result.userId }">
+								   <button class="updatebtn2" type="button" onclick="location.href='/post/update?postNo=${result.postNo}'">수정하기</button>
+								   <button class="deletebtn2" type="button" onclick="location.href='/post/delete?postNo=${result.postNo}'">삭제하기</button>	
+								</c:if>
 							   <input id="commentInput" type="text" placeholder="댓글을 입력하세요." class="commentbox" name="commentContent">
 							   <button class="commentbtn" type="submit">댓글달기</button>
 							   <button class="backbtn" type="button" onclick="location.href='/post/list'">목록으로</button>

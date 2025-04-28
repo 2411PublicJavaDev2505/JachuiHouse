@@ -85,7 +85,9 @@ public interface MemberMapper {
 
 	Member findMemberByEmailOrName(String userEmail, String userName);
 
-
-
-
+	// 자취생, 공인중개사 id 중복확인
+	int overlappedID(String userId);
+	
+	// 회원가입 email 중복확인
+	int overlappedEmail(String email);
 }

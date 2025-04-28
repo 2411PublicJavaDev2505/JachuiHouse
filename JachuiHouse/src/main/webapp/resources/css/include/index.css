@@ -75,10 +75,6 @@ section {
 .main-menu a{
     text-decoration: none;
 }
-.main-menu a:hover {
-    background-color: #FF7337;
-    border-radius: 10px;
-}
 .left-menu {
     display: flex;
 }
@@ -107,30 +103,6 @@ section {
     padding: 20px 35px 20px 35px;
 }
 
-
-/* 캐러셀 */
-/* * { */
-/*   box-sizing: border-box; */
-/* } */
-
-/* .carousel-wrapper { */
-/*   width: 500px; */
-/*   height: 300px; */
-/*   overflow: hidden;   다른 사진 뒤에 감추기 */
-/* } */
-
-/* .carousel-wrapper > .carousel { */
-/*   display: flex; 가로정렬 */
-/*   transform: translate3d(0, 0, 0);부드럽게 진행 */
-/*   transition: transform 0.2s; */
-/* } */
-
-/* .carousel-wrapper > .carousel > img { */
-/*   width: 500px; */
-/*   height: 300px; 높이 맞추기 */
-/* } */
-
-/*캐러셀 2*/
 /* 캐러셀 전체 구조  */
 .carousel_main {
     width: 400px; /* 이미지 크기 설정  */

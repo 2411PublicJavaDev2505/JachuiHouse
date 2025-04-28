@@ -217,3 +217,14 @@ body {
     text-decoration: none;
 }
 
+
+
+.no-result {
+    display: flex;
+    justify-content: center; /* 가로 중앙 */
+    align-items: center;     /* 세로 중앙 */
+    height: 300px;           /* 적당한 높이 (조절 가능) */
+    font-size: 20px;
+    color: #555;
+}
+

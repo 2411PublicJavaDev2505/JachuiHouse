@@ -176,7 +176,7 @@ legend {
     position: absolute;
     top: 2px;
     right: 2px;
-    background-color: red;
+    background-color: rgba(0,0,0,0.5);
     color: white;
     border: none;
     border-radius: 50%;

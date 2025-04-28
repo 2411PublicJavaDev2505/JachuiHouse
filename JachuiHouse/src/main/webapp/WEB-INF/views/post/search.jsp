@@ -6,7 +6,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>자취록 리스트</title>
-		<link rel="stylesheet" href="../resources/css/reset.css">
 	    <link rel="stylesheet" href="../resources/css/include/header.css">
 	    <link rel="stylesheet" href="../resources/css/include/footer.css">
 	    <link rel="stylesheet" href="../resources/css/post/list.css">
@@ -29,7 +28,9 @@
 				    </div>
 				</form>
 	                <div class="board">
-	                    	<button class="writebtn" ><a href="/post/insert">작성하기</a></button>
+	                    <div class="writebtn-container">
+	                    	<button class="writebtn" onclick="location.href='/post/insert'">작성하기</button>
+	                    </div>	
 	                    	<div class="table">
 			                    <table class="boardtbl">
 			                        <tr>

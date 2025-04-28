@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.house.jachui.estate.controller.dto.CheckedOption;
 import com.house.jachui.estate.controller.dto.EstateAddRequest;
 import com.house.jachui.estate.model.mapper.EstateFileMapper;
 import com.house.jachui.estate.model.mapper.OptionMapper;
 import com.house.jachui.estate.model.service.EstateService;
+import com.house.jachui.estate.model.service.OptionService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.estate.model.vo.EstateFile;
 import com.house.jachui.estate.model.vo.EstateOption;
@@ -33,6 +35,7 @@ public class EstateController {
 	  private final EstateService estService;
 	  private final EstateFileMapper fileMapper;
 	  private final OptionMapper oMapper;
+	  private final OptionService oService;
 
     @GetMapping("/list")
     public String showEstateList(@RequestParam(value = "keyword", required = false) String keyword,
@@ -100,24 +103,29 @@ public class EstateController {
 	
 	@GetMapping("/modify/{estateNo}")
 	public String showEstateUpdateForm(@PathVariable("estateNo") int estateNo, Model model) {
-	    Estate estate = estService.selectOneByNo(estateNo);
+	    
+		Estate estate = estService.selectOneByNo(estateNo);
 	    model.addAttribute("estate", estate);
+	    
 	    List<EstateFile> estateImageList = fileMapper.selectImageList(estateNo);
 	    model.addAttribute("estateImageList", estateImageList);
-	    return "estate/update";
+	    
+	    List<CheckedOption> optionsWithCheck = oService.getOptionsWithCheck(estateNo);
+	    model.addAttribute("optionList", optionsWithCheck);
+	    
+	    return "estate/modify";
 	}
 
-	@PostMapping("/update")
-	public String updateEstate(@ModelAttribute Estate  estate,
+	@PostMapping("/modify")
+	public String updateEstate(@ModelAttribute Estate estate,
 	                           @RequestParam(value = "optionCodes", required = false) List<Integer> optionCodes,
-	                           @RequestParam("images") List<MultipartFile> images,
-	                           HttpSession session,
-	                           Model model) throws IOException {
+	                           @RequestParam(value = "images", required = false) List<MultipartFile> newImages,
+	                           @RequestParam(value = "deleteImageIds", required = false) List<Integer> deleteImageIds,
+	                           HttpSession session) throws IOException {
 	    String userId = (String) session.getAttribute("userId");
 	    estate.setUserId(userId);
-	    
-	    int result = estService.updateEstate(estate, images, optionCodes, session);
-	    
+	    estService.updateEstate(estate, newImages, optionCodes, deleteImageIds);
+
 	    return "redirect:/chazabang/detail/" + estate.getEstateNo();
 	}
 

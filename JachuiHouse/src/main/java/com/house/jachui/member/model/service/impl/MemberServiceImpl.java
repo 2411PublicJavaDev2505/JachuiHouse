@@ -37,8 +37,8 @@ public class MemberServiceImpl implements MemberService {
 
     // 자취생 회원가입
     @Override
-    public boolean signupJachui(SignupJachuiRequest request) {
-        return mMapper.signupJachui(request) > 0;
+    public int signupJachui(SignupJachuiRequest request) {
+        return mMapper.signupJachui(request);
     }
 
     // 공인중개사 회원가입
@@ -264,8 +264,19 @@ public class MemberServiceImpl implements MemberService {
 		return mMapper.selectNameById(receiverId);
 	}
 
-
+	// 자취생, 공인중개사 id 중복확인
+	@Override
+	public int overlappedID(String userId) throws Exception {
+		return mMapper.overlappedID(userId);
 	}
+	// 회원가입 email 중복확인
+	@Override
+	public int overlappedEmail(String email) throws Exception {
+		return mMapper.overlappedEmail(email);
+	}
+
+
+}
 
 	
 

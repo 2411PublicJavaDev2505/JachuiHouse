@@ -18,7 +18,7 @@ import com.house.jachui.realtor.controller.dto.UpdateRealtorRequest;
 public interface MemberService {
 
 	// 자취생 회원가입
-    boolean signupJachui(SignupJachuiRequest request);
+    int signupJachui(SignupJachuiRequest request);
 
     // 공인중개사 회원가입
     int signupRealtor(SignupRealtorRequest request);
@@ -84,5 +84,11 @@ public interface MemberService {
 	String getFindIdErrorMessage(Member member);
 
 	Member selectFindId1(Member member);
+
+	// 자취생, 공인중개사 id 중복확인
+	int overlappedID(String userId) throws Exception;
 	
+     // 자취생, 공인중개사 email 중복확인
+  	int overlappedEmail(String userId) throws Exception;
 }
+

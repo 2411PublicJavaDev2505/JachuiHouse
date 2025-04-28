@@ -40,15 +40,13 @@
             USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_PHONE, 
             USER_GENDER, USER_ADDRESS, USER_BIRTH, USER_POSTCODE, 
             USER_DETAILADDRESS, ALONE_LIVING, USER_ROLE, 
-            REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE,
-            FILE_NAME, FILE_RENAME, FILE_PATH
+            REALTOR_NAME, REALTOR_NO, DELETE_YN, APPROVE_YN, JOIN_DATE
         )
         VALUES (
             #{userId}, #{userPw}, #{userName}, #{userEmail}, #{userPhone}, 
             #{userGender}, #{userAddress}, #{userBirth}, #{userPostcode}, 
             #{userDetailAddress}, #{aloneLiving}, 'M', 
-            'X', 0, DEFAULT, DEFAULT, DEFAULT,
-            #{fileName}, #{fileRename}, #{filePath}
+            'X', 0, DEFAULT, DEFAULT, DEFAULT
         )
     </insert>
 
@@ -85,7 +83,6 @@
 	        NOW()
 	    )
 	</insert>
-    
 	
 	<update id="resetPw" parameterType="Member">
 		UPDATE MEMBER 
@@ -145,6 +142,16 @@
         FROM MEMBER
         WHERE (USER_EMAIL = #{userEmail} OR USER_NAME = #{userName})
         AND DELETE_YN = 'N'
+    </select>
+    
+    <!-- 자취생, 공인중개사 id 중복확인 -->
+    <select id="overlappedID" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM MEMBER WHERE USER_ID = #{userId}
+    </select>
+    
+    <!-- 회원가입 email 중복확인 -->
+    <select id="overlappedEmail" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM MEMBER WHERE USER_EMAIL = #{userEmail}
     </select>
 	
 	<!-- <select id="selectMemberById" resultType="Member">

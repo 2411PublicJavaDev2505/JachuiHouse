@@ -75,6 +75,7 @@ public class MemberController {
 				session.setAttribute("userId", mem.getUserId()); // 유저 ID 저장
 				session.setAttribute("userName", mem.getUserName()); // 사용자 이름 저장
 				session.setAttribute("userRole", mem.getUserRole()); 
+				model.addAttribute("success", "가입이 완료되었습니다.");
 				return "redirect:/"; //메인페이지로 리다이렉트
 			} else {
 				model.addAttribute("errorMsg", "아이디 또는 비밀번호가 잘못되었습니다.");
@@ -120,9 +121,9 @@ public class MemberController {
 	// 자취생 회원가입 처리	 
 	@PostMapping("/signupJachui")
 	public String memberSignupJachui(@ModelAttribute SignupJachuiRequest request, HttpSession session) {
-		boolean result = mService.signupJachui(request);
+		int result = mService.signupJachui(request);
 		
-		if(result) {
+		if(result > 0) {
 			session.setAttribute("welcomeMsg", "회원가입이 완료되었습니다!");
 //			return "redirect:/"; // 메인 페이지로 리다이렉트
 			return "member/login";
@@ -141,9 +142,10 @@ public class MemberController {
 	
 	// 공인중개사 회원가입 처리	
 	@PostMapping("/signupRealtor")
-	public String memberSignupRealtor(@ModelAttribute SignupRealtorRequest request) {
+	public String memberSignupRealtor(@ModelAttribute SignupRealtorRequest request, HttpSession session) {
 		int result = mService.signupRealtor(request);
 		if(result > 0) {
+			session.setAttribute("welcomeMsg", "회원가입이 완료되었습니다!");
 //			return "redirect:/";
 			return "member/login";
 		}else {
@@ -151,7 +153,28 @@ public class MemberController {
 		}
 		
 	}
-
+	
+	// 공인중개사 회원가입 id 중복확인
+	@GetMapping("idCheck")
+	@ResponseBody //JSON 응답.
+	public int overlappedID(@RequestParam("userId") String userId) throws Exception{  // Ajax에서 보낸 userId 파라미터 받기.
+		return mService.overlappedID(userId);
+	}
+	
+//	// 자취생 회원가입 id 중복확인
+//		@GetMapping("idCheck")
+//		@ResponseBody //JSON 응답.
+//		public int overlappedID1(@RequestParam("userId") String userId) throws Exception{  // Ajax에서 보낸 userId 파라미터 받기.
+//			return mService.overlappedID(userId);
+//		}
+	
+	// 회원가입 email 중복확인
+		@GetMapping("emailCheck")
+		@ResponseBody //JSON 응답.
+		public int overlappedEmail(@RequestParam("userEmail") String userId) throws Exception{  // Ajax에서 보낸 userId 파라미터 받기.
+			return mService.overlappedEmail(userId);
+		}
+	
 	
 	// 아이디찾기 페이지 이동
 	@GetMapping("/findId")
