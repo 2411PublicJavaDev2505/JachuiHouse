@@ -37,5 +37,10 @@ public class ChatServiceImpl implements ChatService {
 		return cMapper.sendChat(chat);
 	}
 
+	@Override
+	public List<Chat> selectNewMessages(Map<String, Object> map) {
+		return cMapper.selectNewMessages(map);
+	}
+
 
 }
