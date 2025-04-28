@@ -40,5 +40,14 @@
 		    ORDER BY CHAT_NO DESC
 		    FETCH FIRST 1 ROWS ONLY	
     </select>
-	
+    
+	<select id="getTotalCount">
+		SELECT COUNT(*) FROM CHAT WHERE RECEIVER_ID=#{receiverId}
+	</select>
+	<select id="selectChatByUserId" resultMap="chatResultMap">
+		SELECT * 
+		    FROM CHAT
+		    WHERE RECEIVER_ID = #{userId}
+		    ORDER BY CHAT_NO DESC
+	</select>
   </mapper>

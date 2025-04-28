@@ -19,4 +19,8 @@ public interface ChatService {
 	List<Chat> selectNewMessages(Map<String, Object> map);
 	List<Chat> getChatByUserId(String userId);
 
+	int getTotalCount(String userId);
+
+	List<Chat> selectChatByUserId(String userId, int currentPage, int i);
+
 }

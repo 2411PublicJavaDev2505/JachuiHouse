@@ -54,10 +54,8 @@ pageEncoding="UTF-8"%>
                     	<button type="submit" id="chatList">채팅 내역</button>
                     </a>
                 </div>
-                <c:forEach items="${eList }" var="estate">
-                
-                <div id="content">
-                
+                <c:forEach items="${eList }" var="estate">               
+                <div id="content">               
                     <div id="roomImg">
                     	<a href="/chazabang/detail/${estate.estateNo }" class="estate" data-type="${est.estateType}">
 							<img src="${estate.estateFileList[0].estateFilePath}" alt="이미지 준비중">
@@ -68,8 +66,7 @@ pageEncoding="UTF-8"%>
                             <div id="top-in">
                                 <div id="jongro">
                                 	<a href="/chazabang/detail/${estate.estateNo }" class="estate" data-type="${est.estateType}">
-                                    	<b>${estate.estateAddress}</b> 
-                                    	
+                                    	<b>${estate.estateAddress}</b>                                     	
                                   	</a>
                                 </div>
                                 <div id="button-box">
@@ -111,26 +108,23 @@ pageEncoding="UTF-8"%>
                         			<c:if test="${estate.estateType eq 'officetel'}">
                         				<b>오피스텔</b>
                         			</c:if>
-                        	</a> ${estate.estateFloor }층, ${estate.estateWidth }㎡</text>
+                        		</a> ${estate.estateFloor }층, ${estate.estateWidth }㎡</text>
                             </div>
                         </div>
-                </div>
-                
-                </div>
-            	
-            	
+                	</div>           
+                </div>            	            	
             </c:forEach>
             <div class="pagination">
-					<c:if test="${startNavi ne 1 }">
-						<a href="/realtor/myPage?page=${startNavi - 1 }" class="prev">&lt;</a>
-					</c:if>
-					<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-						<a href="/realtor/myPage?page=${p }">${p }</a>
-					</c:forEach>
-					<c:if test="${endNavi ne maxPage }">
-						<a href="/realtor/myPage?page=${endNavi + 1 }" class="next">&gt;</a>
-					</c:if>
-				</div>
+				<c:if test="${startNavi ne 1 }">
+					<a href="/realtor/myPage?page=${startNavi - 1 }" class="prev">&lt;</a>
+				</c:if>
+				<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
+					<a href="/realtor/myPage?page=${p }">${p }</a>
+				</c:forEach>
+				<c:if test="${endNavi ne maxPage }">
+					<a href="/realtor/myPage?page=${endNavi + 1 }" class="next">&gt;</a>
+				</c:if>
+			</div>
         </div>
     </main>
     <footer>

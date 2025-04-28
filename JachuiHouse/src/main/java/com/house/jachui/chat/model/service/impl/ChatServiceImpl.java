@@ -3,6 +3,7 @@ package com.house.jachui.chat.model.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,17 @@ public class ChatServiceImpl implements ChatService {
 		return cMapper.getChatByUserId(userId);
 	}
 
+	@Override
+	public int getTotalCount(String userId) {
+		return cMapper.getTotalCount(userId);
+	}
+
+	@Override
+	public List<Chat> selectChatByUserId(String userId, int currentPage, int i) {
+		int limit = 3;
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return cMapper.selectChatByUserId(userId, rowBounds);
+	}
 
 }
