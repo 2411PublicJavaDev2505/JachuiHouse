@@ -153,7 +153,28 @@ public class MemberController {
 		}
 		
 	}
-
+	
+	// 공인중개사 회원가입 id 중복확인
+	@GetMapping("idCheck")
+	@ResponseBody //JSON 응답.
+	public int overlappedID(@RequestParam("userId") String userId) throws Exception{  // Ajax에서 보낸 userId 파라미터 받기.
+		return mService.overlappedID(userId);
+	}
+	
+//	// 자취생 회원가입 id 중복확인
+//		@GetMapping("idCheck")
+//		@ResponseBody //JSON 응답.
+//		public int overlappedID1(@RequestParam("userId") String userId) throws Exception{  // Ajax에서 보낸 userId 파라미터 받기.
+//			return mService.overlappedID(userId);
+//		}
+	
+	// 회원가입 email 중복확인
+		@GetMapping("emailCheck")
+		@ResponseBody //JSON 응답.
+		public int overlappedEmail(@RequestParam("userEmail") String userId) throws Exception{  // Ajax에서 보낸 userId 파라미터 받기.
+			return mService.overlappedEmail(userId);
+		}
+	
 	
 	// 아이디찾기 페이지 이동
 	@GetMapping("/findId")

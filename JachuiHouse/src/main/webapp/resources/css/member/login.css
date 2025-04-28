@@ -14,6 +14,11 @@ body {
     background-color: #FFF9E9;
 }
 
+.login {
+	font-size: 18px;
+	font-weight: bold;
+}
+
 .login-main {
     display: flex;
     /* width: 730; */
@@ -145,7 +150,7 @@ h1 {
 .form-group label {
     display: block;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 5px;
 }
 
@@ -211,7 +216,7 @@ h1 {
     display: flex;
     align-items: center;
     /* height: 20px; */
-    flex-direction: column;
+    flex-direction: column; /* 요소들을 위아래로 정렬 */
     height: 20%;
     /* margin-bottom: px; */
 }
@@ -221,7 +226,7 @@ h1 {
     text-align: center; /* 텍스트 가운데 정렬 */
     display: block;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 5px;
 }
 

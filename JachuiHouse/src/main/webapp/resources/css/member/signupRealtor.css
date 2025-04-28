@@ -74,6 +74,11 @@ h1 {
   unicode-bidi: isolate;
 }
 
+/* olmessagef는 중복된 아이디일 경우 빨간색의 문구로, .olmessaget는 사용 가능한 아이디일 경우 파란색 문구로 */
+#overlappedID {background-color: GhostWhite; width: 15%; height: 40px;}
+.olmessagef {color: red; font-style: Italic;}
+.olmessaget {color: blue; font-style: Italic;}
+
 .content {
   flex: 1 1 auto;
   padding-top: 30px;

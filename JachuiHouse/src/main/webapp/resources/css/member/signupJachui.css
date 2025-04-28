@@ -9,9 +9,28 @@ body {
   background-color: #FFFBF0;
 }
 
+.signup{
+	font-size: 18px;
+	font-weight: bold;
+}
+
 .logo_jachuiHouse {
   flex-grow: 0 0 auto;
   padding: 19px 115px 19px 20px;
+}
+
+.logo-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+	
+	
+}
+
+.login-image img {
+	width: 100px;
+	height: 70px;
 }
 
 .container{
@@ -219,4 +238,31 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 
 .signUpBtn:hover{
   background-color: #FFA37C;
+}
+
+
+.register-radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.register-radio {
+  display: flex;
+  align-items: center;
+}
+
+.register-radio input[type="radio"] {
+  margin-right: 10px;
+}
+
+.register-radio img {
+  width: 40px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.register-radio input[type="radio"]:checked + img {
+  border: 2px solid #007bff;
+  border-radius: 50%;
 }

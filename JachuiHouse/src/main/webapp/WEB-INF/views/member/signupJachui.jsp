@@ -12,13 +12,15 @@
 <body>
     <div class="container">
         <div class="inner">
-        	<div class="login-image">
-	        	<a href="http://localhost:7777">
-					<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
-				</a>
-          	</div>
-			<div>  
-                <span>회원가입</span>
+        	<div class="logo-container">
+	        	<div class="login-image">
+		        	<a href="http://localhost:7777">
+						<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
+					</a>
+	          	</div>
+				<div>  
+	                <span class="signup">회원가입</span>
+            	</div>    
             <div id="msgTag" style="color: red;"></div>
 			</div>
             <div class="content">
@@ -28,25 +30,25 @@
                 </div>
 				
                 <form class="form" action="/member/signupJachui" method="POST" id="signup_form">
-                        <div class="form-group">
-                        	<h3>아이디 입력</h3>
-                            <label for="id">아이디</label>
-                            <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="영어 소문자와 숫자로 4~12자리" autofocus >
-                            <label id="label1"></label>
-                            <button id="btn-di-check">중복확인</button>
-                      		<div id="id-check-result" class="area"></div>
-                            <!-- <button type="button" onClick="fn_dbCheckId()" name="dbCheckId" class="checkId">중복확인</button>
-                            <input type="hidden" name="idDuplication" value="idUncheck"> -->
-                        </div>
+                    <div class="form-group">
+                    	<h3>아이디 입력</h3>
+                        <label for="id">아이디</label>
+                        <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="영어 소문자와 숫자로 4~12자리여야 합니다." autofocus required>
+                        <label id="label1"></label>
+                        <button id="overlappedID" type="button">중복확인</button><br>
+                  		<span id="idOlMessage"></span>
+                    </div>
                         
                     <div class="form-group">
 			            <label for="userEmail">이메일: </label>
-			            <input type="email" id="userEmail" name="userEmail" >
+			            <input type="email" id="userEmail" name="userEmail" autofocus required>
+			            <button id="overlappedEmail" type="button">중복확인</button><br> 
+			            <span id="emailOlMessage"></span> 
 			        </div>  
         			
                     <div class="form-group">
                         <label for="password">비밀번호</label>
-                        <input type="password" id="userPw"  name="userPw" >
+                        <input type="password" id="userPw"  name="userPw" placeholder="비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." required>
                     </div>
         
                     <div class="form-group">
@@ -88,10 +90,11 @@
         
                     <div class="form-group">
                         <label for="BirthDay">생년월일</label>
-                        <input type="date" name="userBirth" >
+                        <input type="date" name="userBirth" required>
                     </div>
                     
                     <ul class="register-radio-group">
+                    	<label for="gender">성별</label>
 						<li class="register-radio">
 							<label for="male">
 							<img src="../resources/images/male.png" alt="남">
@@ -126,6 +129,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
+    let isIdChecked = false; // 아이디 중복확인 완료 여부
+    let isEmailChecked = false; // 이메일 중복확인 완료 여부
+   		
         function business_execDaumPostcode() {
             new daum.Postcode({
                 oncomplete: function(data) {
@@ -314,19 +320,90 @@
     		}
         	
         })
-        // SweetAlert2  (해당 디자인으로 가져옴.)
+/*         // SweetAlert2  (해당 디자인으로 가져옴.)
         document.querySelector("#success").addEventListener("click", function() {
         	new swal(
      	       'Success',
      	       'You clicked the <b style="color:green;">Success</b> button!',
      	       'error'
-    	    )
+    	    ) */
         	/* Swal.fire({
        		  'Alert가 실행되었습니다.',         // Alert 제목
        		  '이곳은 내용이 나타나는 곳입니다.',  // Alert 내용
        		  'success',                         // Alert 타입
-       		}); */
+       		}); 
         	
+        });*/
+        
+    	 // 아이디 중복 확인
+        const overlappedIDBtn = document.querySelector("#overlappedID");
+        overlappedIDBtn.addEventListener("click", function (event) {
+//         const signupInput = document.querySelector("#signupRealtor");
+//         signupInput.setAttribute("type", "button");
+            
+            const id = document.querySelector("#userId").value;
+            const userIdExp = /^[a-z][a-z0-9]{3,11}$/;
+            
+            if (!userIdExp.test(id)) {
+                showMessage("아이디는 소문자로 시작하고, 영어 소문자와 숫자로 4~12자리여야합니다.");
+                return;
+            }
+        
+	        fetch(`/member/idCheck?userId=`+id)
+	        .then(response => {
+	            if (!response.ok) throw new Error("오류 발생");
+	            return response.text();
+	        })
+	        .then(data => {
+	            const olmessage = document.querySelector("#idOlMessage");
+	            if (data == 1) {
+	                olmessage.textContent = "이미 사용중인 ID 입니다.";
+	                olmessage.style.color = "red";
+	                isIdChecked = false;
+	            } else {
+	                olmessage.textContent = "사용 가능한 ID 입니다.";
+	                olmessage.style.color = "green";
+	                isIdChecked = true;
+	            }
+	        })
+	        .catch(error => {
+	            showMessage("아이디 중복확인 중 오류가 발생했습니다.");
+	            isIdChecked = false;
+	        });
+		});
+        
+     // 이메일 중복 확인
+        const overlappedEmailBtn = document.querySelector("#overlappedEmail");
+        overlappedEmailBtn.addEventListener("click", function (event) {
+            const email = document.querySelector("#userEmail").value;
+            const userEmailExp = /^[a-zA-Z0-9._%+-]{4,12}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (!userEmailExp.test(email)) {
+                showMessage("이메일 형식이 올바르지 않습니다.");
+                return;
+            }
+
+            fetch(`/member/emailCheck?userEmail=`+email)
+                .then(response => {
+                    if (!response.ok) throw new Error("오류 발생");
+                    return response.text();
+                })
+                .then(data => {
+                    const emailOlMessage = document.querySelector("#emailOlMessage");
+                    if (data == 1) {
+                        emailOlMessage.textContent = "이미 사용중인 이메일입니다.";
+                        emailOlMessage.style.color = "red";
+                        isEmailChecked = false;
+                    } else {
+                        emailOlMessage.textContent = "사용 가능한 이메일입니다.";
+                        emailOlMessage.style.color = "green";
+                        isEmailChecked = true;
+                    }
+                })
+                .catch(error => {
+                    showMessage("이메일 중복확인 중 오류가 발생했습니다.");
+                    isEmailChecked = false;
+                });
         });
     </script>
 </body>
