@@ -31,7 +31,29 @@ main {
     border: 1px solid #eee;
     border-radius: 8px;
     margin-bottom: 20px;
+    position: relative;
 }
+
+/* 내 메시지 */
+.my-msg {
+    align-self: flex-end;
+    max-width: 70%;
+}
+
+/* 상대 메시지 */
+.not-my-msg {
+    align-self: flex-start;
+    max-width: 70%;
+    text-align: left;
+}
+
+/* 메시지 입력창 */
+.message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 
 /* 내 메시지 */
 .my-msg {

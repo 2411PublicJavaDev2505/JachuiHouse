@@ -51,7 +51,7 @@ public class NoticeController {
 		try {
 			List<NoticeVO> nList = nService.selectListAll(currentPage);
 			int totalCount = nService.getTotalCount();
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 10);
 			
 			if(!nList.isEmpty()) {
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
@@ -80,7 +80,7 @@ public class NoticeController {
 			int totalCount = nService.getTotalCountByKeyword(searchKeyword);
 			List<NoticeVO> searchList = nService.searchListByKeyword(searchKeyword, currentPage); 
 			
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 10);
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));

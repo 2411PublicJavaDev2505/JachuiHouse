@@ -28,11 +28,11 @@ public class ServiceImpl implements PostService{
 	//게시글 전체 조회
 	@Override
 	public List<PostVO> selectList(int currentPage) {
-		int limit = 10;
+		int limit = 8;
 		int offset = (currentPage-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<PostVO> pList = pMapper.selectList(rowBounds);
-		return pList;
+		return pMapper.selectList(rowBounds);
+		
 	}
 	//게시글 작성
 	@Override
@@ -101,6 +101,7 @@ public class ServiceImpl implements PostService{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return pMapper.selectSearchList(searchKeyword, category, rowBounds);
 	}
+	
 
 	
 }

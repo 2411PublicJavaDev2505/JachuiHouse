@@ -32,32 +32,23 @@
 <!--         			<th>신고글 제목</th> -->
         			<th>작성자</th>
         			<th>작성일</th>
+<!--         			<th>게시글 번호</th> -->
         		</tr>	
         		<c:forEach var="reportVO" items="${rList}" varStatus="i">
 <!-- 	        					자바스크립트로 창열리게 하기:회원관리처럼 -->
         			<tr
         			class="member-row"
         				onclick="showReportInfo(event)"
+        				data-reportno="${reportVO.reportNo }"
         				data-reportreason="${reportVO.reportReason }"
         				data-userid="${reportVO.userId }"
         				data-reportdate="${reportVO.reportDate }"
-<%--         				data-reportcontent="${reportVO.reportContent }" --%>
-<%--         				data-posttitle="${postVO.postTitle }" --%>
-<%--         				data-postcontent="${postVO.postContent }" --%>
+        				data-reportcontent="${reportVO.reportContent }"
+        				data-postno="${reportVO.postNo }"
+        				data-posttitle="${reportVO.postTitle }"
+        				data-commentcontent="${reportVO.commentContent}"
         			>
-<!--         				<td> -->
-<%-- 						    <c:choose> --%>
-<%-- 						        <c:when test="${reportVO.noticeType == '댓글'}"> --%>
-<%-- 						            <span class="notice-type-common">${noticeVO.noticeType}</span> --%>
-<%-- 						        </c:when> --%>
-<%-- 						        <c:when test="${reportVO.noticeType == '게시판'}"> --%>
-<%-- 						            <span class="notice-type-student">${noticeVO.noticeType}</span> --%>
-<%-- 						        </c:when> --%>
-<%-- 						        <c:otherwise> --%>
-<%-- 						            ${noticeVO.noticeType} --%>
-<%-- 						        </c:otherwise> --%>
-<%-- 						    </c:choose> --%>
-<!-- 						</td> -->
+
         				<td>${reportVO.reportReason }</td>
 <%-- 	        				<c:if test="${sessionScope.postNo == postVO.postNo}"> --%>
 <%-- 	        					<td>${postVO.postTitle }</td> --%>
@@ -65,7 +56,6 @@
         				<td>${reportVO.userId}</td>
         				<td><fmt:formatDate pattern = "yyyy/MM/dd" value="${reportVO.reportDate }"/></td>
         			</tr>
-        			</a>
         		</c:forEach>		 
         	</table>
         	
@@ -96,13 +86,15 @@
 <script>
 	function showReportInfo(event){
 		const row = event.currentTarget;
-		const user = {
-			reportreason: row.getAttribute("data-reportreason"),
+		const reportVO = {
 			userId: row.getAttribute("data-userid"),
-			reportdate: row.getAttribute("data-reportdate"),
-// 			reportcontent: row.getAttribute("data-reportcontent"),
-// 			posttitle: row.getAttribute("data-posttitle"),
-// 			postcontent: row.getAttribute("data-postcontent")
+			reportNo: row.getAttribute("data-reportno"),
+			reportDate: row.getAttribute("data-reportdate"),
+			reportReason: row.getAttribute("data-reportreason"),
+			reportContent: row.getAttribute("data-reportcontent"),
+			postNo: row.getAttribute("data-postno"),
+			postTitle: row.getAttribute("data-posttitle"),
+			commentContent: row.getAttribute("data-commentcontent"),
 		};
 		Swal.fire({
 			title: '신고 관리',
@@ -110,42 +102,23 @@
 			  <div style="text-align: left;">
 			  	<p><strong>아이디:</strong>`+reportVO.userId+`</p>
 			  	<p><strong>신고날짜:</strong>`+reportVO.reportDate+`</p>
-			  	<p><strong>신고내용:</strong>`+reportVO.reportContent+`</p>
 			  	<p><strong>신고사유:</strong>`+reportVO.reportReason+`</p>
-			  	<p><strong>신고제목:</strong>`+postVO.postTitle+`</p>
-			  	<p><strong>신고게시글:</strong>`+postVO.postContent+`</p>
+			  	<p><strong>신고내용:</strong>`+reportVO.reportContent+`</p>
+			  	<p><strong>원본번호:</strong>`+reportVO.postNo+`</p>
+			  	<p><strong>[게시글]:</strong>`+reportVO.postTitle+`</p>
+			  	<p><strong>[댓글]:</strong>`+reportVO.commentContent+`</p>
 			  </div>
 			  `,
 			  showCloseButton: true,
 			  showCancelButton: true,
-			  confirmButtonText: '신고게시글 검색',
+			  confirmButtonText: '게시글 조회',
 			  cancelButtonText: '신고 반려'
 		}).then((result) => {
 			if(result.isConfirmed){
-				// 🔽 신고 게시글 검색
-				fetch('post/search?category=none&searchKeyword=${postVO.postTitle}',{//이거 주소 맞는지 모르겠어
+				// 🔽 게시글 조회
+				window.location.href = '/post/detail?postNo=' + reportVO.postNo;
 				}
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'//보내는 데이터 형식
-		    	    },
-		    	    body: `postNo=`+postVO.postNo
-		    	  })
-		    	  .then(response => response.text())
-		    	  .then(data => {
-		    		if(data == "success") {
-			    	    Swal.fire("승인 완료", "중개사 승인이 완료되었습니다.", "success").then(() => {
-			    	      location.reload();
-			    	    });
-		    		}else{
-		    			Swal.fire("오류", "신고 게시글이 검색되지 않았습니다.", "error");
-		    		}
-		    	  })
-		    	  .catch(error => {
-		    	    console.error("검색 중 오류 발생:", error);
-		    	    Swal.fire("오류", "신고 게시글 조회에 실패했습니다.", "error");
-		    	  });
-		    } else if (result.dismiss === Swal.DismissReason.cancel) {
+			else if (result.dismiss === Swal.DismissReason.cancel) {
 		    	
 		        // 🔽 신고 반려 로직
 		        Swal.fire({
@@ -182,7 +155,8 @@
 		        });
 		      }	    
 		    });
+	}
 </script>
-	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	</body>
 </html>

@@ -86,6 +86,10 @@
 	                                <th>내용</th>
 	                                <th>작성일</th>
 	                                <th>관리</th>
+	                                <%--관리자에게 댓글 삭제 권한 부여도 추가 --%>
+	                                <c:if test="${sessionScope.userId eq 'admin'}">
+	                                	<th>관리자 삭제 권한</th>
+	                                </c:if>
 	                            </tr>
 	                               <c:forEach items="${cList }" var="comment">
 		                               <c:if test="${comment.postNo == result.postNo}">
@@ -96,7 +100,8 @@
 		                                    <c:if test="${sessionScope.userId ne comment.userId }">
 		                                    	<td><button class="reportbtn" onclick="showReport();">신고하기</button></td>
 		                                    </c:if>
-		                                     <c:if test="${sessionScope.userId eq comment.userId }">
+		                                    <%--관리자에게 댓글 삭제 권한 부여도 추가 --%>
+		                                     <c:if test="${sessionScope.userId eq comment.userId or sessionScope.userId eq 'admin'}">
 		                                     	<td>
 			                                     	<div class="deletebtn"><a href="/post/cdelete?commentNo=${comment.commentNo }&postNo=${result.postNo}">삭제하기</a></div>
 		                                     	</td>
@@ -118,6 +123,10 @@
 								   <button class="updatebtn2" type="button" onclick="location.href='/post/update?postNo=${result.postNo}'">수정하기</button>
 								   <button class="deletebtn2" type="button" onclick="location.href='/post/delete?postNo=${result.postNo}'">삭제하기</button>	
 								</c:if>
+								      <!-- 관리자에게 게시글 삭제 권한 부여 -->
+						       <c:if test="${sessionScope.userId eq 'admin'}">
+						           <button class="deletebtn2" type="button" onclick="location.href='/post/delete?postNo=${result.postNo}'">삭제하기</button>
+						       </c:if>
 							   <input id="commentInput" type="text" placeholder="댓글을 입력하세요." class="commentbox" name="commentContent">
 							   <button class="commentbtn" type="submit">댓글달기</button>
 							   <button class="backbtn" type="button" onclick="location.href='/post/list'">목록으로</button>
@@ -128,28 +137,34 @@
    			<jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
 	     </div>
 	     <script>
+			// 댓글 신고 모달 열기
 			const showReport = () => {
-				console.log("확인")
+				console.log("댓글 신고 모달 열기");
 				document.querySelector(".report").style.display = "flex";
 			}
+		
+			// 댓글 신고 모달 닫기
 			const reportBackToPage = () => {
 				document.querySelector(".report").style.display = "none";
 			}
-			
+		
+			// 게시글 신고 모달 열기
 			const showReport2 = () => {
-				console.log("확인")
+				console.log("게시글 신고 모달 열기");
 				document.querySelector(".report2").style.display = "flex";
 			}
+		
+			// 게시글 신고 모달 닫기
 			const reportBackToPage2 = () => {
 				document.querySelector(".report2").style.display = "none";
-			}	
-	     
-	     
-	     
+			}
+		
+			// 댓글 등록 (AJAX, 지금은 별 수정 필요 X)
 			function submitComment() {
-			    const commentContent = document.getElementById('commentInput').value;
-			    const postNo = '${result.postNo}';
-				const userId = "${sessionScope.userId}"
+				const commentContent = document.getElementById('commentInput').value;
+				const postNo = '${result.postNo}';
+				const userId = "${sessionScope.userId}";
+				
 				$.ajax({
 					url: "post/cinsert",
 					data: {
@@ -157,8 +172,8 @@
 						"userId" : userId,
 						"postNo" : postNo
 					},
-					
 					success : function(data) {
+						// 성공했을 때 처리 (필요시 추가)
 					},
 					error : function() {
 						alert("통신 오류!!");

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +22,8 @@
 	          	</div>
 				<div>  
 	                <span class="signup">회원가입</span>
+	            <div id="msgTag" style="color: red;"></div>
             	</div>    
-            <div id="msgTag" style="color: red;"></div>
 			</div>
             <div class="content">
                 <div class="agreements">
@@ -31,18 +33,21 @@
 				
                 <form class="form" action="/member/signupJachui" method="POST" id="signup_form">
                     <div class="form-group">
-                    	<h3>아이디 입력</h3>
                         <label for="id">아이디</label>
-                        <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="영어 소문자와 숫자로 4~12자리여야 합니다." autofocus required>
-                        <label id="label1"></label>
-                        <button id="overlappedID" type="button">중복확인</button><br>
+                        <div class="input-wrapper">
+                        	<input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="영어 소문자와 숫자로 4~12자리여야 합니다." autofocus required>
+	                        <label id="label1"></label>
+	                        <button id="overlappedID" type="button">중복확인</button><br>
+                        </div>
                   		<span id="idOlMessage"></span>
                     </div>
                         
                     <div class="form-group">
-			            <label for="userEmail">이메일: </label>
-			            <input type="email" id="userEmail" name="userEmail" autofocus required>
-			            <button id="overlappedEmail" type="button">중복확인</button><br> 
+			            <label for="userEmail">이메일</label>
+			            <div class="input-wrapper">
+				            <input type="email" id="userEmail" name="userEmail" autofocus required>
+				            <button id="overlappedEmail" type="button">중복확인</button><br> 
+			            </div>
 			            <span id="emailOlMessage"></span> 
 			        </div>  
         			
@@ -68,11 +73,10 @@
         
                     <div class="form-group">
                         <label for="userAddress">주소</label>
-                        <div class="signUp-input-area">
+                        	<div class="signUp-input-area">
                             <input type="text" name="userPostcode" placeholder="우편번호" maxlength="6" id="userPostcode" >
                             <input type="button" id="userPostcodeBtn" onclick="business_execDaumPostcode()" value="우편번호 찾기"><br>
-                        </div>
-        
+                        </div>   
         
                         <div class="form-group">
                             <input type="text" name="userAddress" placeholder="도로명/지번 주소" id="userAddress" ><br>

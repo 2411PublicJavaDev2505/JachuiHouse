@@ -2,6 +2,8 @@ package com.house.jachui.member.controller;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +23,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.house.jachui.chat.model.service.ChatService;
+import com.house.jachui.chat.model.vo.Chat;
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.ContactRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
@@ -47,6 +51,7 @@ public class MemberController {
 	private final PostService pService;
 	private final TradeService tService;
 	private final MemberService mService;
+	private final ChatService cService;
 	//회원 관리 리스트 - 페이지네이션
 	private final PageUtil pageUtil;
 	
@@ -329,17 +334,30 @@ public class MemberController {
 	@GetMapping("/myPage")
 	public String showAloneDetail(
 			HttpSession session,
+			 @RequestParam(value = "receiverId", required = false) String receiverId,
 			Model model) {
 			String userRole = (String)session.getAttribute("userRole");
 			if("M".equals(userRole)) {
+		        Map<String, String> map = new HashMap<>();
+		        map.put("receiverId", receiverId);
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
+				List<Chat> cList = cService.getChatByUserId(userId);
 				List<PostVO> pList = pService.getPostsByUserId(userId);
 				List<Trade> tList = tService.getTradeByUserId(userId);
-				
+				String receiverName = mService.selectNameById(receiverId);
+				if (!cList.isEmpty()) {
+				    Collections.sort(cList, (c1, c2) -> Integer.compare(c2.getChatNo(), c1.getChatNo())); // 내림차순 정렬
+				    Chat latestChat = cList.get(0);  // 최신 채팅
+				    model.addAttribute("latestChat", latestChat); // 최신 채팅 객체를 JSP에 전달
+				}
 				model.addAttribute("tList", tList);
 				model.addAttribute("member", member);
 				model.addAttribute("pList", pList);
+				model.addAttribute("cList", cList);
+		        model.addAttribute("receiverName", receiverName);
+
+
 				return "member/myPage";
 			}else {
 				model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
@@ -430,7 +448,7 @@ public class MemberController {
 				System.out.println(">>> member: " + m);
 			}
 			int totalCount = mService.getTotalCount();
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 10);
 			
 			if(!mList.isEmpty()) {
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
@@ -460,7 +478,7 @@ public class MemberController {
 			int totalCount = mService.getTotalCountByKeyword(searchKeyword);
 			List<Member> searchList = mService.searchListByKeyword(searchKeyword, currentPage);
 			
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 10);
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));

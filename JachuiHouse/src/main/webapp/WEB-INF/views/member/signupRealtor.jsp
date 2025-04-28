@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,97 +14,101 @@
 <body>
     <div class="container">
         <div class="inner">
-            <div class="logo-container">
-				<div class="login-image">
-					<a href="http://localhost:7777">
-						<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
-					</a>
-				</div>
-				<div>
-					<span>공인중개사 회원가입</span>
-				<div id="msgTag" style="color: red;"></div>
-				</div>
-				</div>
-               
-               <div class="agreements">
-                   <label><input type="checkbox" required>약관에 동의합니다. <a href="#">내용보기</a></label>
-                   <label><input type="checkbox" required>개인정보 수집에 동의합니다. <a href="#">내용보기</a></label>
-               </div>
-
-               <form class="form" name="join" action="/member/signupRealtor" method="POST" autocomplete="off" id="signup_form" encType="utf-8">
-					<div class="form-group">
-					     <h3>아이디 입력</h3>
-					     <label for="userId" >아이디: </label>
-					     <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="12" placeholder="영어 소문자와 숫자로 4~12자리여야 합니다."  autofocus required >
-					     <button id="overlappedID" type="button">중복확인</button><br>  
-					     <span id="idOlMessage"></span>
+	            <div class="logo-container">
+					<div class="login-image">
+						<a href="http://localhost:7777">
+							<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
+						</a>
 					</div>
-   
-	   				<div class="form-group">
-			            <label for="userEmail">이메일: </label>
-			            <input type="email" id="userEmail" name="userEmail" autofocus required>
-			            <button id="overlappedEmail" type="button">중복확인</button><br>  
-			        	<span id="emailOlMessage"></span>
-			        </div> 
+					<div>
+						<span class=signup>공인중개사 회원가입</span>
+					<div id="msgTag" style="color: red;"></div>
+					</div>
+				</div>
+	               <div class="agreements">
+	                   <label><input type="checkbox" required>약관에 동의합니다. <a href="#">내용보기</a></label>
+	                   <label><input type="checkbox" required>개인정보 수집에 동의합니다. <a href="#">내용보기</a></label>
+	               </div>
+               <div class="content">
+	
+	               <form class="form" name="join" action="/member/signupRealtor" method="POST" autocomplete="off" id="signup_form" enctype="utf-8">
+						<div class="form-group">
+						     <label for="userId" >아이디: </label>
+						     <div class="input-wrapper">
+							     <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="12" placeholder="영어 소문자와 숫자로 4~12자리여야 합니다."  autofocus required >
+							     <button id="overlappedID" type="button">중복확인</button><br>  
+						     </div>
+						     <span id="idOlMessage"></span>
+						</div>
 	   
-	                <div class="form-group">
-	                    <label for="password">비밀번호</label>
-	                    <input type="password" name="userPw" id="userPw" placeholder="비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." required>
+		   				<div class="form-group">
+				            <label for="userEmail">이메일: </label>
+				            <div class="input-wrapper">
+					            <input type="email" id="userEmail" name="userEmail" autofocus required>
+					            <button id="overlappedEmail" type="button">중복확인</button><br>  
+				        	</div>
+				        	<span id="emailOlMessage"></span>
+				        </div> 
+		   
+		                <div class="form-group">
+		                    <label for="password">비밀번호</label>
+		                    <input type="password" name="userPw" id="userPw" placeholder="비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." required>
+		                </div>
+		
+		                <div class="form-group">
+		                    <label for="confirm-password">비밀번호 확인</label>
+		                    <input type="password" name="userPwCheck" id="userPwCheck" placeholder="비밀번호를 한 번 더 입력해주세요." required>
+		                </div>
+		
+		                <div class="form-group">
+		                    <label for="name">이름</label>
+		                    <input type="text" name="userName" id="userName" required>
+		                </div>
+		
+		                <div class="form-group">
+		                    <label for="phoneNumber">전화번호</label>
+		                    <input type="text" name="userPhone" id="userPhone" placeholder="ex.01012345678" maxlength="11" required>
+		                </div>
+		
+		                <div class="form-group">
+		                    <label for="userAddress">사무실 주소</label>
+		                    <div class="signUp-input-area">
+		                        <input type="text" name="businessAddress" placeholder="우편번호" maxlength="6" id="userPostcode" required>
+		                        <button type="button" onclick="business_execDaumPostcode()">검색</button>
+		                    </div>
+	
+	
+		                    <div class="form-group">
+		                        <input type="text" name="businessAddress" placeholder="도로명/지번 주소" id="userAddress" required>
+		                    </div>
+		
+		
+		                    <div class="form-group">
+		                        <input type="text" name="businessAddress" placeholder="상세 주소" id="userDetailAddress" required>
+		                    </div>
 	                </div>
 	
 	                <div class="form-group">
-	                    <label for="confirm-password">비밀번호 확인</label>
-	                    <input type="password" name="userPwCheck" id="userPwCheck" placeholder="비밀번호를 한 번 더 입력해주세요." required>
+	                    <label for="realtorName" >상호명</label>
+	                    <input type="text" name="realtorName" id="realtorName" required>
 	                </div>
 	
 	                <div class="form-group">
-	                    <label for="name">이름</label>
-	                    <input type="text" name="userName" id="userName" required>
+	                    <label for="realtorNo">공인중개사 등록번호</label>
+	                    <input type="text" name="realtorNo" id="realtorNo" required>
 	                </div>
-	
-	                <div class="form-group">
-	                    <label for="phoneNumber">전화번호</label>
-	                    <input type="text" name="userPhone" id="userPhone" placeholder="ex.01012345678" maxlength="11" required>
+	                
+	                <div class="upload-area"> 
+	                <a>중개등록증 또는 사업자등록증을 첨부해주세요</a>
+	                <%-- <button href=..${dm.filePath }">${dm.fileName }>파일첨부</button> --%>
+	                <span><a href="..${dm.filePath }">${dm.fileName }</a></span>
+	                <input type="file" name="dUploadFiles" onchange="readURL(this)"> <br>
 	                </div>
+	                
 	
-	                <div class="form-group">
-	                    <label for="userAddress">사무실 주소</label>
-	                    <div class="signUp-input-area">
-	                        <input type="text" name="businessAddress" placeholder="우편번호" maxlength="6" id="userPostcode" required>
-	                        <button type="button" onclick="business_execDaumPostcode()">검색</button>
-	                    </div>
-
-
-	                    <div class="form-group">
-	                        <input type="text" name="businessAddress" placeholder="도로명/지번 주소" id="userAddress" required>
-	                    </div>
-	
-	
-	                    <div class="form-group">
-	                        <input type="text" name="businessAddress" placeholder="상세 주소" id="userDetailAddress" required>
-	                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="realtorName" >상호명</label>
-                    <input type="text" name="realtorName" id="realtorName" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="realtorNo">공인중개사 등록번호</label>
-                    <input type="text" name="realtorNo" id="realtorNo" required>
-                </div>
-                
-                <div class="upload-area"> 
-                <a>중개등록증 또는 사업자등록증을 첨부해주세요</a>
-                <%-- <button href=..${dm.filePath }">${dm.fileName }>파일첨부</button> --%>
-                <span><a href="..${dm.filePath }">${dm.fileName }</a></span>
-                <input type="file" name="dUploadFiles" onchange="readURL(this)"> <br>
-                </div>
-                
-
-                <button type="submit" class="signUpBtn">가입신청하기</button>
-            </form>
+	                <button type="submit" class="signUpBtn">가입신청하기</button>
+	            </form>
+            </div>
         </div>
     </div>
 

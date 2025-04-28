@@ -44,11 +44,12 @@ public class PostController {
 		try {
 			List<PostVO> pList = pService.selectList(currentPage);
 			int totalCount = pService.getTotalCount();
-			Map<String, Integer> pageInfo = PageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = PageUtil.generatePageInfo(totalCount, currentPage, 8);
 			if(!pList.isEmpty()) {
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+				model.addAttribute("currentPage", currentPage);
 				model.addAttribute("pList", pList);
 				return "post/list";
 			}else {
@@ -233,7 +234,7 @@ public class PostController {
 				model.addAttribute("searchList", null);
 				model.addAttribute("errorMessage", "검색 결과가 없습니다.");
 			}else {
-				Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage);
+				Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage, 8);
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));
@@ -254,4 +255,21 @@ public class PostController {
 
 		}
 	}
+	
+	//관리자가 비번 없이 게시글 삭제 - 근데 post가 원래 없었는데 가능한가?
+	@PostMapping("/delete-by-admin")
+	@ResponseBody
+	public String deletePost(@RequestParam("postNo") int postNo) {
+		int result = pService.deletePost(postNo);
+		return (result>0) ? "sucess" : "fail";
+	}
+	
+	//관리자가 비번 없이 댓글 삭제
+	@PostMapping("/cdelete-by-admin")
+	@ResponseBody
+	public String deleteComment(@RequestParam("commentNo") int commentNo) {
+		int result = pService.deleteComment(commentNo);
+		return (result>0) ? "sucess" : "fail";
+	}
+	
 }

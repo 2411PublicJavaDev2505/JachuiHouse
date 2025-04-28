@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자취스크립트</title>
+<title>자취하우스 마이페이지</title>
 <link rel="stylesheet" href="../resources/css/include/header.css">
 <link rel="stylesheet" href="../resources/css/member/myPage.css">
 <link rel="stylesheet" href="../resources/css/include/footer.css">
@@ -42,22 +42,49 @@
 	                    <h3>내 채팅</h3>
 	                </div>
 	                <div class="chat-content">
-	                    <p>최제우스 어디 사는 몇살? ㅎㅎ</p>
+	                    <c:if test="${empty cList}">
+					        <p>채팅내역이 없습니다.</p>
+					    </c:if>
+					    <c:forEach var="chat" items="${cList}">
+					        <a href="${pageContext.request.contextPath}/chat/chat?writerId=${chat.receiverId}&receiverId=${chat.writerId}">
+					            <!-- 마지막으로 보낸 메시지의 writerId 또는 receiverId를 출력 -->
+					            <p>${chat.writerId} 공인중개사와의 대화</p>
+					        </a>
+					    </c:forEach>
 	                </div>
 	                <div class="my-notice">
 	                    <h3>내가 쓴 글</h3>
 	                </div>
-	                <div class="notice-content">
-	                   <c:forEach var="post" items="${pList}">
-	                   		<a href="/post/detail?postNo=${post.postNo }">
-						    <p>${post.postTitle}</p>
-	                   		</a>
-						</c:forEach>
-	                </div>
+	               <div class="show-more-wrap-post">
+					   <button id="showMorePostBtn" onclick="togglePostList()">더보기</button>
+					</div>
+					<div class="notice-content" id="postList">
+					   <c:if test="${empty pList}">
+					      <p>등록된 게시글이 없습니다.</p>
+					   </c:if>
+					   <c:forEach var="post" items="${pList}" varStatus="status">
+					       <c:choose>
+					           <c:when test="${status.index < 3}">
+						           	<div class="post-item">
+						               <a href="/post/detail?postNo=${post.postNo}">
+						                   <p>${post.postTitle}</p>
+					               		</a>
+						           	</div>
+					           </c:when>
+					           <c:otherwise>
+					               <div class="post-item hidden">
+					                   <a href="/post/detail?postNo=${post.postNo}">
+					                       <p>${post.postTitle}</p>
+					                   </a>
+					               </div>
+					           </c:otherwise>
+					       </c:choose>
+					   </c:forEach>
+					</div>
 	                <div class="thing">
 	                    <h3>내가 올린 물건</h3>
 	                </div>
-						<div class="show-more-wrap">
+						<div class="show-more-wrap-trade">
 						    <button id="showMoreBtn" onclick="toggleTradeList()">더보기</button>
 						</div>
 	                <div class="thing-content" id="tradeList">
@@ -98,6 +125,23 @@
 		        button.innerText = "더보기";
 		    }
 		}
+	    function togglePostList() {
+	        const allPostItems = document.querySelectorAll('.post-item');
+	        const button = document.getElementById("showMorePostBtn");
+	        if (button.innerText === "더보기") {
+	            allPostItems.forEach(item => item.classList.remove('hidden'));
+	            button.innerText = "간략히 보기";
+	        } else {
+	        	allPostItems.forEach((item, index) => {
+	                if (index >= 3) {
+	                    item.classList.add('hidden');
+	                } else {
+	                    item.classList.remove('hidden'); // 처음 3개는 항상 보여야 함
+	                }
+	            });
+	            button.innerText = "더보기";
+	        }
+	    }
 	</script>	
 </body>
 </html>

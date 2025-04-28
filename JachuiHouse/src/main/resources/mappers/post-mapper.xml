@@ -34,7 +34,7 @@
 	</select>
 	
 	<update id="postUpdate">
-		UPDATE POST SET POST_TYPE=#{postType}, POST_TITLE=#{postTitle}, POST_CONTENT=#{postContent}
+		UPDATE POST SET POST_TYPE=#{postType}, POST_TITLE=#{postTitle}, POST_CONTENT=#{postContent} WHERE POST_NO = #{postNo}
 	</update>
 	
 	<select id="selectcList" resultType="CommentVO">

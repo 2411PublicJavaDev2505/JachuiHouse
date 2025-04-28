@@ -60,9 +60,16 @@ main{
 .rigth-inform {
 	width : 450px;
 }
+
 .my-inform p {
     border-bottom: 2px solid #E0DFDF;
     padding: 5px;
+}
+.chat-content a{
+	text-decoration: none;
+}
+#postList a {
+	text-decoration: none;
 }
 .chat-content, .notice-content, .thing-content{
     border: 1px solid #E0DFDF;
@@ -96,13 +103,32 @@ main{
 .trade-item.hidden {
     display: none;
 }
-.show-more-wrap {
+.hidden {
+    display: none;
+}
+.show-more-wrap-post {
+	width : 450px;
+	margin-bottom : 10px;
+    text-align: right;
+    margin-top: 16px;
+}
+.show-more-wrap-trade {
 	width : 530px;
 	margin-bottom : 10px;
     text-align: right;
     margin-top: 16px;
 }
-
+#showMorePostBtn{
+	padding: 8px 16px;
+    border: none;
+    background-color: #FF7C45;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#showMorePostBtn:hover{
+	background-color: #D4693B;
+}
 #showMoreBtn {
     padding: 8px 16px;
     border: none;

@@ -1,5 +1,6 @@
 package com.house.jachui.chat.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.chat.controller.dto.SendRequest;
@@ -20,7 +22,9 @@ import com.house.jachui.chat.model.vo.Chat;
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.member.model.service.MemberService;
+import com.house.jachui.member.model.vo.Member;
 import com.house.jachui.post.service.PostService;
+import com.house.jachui.realtor.model.service.RealtorService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +37,8 @@ public class ChatController {
 	private final MemberService mService;
 	private final EstateService eService;
 	private final ChatService cService;
+	private final RealtorService rService;
+	private final PageUtil pageUtil;
 	
 	@GetMapping("/torealtor")
     public String showEtoBChat(Model model,
@@ -89,9 +95,51 @@ public class ChatController {
             return "common/error";
         }
     }
+    //공인중개사 채팅 리스트
     @GetMapping("/list")
-    public String showChatList() {
-    	
-    	return "chat/list";
+    public String showChatList(HttpSession session, Model model
+    		,@RequestParam(value = "receiverId", required = false) String receiverId
+			,@RequestParam(value="page", defaultValue="1") int currentPage) {
+    	String userRole = (String)session.getAttribute("userRole");
+    	if("R".equals(userRole)) {
+    		String userId = (String)session.getAttribute("userId");
+    		String receiverName = mService.selectNameById(receiverId);
+    		Member member = rService.selectRealtorById(userId);
+    		int totalCount = cService.getTotalCount(userId);
+    		Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
+    		model.addAttribute("maxPage", pageInfo.get("maxPage"));
+			model.addAttribute("startNavi", pageInfo.get("startNavi"));
+			model.addAttribute("endNavi", pageInfo.get("endNavi"));
+    		List<Chat> cList = cService.selectChatByUserId(userId, currentPage, 3);
+    		if(!cList.isEmpty()) {
+			    Collections.sort(cList, (c1, c2) -> Integer.compare(c2.getChatNo(), c1.getChatNo())); // 내림차순 정렬
+			    Chat latestChat = cList.get(0);  // 최신 채팅
+			    model.addAttribute("latestChat", latestChat); // 최신 채팅 객체를 JSP에 전달
+    		}
+    		model.addAttribute("cList", cList);
+    		model.addAttribute("maxPage", pageInfo.get("maxPage"));
+			model.addAttribute("startNavi", pageInfo.get("startNavi"));
+			model.addAttribute("endNavi", pageInfo.get("endNavi"));
+			model.addAttribute("member", member);
+			if(member != null) {
+				model.addAttribute("member", member);
+				return "chat/list";
+			}
+    	}
+    	return "common/error";
+    }
+    @GetMapping("/fetch")
+    @ResponseBody
+    public List<Chat> fetchNewMessages(
+        @RequestParam("writerId") String writerId,
+        @RequestParam("receiverId") String receiverId,
+        @RequestParam("lastChatId") int lastChatId) {
+        
+        Map<String, Object> map = new HashMap<>();
+        map.put("writerId", writerId);
+        map.put("receiverId", receiverId);
+        map.put("lastChatId", lastChatId);
+
+        return cService.selectNewMessages(map);
     }
 }

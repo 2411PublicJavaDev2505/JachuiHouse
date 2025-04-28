@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,9 +59,17 @@
                         </div>
                     </div>
                     <div id="list">
+                    <c:if test="${empty cList}">
+					        <p>채팅내역이 없습니다.</p>
+					</c:if>
                         <div id="nickname">
                             <div id="nicknameText">
-                                <b>익명의 아르마딜로</b>
+                            <c:forEach var="chat" items="${cList}">
+					        <a href="${pageContext.request.contextPath}/chat/chat?writerId=${chat.receiverId}&receiverId=${chat.writerId}">
+					            <!-- 마지막으로 보낸 메시지의 writerId 또는 receiverId를 출력 -->
+					            <b>${chat.writerId}</b>
+					        </a>
+					    </c:forEach>
                             </div>
                             
                         </div>
