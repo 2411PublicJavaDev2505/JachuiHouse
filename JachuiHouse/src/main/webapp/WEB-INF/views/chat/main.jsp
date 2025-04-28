@@ -55,21 +55,17 @@
 	    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 	<script>
-	    document.getElementById('fileBtn').addEventListener('click', function() {
-	        document.getElementById('fileInput').click();
-	    });
-	    
-	 // 페이지 로드 시 스크롤을 가장 아래로 이동
+	    // 페이지 로드 시 스크롤을 가장 아래로 이동
 	    window.onload = function() {
 	        scrollToBottom();
 	    };
-
+	
 	    // 스크롤을 가장 아래로 내리기 위한 함수
 	    function scrollToBottom() {
 	        const chatContent = document.querySelector('.chat-content');
 	        chatContent.scrollTop = chatContent.scrollHeight;
 	    }
-
+	
 	    // 메시지를 전송한 후 자동으로 스크롤을 맨 아래로 내리기
 	    function sendMessage() {
 	        const messageContent = document.querySelector("#input").value;
@@ -81,51 +77,78 @@
 	            method: "POST",
 	            body: formData
 	        })
-	        .then(response => response.json())  // 서버의 응답 처리
+	        .then(response => response.json())
 	        .then(data => {
-	            // 서버에서 메시지가 성공적으로 처리된 후 새 메시지를 화면에 추가
-	            // 화면에 메시지 추가 (새 메시지 추가하는 부분은 생략)
-	            
-	            // 메시지가 전송되면 자동 스크롤
 	            scrollToBottom();
 	        })
 	        .catch(error => console.error("Error:", error));
 	    }
-
-	    // 새로운 메시지가 올 때마다 자동으로 스크롤 내리기
+	
 	    function updateChatContent(newMessage) {
 	        const chatContent = document.querySelector('.chat-content');
 	        const messageDiv = document.createElement('div');
 	        messageDiv.classList.add('chat-message');
-	        messageDiv.innerHTML = `<p>${newMessage}</p>`;  // 새 메시지 추가
-
+	        messageDiv.innerHTML = `<p>${newMessage}</p>`;  
+	
 	        chatContent.appendChild(messageDiv);
-
-	        // 새 메시지가 추가된 후 스크롤을 맨 아래로 내리기
+	
 	        scrollToBottom();
 	    }
-
-	    // 사용자가 스크롤을 올릴 때, 스크롤을 유지하려면 아래와 같은 코드로 처리
-	    let isScrolling = false;  // 사용자가 스크롤을 올렸는지 여부 확인
-
+	
+	    let isScrolling = false;
+	
 	    document.querySelector('.chat-content').addEventListener('scroll', function() {
 	        const chatContent = document.querySelector('.chat-content');
 	        
-	        // 스크롤이 맨 아래에 있지 않으면, 새 메시지가 왔을 때 스크롤을 자동으로 내리지 않도록 설정
 	        if (chatContent.scrollTop + chatContent.clientHeight < chatContent.scrollHeight - 10) {
-	            isScrolling = true;  // 사용자가 스크롤을 올리고 있다는 표시
+	            isScrolling = true; 
 	        } else {
-	            isScrolling = false;  // 스크롤이 맨 아래에 있음
+	            isScrolling = false; 
 	        }
 	    });
-
-	    // 새 메시지가 수신될 때마다 자동으로 스크롤 내려줌 (스크롤을 올린 상태가 아닐 경우)
+	
 	    function handleNewMessage(newMessage) {
 	        if (!isScrolling) {
-	            updateChatContent(newMessage);  // 새 메시지 추가
+	            updateChatContent(newMessage); 
 	        }
 	    }
-</script>
+	
+	    // 1초마다 채팅 목록 가져오기
+	    setInterval(fetchChatMessages, 1000);
+	
+	    function fetchChatMessages() {
+	        fetch("/chat/chat?writerId=${writerId}&receiverId=${receiverId}")
+	            .then(response => response.json())
+	            .then(data => {
+	                const chatContent = document.querySelector('.chat-content');
+	                
+	                // 새로운 메시지가 있을 때만 추가
+	                data.forEach(chat => {
+	                    // 기존에 있는 메시지가 아닌 새로운 메시지만 추가
+	                    if (!document.querySelector(`.message-${chat.chatNo}`)) {
+	                        const messageDiv = document.createElement('div');
+	                        messageDiv.classList.add(chat.writerId === '${writerId}' ? 'my-msg' : 'not-my-msg');
+	                        messageDiv.classList.add(`message-${chat.chatNo}`);
+	
+	                        if (chat.writerId === '${writerId}') {
+	                            messageDiv.innerHTML = `
+	                                <div class="me">나</div>
+	                                <div class="my-msg-detail">${chat.chatContent}</div>`;
+	                        } else {
+	                            messageDiv.innerHTML = `
+	                                <div class="receiver-name">${receiverName}</div>
+	                                <div class="receive-msg">${chat.chatContent}</div>`;
+	                        }
+	                        chatContent.appendChild(messageDiv);
+	                    }
+	                });
+	
+	                scrollToBottom();  // 스크롤 맨 아래로 이동
+	            })
+	            .catch(error => console.error("Error:", error));
+	    }
+	</script>
+
 	
 </body>
 </html>
