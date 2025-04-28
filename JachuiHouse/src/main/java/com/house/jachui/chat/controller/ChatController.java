@@ -116,10 +116,6 @@ public class ChatController {
             return "common/error";
         }
     }
-    @GetMapping("/list")
-    public String showChatList() {
-    	return "chat/list";
-    }
     //공인중개사 채팅 리스트
     @GetMapping("/list")
     public String showChatList(HttpSession session, Model model

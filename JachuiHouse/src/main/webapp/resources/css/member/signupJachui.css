@@ -236,6 +236,7 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
   padding: 10px;
   border: 1px solid #c0baba;
   border-radius: 5px;
+  /* width: 100%; */
 }
 
 
