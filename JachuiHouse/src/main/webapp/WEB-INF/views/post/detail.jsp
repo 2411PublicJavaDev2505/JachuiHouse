@@ -128,28 +128,34 @@
    			<jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
 	     </div>
 	     <script>
+			// 댓글 신고 모달 열기
 			const showReport = () => {
-				console.log("확인")
+				console.log("댓글 신고 모달 열기");
 				document.querySelector(".report").style.display = "flex";
 			}
+		
+			// 댓글 신고 모달 닫기
 			const reportBackToPage = () => {
 				document.querySelector(".report").style.display = "none";
 			}
-			
+		
+			// 게시글 신고 모달 열기
 			const showReport2 = () => {
-				console.log("확인")
+				console.log("게시글 신고 모달 열기");
 				document.querySelector(".report2").style.display = "flex";
 			}
+		
+			// 게시글 신고 모달 닫기
 			const reportBackToPage2 = () => {
 				document.querySelector(".report2").style.display = "none";
-			}	
-	     
-	     
-	     
+			}
+		
+			// 댓글 등록 (AJAX, 지금은 별 수정 필요 X)
 			function submitComment() {
-			    const commentContent = document.getElementById('commentInput').value;
-			    const postNo = '${result.postNo}';
-				const userId = "${sessionScope.userId}"
+				const commentContent = document.getElementById('commentInput').value;
+				const postNo = '${result.postNo}';
+				const userId = "${sessionScope.userId}";
+				
 				$.ajax({
 					url: "post/cinsert",
 					data: {
@@ -157,8 +163,8 @@
 						"userId" : userId,
 						"postNo" : postNo
 					},
-					
 					success : function(data) {
+						// 성공했을 때 처리 (필요시 추가)
 					},
 					error : function() {
 						alert("통신 오류!!");

@@ -164,6 +164,8 @@
     color: white;
 }
 
+.pagination .first,
+.pagination .last,
 .pagination .prev,
 .pagination .next {
     font-weight: bold;
