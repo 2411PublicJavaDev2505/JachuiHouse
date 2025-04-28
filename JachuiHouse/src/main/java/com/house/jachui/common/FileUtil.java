@@ -19,31 +19,33 @@ public class FileUtil {
 	
 	public Map<String, String> saveFile(MultipartFile uploadFile, HttpSession session, String type) throws IllegalStateException, IOException{
 		Map<String, String> result = new HashMap<String, String>();
-		String folderName = type.equals("board") ? "bUploadFiles":"nUploadFiles";
+		result.put("estate", "eUploadFiles");
+		result.put("notice", "nUploadFiles");
+		result.put("post", "pUploadFiles");
+		result.put("realtor", "rUploadFiles");
+		result.put("trade", "tUploadFiles");
+		String folderName = result.get(type);
 		String prefix = type.toLowerCase().substring(0,1);
-		String tradeFilename = uploadFile.getOriginalFilename();
-		String tradeFileRename;
-		String tradeFilePath;
+		String fileName = uploadFile.getOriginalFilename();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String transStr = sdf.format(new Date(System.currentTimeMillis()));
-		String ext = tradeFilename.substring(tradeFilename.lastIndexOf(".")+1);
-		tradeFileRename = transStr + "." + ext;
-		tradeFilePath = "/resources/"+folderName+"/"+tradeFileRename;
+		String ext = fileName.substring(fileName.lastIndexOf(".")+1);
+		String fileRename = transStr + "." + ext;
+		String filePath = "/resources/"+folderName+"/"+fileRename;
 		
 		String folderPath = session.getServletContext().getRealPath("/resources/"+folderName);
 		File dir = new File(folderPath); 
-		if (!dir.exists()) { // 디렉토리없을 시 자동생성
+		if (!dir.exists()) { // 디렉토리(폴더) 없을 시 자동생성
 			dir.mkdirs();
 		}
 		
-		String savePath = folderPath+"\\"+tradeFileRename;
+		String savePath = folderPath+"\\"+fileRename;
 		uploadFile.transferTo(new File(savePath));
-		result.put(prefix+"Filename", tradeFilename);
-		result.put(prefix+"FileRename", tradeFileRename);
-		System.out.println("Original Filename: " + tradeFilename);
-		System.out.println("Renamed Filename: " + tradeFileRename);
-		System.out.println("File path: " + savePath);
+		result.clear();
+		result.put(prefix+"Filename", fileName);
+		result.put(prefix+"FileRename", fileRename);
+		result.put(prefix+"FilePath", filePath);
 		return result;
 
 	}

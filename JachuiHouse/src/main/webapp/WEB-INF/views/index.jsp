@@ -26,13 +26,20 @@
 							<div class="carousel_main">
 							    <div class="carousel_wrapper">
 							        <div class="carousel_slide">
-							            <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MzBfNTUg%2FMDAxNjMyOTg3MzU1Mjg4.LbF4Exn6nnxxE2qvzmlEYgMKZh4fige3O3DH5nEdq2Qg.5HpjCmRosQHCCYj2M7B-8dXjHcUw6EWr2jBpwklRAfIg.JPEG.dreamcampus%2F%25C7%25D1%25C0%25E5%25C0%25E7%25C0%25DA%25C3%25EB%25BB%25FD_%25B2%25DC%25C6%25C1.jpg&type=a340" alt="#" />
+							        	<a href="http://localhost:7777/post/detail?postNo=801">
+<!-- 							            <img src="https://iii.ad/16747a" alt="#" /> -->
+							            	<img src="https://iii.ad/145484" alt="첫 번째 이미지" />
+							            </a>
 							        </div>
 							        <div class="carousel_slide">
-							            <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA3MjBfMTcg%2FMDAxNjI2NzYzMTEwOTIw.AsB2J8LNr8UG_iW5KZZEcDatHJ4iM7PkunXQo-P94hAg.mUl_4vATjWFI_pIISh6Qx9Mp-WoRcKGHkzmwlVs7uV8g.PNG.dreamcampus%2F%25C7%25D1%25C0%25E5%25C0%25E7%25C0%25DA%25C3%25EB%25BB%25FD%25C3%25DF%25C3%25B5%25BF%25E4%25B8%25AE_01.png&type=a340" alt="#" />
+										<a href="http://localhost:7777/post/detail?postNo=802">
+							                <img src="https://iii.ad/ccc869" alt="두 번째 이미지" />
+							            </a>
 							        </div>
 							        <div class="carousel_slide">
-							            <img src="https://octapi.lxzin.com/imageBlockProp/image/202210/12/720/0/ad6e0563-7903-4c48-8b70-45821992255c.jpg" alt="#" />
+							            <a href="http://localhost:7777/post/detail?postNo=803">
+							                <img src="https://iii.ad/054b54" alt="세 번째 이미지" />
+							            </a>
 							        </div>
 							    </div>
 							
@@ -179,19 +186,23 @@
 		        });
 		      }
 		
-		      prevBtn.addEventListener('click', () => {
+		      prevBtn.addEventListener('click', (e) => {
+		    	    e.stopPropagation();  // 추가!! 링크 이동 막음
 		        if (currentSlide > 0) showSlide(currentSlide - 1);
 		        updateSlideWidth()
 		      });
 		
-		      nextBtn.addEventListener('click', () => {
+		      nextBtn.addEventListener('click',  (e) => {
+		    	    e.stopPropagation();  // 추가!! 링크 이동 막음
 		        if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
 		        updateSlideWidth()
 		      });
 		
 		      bullets.forEach((bullet, i) => {
-		        bullet.addEventListener('click', () => showSlide(i));
-		        updateSlideWidth()
+		        bullet.addEventListener('click',  (e) => {
+		            e.stopPropagation();  // 추가!! 링크 이동 막음
+		        	showSlide(i));
+		        	updateSlideWidth()
 		      });
 		    });
 		    
