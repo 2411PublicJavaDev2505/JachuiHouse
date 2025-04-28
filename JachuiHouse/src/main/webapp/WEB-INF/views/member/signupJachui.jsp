@@ -12,13 +12,15 @@
 <body>
     <div class="container">
         <div class="inner">
-        	<div class="login-image">
-	        	<a href="http://localhost:7777">
-					<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
-				</a>
-          	</div>
-			<div>  
-                <span>회원가입</span>
+        	<div class="logo-container">
+	        	<div class="login-image">
+		        	<a href="http://localhost:7777">
+						<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
+					</a>
+	          	</div>
+				<div>  
+	                <span class="signup">회원가입</span>
+            	</div>    
             <div id="msgTag" style="color: red;"></div>
 			</div>
             <div class="content">
@@ -31,7 +33,7 @@
                     <div class="form-group">
                     	<h3>아이디 입력</h3>
                         <label for="id">아이디</label>
-                        <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="영어 소문자와 숫자로 4~12자리" autofocus required>
+                        <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="영어 소문자와 숫자로 4~12자리여야 합니다." autofocus required>
                         <label id="label1"></label>
                         <button id="overlappedID" type="button">중복확인</button><br>
                   		<span id="idOlMessage"></span>
@@ -46,7 +48,7 @@
         			
                     <div class="form-group">
                         <label for="password">비밀번호</label>
-                        <input type="password" id="userPw"  name="userPw" >
+                        <input type="password" id="userPw"  name="userPw" placeholder="비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." required>
                     </div>
         
                     <div class="form-group">

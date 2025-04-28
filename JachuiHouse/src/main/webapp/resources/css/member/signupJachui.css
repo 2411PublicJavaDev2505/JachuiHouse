@@ -9,9 +9,28 @@ body {
   background-color: #FFFBF0;
 }
 
+.signup{
+	font-size: 18px;
+	font-weight: bold;
+}
+
 .logo_jachuiHouse {
   flex-grow: 0 0 auto;
   padding: 19px 115px 19px 20px;
+}
+
+.logo-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+	
+	
+}
+
+.login-image img {
+	width: 100px;
+	height: 70px;
 }
 
 .container{

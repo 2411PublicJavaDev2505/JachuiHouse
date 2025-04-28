@@ -33,7 +33,7 @@
 					<div class="form-group">
 					     <h3>아이디 입력</h3>
 					     <label for="userId" >아이디: </label>
-					     <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="12" placeholder="영어 소문자와 숫자로 4~12자리"  autofocus required >
+					     <input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="12" placeholder="영어 소문자와 숫자로 4~12자리여야 합니다."  autofocus required >
 					     <button id="overlappedID" type="button">중복확인</button><br>  
 					     <span id="idOlMessage"></span>
 					</div>
@@ -47,7 +47,7 @@
 	   
 	                <div class="form-group">
 	                    <label for="password">비밀번호</label>
-	                    <input type="password" name="userPw" id="userPw" required>
+	                    <input type="password" name="userPw" id="userPw" placeholder="비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." required>
 	                </div>
 	
 	                <div class="form-group">

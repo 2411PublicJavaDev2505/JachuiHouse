@@ -20,7 +20,7 @@
 							</a>
 						</div>
 						<div>
-							<span>로그인</span>
+							<span class="login">로그인</span>
 						</div>
 					</div>
 					<form class="login-form" action="/member/login" method="post">
