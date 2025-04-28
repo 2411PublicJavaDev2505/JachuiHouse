@@ -5,40 +5,31 @@
   <mapper namespace="com.house.jachui.chat.model.mapper.ChatMapper">
   	<resultMap type="Chat" id="chatResultMap">
   		<id property="chatNo" column="CHAT_NO"/>
-  		<result property="writerId" column="WRITER_ID"/>
+  		<result property="writerNo" column="WRITER_NO"/>
   		<result property="chatSendDate" column="CHAT_SEND_DATE"/>
   		<result property="chatContent" column="CHAT_CONTENT"/>
   		<result property="chatFileName" column="CHAT_FILE_NAME"/>
   		<result property="chatFilePath" column="CHAT_FILE_PATH"/>
   		<result property="chatFileRename" column="CHAT_FILE_RENAME"/>
-  		<result property="chatNo" column="CHAT_NO"/>
   		<result property="receiverId" column="RECEIVER_ID"/>
-  		<result property="chatTime" column="CHAT_TIME"/>
   	</resultMap>
   	
   	<select id="selectList" resultMap="chatResultMap">
 		SELECT * FROM CHAT WHERE (WRITER_ID=#{writerId} AND RECEIVER_ID=#{receiverId}) 
 		OR (RECEIVER_ID=#{writerId} AND WRITER_ID=#{receiverId}) ORDER BY CHAT_SEND_DATE
 	</select>
-	<select id="selectNewMessages" parameterType="map" resultType="com.house.jachui.chat.model.vo.Chat">
-	    SELECT *
-	    FROM chat
-	    WHERE
-	        ((writer_id = #{writerId} AND receiver_id = #{receiverId})
-	        OR (writer_id = #{receiverId} AND receiver_id = #{writerId}))
-	      AND CHAT_NO > #{lastChatId}
-	    ORDER BY CHAT_NO ASC
-	</select>
 	<insert id="sendChat">
-		INSERT INTO CHAT VALUES(SEQ_CHAT_NO.NEXTVAL,#{writerId}, SYSDATE, #{chatContent},
-		#{chatFileName}, #{chatFilePath}, #{chatFileRename}, #{receiverId}, SYSTIMESTAMP)
+	    INSERT INTO CHAT (CHAT_NO, WRITER_ID, CHAT_SEND_DATE, CHAT_CONTENT, 
+	                      CHAT_FILE_NAME, CHAT_FILE_PATH, CHAT_FILE_RENAME, RECEIVER_ID)
+	    VALUES (SEQ_CHAT_NO.NEXTVAL, #{writerId}, SYSTIMESTAMP, #{chatContent},
+	            #{chatFileName}, #{chatFilePath}, #{chatFileRename}, #{receiverId})
 	</insert>
 	<select id="getChatByUserId" resultMap="chatResultMap">
 		SELECT * 
 		    FROM CHAT
 		    WHERE RECEIVER_ID = #{userId}
-		    ORDER BY CHAT_NO DESC
-		    FETCH FIRST 1 ROWS ONLY	
+		    OR WRITER_ID = #{userId}
+		    ORDER BY CHAT_NO DESC	
     </select>
 	
   </mapper>

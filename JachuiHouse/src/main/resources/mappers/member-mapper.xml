@@ -234,7 +234,10 @@
 			   	</if>
 			</where>
 	</select>
-	
+<!-- 	채팅내역 역할 -->
+	<select id="getUserRoleById">
+		SELECT USER_ROLE FROM MEMBER WHERE USER_ID = #{userId}
+	</select>
 	<select id="selectNameById" resultType="string">
 		SELECT USER_NAME FROM MEMBER WHERE USER_ID = #{userId}
 	</select>
