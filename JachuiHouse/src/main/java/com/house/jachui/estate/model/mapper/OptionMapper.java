@@ -3,6 +3,7 @@ package com.house.jachui.estate.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.house.jachui.estate.controller.dto.OptionAddrequest;
 import com.house.jachui.estate.model.vo.EstateOption;
@@ -19,7 +20,7 @@ public interface OptionMapper {
 
 	void deleteOptionByEstateNo(int estateNo);
 
-	void insertOptionCode(int estateNo, Integer code);
+	void insertOptionCode(int estateNo, Integer optionNo);
 
-	int insertOptionList(int estateNo, Integer integer);
+	int insertOptionList(@Param("estateNo") int estateNo, @Param("optionNo") int optionNo);
 }

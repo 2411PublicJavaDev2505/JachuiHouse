@@ -25,10 +25,10 @@
  	<insert id="insertOptionList">
 		INSERT INTO  OPTION_LIST (estate_no, option_no)
 		VALUES
-	    (#{estateNo}, #{optionCode})
+	    (#{estateNo}, #{optionNo})
 	</insert>
 	<insert id="insertOptionCode" parameterType="map">
-        INSERT INTO estate_option (estate_no, option_no)
+        INSERT INTO OPTION_LIST (estate_no, option_no)
         VALUES (#{estateNo}, #{optionNo})
     </insert>
 	<delete id="deleteOptionByEstateNo">

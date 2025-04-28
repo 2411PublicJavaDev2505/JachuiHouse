@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.chat.controller.dto.SendRequest;
@@ -89,8 +90,19 @@ public class ChatController {
             return "common/error";
         }
     }
-    @GetMapping("/list")
-    public String showChatList() {
-    	return "chat/list";
+    
+    @GetMapping("/fetch")
+    @ResponseBody
+    public List<Chat> fetchNewMessages(
+        @RequestParam("writerId") String writerId,
+        @RequestParam("receiverId") String receiverId,
+        @RequestParam("lastChatId") int lastChatId) {
+        
+        Map<String, Object> map = new HashMap<>();
+        map.put("writerId", writerId);
+        map.put("receiverId", receiverId);
+        map.put("lastChatId", lastChatId);
+
+        return cService.selectNewMessages(map);
     }
 }

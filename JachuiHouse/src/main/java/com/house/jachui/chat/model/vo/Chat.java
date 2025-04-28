@@ -1,6 +1,7 @@
 package com.house.jachui.chat.model.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,4 +22,5 @@ public class Chat {
 	private String chatFilePath;
 	private String chatFileRename;
 	private String receiverId;
+	private Timestamp chatTime;
 }

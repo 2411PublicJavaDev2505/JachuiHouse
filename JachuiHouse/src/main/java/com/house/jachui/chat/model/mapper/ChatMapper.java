@@ -16,4 +16,6 @@ public interface ChatMapper {
 
 	int sendChat(SendRequest chat);
 
+	List<Chat> selectNewMessages(Map<String, Object> map);
+
 }
