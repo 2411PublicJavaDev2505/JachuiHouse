@@ -98,19 +98,21 @@
                     </div>
                     
                     <ul class="register-radio-group">
-                    	<label for="gender">성별</label>
-						<li class="register-radio">
-							<label for="male">
-							<img src="../resources/images/male.png" alt="남">
-							<input type="radio" id="male" name="gender" value="M" checked>
-							</label>
-						</li>
-						<li class="register-radio">
-							<label for="female">
-							<img src="../resources/images/female.png" alt="여">
-							<input type="radio" id="female" name="gender" value="F">
-							</label>
-						</li>
+					  <label for="gender">성별</label>
+					  <div class="register-radio-container">
+					    <li class="register-radio">
+					      <label for="male">
+					        <img src="../resources/images/male.png" alt="남">
+					        <input type="radio" id="male" name="gender" value="M" checked>
+					      </label>
+					    </li>
+					    <li class="register-radio">
+					      <label for="female">
+					        <img src="../resources/images/female.png" alt="여">
+					        <input type="radio" id="female" name="gender" value="F">
+					      </label>
+					    </li>
+					  </div>
 					</ul>
                     
                     <!-- <div class="form-group">

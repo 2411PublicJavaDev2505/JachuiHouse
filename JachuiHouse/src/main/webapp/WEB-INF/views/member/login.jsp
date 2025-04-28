@@ -7,6 +7,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <title>로그인 페이지</title>
 	    <link rel="stylesheet" href="../resources/css/member/login.css">
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 	    
 	</head>
 	<body>
@@ -49,5 +50,41 @@
 				</div>
 			</div>
 		</main>
+		
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+	    <script type="text/javascript">
+	    
+		 // SweetAlert
+		    function showMessage(msg) {
+		    	Swal.fire({            		
+		     		title: '다시 한 번 확인해주세요.',
+		     		text: msg,
+		     		icon: 'error',
+		   		});
+		    }
+		
+		    const loginBtn = document.querySelector(".loginBtn");
+		    loginBtn.addEventListener("click", function (event) {
+		    	const userId = document.querySelector("#userId");
+		    	const userPw = document.querySelector("#userPw");
+	    	
+		    	const userIdExp = /^[a-z][a-z0-9]{3,11}$/;
+	        	const userPwExp = /[a-zA-Z0-9]{8,20}/;
+	        	
+	        	if(!userIdExp.test(userId.value.trim())){
+	            	event.preventDefault();
+	            	const msg = "아이디는 소문자로 시작하고, 영어 소문자와 숫자로 4~12자리여야합니다."
+	        		showMessage(msg);
+	            	return false;
+	            }
+	        	
+	        	if(!userPwExp.test(userPw.value.trim())){
+	            	event.preventDefault();
+	    			const msg = "비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다."
+	           		showMessage(msg);
+	               	return false;
+	    		}
+		});    	
+	    </script>
 	</body>
 </html>

@@ -51,27 +51,27 @@
 				        </div> 
 		   
 		                <div class="form-group">
-		                    <label for="password">비밀번호</label>
+		                    <label for="password">비밀번호: </label>
 		                    <input type="password" name="userPw" id="userPw" placeholder="비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." required>
 		                </div>
 		
 		                <div class="form-group">
-		                    <label for="confirm-password">비밀번호 확인</label>
+		                    <label for="confirm-password">비밀번호 확인: </label>
 		                    <input type="password" name="userPwCheck" id="userPwCheck" placeholder="비밀번호를 한 번 더 입력해주세요." required>
 		                </div>
 		
 		                <div class="form-group">
-		                    <label for="name">이름</label>
+		                    <label for="name">이름: </label>
 		                    <input type="text" name="userName" id="userName" required>
 		                </div>
 		
 		                <div class="form-group">
-		                    <label for="phoneNumber">전화번호</label>
+		                    <label for="phoneNumber">전화번호: </label>
 		                    <input type="text" name="userPhone" id="userPhone" placeholder="ex.01012345678" maxlength="11" required>
 		                </div>
 		
 		                <div class="form-group">
-		                    <label for="userAddress">사무실 주소</label>
+		                    <label for="userAddress">사무실 주소: </label>
 		                    <div class="signUp-input-area">
 		                        <input type="text" name="businessAddress" placeholder="우편번호" maxlength="6" id="userPostcode" required>
 		                        <button type="button" onclick="business_execDaumPostcode()">검색</button>
@@ -89,12 +89,12 @@
 	                </div>
 	
 	                <div class="form-group">
-	                    <label for="realtorName" >상호명</label>
+	                    <label for="realtorName" >상호명: </label>
 	                    <input type="text" name="realtorName" id="realtorName" required>
 	                </div>
 	
 	                <div class="form-group">
-	                    <label for="realtorNo">공인중개사 등록번호</label>
+	                    <label for="realtorNo">공인중개사 등록번호: </label>
 	                    <input type="text" name="realtorNo" id="realtorNo" required>
 	                </div>
 	                
