@@ -18,5 +18,7 @@ public interface ReportService {
 	List<ReportVO> selectListAll(int currentPage);
 	//신고관리 페이지네이션
 	int getTotalCount();
+	//신고반려
+	int deleteReport(String reportNo);
 
 }

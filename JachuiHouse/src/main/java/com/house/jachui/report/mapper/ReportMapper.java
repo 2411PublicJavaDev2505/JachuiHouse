@@ -20,5 +20,7 @@ public interface ReportMapper {
 	List<ReportVO> selectListAll(RowBounds rowBounds);
 	//신고관리 페이지네이션
 	int getTotalCount();
+	//신고반려
+	int deleteReport(String reportNo);
 
 }
