@@ -16,7 +16,8 @@ public class ReportVO {
 	private int postNo;
 	private int commentNo;
 	
-	//조인을 위한 추가
+	//신고관리를 위한 추가
 	private String postTitle;
 	private String postContent;
+	private String commentContent;
 }

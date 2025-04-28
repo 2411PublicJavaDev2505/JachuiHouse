@@ -82,20 +82,18 @@ public class TradeController {
             if (searchList == null || searchList.isEmpty()) {
                 searchList = new ArrayList<>(); // 빈 리스트로 초기화
                 model.addAttribute("errorMessage", "검색 결과가 없습니다.");
-            }
-
-            // 페이지네이션 정보 생성
-            Map<String, Integer> pageInfo = page.generatePageInfoTrade(totalCount, currentPage);
-            model.addAttribute("maxPage", pageInfo.get("maxPage"));
-            model.addAttribute("startNavi", pageInfo.get("startNavi"));
-            model.addAttribute("endNavi", pageInfo.get("endNavi"));
-            model.addAttribute("searchList", searchList);
+            } else {
+                Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage, 8);
+                model.addAttribute("maxPage", pageInfo.get("maxPage"));
+                model.addAttribute("startNavi", pageInfo.get("startNavi"));
+                model.addAttribute("endNavi", pageInfo.get("endNavi"));
+                model.addAttribute("searchList", searchList);
 
             // 검색어 및 카테고리 모델에 추가
             model.addAttribute("searchKeyword", searchKeyword);
             model.addAttribute("category", category);
             model.addAttribute("currentPage", currentPage);
-
+            }
             return "trade/search";
         } catch (Exception e) {
             e.printStackTrace();

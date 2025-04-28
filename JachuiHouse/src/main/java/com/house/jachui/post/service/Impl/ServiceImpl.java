@@ -101,6 +101,7 @@ public class ServiceImpl implements PostService{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return pMapper.selectSearchList(searchKeyword, category, rowBounds);
 	}
+	
 
 	
 }

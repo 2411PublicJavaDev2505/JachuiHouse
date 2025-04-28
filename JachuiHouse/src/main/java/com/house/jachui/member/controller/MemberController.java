@@ -430,7 +430,7 @@ public class MemberController {
 				System.out.println(">>> member: " + m);
 			}
 			int totalCount = mService.getTotalCount();
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 10);
 			
 			if(!mList.isEmpty()) {
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
@@ -460,7 +460,7 @@ public class MemberController {
 			int totalCount = mService.getTotalCountByKeyword(searchKeyword);
 			List<Member> searchList = mService.searchListByKeyword(searchKeyword, currentPage);
 			
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 10);
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));
