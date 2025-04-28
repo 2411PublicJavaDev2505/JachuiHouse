@@ -13,21 +13,19 @@
 </head>
 <body>
     <div id="container">
-<meta charset="UTF-8">
-<title>사방팔아방 상세페이지</title>
-        <link rel="stylesheet" href="/resources/css/include/header.css">
-	    <link rel="stylesheet" href="/resources/css/trade/detail.css">
-	    <link rel="stylesheet" href="/resources/css/include/footer.css">
-      </head>
-      <body>
-         <div id="container">
         <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
         <main class="detail-container">
             <h2>사방팔아방 상세페이지</h2>
 
             <div class="detail-box">
-
+				<c:if test="${not empty sessionScope.userId and trade.userId ne sessionScope.userId}">
+				    <div class="chat-btn">
+				        <a href="/chat/totrade?tradeNo=${tradeNo}">
+				            <button>1:1 채팅문의</button>
+				        </a>
+				    </div>
+				</c:if>
                 <div class="view-count-wrapper">
                     <span class="view-count-label">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
