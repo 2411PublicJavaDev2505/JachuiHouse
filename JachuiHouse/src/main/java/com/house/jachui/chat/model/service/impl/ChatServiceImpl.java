@@ -37,5 +37,10 @@ public class ChatServiceImpl implements ChatService {
 		return cMapper.sendChat(chat);
 	}
 
+	@Override
+	public List<Chat> getChatByUserId(String userId) {
+		return cMapper.getChatByUserId(userId);
+	}
+
 
 }

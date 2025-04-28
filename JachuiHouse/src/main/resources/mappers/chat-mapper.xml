@@ -22,5 +22,12 @@
 		INSERT INTO CHAT VALUES(SEQ_CHAT_NO.NEXTVAL,#{writerId}, SYSTIMESTAMP, #{chatContent},
 		#{chatFileName}, #{chatFilePath}, #{chatFileRename}, #{receiverId})
 	</insert>
+	<select id="getChatByUserId" resultMap="chatResultMap">
+		SELECT * 
+		    FROM CHAT
+		    WHERE RECEIVER_ID = #{userId}
+		    ORDER BY CHAT_NO DESC
+		    FETCH FIRST 1 ROWS ONLY	
+    </select>
 	
   </mapper>
