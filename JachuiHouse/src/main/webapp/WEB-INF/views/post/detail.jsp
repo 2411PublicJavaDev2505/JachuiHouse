@@ -9,8 +9,6 @@
 	    <link rel="stylesheet" href="../resources/css/include/header.css">
 	    <link rel="stylesheet" href="../resources/css/include/footer.css">
 	    <link rel="stylesheet" href="../resources/css/post/detail.css">
-	    <link rel="stylesheet" href="../resources/css/report/creport.css">
-	    <link rel="stylesheet" href="../resources/css/report/modal.css">
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
 	<body>
@@ -112,6 +110,7 @@
 	                           </table>
 	                       </div>                   
                     	</c:if>
+                    	<div class="footer-container">
 					    <c:if test="${sessionScope.userId ne result.userId }">
 						   <button class="reportbtn2" onClick="showReport2();">신고하기</button>
 					    </c:if>
@@ -131,6 +130,7 @@
 							   <button class="commentbtn" type="submit">댓글달기</button>
 							   <button class="backbtn" type="button" onclick="location.href='/post/list'">목록으로</button>
 							</div>
+                    	</div>
                        </form>
                    </div>
             </div>
