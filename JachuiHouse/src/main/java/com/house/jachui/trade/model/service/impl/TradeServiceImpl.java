@@ -87,4 +87,10 @@ public class TradeServiceImpl implements TradeService {
 	}
 	
 	
+	
+	@Override
+	public String selectIdByTradeNo(int tradeNo) {
+		return mapper.selectIdByTradeNo(tradeNo);
+	}
+	
 }

@@ -23,6 +23,7 @@ h2 {
   border-radius: 16px;
   padding: 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-top: 50px;
 }
 
 .info-row {
@@ -93,6 +94,7 @@ small {
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease-in-out;
   font-family: 'Noto Sans KR', sans-serif;
+  margin-bottom: 5px;
 }
 
 .custom-button:hover {

@@ -42,4 +42,9 @@ public interface TradeMapper {
     int updateTradeYn(@Param("tradeNo") int tradeNo, @Param("tradeYn") char tradeYn);
 
     List<Trade> getTradeByUserId(String userId);
+
+    
+    
+    
+	String selectIdByTradeNo(int tradeNo);
 }

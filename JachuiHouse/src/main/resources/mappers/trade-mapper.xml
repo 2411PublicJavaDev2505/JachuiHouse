@@ -28,45 +28,50 @@
 	</select>
 
     <select id="selectListAll" resultMap="tradeResultMap">
-	    SELECT * FROM TRADE WHERE DEL_YN = 'N' ORDER BY TRADE_NO
+	    SELECT * FROM TRADE WHERE DEL_YN = 'N' ORDER BY TRADE_NO DESC
 	</select>
 
 	<select id="getTotalCountKeyword" resultType="_int">
 		SELECT COUNT(*) FROM TRADE WHERE DEL_YN ='N' AND TRADE_TITLE LIKE '%'||#{searchKeyword}||'%' 
 	</select>
 	<select id="getTotalCount" parameterType="map" resultType="_int">
-    SELECT COUNT(*) FROM TRADE
-    WHERE DEL_YN = 'N'
-    <if test="category == 'title'">
-        AND TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
-    </if>
-    <if test="category == 'writer'">
-        AND USER_ID LIKE '%' || #{searchKeyword} || '%'
-    </if>
-</select>
+	    SELECT COUNT(*) FROM TRADE
+	    WHERE DEL_YN = 'N'
+	    <if test="category == 'title'">
+	        AND TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
+	    </if>
+	    <if test="category == 'writer'">
+	        AND USER_ID LIKE '%' || #{searchKeyword} || '%'
+	    </if>
+	</select>
+	
+	<select id="searchListByKeyword" parameterType="map" resultMap="tradeResultMap">
+	    SELECT *
+	    FROM (
+	        SELECT ROWNUM AS RNUM, T.*
+	        FROM (
+	            SELECT * FROM TRADE
+	            WHERE DEL_YN = 'N'
+	            <if test="category == 'title'">
+	                AND TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
+	            </if>
+	            <if test="category == 'writer'">
+	                AND USER_ID LIKE '%' || #{searchKeyword} || '%'
+	            </if>
+	            ORDER BY TRADE_NO DESC
+	        ) T
+	        WHERE ROWNUM &lt;= #{endRow}
+	    )
+	    WHERE RNUM &gt;= #{startRow}
+	</select>
 
-<select id="searchListByKeyword" parameterType="map" resultMap="tradeResultMap">
-    SELECT *
-    FROM (
-        SELECT ROWNUM AS RNUM, T.*
-        FROM (
-            SELECT * FROM TRADE
-            WHERE DEL_YN = 'N'
-            <if test="category == 'title'">
-                AND TRADE_TITLE LIKE '%' || #{searchKeyword} || '%'
-            </if>
-            <if test="category == 'writer'">
-                AND USER_ID LIKE '%' || #{searchKeyword} || '%'
-            </if>
-            ORDER BY TRADE_NO DESC
-        ) T
-        WHERE ROWNUM &lt;= #{endRow}
-    )
-    WHERE RNUM &gt;= #{startRow}
-</select>
 
 
-
+	<select id="selectIdByTradeNo" resultType="String" parameterType="int">
+	    SELECT USER_ID
+	    FROM TRADE
+	    WHERE TRADE_NO = #{tradeNo}
+	</select>
 
 
     <select id="selectSearchList" resultType="Trade">
