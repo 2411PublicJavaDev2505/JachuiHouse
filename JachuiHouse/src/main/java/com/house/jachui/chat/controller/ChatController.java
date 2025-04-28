@@ -91,6 +91,7 @@ public class ChatController {
     }
     @GetMapping("/list")
     public String showChatList() {
+    	
     	return "chat/list";
     }
 }
