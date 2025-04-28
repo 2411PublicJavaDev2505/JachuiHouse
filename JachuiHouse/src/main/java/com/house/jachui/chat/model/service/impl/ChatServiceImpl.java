@@ -41,6 +41,10 @@ public class ChatServiceImpl implements ChatService {
 	public List<Chat> selectNewMessages(Map<String, Object> map) {
 		return cMapper.selectNewMessages(map);
 	}
+		
+	public List<Chat> getChatByUserId(String userId) {
+		return cMapper.getChatByUserId(userId);
+	}
 
 
 }
