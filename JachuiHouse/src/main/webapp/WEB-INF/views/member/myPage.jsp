@@ -3,13 +3,13 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>자취하우스 마이페이지</title>
-<link rel="stylesheet" href="../resources/css/include/header.css">
-<link rel="stylesheet" href="../resources/css/member/myPage.css">
-<link rel="stylesheet" href="../resources/css/include/footer.css">
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>자취하우스 마이페이지</title>
+		<link rel="stylesheet" href="../resources/css/include/header.css">
+		<link rel="stylesheet" href="../resources/css/member/myPage.css">
+		<link rel="stylesheet" href="../resources/css/include/footer.css">
+	</head>
 <body>
 	<div class="container">
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -39,19 +39,40 @@
 	            </div>
 	            <div class="rigth-inform">
 	                <div class="chat">
-	                    <h3>내 채팅</h3>
-	                </div>
-	                <div class="chat-content">
-	                    <c:if test="${empty cList}">
-					        <p>채팅내역이 없습니다.</p>
-					    </c:if>
-					    <c:forEach var="chat" items="${cList}">
-					        <a href="${pageContext.request.contextPath}/chat/chat?writerId=${chat.receiverId}&receiverId=${chat.writerId}">
-					            <!-- 마지막으로 보낸 메시지의 writerId 또는 receiverId를 출력 -->
-					            <p>${chat.writerId} 공인중개사와의 대화</p>
-					        </a>
-					    </c:forEach>
-	                </div>
+					    <h3>내 채팅</h3>
+					</div>
+					<div class="chat-content">
+				    <c:if test="${empty cList}">
+				        <p>채팅내역이 없습니다.</p>
+				    </c:if>
+				
+				    <!-- 이미 출력된 writerId들을 추적할 변수 -->
+				    <c:set var="printedWriterIds" value=""/>
+				
+				    <c:forEach var="chat" items="${cList}">
+				        <c:set var="otherUserId" value="${chat.writerId eq sessionScope.userId ? chat.receiverId : chat.writerId}"/>
+				
+				        <!-- writerId가 이미 출력된 경우에는 건너뛰기 -->
+				        <c:if test="${empty printedWriterIds || !empty printedWriterIds && printedWriterIds.indexOf(chat.writerId) == -1}">
+				            <!-- 출력된 writerId를 추가 -->
+				            <c:set var="printedWriterIds" value="${printedWriterIds},${chat.writerId}"/>
+				
+				            <a href="${pageContext.request.contextPath}/chat/chat?writerId=${chat.receiverId}&receiverId=${chat.writerId}">
+				                <c:choose>
+				                    <c:when test="${chat.otherUserRole == 'M'}">
+				                        <p>자취생 ${chat.writerId}과의 대화</p>
+				                    </c:when>
+				                    <c:when test="${chat.otherUserRole == 'R'}">
+				                        <p>공인중개사 ${chat.writerId}과의 대화</p>
+				                    </c:when>
+				                    <c:otherwise>
+				                        <p>${chat.writerId}과의 대화</p>
+				                    </c:otherwise>
+				                </c:choose>
+				            </a>
+				        </c:if>
+				    </c:forEach>
+				</div>
 	                <div class="my-notice">
 	                    <h3>내가 쓴 글</h3>
 	                </div>

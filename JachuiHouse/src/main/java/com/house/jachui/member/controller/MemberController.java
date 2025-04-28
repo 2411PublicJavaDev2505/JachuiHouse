@@ -340,17 +340,18 @@ public class MemberController {
 			if("M".equals(userRole)) {
 		        Map<String, String> map = new HashMap<>();
 		        map.put("receiverId", receiverId);
+		        String receiverName = mService.selectNameById(receiverId);
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
 				List<Chat> cList = cService.getChatByUserId(userId);
 				List<PostVO> pList = pService.getPostsByUserId(userId);
 				List<Trade> tList = tService.getTradeByUserId(userId);
-				String receiverName = mService.selectNameById(receiverId);
-				if (!cList.isEmpty()) {
-				    Collections.sort(cList, (c1, c2) -> Integer.compare(c2.getChatNo(), c1.getChatNo())); // 내림차순 정렬
-				    Chat latestChat = cList.get(0);  // 최신 채팅
-				    model.addAttribute("latestChat", latestChat); // 최신 채팅 객체를 JSP에 전달
-				}
+				for (Chat chat : cList) {
+		            String otherUserId = chat.getWriterId().equals(userId) ? chat.getReceiverId() : chat.getWriterId();
+		            String otherUserRole = mService.getUserRoleById(otherUserId);  // mService에서 getUserRoleById 메서드를 추가해서 userRole을 가져오기
+		            chat.setOtherUserRole(otherUserRole);  // Chat 객체에 otherUserRole 속성 추가
+		        }
+
 				model.addAttribute("tList", tList);
 				model.addAttribute("member", member);
 				model.addAttribute("pList", pList);
@@ -448,7 +449,7 @@ public class MemberController {
 				System.out.println(">>> member: " + m);
 			}
 			int totalCount = mService.getTotalCount();
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 10);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage,10);
 			
 			if(!mList.isEmpty()) {
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
@@ -478,7 +479,7 @@ public class MemberController {
 			int totalCount = mService.getTotalCountByKeyword(searchKeyword);
 			List<Member> searchList = mService.searchListByKeyword(searchKeyword, currentPage);
 			
-			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 10);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage,10);
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));

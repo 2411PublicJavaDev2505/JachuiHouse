@@ -90,4 +90,6 @@ public interface MemberMapper {
 	
 	// 회원가입 email 중복확인
 	int overlappedEmail(String email);
+
+	String getUserRoleById(String otherUserId);
 }

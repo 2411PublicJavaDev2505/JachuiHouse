@@ -23,4 +23,5 @@ public class Chat {
 	private String chatFileRename;
 	private String receiverId;
 	private Timestamp chatTime;
+	private String otherUserRole;
 }

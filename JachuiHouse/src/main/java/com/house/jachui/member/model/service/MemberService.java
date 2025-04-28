@@ -90,5 +90,7 @@ public interface MemberService {
 	
      // 자취생, 공인중개사 email 중복확인
   	int overlappedEmail(String userId) throws Exception;
+
+	String getUserRoleById(String otherUserId);
 }
 
