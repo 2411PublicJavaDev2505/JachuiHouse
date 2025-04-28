@@ -14,7 +14,7 @@
 	</resultMap>
 
 	<select id="selectList" resultMap="postResultMap">
-		SELECT * FROM POST
+		SELECT * FROM POST ORDER BY WRITE_DATE DESC
 	</select>
 	
 	<insert id="insertPost">
