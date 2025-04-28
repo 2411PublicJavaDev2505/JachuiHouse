@@ -22,13 +22,13 @@
 	        </div>
 	        <div class="chat-content">
 	        	<c:forEach var="chat" items="${cList }">
-	        		<c:if test="${chat.writerId ne sessionScope.id}">
+	        		<c:if test="${chat.writerId eq writerId}">
 	        			<div class="my-msg">
 	        				<div class="me">나</div>
 	        				<div class="my-msg-detail">${chat.chatContent }</div>
 	        			</div>
 	        		</c:if>
-	        		<c:if test="${chat.writerId eq sessionScope.id}">
+	        		<c:if test="${chat.writerId ne writerId}">
 	        			<div class="not-my-msg">
 	        				<div class="receiver-name">${receiverName }</div>
 	        				<div class="receive-msg">${chat.chatContent }</div>
@@ -38,14 +38,15 @@
 	        </div>
         	<form action="/chat/send" method="post" enctype="multipart/form-data">
         		<div class="message">
-	        		<input type="hidden" value="${writerId }" name="writerId">
-	        		<input type="hidden" value="${receiverId }" name="receiverId">
-	        		<input type="text" placeholder="메세지를 입력해주세요" name="chatContent" id="input" required="required">
-	        		<input type="file" name="images" multiple>
-		            	<button type="submit" id="submitbtn">
-		                	<img src="../resources/image/send.256x233.png" alt="send">
-		            	</button>	        	
-        		</div>
+				    <input type="hidden" value="${writerId}" name="writerId">
+				    <input type="hidden" value="${receiverId}" name="receiverId">
+				    <input type="text" placeholder="메세지를 입력해주세요" name="chatContent" id="input" required="required">
+				    <input type="file" id="fileInput" name="images" multiple>
+				    <button type="button" id="fileBtn">+</button>
+				    <button type="submit" id="submitbtn">
+				        <img src="../resources/image/send.256x233.png" alt="send">
+				    </button>     
+				</div>
         	</form>
 	        <div class="btn">
 	            <button onClick="location.href='/'">채팅방 나가기</button>
@@ -53,5 +54,11 @@
 	    </main>
 	    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
+	<script>
+	    document.getElementById('fileBtn').addEventListener('click', function() {
+	        document.getElementById('fileInput').click();
+	    });
+</script>
+	
 </body>
 </html>
