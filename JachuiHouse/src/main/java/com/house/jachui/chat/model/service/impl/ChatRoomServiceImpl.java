@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.house.jachui.chat.model.mapper.ChatRoomMapper;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.vo.Chat;
+import com.house.jachui.chat.model.vo.ChatRoom;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,10 +24,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         return chatRoomMapper.findChatRoom(map);
     }
 
-    @Override
-    public List<Chat> getChatRoomsByUserId(String userId) {
-        return chatRoomMapper.getChatRoomsByUserId(userId);
-    }
 
     @Override
     public int createEstateChatRoom(String user1Id, String user2Id, int estateNo) {
@@ -50,7 +47,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         }
         return newRoomNo;
     }
-
     @Override
     public int createTradeChatRoom(String user1Id, String user2Id, int tradeNo) {
         // 중복 채팅방 확인
@@ -87,4 +83,11 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         Integer count = chatRoomMapper.countChatRoomByRoomNo(roomNo);
         return count != null && count > 0;
     }
+
+
+	@Override
+	public List<ChatRoom> getChatRoomsByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return chatRoomMapper.getChatRoomsByUserId(userId);
+	}
 }

@@ -277,14 +277,20 @@ public class MemberServiceImpl implements MemberService {
 	}
 	// 마이페이지에서 채팅내역 공인중개사인지 자취생인지 구분
 	@Override
-	public String getUserRoleById(String otherUserId) {
-		return mMapper.getUserRoleById(otherUserId);
+	public String getChatByUserId(String otherUserId) {
+		return mMapper.getChatByUserId(otherUserId);
 	}
 
 	//공인중개사 파일 저장 처리
 	@Override
 	public int addMember(MemberAddRequest member) {
 		return mMapper.addMember(member);
+	}
+
+	@Override
+	public String getUserRoleById(String otherUserId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

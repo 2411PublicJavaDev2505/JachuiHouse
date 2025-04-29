@@ -27,6 +27,7 @@ import com.house.jachui.common.FileUtil;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
+import com.house.jachui.chat.model.vo.ChatRoom;
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.ContactRequest;
 import com.house.jachui.member.dto.MemberAddRequest;
@@ -372,14 +373,9 @@ public class MemberController {
 		        String receiverName = mService.selectNameById(receiverId);
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
-				List<Chat> cList = chatRoomService.getChatRoomsByUserId(userId);
+				List<ChatRoom> cList = chatRoomService.getChatRoomsByUserId(userId);
 				List<PostVO> pList = pService.getPostsByUserId(userId);
 				List<Trade> tList = tService.getTradeByUserId(userId);
-				for (Chat chat : cList) {
-		            String otherUserId = chat.getWriterId().equals(userId) ? chat.getWriterId() : chat.getWriterId();
-		            String otherUserRole = mService.getUserRoleById(otherUserId);  // mService에서 getUserRoleById 메서드를 추가해서 userRole을 가져오기
-		            chat.setOtherUserRole(otherUserRole);  // Chat 객체에 otherUserRole 속성 추가
-		        }
 
 				model.addAttribute("tList", tList);
 				model.addAttribute("member", member);

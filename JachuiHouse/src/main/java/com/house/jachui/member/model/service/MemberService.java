@@ -96,5 +96,7 @@ public interface MemberService {
 
 	//공인중개사 파일 저장 처리
 	int addMember(MemberAddRequest member);
+	
+	String getChatByUserId(String otherUserId);
 }
 

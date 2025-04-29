@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.house.jachui.chat.model.vo.Chat;
+import com.house.jachui.chat.model.vo.ChatRoom;
 
 public interface ChatRoomService {
 
 	Integer findChatRoom(Map<String, String> map);
 
-	List<Chat> getChatRoomsByUserId(String userId);
+
+	List<ChatRoom> getChatRoomsByUserId(String userId);
 
 	int createEstateChatRoom(String user1Id, String user2Id, int estateNo);
 

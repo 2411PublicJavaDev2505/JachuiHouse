@@ -17,6 +17,7 @@ import com.house.jachui.chat.controller.dto.SendRequest;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
+import com.house.jachui.chat.model.vo.ChatRoom;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.member.model.service.MemberService;
@@ -199,7 +200,7 @@ public class ChatController {
             return "common/error";
         }
         
-        List<Chat> chatRoomList = chatRoomService.getChatRoomsByUserId(userId);
+        List<ChatRoom> chatRoomList = chatRoomService.getChatRoomsByUserId(userId);
         model.addAttribute("chatRoomList", chatRoomList);
         return "chat/list";
     }

@@ -95,4 +95,6 @@ public interface MemberMapper {
 	String getUserRoleById(String otherUserId);
 
 	int addMember(MemberAddRequest member);
+	// 채팅방 조회
+	String getChatByUserId(String otherUserId);
 }

@@ -7,13 +7,16 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.house.jachui.chat.model.vo.Chat;
+import com.house.jachui.chat.model.vo.ChatRoom;
 
 @Mapper
 public interface ChatRoomMapper {
 
-	List<Chat> getChatRoomsByUserId(String userId);
-
+	List<ChatRoom> getChatRoomsByUserId(String userId);
+	
 	Integer findChatRoom(Map<String, String> map);
+
+	Integer createChatRoom(Map<String, String> map);
 
 	Integer findChatRoomByUsersAndItem(Map<String, Object> params);
 
