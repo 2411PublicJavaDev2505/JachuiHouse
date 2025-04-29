@@ -181,25 +181,26 @@ public class PostController {
 //			return "common/error.jsp";
 //		}
 	}
-	
-	@PostMapping("/cinsert")//댓글 작성 (POST)
-	public String insertComment(Model model,
-			@ModelAttribute CommentInsertRequest comment) {
-		try {
-			System.out.println("확인");
-			System.out.println(comment);
-			int result = pService.insertcomment(comment);
-			if(result > 0) {
-				return "redirect:/post/detail?postNo="+comment.getPostNo();
-			}else {
-				return "common/error";
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
-			return "common/error";
-		}
+	@ResponseBody
+	@PostMapping("/cinsert")
+	public String insertComment(Model model, @ModelAttribute CommentInsertRequest comment) {
+	    try {
+	        System.out.println(comment);
+	        if (comment.getCommentContent().length() == 0) {
+	            return "fail"; // 실패
+	        }
+
+	        int result = pService.insertcomment(comment);
+	        if (result > 0) {
+	            return "success"; //  성공시 success 문자열만
+	        } else {
+	            return "fail";
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("errorMessage", e.getMessage());
+	        return "fail";
+	    }
 	}
 	
 	@GetMapping("/cdelete")//댓글 삭제

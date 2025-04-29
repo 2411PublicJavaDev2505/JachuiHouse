@@ -6,7 +6,7 @@ body {
 
 .main {
     background-color: #fdf6ec;
-    height: 1000px;
+
     padding: 50px;
     padding-bottom: 30px;
 }
@@ -101,7 +101,7 @@ body {
 .underbar {
     display: flex;
 }
-.commentbox {
+#commentInput {
     padding: 10px;
     border-radius: 25px;
     width: 60%;
