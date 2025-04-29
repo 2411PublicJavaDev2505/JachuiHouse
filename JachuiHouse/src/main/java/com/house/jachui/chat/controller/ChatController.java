@@ -128,8 +128,8 @@ public class ChatController {
         
         model.addAttribute("chatRoomList", chatRoomList);
         return "chat/list";
-    }
 
+    }
     // 새로운 메시지 fetch
     @GetMapping("/fetch")
     @ResponseBody

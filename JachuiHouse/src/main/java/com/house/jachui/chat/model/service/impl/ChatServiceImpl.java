@@ -40,5 +40,8 @@ public class ChatServiceImpl implements ChatService {
     }
 
     // 사용자가 참여한 채팅방을 조회하기 위한 쿼리 호출
-  
+	@Override
+	public String selectLastChatById(String receiverId) {
+		return chatMapper.selectLastChatById(receiverId);
+	}
 }

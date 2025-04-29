@@ -18,4 +18,6 @@ public interface ChatService {
 
 	List<Chat> fetchNewMessages(Map<String, Object> map);
 
+	String selectLastChatById(String receiverId);
+
 }

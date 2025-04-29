@@ -38,6 +38,35 @@ public class RealtorController {
 	//회원 관리 리스트 - 페이지네이션
 	private final PageUtil pageUtil;
 	
+	//공인중개사 페이지 이동
+	@GetMapping("/page")
+	public String showRealtorInfo(HttpSession session, Model model
+			, @RequestParam(value="page", defaultValue="1") int currentPage) {
+		String userRole = (String)session.getAttribute("userRole");
+		if("M".equals(userRole)) {
+			String userId = (String)session.getAttribute("userId");
+			Member member = rService.selectRealtorById(userId);
+			List<Estate> eList = rService.selectEstatesById(userId, currentPage, 3);
+			int totalCount = rService.getTotalCount(userId);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
+			model.addAttribute("maxPage", pageInfo.get("maxPage"));
+			model.addAttribute("startNavi", pageInfo.get("startNavi"));
+			model.addAttribute("endNavi", pageInfo.get("endNavi"));
+			model.addAttribute("eList", eList);
+			
+			for (Estate est : eList) {
+	            List<EstateFile> fileList = fileMapper.selectImageList(est.getEstateNo());
+	            est.setEstateFileList(fileList);
+	        }
+			if(member != null) {
+				model.addAttribute("member", member);
+				return "realtor/page";
+			}
+			return "common/error";
+		}
+		return "common/error";
+	}
+	
 	//공인중개사 마이페이지 이동
 	@GetMapping("/myPage")
 	public String showRealtorMypageForm(HttpSession session, Model model
@@ -66,11 +95,6 @@ public class RealtorController {
 		return "realtor/page";
 	}
 	
-	// 공인중개사 채팅 목록
-	@GetMapping("/chatlist")
-	public String showRealtorChatList() {
-		return "realtor/chatlist";
-	}
 	// 공인중개사 정보 수정 페이지로 이동
 	@GetMapping("/update")
 	public String showRealtorUpdate(HttpSession session, Model model) {
