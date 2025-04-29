@@ -13,7 +13,7 @@
 	<div class="container">
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		<main>
-               <form action="/realtor/update" method="post"  enctype="multipart/form-data" class="form-main">
+			<form action="/realtor/update" method="post" enctype="multipart/form-data" class="form-main" onsubmit="return validateForm()">
 	            <div class="profile-preview">
 		            <label for="profileImageInput">
 		                <img id="profileImage" src="/resources/image/${member.profileImage}" 
@@ -29,28 +29,28 @@
                 <div class="main-contents">
                  <label>
                         ID
-                    </label> <br>
-                        <input name="userId" value="${member.userId }" readonly> <br>
+                    </label>
+                        <input name="userId" value="${member.userId }" readonly>
                         <label >
                             비밀번호
-                        </label> <br>
-                        <input type="password" name="userPw" value="${member.userPw }"> <br>
+                        </label> 
+                        <input type="password" name="userPw" value="${member.userPw }">
                         <label for="">
                             이름
-                        </label> <br>
-                        <input type="text" name="userName" value="${member.userName }"> <br>
+                        </label> 
+                        <input type="text" name="userName" value="${member.userName }">
                         <label for="">
                             전화번호
-                        </label> <br>
-                        <input type="text" name="userPhone" value="${member.userPhone }"> <br>
+                        </label> 
+                        <input type="text" name="userPhone" value="${member.userPhone }">
                         <label for="">
                             주소
-                        </label> <br>
-                        <input type="text" name="userAddress" value="${member.userAddress }"> <br>
+                        </label> 
+                        <input type="text" name="userAddress" value="${member.userAddress }">
                         <label for="">
                             상호명
-                        </label> <br>
-                        <input type="text" name="realtorName" value="${member.realtorName }"> <br>
+                        </label> 
+                        <input type="text" name="realtorName" value="${member.realtorName }">
                    </div>
 	                   <div class="button">
 	                       <div class="cancelBtn">
@@ -71,6 +71,35 @@
 	        reader.onload = e => document.getElementById('profileImage').src = e.target.result;
 	        reader.readAsDataURL(event.target.files[0]);
 	    }
+		<script type="text/javascript">
+	    function previewImage(event) {
+	        const reader = new FileReader();
+	        reader.onload = e => document.getElementById('profileImage').src = e.target.result;
+	        reader.readAsDataURL(event.target.files[0]);
+	    }
+
+	    function validateForm() {
+	        const password = document.querySelector('input[name="userPw"]').value.trim();
+	        const phone = document.querySelector('input[name="userPhone"]').value.trim();
+
+	        // 비밀번호 8자 이상 체크
+	        if (password.length < 8) {
+	            alert('비밀번호는 8자 이상이어야 합니다.');
+	            return false;
+	        }
+
+	        // 전화번호 010으로 시작 + 11자리 체크
+	        const phoneRegex = /^010\d{8}$/;
+	        if (!phoneRegex.test(phone)) {
+	            alert('전화번호는 010으로 시작하고 총 11자리여야 합니다.');
+	            return false;
+	        }
+
+	        // 모든 조건 통과
+	        return true;
+	    }
+	</script>
+
 	</script>
 </body>
 </html>

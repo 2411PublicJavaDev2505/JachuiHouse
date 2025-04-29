@@ -28,7 +28,8 @@ header a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-header a:hover {
+header .nav a:hover, 
+header .loginBtn a:hover {
     background-color: #D4693B;
     color: #FFAB87;
     border-radius: 10px;

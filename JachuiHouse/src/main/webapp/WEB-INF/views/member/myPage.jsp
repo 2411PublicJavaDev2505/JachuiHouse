@@ -60,13 +60,13 @@
 				            <a href="${pageContext.request.contextPath}/chat/chat?writerId=${chat.receiverId}&receiverId=${chat.writerId}">
 				                <c:choose>
 				                    <c:when test="${chat.otherUserRole == 'M'}">
-				                        <p>자취생 ${chat.writerId}과의 대화</p>
+				                        <p>자취생 ${chat.writerId}님과의 대화</p>
 				                    </c:when>
 				                    <c:when test="${chat.otherUserRole == 'R'}">
-				                        <p>공인중개사 ${chat.writerId}과의 대화</p>
+				                        <p>공인중개사 ${chat.writerId}님과의 대화</p>
 				                    </c:when>
 				                    <c:otherwise>
-				                        <p>${chat.writerId}과의 대화</p>
+				                        <p>${chat.writerId}님과의 대화</p>
 				                    </c:otherwise>
 				                </c:choose>
 				            </a>
