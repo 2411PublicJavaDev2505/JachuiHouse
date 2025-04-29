@@ -13,18 +13,10 @@ import com.house.jachui.chat.model.vo.Chat;
 @Mapper
 public interface ChatMapper {
 
-	List<Chat> selectList(Map<String, String> map);
+	List<Chat> getMessagesByRoom(Integer roomNo);
 
-	int sendChat(SendRequest chat);
-
-	List<Chat> getChatByUserId(String userId);
-
-	int getTotalCount(String userId);
-
-	List<Chat> selectChatByUserId(String userId, RowBounds rowBounds);
+	int sendChat(SendRequest sendRequest);
 
 	List<Chat> selectNewMessagesAfter(Map<String, Object> map);
-	
-	
 
 }

@@ -15,4 +15,5 @@ public class SendRequest {
 	private String chatFileName;
 	private String chatFileRename;
 	private String chatFilePath;
+	private String chatNo;
 }

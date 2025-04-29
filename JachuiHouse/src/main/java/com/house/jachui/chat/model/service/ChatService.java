@@ -12,16 +12,10 @@ import jakarta.servlet.http.HttpSession;
 
 public interface ChatService {
 
-	List<Chat> selectList(Map<String, String> map);
+	List<Chat> getMessagesByRoom(Integer roomNo);
 
-	int sendChat(SendRequest chat, List<MultipartFile> images);
+	int sendChatMessage(SendRequest sendRequest);
 
-	List<Chat> getChatByUserId(String userId);
-
-	int getTotalCount(String userId);
-
-	List<Chat> selectChatByUserId(String userId, int currentPage, int i);
-
-	List<Chat> selectNewMessagesAfter(Map<String, Object> map);
+	List<Chat> fetchNewMessages(Map<String, Object> map);
 
 }

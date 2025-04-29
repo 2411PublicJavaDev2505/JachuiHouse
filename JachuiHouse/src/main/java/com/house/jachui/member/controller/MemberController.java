@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
 import com.house.jachui.common.PageUtil;
@@ -51,7 +52,7 @@ public class MemberController {
 	private final PostService pService;
 	private final TradeService tService;
 	private final MemberService mService;
-	private final ChatService cService;
+	private final ChatRoomService chatRoomService;
 	//회원 관리 리스트 - 페이지네이션
 	private final PageUtil pageUtil;
 	
@@ -343,11 +344,11 @@ public class MemberController {
 		        String receiverName = mService.selectNameById(receiverId);
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
-				List<Chat> cList = cService.getChatByUserId(userId);
+				List<Chat> cList = chatRoomService.getChatRoomsByUserId(userId);
 				List<PostVO> pList = pService.getPostsByUserId(userId);
 				List<Trade> tList = tService.getTradeByUserId(userId);
 				for (Chat chat : cList) {
-		            String otherUserId = chat.getWriterId().equals(userId) ? chat.getReceiverId() : chat.getWriterId();
+		            String otherUserId = chat.getWriterId().equals(userId) ? chat.getWriterId() : chat.getWriterId();
 		            String otherUserRole = mService.getUserRoleById(otherUserId);  // mService에서 getUserRoleById 메서드를 추가해서 userRole을 가져오기
 		            chat.setOtherUserRole(otherUserRole);  // Chat 객체에 otherUserRole 속성 추가
 		        }
