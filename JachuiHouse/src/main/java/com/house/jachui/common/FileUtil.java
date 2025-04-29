@@ -24,6 +24,7 @@ public class FileUtil {
 		result.put("post", "pUploadFiles");
 		result.put("realtor", "rUploadFiles");
 		result.put("trade", "tUploadFiles");
+		result.put("member", "mUploadFiles");
 		String folderName = result.get(type);
 		String prefix = type.toLowerCase().substring(0,1);
 		String fileName = uploadFile.getOriginalFilename();

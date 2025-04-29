@@ -23,11 +23,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.house.jachui.common.FileUtil;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
 import com.house.jachui.common.PageUtil;
 import com.house.jachui.member.dto.ContactRequest;
+import com.house.jachui.member.dto.MemberAddRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.MemberPasswordRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
@@ -35,6 +37,7 @@ import com.house.jachui.member.dto.SignupRealtorRequest;
 import com.house.jachui.member.dto.UpdateRequest;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
+import com.house.jachui.notice.controller.dto.NoticeAddRequest;
 import com.house.jachui.post.domain.PostVO;
 import com.house.jachui.post.service.PostService;
 import com.house.jachui.trade.model.service.TradeService;
@@ -55,6 +58,8 @@ public class MemberController {
 	private final ChatRoomService chatRoomService;
 	//회원 관리 리스트 - 페이지네이션
 	private final PageUtil pageUtil;
+	
+	private final FileUtil fileUtil;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -146,19 +151,42 @@ public class MemberController {
 		return "member/signupRealtor";
 	}
 	
-	// 공인중개사 회원가입 처리	
+	// 공인중개사 회원가입 처리	(파일 업로드 포함)
 	@PostMapping("/signupRealtor")
-	public String memberSignupRealtor(@ModelAttribute SignupRealtorRequest request, HttpSession session) {
-		int result = mService.signupRealtor(request);
-		if(result > 0) {
-			session.setAttribute("welcomeMsg", "회원가입이 완료되었습니다!");
-//			return "redirect:/";
-			return "member/login";
-		}else {
-			return "common/error";
-		}
-		
-	}
+    public String memberSignupRealtor(
+            @ModelAttribute SignupRealtorRequest request,
+            @RequestParam(value = "mUploadFiles", required = false) MultipartFile uploadFile,
+            HttpSession session, Model model) {
+        try {
+            // 1. 파일 저장 처리 (사업자등록증)
+            if (uploadFile != null && !uploadFile.getOriginalFilename().isBlank()) {
+                Map<String, String> fileInfo = fileUtil.saveFile(uploadFile, session, "member");
+                request.setFileName(fileInfo.get("mFilename"));
+                request.setFileRename(fileInfo.get("mFileRename"));
+                request.setFilePath("/resources/mUploadFiles/" + fileInfo.get("mFileRename"));
+            }
+
+            // 2. 비밀번호 암호화
+            String encodedPassword = passwordEncoder.encode(request.getUserPw());
+            request.setUserPw(encodedPassword);
+
+            // 3. 회원가입 처리
+            int result = mService.signupRealtor(request);
+
+            if (result > 0) {
+                session.setAttribute("welcomeMsg", "회원가입이 완료되었습니다!");
+                return "member/login";
+            } else {
+                model.addAttribute("errorMessage", "회원가입에 실패했습니다.");
+                return "common/error";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", e.getMessage());
+            return "common/error";
+        }
+    }
+	
 	
 	// 공인중개사 회원가입 id 중복확인
 	@GetMapping("idCheck")

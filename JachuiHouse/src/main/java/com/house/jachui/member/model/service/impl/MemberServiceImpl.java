@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.member.dto.ContactRequest;
+import com.house.jachui.member.dto.MemberAddRequest;
 import com.house.jachui.member.dto.MemberLoginRequest;
 import com.house.jachui.member.dto.MemberPasswordRequest;
 import com.house.jachui.member.dto.SignupJachuiRequest;
@@ -278,6 +279,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String getUserRoleById(String otherUserId) {
 		return mMapper.getUserRoleById(otherUserId);
+	}
+
+	//공인중개사 파일 저장 처리
+	@Override
+	public int addMember(MemberAddRequest member) {
+		return mMapper.addMember(member);
 	}
 
 
