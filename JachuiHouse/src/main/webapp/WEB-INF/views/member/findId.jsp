@@ -11,7 +11,18 @@
     </head>
     <body>
       <div class="container">
-        <h2>아이디 찾기</h2>
+      	<div class="logo-container">
+			<div class="login-image">
+				<a href="http://localhost:7777">
+					<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
+				</a>
+			</div>
+			<div>
+        		<h2>아이디 찾기</h2>
+        	<div id="msgTag" style="color: red;"></div>
+			</div>
+		</div>
+        
         <form action="/member/foundId" method="post">
           <div class="form-group">
             <label for="userName">이름: </label>

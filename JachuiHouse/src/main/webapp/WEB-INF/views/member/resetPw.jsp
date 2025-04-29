@@ -10,15 +10,26 @@
 </head>
 <body>
     <div class="container">
-        <h2>비밀번호 재설정</h2>
+    	<div class="logo-container">
+			<div class="login-image">
+				<a href="http://localhost:7777">
+					<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
+				</a>
+			</div>
+			<div>
+        		<h2>비밀번호 재설정</h2>
+        	<div id="msgTag" style="color: red;"></div>
+			</div>
+		</div>
+				
         <form role="form" action="/member/resetPw" method="post">
         	<div class="form-group">
-	            <label for="userId">아이디</label>
+	            <label for="userId">아이디: </label>
 	                <input type="text" name="userId" id="userId" placeholder="아이디를 입력해주세요." class="form-control" required>
         	</div>
         	
 	        <div class="form-group">
-	            <label for="userEmail">이메일</label>
+	            <label for="userEmail">이메일: </label>
 	                <input type="email" name="userEmail" id="userEmail"  placeholder="가입 시 기재한 이메일 주소를 입력해주세요." class="form-control" required>
         	</div>
         	<button type="submit" class="signUpBtn">변경하기</button>

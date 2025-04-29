@@ -25,11 +25,11 @@
 					<div id="msgTag" style="color: red;"></div>
 					</div>
 				</div>
+               <div class="content">
 	               <div class="agreements">
 	                   <label><input type="checkbox" required>약관에 동의합니다. <a href="#">내용보기</a></label>
 	                   <label><input type="checkbox" required>개인정보 수집에 동의합니다. <a href="#">내용보기</a></label>
 	               </div>
-               <div class="content">
 	
 	               <form class="form" name="join" action="/member/signupRealtor" method="POST" autocomplete="off" id="signup_form" enctype="utf-8">
 						<div class="form-group">

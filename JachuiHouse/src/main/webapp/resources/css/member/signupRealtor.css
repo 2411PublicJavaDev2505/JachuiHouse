@@ -31,8 +31,9 @@
 }
 
 .agreements {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     margin-left: 145px;
+    margin-top: 50px;
 }
 
 
@@ -98,7 +99,7 @@
 
 .input-wrapper button {
     width: 70px;
-    background-color: #ff6200;
+    background-color: #ff7337;
     color: white;
     border: none;
     cursor: pointer;
@@ -134,7 +135,7 @@
 .signUp-input-area button {
     width: 70px;
     height: 40px; /* 높이를 명시적으로 40px로 설정 */
-    background-color: #ff6200;
+    background-color: #ff7337;
     color: white;
     border: none;
     cursor: pointer;
@@ -171,15 +172,16 @@
 
 /* 파일 선택 버튼 스타일링 */
 .upload-area input[type="file"] {
-	opacity: 0;
+	opacity: 2;
     width: 70px; /* 중복확인, 검색 버튼과 동일한 너비 */
     height: 40px; /* 동일한 높이 */
-    background-color: #ff6200; /* 동일한 배경색 */
+    background-color: #ff7337; /* 동일한 배경색 */
     color: white; /* 동일한 텍스트 색상 */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    padding: 8px;
+    --padding: 8px;
+    padding-bottom:7px;
     font-size: 14px;
     box-sizing: border-box;
     text-align: center;
@@ -207,12 +209,13 @@
 
 /* 가입신청하기 버튼 스타일 */
 .signUpBtn {
-    background-color: #ff6200;
+    background-color: #ff7337;
     color: white;
     border: none;
     cursor: pointer;
     margin-top: 20px;
     margin-left: 145px;
+    font-weight: bold;
 }
 
 .signUpBtn:hover {

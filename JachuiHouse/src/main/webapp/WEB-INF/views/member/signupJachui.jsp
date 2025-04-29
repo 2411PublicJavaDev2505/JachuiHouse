@@ -33,46 +33,46 @@
 				
                 <form class="form" action="/member/signupJachui" method="POST" id="signup_form">
                     <div class="form-group">
-                        <label for="id">아이디</label>
+                        <label for="id">아이디: </label>
                         <div class="input-wrapper">
                         	<input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="영어 소문자와 숫자로 4~12자리여야 합니다." autofocus required>
 	                        <label id="label1"></label>
-	                        <button id="overlappedID" type="button">중복확인</button><br>
+	                        <button id="overlappedID" type="button">중복확인</button>
                         </div>
                   		<span id="idOlMessage"></span>
                     </div>
                         
                     <div class="form-group">
-			            <label for="userEmail">이메일</label>
+			            <label for="userEmail">이메일: </label>
 			            <div class="input-wrapper">
 				            <input type="email" id="userEmail" name="userEmail" autofocus required>
-				            <button id="overlappedEmail" type="button">중복확인</button><br> 
+				            <button id="overlappedEmail" type="button">중복확인</button>
 			            </div>
 			            <span id="emailOlMessage"></span> 
 			        </div>  
         			
                     <div class="form-group">
-                        <label for="password">비밀번호</label>
+                        <label for="password">비밀번호: </label>
                         <input type="password" id="userPw"  name="userPw" placeholder="비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." required>
                     </div>
         
                     <div class="form-group">
-                        <label for="confirm-password">비밀번호 확인</label>
+                        <label for="confirm-password">비밀번호 확인: </label>
                         <input type="password" id="userPwCheck" name="userPwCheck" >
                     </div>
         
                     <div class="form-group">
-                        <label for="name">이름</label>
+                        <label for="name">이름: </label>
                         <input type="text" id="userName" name="userName" >
                     </div>
         
                     <div class="form-group">
-                        <label for="phoneNumber">전화번호</label>
+                        <label for="phoneNumber">전화번호: </label>
                         <input type="text" name="userPhone" id="phoneNumber" placeholder="ex.01012345678" maxlength="11" >
                     </div>
         
-                    <div class="form-group">
-                        <label for="userAddress">주소</label>
+                    <div class="address-form-group">
+                        <label for="userAddress">주소: </label>
                         	<div class="signUp-input-area">
                             <input type="text" name="userPostcode" placeholder="우편번호" maxlength="6" id="userPostcode" >
                             <input type="button" id="userPostcodeBtn" onclick="business_execDaumPostcode()" value="우편번호 찾기"><br>
@@ -93,12 +93,12 @@
                     </div>
         
                     <div class="form-group">
-                        <label for="BirthDay">생년월일</label>
+                        <label for="BirthDay">생년월일: </label>
                         <input type="date" name="userBirth" required>
                     </div>
                     
                     <ul class="register-radio-group">
-					  <label for="gender">성별</label>
+					  <label for="gender">성별: </label>
 					  <div class="register-radio-container">
 					    <li class="register-radio">
 					      <label for="male">
@@ -122,7 +122,7 @@
                     </div> -->
         
                     <div class="form-group">
-                        <label for="aloneLiving">자취년차</label>
+                        <label for="aloneLiving">자취년차: </label>
                         <input type="text" name="aloneLiving" id="aloneLiving" placeholder="선택 사항입니다. 숫자만 입력해주세요.">
                     </div>
         

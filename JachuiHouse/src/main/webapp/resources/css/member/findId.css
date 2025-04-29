@@ -2,20 +2,31 @@
 
 body {
   margin: 0;
+  padding: 0;
+  display: block;
+  /* align-items: center; */
   font-family: Arial, sans-serif;
   background-color: #FFFBF0;
 }
 
 .container {
-  width: 400px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: white;
-  border: 1px solid #a3a0a0;
-  border-radius: 10px;
-  overflow: hidden;
-    box-sizing: boder-box;
-    box-shadow: 2px 5px 10px 3px rgb(165, 162, 162);
+	width: 400px;
+	margin: 50px auto;
+	padding: 30px;
+	background-color: white;
+	overflow: hidden;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-image {
+	padding-left: 42px;	
 }
 
 h2 {

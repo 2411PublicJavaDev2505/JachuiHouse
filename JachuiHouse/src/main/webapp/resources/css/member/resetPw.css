@@ -16,102 +16,25 @@ body {
     text-align: center;
     padding: 50px;
     background-color: white;
-    border: 1px solid #a3a0a0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
 
-h2 {
-    padding-bottom: 10px;
-}
-
-.btn {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #FF7337;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    border: 1px solid #a3a0a0;
-    width: 422px;
-    /* float: right; */
-}
-
-.btn:hover {
-    background-color: #FFA37C;
-}
-
-.form-group {
-    margin-bottom: 15px;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.form-group label {
-    display: block;
-    float: left;
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 5px;
-    padding-right: 10px;
-}
-
-.form-group input {
-    /* width: 80%; */
-    width: 378px;
-    padding: 10px;
-    border: 1px solid #c0baba;
-    border-radius: 5px;
-}
-
-.form-group button {
-    /* width: 80%; */
-    width: 400px;
-    display: flex;
-    /* align-items: center; */
-    flex-direction: column;
-
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    display: block;
-    /* align-items: center; */
-    font-family: Arial, sans-serif;
-    background-color: #FFFBF0;
-}
-
-.container {
-    width: 500px;
-    margin: 50px auto;
+.logo-container {
     text-align: center;
-    padding: 50px;
-    background-color: white;
-    border: 1px solid #a3a0a0;
-    border-radius: 10px;
+    margin-bottom: 20px;
 }
+
+.login-image {
+	padding-left: 42px;	
+}
+
 
 h2 {
-    padding-bottom: 10px;
+    padding-bottom: 40px;
 }
 
-.btn {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #FF7337;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    border: 1px solid #a3a0a0;
-    width: 422px;
-    /* float: right; */
-}
-
-.btn:hover {
-    background-color: #FFA37C;
-}
 
 .form-group {
     margin-bottom: 15px;
@@ -138,11 +61,27 @@ h2 {
     border-radius: 5px;
 }
 
-.form-group button {
-    /* width: 80%; */
+/* .form-group button {
+    width: 80%;
     width: 400px;
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     flex-direction: column;
 
+} */
+
+.signUpBtn {
+	width: 400px;
+	height: 40px;
+    background-color: #ff7337;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.signUpBtn:hover {
+    background-color: #e55a00;
 }

@@ -73,14 +73,14 @@
 	        	
 	        	if(!userIdExp.test(userId.value.trim())){
 	            	event.preventDefault();
-	            	const msg = "아이디는 소문자로 시작하고, 영어 소문자와 숫자로 4~12자리여야합니다."
+	            	const msg = "아이디를 다시 한 번 확인해주세요."
 	        		showMessage(msg);
 	            	return false;
 	            }
 	        	
 	        	if(!userPwExp.test(userPw.value.trim())){
 	            	event.preventDefault();
-	    			const msg = "비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다."
+	    			const msg = "아이디와 비밀번호를 다시 한 번 확인해주세요."
 	           		showMessage(msg);
 	               	return false;
 	    		}
