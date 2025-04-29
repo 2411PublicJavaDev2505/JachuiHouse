@@ -31,7 +31,7 @@
 	                   <label><input type="checkbox" required>개인정보 수집에 동의합니다. <a href="#">내용보기</a></label>
 	               </div>
 	
-	               <form class="form" name="join" action="/member/signupRealtor" method="POST" autocomplete="off" id="signup_form" enctype="utf-8">
+	               <form class="form" name="join" action="/member/signupRealtor" method="POST" autocomplete="off" id="signup_form" enctype="multipart/form-data">
 						<div class="form-group">
 						     <label for="userId" >아이디: </label>
 						     <div class="input-wrapper">
@@ -52,7 +52,7 @@
 		   
 		                <div class="form-group">
 		                    <label for="password">비밀번호: </label>
-		                    <input type="password" name="userPw" id="userPw" placeholder="비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." required>
+		                    <input type="password" name="userPw" id="userPw" placeholder="영어소문자,대문자,숫자만 입력 가능하고 8~20자리여야 합니다." required>
 		                </div>
 		
 		                <div class="form-group">
@@ -73,18 +73,18 @@
 		                <div class="address-form-group">
 		                    <label class="address" for="userAddress">사무실 주소: </label>
 		                    <div class="signUp-input-area">
-		                        <input type="text" name="businessAddress" placeholder="우편번호" maxlength="6" id="userPostcode" required>
+		                        <input type="text" name="userPostcode" placeholder="우편번호" maxlength="6" id="userPostcode" required>
 		                        <button type="button" onclick="business_execDaumPostcode()">검색</button>
 		                    </div>
 	
 	
 		                    <div class="form-group">
-		                        <input type="text" name="businessAddress" placeholder="도로명/지번 주소" id="userAddress" required>
+		                        <input type="text" name="userAddress" placeholder="도로명/지번 주소" id="userAddress" required>
 		                    </div>
 		
 		
 		                    <div class="form-group">
-		                        <input type="text" name="businessAddress" placeholder="상세 주소" id="userDetailAddress" required>
+		                        <input type="text" name="userDetailAddress" placeholder="상세 주소" id="userDetailAddress" required>
 		                    </div>
 	                	</div>
 	
@@ -101,8 +101,9 @@
 	                <div class="upload-area"> 
 	                <p>중개등록증 또는 사업자등록증을 첨부해주세요</p>
 	                <%-- <button href=..${dm.filePath }">${dm.fileName }>파일첨부</button> --%>
-	                <span><a href="..${dm.filePath }">${dm.fileName }</a></span>
-	                <input type="file" name="dUploadFiles" onchange="readURL(this)"> <br>
+		                	<span><a href="..${dm.filePath }">${dm.fileName }</a></span>
+		                <input type="file" name="mUploadFiles" accept="image/*" onchange="previewImage(event)"> <br>
+		                <img id="productPreview" src="#" alt="미리보기 이미지" class="product-image" />
 	                </div>
 	                
 	
@@ -393,7 +394,19 @@
        			}
         	});
         }); */
-        
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('productPreview');
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "/resources/img/default-image.png";
+            }
+        }
     </script>
 </body>
 </html>

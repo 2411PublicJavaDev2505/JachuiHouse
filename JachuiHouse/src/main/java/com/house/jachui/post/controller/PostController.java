@@ -1,5 +1,6 @@
 package com.house.jachui.post.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ import com.house.jachui.post.controller.dto.PostInsertRequest;
 import com.house.jachui.post.domain.CommentVO;
 import com.house.jachui.post.domain.PostVO;
 import com.house.jachui.post.service.PostService;
-
+import com.house.jachui.trade.model.service.impl.TradeServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/post")
 public class PostController {
-	
+
 	private final PostService pService;
     private final PageUtil page;
     private final FileUtil file;
@@ -232,14 +233,13 @@ public class PostController {
 			List<PostVO> searchList = pService.searchListByKeyword(searchKeyword, category, currentPage);
 			
 			if(searchList == null || searchList.isEmpty()) {
-				model.addAttribute("searchList", null);
+				searchList = new ArrayList<>();
 				model.addAttribute("errorMessage", "검색 결과가 없습니다.");
 			}else {
-				Map<String, Integer> pageInfo = page.generatePageInfo(totalCount, currentPage, 8);
+				Map<String, Integer> pageInfo = page.generatePageInfoTrade(totalCount, currentPage);
 				model.addAttribute("maxPage", pageInfo.get("maxPage"));
 				model.addAttribute("startNavi", pageInfo.get("startNavi"));
 				model.addAttribute("endNavi", pageInfo.get("endNavi"));
-				
 				model.addAttribute("searchList", searchList);
 			}
 			

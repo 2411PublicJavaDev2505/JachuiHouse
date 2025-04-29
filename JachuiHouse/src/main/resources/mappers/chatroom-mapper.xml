@@ -2,26 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.house.jachui.chat.model.mapper.ChatRoomMapper">
 
-    <!-- 채팅방 조회 -->
-    <select id="getChatRoomsByUserId" resultType="com.house.jachui.chat.model.vo.ChatRoom">
-        SELECT * 
-        FROM CHAT_ROOM
-        WHERE USER1_ID = #{userId} OR USER2_ID = #{userId}
-        ORDER BY CREATED_DATE DESC
-    </select>
-
-    <!-- 채팅방 존재 여부 조회 -->
-    <select id="findChatRoom" resultType="Integer">
-        SELECT ROOM_NO 
-        FROM CHAT_ROOM
-        WHERE (USER1_ID = #{user1Id} AND USER2_ID = #{user2Id})
-        OR (USER1_ID = #{user2Id} AND USER2_ID = #{user1Id})
-    </select>
-
-    <!-- 채팅방 생성 -->
-    <insert id="createChatRoom">
-        INSERT INTO CHAT_ROOM (ROOM_NO, USER1_ID, USER2_ID, CREATED_DATE)
-        VALUES (SEQ_CHAT_ROOM.NEXTVAL, #{user1Id}, #{user2Id}, SYSDATE)
+    <insert id="createEstateChatRoom" parameterType="map">
+        INSERT INTO CHAT_ROOM (CHAT_ROOM_NO, ITEM_TYPE, ITEM_NO, USER1_ID, USER2_ID, CREATE_DATE, UPDATE_TIME)
+        VALUES (SEQ_CHAT_ROOM.NEXTVAL, 'estate', #{itemNo}, #{user1Id}, #{user2Id}, SYSDATE, SYSDATE)
     </insert>
 
+    <insert id="createTradeChatRoom" parameterType="map">
+        INSERT INTO CHAT_ROOM (CHAT_ROOM_NO, ITEM_TYPE, ITEM_NO, USER1_ID, USER2_ID, CREATE_DATE, UPDATE_TIME)
+        VALUES (SEQ_CHAT_ROOM.NEXTVAL, 'trade', #{itemNo}, #{user1Id}, #{user2Id}, SYSDATE, SYSDATE)
+    </insert>
+
+    <select id="findChatRoomByUsersAndItem" parameterType="map" resultType="int">
+        SELECT CHAT_ROOM_NO
+        FROM CHAT_ROOM
+        WHERE ((USER1_ID = #{user1Id} AND USER2_ID = #{user2Id}) 
+               OR (USER1_ID = #{user2Id} AND USER2_ID = #{user1Id}))
+        AND ITEM_TYPE = #{itemType}
+        AND ITEM_NO = #{itemNo}
+        ORDER BY CREATE_DATE DESC
+        FETCH FIRST 1 ROW ONLY
+    </select>
+
+    <select id="findChatRoom" parameterType="map" resultType="int">
+        SELECT CHAT_ROOM_NO
+        FROM CHAT_ROOM
+        WHERE (USER1_ID = #{user1Id} AND USER2_ID = #{user2Id})
+           OR (USER1_ID = #{user2Id} AND USER2_ID = #{user1Id})
+        ORDER BY CREATE_DATE DESC
+        FETCH FIRST 1 ROW ONLY
+    </select>
+
+    <select id="findChatRoomByUsers" parameterType="map" resultType="int">
+        SELECT CHAT_ROOM_NO
+        FROM CHAT_ROOM
+        WHERE (USER1_ID = #{user1Id} AND USER2_ID = #{user2Id})
+           OR (USER1_ID = #{user2Id} AND USER2_ID = #{user1Id})
+        ORDER BY CREATE_DATE DESC
+        FETCH FIRST 1 ROW ONLY
+    </select>
+
+    <select id="getChatRoomsByUserId" resultMap="com.house.jachui.chat.model.mapper.ChatMapper.chatResultMap">
+        SELECT DISTINCT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME, c.OTHER_USER_ROLE
+        FROM CHAT c
+        JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
+        WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
+        ORDER BY c.CHAT_TIME DESC
+    </select>
+
+    <select id="countChatRoomByRoomNo" resultType="int">
+        SELECT COUNT(*)
+        FROM CHAT_ROOM
+        WHERE CHAT_ROOM_NO = #{chatRoomNo}
+    </select>
+    
+    <select id="getChatRoomsByMyId" resultMap="com.house.jachui.chat.model.mapper.ChatMapper.chatResultMap">
+        SELECT DISTINCT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME, c.OTHER_USER_ROLE
+        FROM CHAT c
+        JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
+        WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
+        ORDER BY c.CHAT_TIME DESC
+    </select>
 </mapper>

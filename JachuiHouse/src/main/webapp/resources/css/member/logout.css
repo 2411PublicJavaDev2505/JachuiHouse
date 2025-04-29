@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .main-container {
-	height: 780px;
+	height: 820px;
 	display : flex;
 	justify-content: center;
 	align-items: center;

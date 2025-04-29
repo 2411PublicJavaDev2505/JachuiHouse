@@ -92,7 +92,7 @@ public class ServiceImpl implements PostService{
 	}
 	@Override
 	public int getTotalCount(String searchKeyword, String category) {
-		return pMapper.getTotalCount(searchKeyword, category);
+		return pMapper.getTotalSCount(searchKeyword, category);
 	}
 	@Override
 	public List<PostVO> searchListByKeyword(String searchKeyword, String category, int currentPage) {

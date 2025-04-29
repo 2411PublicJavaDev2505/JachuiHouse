@@ -116,10 +116,10 @@ public class TradeController {
             HttpSession session, Model model) {
         try {
             if (uploadFile != null && !uploadFile.getOriginalFilename().isBlank()) {
-                Map<String, String> fileInfo = file.saveFile(uploadFile, session, "board");
-                trade.setTradeFilename(fileInfo.get("bFilename"));
-                trade.setTradeFileRename(fileInfo.get("bFileRename"));
-                trade.setTradeFilepath("/resources/bUploadFiles/" + fileInfo.get("bFileRename"));
+                Map<String, String> fileInfo = file.saveFile(uploadFile, session, "trade");
+                trade.setTradeFilename(fileInfo.get("tFilename"));
+                trade.setTradeFileRename(fileInfo.get("tFileRename"));
+                trade.setTradeFilepath("/resources/tUploadFiles/" + fileInfo.get("tFileRename"));
             }
             int result = tService.insertTrade(trade);
             return "redirect:/trade/list"; 
@@ -166,10 +166,10 @@ public class TradeController {
             HttpSession session, Model model) {
         try {
             if (reloadFile != null && !reloadFile.getOriginalFilename().isBlank()) {
-            	Map<String, String> fileInfo = file.saveFile(reloadFile, session, "board");
-                trade.setTradeFilename(fileInfo.get("bFilename"));
-                trade.setTradeFileRename(fileInfo.get("bFileRename"));
-                trade.setTradeFilepath("/resources/bUploadFiles/" + fileInfo.get("bFileRename"));
+            	Map<String, String> fileInfo = file.saveFile(reloadFile, session, "trade");
+                trade.setTradeFilename(fileInfo.get("tFilename"));
+                trade.setTradeFileRename(fileInfo.get("tFileRename"));
+                trade.setTradeFilepath("/resources/tUploadFiles/" + fileInfo.get("tFileRename"));
             } else {
                 // 기존 파일 유지
                 Trade origin = tService.selectOneByNo(trade.getTradeNo());

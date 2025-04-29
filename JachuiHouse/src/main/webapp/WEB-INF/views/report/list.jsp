@@ -50,9 +50,6 @@
         			>
 
         				<td>${reportVO.reportReason }</td>
-<%-- 	        				<c:if test="${sessionScope.postNo == postVO.postNo}"> --%>
-<%-- 	        					<td>${postVO.postTitle }</td> --%>
-<%-- 	        				</c:if> --%>
         				<td>${reportVO.userId}</td>
         				<td><fmt:formatDate pattern = "yyyy/MM/dd" value="${reportVO.reportDate }"/></td>
         			</tr>

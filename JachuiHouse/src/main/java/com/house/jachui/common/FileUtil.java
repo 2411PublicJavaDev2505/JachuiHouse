@@ -24,6 +24,7 @@ public class FileUtil {
 		result.put("post", "pUploadFiles");
 		result.put("realtor", "rUploadFiles");
 		result.put("trade", "tUploadFiles");
+		result.put("member", "mUploadFiles");
 		String folderName = result.get(type);
 		String prefix = type.toLowerCase().substring(0,1);
 		String fileName = uploadFile.getOriginalFilename();
@@ -36,7 +37,7 @@ public class FileUtil {
 		
 		String folderPath = session.getServletContext().getRealPath("/resources/"+folderName);
 		File dir = new File(folderPath); 
-		if (!dir.exists()) { // 디렉토리(폴더) 없을 시 자동생성
+		if (!dir.exists()) { // 디렉토리없을 시 자동생성
 			dir.mkdirs();
 		}
 		

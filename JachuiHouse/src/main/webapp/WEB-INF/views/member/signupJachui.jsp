@@ -36,7 +36,6 @@
                         <label for="id">아이디: </label>
                         <div class="input-wrapper">
                         	<input class="form-control" type="text" name="userId" id="userId" minlength="4" maxlength="10" placeholder="영어 소문자와 숫자로 4~12자리여야 합니다." autofocus required>
-	                        <label id="label1"></label>
 	                        <button id="overlappedID" type="button">중복확인</button>
                         </div>
                   		<span id="idOlMessage"></span>

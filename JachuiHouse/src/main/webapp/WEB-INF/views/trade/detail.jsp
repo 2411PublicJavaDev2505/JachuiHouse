@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 <!DOCTYPE html>
@@ -16,23 +15,28 @@
         <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
         <main class="detail-container">
-            
-
             <div class="detail-box">
-				<div class="top-info-bar">
-                    <div class="chat-btn-wrapper">
-                        <c:if test="${not empty sessionScope.userId and trade.userId ne sessionScope.userId}">
-                            <a href="/chat/totrade?tradeNo=${tradeNo}">
-                                <button class="chat-btn">1:1 채팅문의</button>
-                            </a>
-                        </c:if>
-                    </div>
+                <div class="top-info-bar">
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.userId and trade.userId ne sessionScope.userId}">
+                            <div class="chat-btn">
+                                <a href="/chat/totrade?tradeNo=${tradeNo}">
+                                    <button>1:1 채팅문의</button>
+                                </a>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="chat-btn" style="visibility: hidden;">
+                                <button>공백</button>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
 
                     <div class="view-count-wrapper">
                         <span class="view-count-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                                 viewBox="0 0 24 24" stroke="#f38b3f" fill="none" stroke-width="2" 
-                                 stroke-linecap="round" stroke-linejoin="round">
+                                viewBox="0 0 24 24" stroke="#f38b3f" fill="none" stroke-width="2" 
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
                                 <circle cx="12" cy="12" r="3"/>
                             </svg>
@@ -66,7 +70,7 @@
                     <div class="info-row image-row">
                         <div class="label">상품 이미지</div>
                         <div class="value image-box">
-                            <img src="${pageContext.request.contextPath}/resources/bUploadFiles/${trade.tradeFileRename}" 
+                            <img src="${pageContext.request.contextPath}/resources/tUploadFiles/${trade.tradeFileRename}" 
                                  alt="${trade.tradeTitle}" class="product-image"/>
                         </div>
                     </div>
@@ -126,6 +130,8 @@
                         }
                     }
                 </script>
+			</div>
+
 
                 <%-- 
                 <div class="info-row">
@@ -140,23 +146,22 @@
                     </div>
                 </div> 
                 --%>
-            </div>
 
-            <!-- 작성자에게만 수정/삭제 버튼 노출 -->
-            <c:if test="${trade.userId eq sessionScope.userId}">
-                <div class="button-container">
-                	<button class="custom-button left-button" onclick="handleList()">목록</button> <!-- 목록 버튼 추가 -->
+            <!-- 목록 버튼은 누구나 보이게 -->
+            <div class="button-container">
+                <button class="custom-button left-button" onclick="handleList()">목록</button>
+                <!-- 작성자에게만 수정/삭제 버튼 노출 -->
+                <c:if test="${trade.userId eq sessionScope.userId}">
                     <button class="custom-button" onclick="handleUpdate()">수정</button>
                     <button class="custom-button" onclick="handleDelete()">삭제</button>
-				</div>
-            </c:if>
+                </c:if>
+            </div>
 
             <script>
-			    function handleList() {
-			        // 목록 페이지로 리디렉션
-			        location.href = "/trade/list";  // trade/list는 목록 페이지 URL에 맞게 수정 필요
-			    }
-			    
+                function handleList() {
+                    location.href = "/trade/list";
+                }
+
                 function handleUpdate() {
                     const tradeNo = "${trade.tradeNo}";
                     location.href = "/trade/update/" + tradeNo;
@@ -171,7 +176,6 @@
                 }
             </script>
         </main>
-
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
 </body>
