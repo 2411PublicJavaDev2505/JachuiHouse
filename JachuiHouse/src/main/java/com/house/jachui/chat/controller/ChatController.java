@@ -39,8 +39,8 @@ public class ChatController {
 
     @GetMapping("/torealtor")
     public String showEtoBChat(Model model,
-                               @RequestParam("estateNo") int estateNo,
-                               HttpSession session) {
+                       @RequestParam("estateNo") int estateNo,
+                       HttpSession session) {
         try {
             String writerId = (String) session.getAttribute("userId"); // 현재 로그인한 사람
             String receiverId = eService.selectIdByEstateNo(estateNo); // 매물 번호로 중개사 ID 조회

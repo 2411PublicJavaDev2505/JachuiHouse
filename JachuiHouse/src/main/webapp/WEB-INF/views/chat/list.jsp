@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="../../resources/css/include/header.css">
 <link rel="stylesheet" href="../../resources/css/include/footer.css">
 <link rel="stylesheet" href="../../resources/css/realtor/chatlist.css">
-
 </head>
+
 <body>
     <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
     <main>
@@ -28,10 +28,10 @@
                     공인중개사 ${member.userName }입니다.
                 </div>
                 <div id="company">
-                   ${member.realtorName}
+                   	${member.realtorName}
                 </div>
                 <div id="phone">
-                     ${member.userPhone }
+                    ${member.userPhone }
                 </div>
                 <div id="email">
                     ${member.userEmail }
