@@ -18,12 +18,14 @@
 		SELECT * FROM CHAT WHERE (WRITER_ID=#{writerId} AND RECEIVER_ID=#{receiverId}) 
 		OR (RECEIVER_ID=#{writerId} AND WRITER_ID=#{receiverId}) ORDER BY CHAT_SEND_DATE
 	</select>
+	
 	<insert id="sendChat">
 	    INSERT INTO CHAT (CHAT_NO, WRITER_ID, CHAT_SEND_DATE, CHAT_CONTENT, 
 	                      CHAT_FILE_NAME, CHAT_FILE_PATH, CHAT_FILE_RENAME, RECEIVER_ID)
 	    VALUES (SEQ_CHAT_NO.NEXTVAL, #{writerId}, SYSTIMESTAMP, #{chatContent},
 	            #{chatFileName}, #{chatFilePath}, #{chatFileRename}, #{receiverId})
 	</insert>
+	
 	<select id="getChatByUserId" resultMap="chatResultMap">
 		SELECT * 
 		    FROM CHAT
@@ -35,10 +37,22 @@
 	<select id="getTotalCount">
 		SELECT COUNT(*) FROM CHAT WHERE RECEIVER_ID=#{receiverId}
 	</select>
+	
 	<select id="selectChatByUserId" resultMap="chatResultMap">
 		SELECT * 
 		    FROM CHAT
 		    WHERE RECEIVER_ID = #{userId}
 		    ORDER BY CHAT_NO DESC
 	</select>
+	
+	<select id="selectNewMessagesAfter" resultType="com.house.jachui.chat.model.vo.Chat">
+        SELECT chat_no, writer_id, receiver_id, chat_content, chat_time
+        FROM chat
+        WHERE ((writer_id = #{writerId} AND receiver_id = #{receiverId})
+            OR (writer_id = #{receiverId} AND receiver_id = #{writerId}))
+        <if test="lastChatNo != null">
+            AND chat_no &gt; #{lastChatNo}
+        </if>
+        ORDER BY chat_no ASC
+    </select>
   </mapper>
