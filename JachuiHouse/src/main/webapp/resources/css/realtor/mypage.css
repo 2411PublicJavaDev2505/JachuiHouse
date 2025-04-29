@@ -83,7 +83,11 @@ main{
     border-radius: 6px;
     background-color: #969696;
 }
-
+#none{
+	text-align:center;
+	font-size: 30px;
+	margin-top: 200px;
+}
 #del{
     height:40px;
     text-align: center;
@@ -102,12 +106,21 @@ main{
     font-size: 28px;
 
 }
+#text-box{
+	width:350px;
+	float:left;
+}
+
+#content-intro a{
+	width:122px;
+	float: right;
+}
 #chatList{
     background-color: #0c8ce9;
     border-radius: 5px;
     width:120px;
     height: 40px;
-    margin-left: 435px;
+    --margin-left: 435px;
     font-size: 20px ;
     color:white;
 }
