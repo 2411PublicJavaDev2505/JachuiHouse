@@ -6,43 +6,6 @@
         INSERT INTO CHAT_ROOM (CHAT_ROOM_NO, ITEM_TYPE, ITEM_NO, USER1_ID, USER2_ID, CREATE_DATE, UPDATE_TIME)
         VALUES (SEQ_CHAT_ROOM.NEXTVAL, 'estate', #{itemNo}, #{user1Id}, #{user2Id}, SYSDATE, SYSDATE)
     </insert>
-    <!-- 채팅방 조회 -->
-    <select id="getChatRoomsByUserId" resultType="com.house.jachui.chat.model.vo.ChatRoom">
-    SELECT chatRoomNo, itemType, itemNo, user1Id, user2Id, createDate, updateTime, opponentId
-    FROM (
-        SELECT 
-            CHAT_ROOM_NO AS chatRoomNo,
-            ITEM_TYPE AS itemType,
-            ITEM_NO AS itemNo,
-            USER1_ID AS user1Id,
-            USER2_ID AS user2Id,
-            CREATE_DATE AS createDate,
-            UPDATE_TIME AS updateTime,
-            CASE 
-                WHEN USER1_ID = #{userId} THEN USER2_ID
-                ELSE USER1_ID
-            END AS opponentId,
-            ROW_NUMBER() OVER (
-                PARTITION BY 
-                    CASE 
-                        WHEN USER1_ID = #{userId} THEN USER2_ID
-                        ELSE USER1_ID
-                    END
-                ORDER BY UPDATE_TIME DESC
-            ) AS rn
-        FROM CHAT_ROOM
-        WHERE USER1_ID = #{userId} OR USER2_ID = #{userId}
-    )
-    WHERE rn = 1
-    ORDER BY updateTime DESC
-</select>
-
-	
-    <!-- 채팅방 생성 -->
-    <insert id="createChatRoom">
-        INSERT INTO CHAT_ROOM (ROOM_NO, USER1_ID, USER2_ID, CREATED_DATE)
-        VALUES (SEQ_CHAT_ROOM.NEXTVAL, #{user1Id}, #{user2Id}, SYSDATE)
-    </insert>
 
     <insert id="createTradeChatRoom" parameterType="map">
         INSERT INTO CHAT_ROOM (CHAT_ROOM_NO, ITEM_TYPE, ITEM_NO, USER1_ID, USER2_ID, CREATE_DATE, UPDATE_TIME)
@@ -78,7 +41,7 @@
         FETCH FIRST 1 ROW ONLY
     </select>
 
-    <select id="getChatRoomsByUserId" resultMap="com.house.jachui.chat.model.mapper.ChatMapper">
+    <select id="getChatRoomsByUserId" resultMap="com.house.jachui.chat.model.mapper.ChatMapper.chatResultMap">
         SELECT DISTINCT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME, c.OTHER_USER_ROLE
         FROM CHAT c
         JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
@@ -89,6 +52,14 @@
     <select id="countChatRoomByRoomNo" resultType="int">
         SELECT COUNT(*)
         FROM CHAT_ROOM
-        WHERE CHAT_ROOM_NO = #{roomNo}
+        WHERE CHAT_ROOM_NO = #{chatRoomNo}
+    </select>
+    
+    <select id="getChatRoomsByMyId" resultMap="com.house.jachui.chat.model.mapper.ChatMapper.chatResultMap">
+        SELECT DISTINCT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME, c.OTHER_USER_ROLE
+        FROM CHAT c
+        JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
+        WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
+        ORDER BY c.CHAT_TIME DESC
     </select>
 </mapper>

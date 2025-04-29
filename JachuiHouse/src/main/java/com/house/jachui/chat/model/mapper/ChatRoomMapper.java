@@ -12,7 +12,7 @@ import com.house.jachui.chat.model.vo.ChatRoom;
 @Mapper
 public interface ChatRoomMapper {
 
-	List<ChatRoom> getChatRoomsByUserId(String userId);
+	List<Chat> getChatRoomsByUserId(String userId);
 	
 	Integer findChatRoom(Map<String, String> map);
 
@@ -27,5 +27,7 @@ public interface ChatRoomMapper {
 	Integer findChatRoomByUsers(Map<String, String> params);
 
 	Integer countChatRoomByRoomNo(int roomNo);
+
+	List<ChatRoom> getChatRoomsByMyId(String userId);
 
 }

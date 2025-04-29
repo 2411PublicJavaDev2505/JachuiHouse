@@ -12,5 +12,5 @@ public class SendRequest {
 	private String writerId;
     private String receiverId;
     private String message;
-    private int roomNo;
+    private int chatRoomNo;
 }

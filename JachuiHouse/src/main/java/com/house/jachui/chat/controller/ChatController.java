@@ -17,7 +17,6 @@ import com.house.jachui.chat.controller.dto.SendRequest;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
-import com.house.jachui.chat.model.vo.ChatRoom;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.member.model.service.MemberService;
@@ -55,7 +54,7 @@ public class ChatController {
                 return "common/error";
             }
 
-            int roomNo = chatRoomService.createEstateChatRoom(user1Id, user2Id, estateNo);
+            int chatRoomNo = chatRoomService.createEstateChatRoom(user1Id, user2Id, estateNo);
 
             Estate estate = eService.selectOneByNo(estateNo);
             if (estate == null) {
@@ -63,7 +62,7 @@ public class ChatController {
                 return "common/error";
             }
 
-            String redirectUrl = "redirect:/chat/room?roomNo=" + roomNo + "&itemname=estate&itemNo=" + estateNo + "&user1Id=" + user1Id + "&user2Id=" + user2Id;
+            String redirectUrl = "redirect:/chat/room?chatRoomNo=" + chatRoomNo + "&itemname=estate&itemNo=" + estateNo + "&user1Id=" + user1Id + "&user2Id=" + user2Id;
             System.out.println("Redirecting to: " + redirectUrl);
             return redirectUrl;
         } catch (Exception e) {
@@ -89,7 +88,7 @@ public class ChatController {
                 return "common/error";
             }
 
-            int roomNo = chatRoomService.createTradeChatRoom(user1Id, user2Id, tradeNo);
+            int chatRoomNo = chatRoomService.createTradeChatRoom(user1Id, user2Id, tradeNo);
 
             Trade trade = tService.selectOneByNo(tradeNo);
             if (trade == null) {
@@ -97,7 +96,7 @@ public class ChatController {
                 return "common/error";
             }
 
-            String redirectUrl = "redirect:/chat/room?roomNo=" + roomNo + "&itemname=trade&itemNo=" + tradeNo + "&user1Id=" + user1Id + "&user2Id=" + user2Id;
+            String redirectUrl = "redirect:/chat/room?chatRoomNo=" + chatRoomNo + "&itemname=trade&itemNo=" + tradeNo + "&user1Id=" + user1Id + "&user2Id=" + user2Id;
             System.out.println("Redirecting to: " + redirectUrl);
             return redirectUrl;
         } catch (Exception e) {
@@ -109,20 +108,20 @@ public class ChatController {
 
     @GetMapping("/room")
     public String showChatRoom(Model model,
-                               @RequestParam("roomNo") int roomNo,
+                               @RequestParam("chatRoomNo") int chatRoomNo,
                                @RequestParam("user1Id") String user1Id,
                                @RequestParam("user2Id") String user2Id,
                                @RequestParam("itemname") String itemName,
                                @RequestParam("itemNo") int itemNo,
                                HttpSession session) {
-        System.out.println("Received request: roomNo=" + roomNo + ", user1Id=" + user1Id + ", user2Id=" + user2Id + ", itemName=" + itemName + ", itemNo=" + itemNo);
+        System.out.println("Received request: chatRoomNo=" + chatRoomNo + ", user1Id=" + user1Id + ", user2Id=" + user2Id + ", itemName=" + itemName + ", itemNo=" + itemNo);
 
-        if (!chatRoomService.checkChatRoomExists(roomNo)) {
-            model.addAttribute("errorMessage", "채팅방이 존재하지 않습니다: CHAT_ROOM_NO=" + roomNo);
+        if (!chatRoomService.checkChatRoomExists(chatRoomNo)) {
+            model.addAttribute("errorMessage", "채팅방이 존재하지 않습니다: CHAT_ROOM_NO=" + chatRoomNo);
             return "common/error";
         }
 
-        List<Chat> chatList = chatService.getMessagesByRoom(roomNo);
+        List<Chat> chatList = chatService.getMessagesByRoom(chatRoomNo);
 
         Member receiver = memberService.selectMemberById(user2Id);
         if (receiver == null) {
@@ -146,7 +145,7 @@ public class ChatController {
             model.addAttribute("item", trade);
         }
 
-        model.addAttribute("roomNo", roomNo);
+        model.addAttribute("chatRoomNo", chatRoomNo);
         model.addAttribute("chatList", chatList);
         model.addAttribute("writerId", user1Id);
         model.addAttribute("receiverId", user2Id);
@@ -164,16 +163,16 @@ public class ChatController {
         
         System.out.println("Received SendRequest: " + sendRequest);
         
-        if (sendRequest.getWriterId() == null || sendRequest.getReceiverId() == null || sendRequest.getMessage() == null || sendRequest.getRoomNo() == 0) {
+        if (sendRequest.getWriterId() == null || sendRequest.getReceiverId() == null || sendRequest.getMessage() == null || sendRequest.getChatRoomNo() == 0) {
             response.put("status", "error");
-            response.put("message", "잘못된 요청: writerId, receiverId, roomNo, message는 필수입니다.");
+            response.put("message", "잘못된 요청: writerId, receiverId, chatRoomNo, message는 필수입니다.");
             return response;
         }
 
         try {
-            if (!chatRoomService.checkChatRoomExists(sendRequest.getRoomNo())) {
+            if (!chatRoomService.checkChatRoomExists(sendRequest.getChatRoomNo())) {
                 response.put("status", "error");
-                response.put("message", "채팅방이 존재하지 않습니다: CHAT_ROOM_NO=" + sendRequest.getRoomNo());
+                response.put("message", "채팅방이 존재하지 않습니다: CHAT_ROOM_NO=" + sendRequest.getChatRoomNo());
                 return response;
             }
             
@@ -200,7 +199,7 @@ public class ChatController {
             return "common/error";
         }
         
-        List<ChatRoom> chatRoomList = chatRoomService.getChatRoomsByUserId(userId);
+        List<Chat> chatRoomList = chatRoomService.getChatRoomsByUserId(userId);
         model.addAttribute("chatRoomList", chatRoomList);
         return "chat/list";
     }

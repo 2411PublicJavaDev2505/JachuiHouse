@@ -11,7 +11,7 @@ public interface ChatRoomService {
 	Integer findChatRoom(Map<String, String> map);
 
 
-	List<ChatRoom> getChatRoomsByUserId(String userId);
+	List<Chat> getChatRoomsByUserId(String userId);
 
 	int createEstateChatRoom(String user1Id, String user2Id, int estateNo);
 
@@ -20,5 +20,7 @@ public interface ChatRoomService {
 	Integer findChatRoomByUsers(String writerId, String receiverId);
 
 	boolean checkChatRoomExists(int roomNo);
+
+	List<ChatRoom> getChatRoomsByMyId(String userId);
 
 }

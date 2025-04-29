@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.chat.controller.dto.SendRequest;
 import com.house.jachui.chat.model.vo.Chat;
