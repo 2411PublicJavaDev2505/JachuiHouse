@@ -38,11 +38,6 @@ public class ChatServiceImpl implements ChatService {
 		return cMapper.sendChat(chat);
 	}
 
-	@Override
-	public List<Chat> selectNewMessages(Map<String, Object> map) {
-		return cMapper.selectNewMessages(map);
-	}
-		
 	public List<Chat> getChatByUserId(String userId) {
 		return cMapper.getChatByUserId(userId);
 	}
@@ -58,6 +53,11 @@ public class ChatServiceImpl implements ChatService {
 		int offset = (currentPage-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return cMapper.selectChatByUserId(userId, rowBounds);
+	}
+
+	@Override
+	public List<Chat> selectNewMessagesAfter(Map<String, Object> map) {
+		return cMapper.selectNewMessagesAfter(map);
 	}
 
 }

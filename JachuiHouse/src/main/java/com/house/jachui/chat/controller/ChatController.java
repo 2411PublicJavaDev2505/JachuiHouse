@@ -100,26 +100,22 @@ public class ChatController {
 
     // 메시지 전송 처리
     @PostMapping("/send")
-    public String sendChat(@ModelAttribute SendRequest chat,
-                           HttpSession session,
-                           @RequestParam(value = "images", required = false)
-                           List<MultipartFile> images,
-                           Model model) {
-    	System.out.println("DEBUG - writerId: " + chat.getWriterId());
-        System.out.println("DEBUG - receiverId: " + chat.getReceiverId());
-        System.out.println("DEBUG - chatContent: " + chat.getChatContent());
+    @ResponseBody
+    public Map<String, Object> sendChat(@ModelAttribute SendRequest chat,
+                                        HttpSession session,
+                                        @RequestParam(value = "images", required = false)
+                                        List<MultipartFile> images) {
+        Map<String, Object> response = new HashMap<>();
         int result = cService.sendChat(chat, images);
         if (result > 0) {
-            return "redirect:/chat/chat?writerId=" + chat.getWriterId() + "&receiverId=" + chat.getReceiverId();
+            response.put("status", "success");
         } else {
-            model.addAttribute("errorMessage", "메시지 전송 실패");
-            return "common/error";
+            response.put("status", "error");
+            response.put("message", "메시지 전송 실패");
         }
+        return response;
     }
-    @GetMapping("/list")
-    public String showChatList() {
-    	return "chat/list";
-    }
+
     //공인중개사 채팅 리스트
     @GetMapping("/list")
     public String showChatList(HttpSession session, Model model
@@ -153,18 +149,20 @@ public class ChatController {
     	}
     	return "common/error";
     }
+    
     @GetMapping("/fetch")
     @ResponseBody
     public List<Chat> fetchNewMessages(
         @RequestParam("writerId") String writerId,
         @RequestParam("receiverId") String receiverId,
-        @RequestParam("lastChatId") int lastChatId) {
+        @RequestParam(value = "lastChatNo", required = false) Integer lastChatNo) {
         
         Map<String, Object> map = new HashMap<>();
         map.put("writerId", writerId);
         map.put("receiverId", receiverId);
-        map.put("lastChatId", lastChatId);
+        map.put("lastChatNo", lastChatNo);
 
-        return cService.selectNewMessages(map);
+        return cService.selectNewMessagesAfter(map);
     }
+
 }
