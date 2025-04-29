@@ -115,40 +115,6 @@ public class ChatController {
         }
         return response;
     }
-
-    //공인중개사 채팅 리스트
-    @GetMapping("/list")
-    public String showChatList(HttpSession session, Model model
-    		,@RequestParam(value = "receiverId", required = false) String receiverId
-			,@RequestParam(value="page", defaultValue="1") int currentPage) {
-    	String userRole = (String)session.getAttribute("userRole");
-    	if("R".equals(userRole)) {
-    		String userId = (String)session.getAttribute("userId");
-    		String receiverName = mService.selectNameById(receiverId);
-    		Member member = rService.selectRealtorById(userId);
-    		int totalCount = cService.getTotalCount(userId);
-    		Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
-    		model.addAttribute("maxPage", pageInfo.get("maxPage"));
-			model.addAttribute("startNavi", pageInfo.get("startNavi"));
-			model.addAttribute("endNavi", pageInfo.get("endNavi"));
-    		List<Chat> cList = cService.selectChatByUserId(userId, currentPage, 3);
-    		if(!cList.isEmpty()) {
-			    Collections.sort(cList, (c1, c2) -> Integer.compare(c2.getChatNo(), c1.getChatNo())); // 내림차순 정렬
-			    Chat latestChat = cList.get(0);  // 최신 채팅
-			    model.addAttribute("latestChat", latestChat); // 최신 채팅 객체를 JSP에 전달
-    		}
-    		model.addAttribute("cList", cList);
-    		model.addAttribute("maxPage", pageInfo.get("maxPage"));
-			model.addAttribute("startNavi", pageInfo.get("startNavi"));
-			model.addAttribute("endNavi", pageInfo.get("endNavi"));
-			model.addAttribute("member", member);
-			if(member != null) {
-				model.addAttribute("member", member);
-				return "chat/list";
-			}
-    	}
-    	return "common/error";
-    }
     
     @GetMapping("/fetch")
     @ResponseBody
