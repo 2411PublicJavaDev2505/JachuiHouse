@@ -41,4 +41,12 @@
 		    WHERE RECEIVER_ID = #{userId}
 		    ORDER BY CHAT_NO DESC
 	</select>
+	<select id="selectLastChatById" resultMap="chatResultMap">
+		SELECT CHAT_CONTENT
+	    FROM CHAT
+	    WHERE 
+	        (WRITER_ID = #{userId} OR RECEIVER_ID = #{userId})
+	    ORDER BY CHAT_TIME DESC
+	    FETCH FIRST 1 ROWS ONLY
+	</select>
   </mapper>

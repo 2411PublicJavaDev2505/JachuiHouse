@@ -64,7 +64,7 @@
 					</c:if>
                         <div id="nickname">
                             <div id="nicknameText">
-                            <c:forEach var="chat" items="${cList}">
+                            <c:forEach var="chat" items="${cList}" varStatus="i">
 					        <a href="${pageContext.request.contextPath}/chat/chat?writerId=${chat.receiverId}&receiverId=${chat.writerId}">
 					            <!-- 마지막으로 보낸 메시지의 writerId 또는 receiverId를 출력 -->
 					            <b>${chat.writerId}</b>
@@ -77,7 +77,7 @@
                             17:40
                         </div>
                         <div id="chat">
-                            <b>방이 너무 비싸요</b>
+                            <b>${chat.chatContent}</b>
                         </div>
                     </div>
                     <div id="list">

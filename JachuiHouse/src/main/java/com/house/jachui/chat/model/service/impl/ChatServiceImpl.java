@@ -60,4 +60,9 @@ public class ChatServiceImpl implements ChatService {
 		return cMapper.selectChatByUserId(userId, rowBounds);
 	}
 
+	@Override
+	public String selectLastChatById(String receiverId) {
+		return cMapper.selectLastChatById(receiverId);
+	}
+
 }

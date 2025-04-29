@@ -116,10 +116,7 @@ public class ChatController {
             return "common/error";
         }
     }
-    @GetMapping("/list")
-    public String showChatList() {
-    	return "chat/list";
-    }
+
     //공인중개사 채팅 리스트
     @GetMapping("/list")
     public String showChatList(HttpSession session, Model model
@@ -129,6 +126,7 @@ public class ChatController {
     	if("R".equals(userRole)) {
     		String userId = (String)session.getAttribute("userId");
     		String receiverName = mService.selectNameById(receiverId);
+    		String lastChat = cService.selectLastChatById(userId);
     		Member member = rService.selectRealtorById(userId);
     		int totalCount = cService.getTotalCount(userId);
     		Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
@@ -142,6 +140,7 @@ public class ChatController {
 			    model.addAttribute("latestChat", latestChat); // 최신 채팅 객체를 JSP에 전달
     		}
     		model.addAttribute("cList", cList);
+    		model.addAttribute("lastChat", lastChat);
     		model.addAttribute("maxPage", pageInfo.get("maxPage"));
 			model.addAttribute("startNavi", pageInfo.get("startNavi"));
 			model.addAttribute("endNavi", pageInfo.get("endNavi"));

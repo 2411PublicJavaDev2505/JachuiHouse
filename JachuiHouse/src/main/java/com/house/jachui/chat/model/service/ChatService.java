@@ -23,4 +23,6 @@ public interface ChatService {
 
 	List<Chat> selectChatByUserId(String userId, int currentPage, int i);
 
+	String selectLastChatById(String receiverId);
+
 }
