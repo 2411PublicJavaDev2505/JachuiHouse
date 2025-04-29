@@ -380,7 +380,7 @@ public class MemberController {
 	    
 	    if (!mService.checkPw(userId, userPw)) {
 	        redirectAttributes.addFlashAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
-	        return "redirect:/member/delete";  // 탈퇴 폼 페이지로 다시 리다이렉트
+	        return "redirect:/member/delete";  
 	    }
 	    
 	    int result = mService.deleteMember(userId);
@@ -389,7 +389,7 @@ public class MemberController {
 	        return "redirect:/";
 	    } else {
 	        redirectAttributes.addFlashAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
-	        return "redirect:/member/delete"; // 실패 시에도 탈퇴 폼으로
+	        return "redirect:/member/delete"; 
 	    }
 	}
 	// 예산계산기
