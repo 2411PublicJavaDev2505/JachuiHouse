@@ -42,37 +42,18 @@
 					    <h3>내 채팅</h3>
 					</div>
 					<div class="chat-content">
-				    <c:if test="${empty cList}">
-				        <p>채팅내역이 없습니다.</p>
-				    </c:if>
-				
-				    <!-- 이미 출력된 writerId들을 추적할 변수 -->
-				    <c:set var="printedWriterIds" value=""/>
-				
-				    <c:forEach var="chat" items="${cList}">
-				        <c:set var="otherUserId" value="${chat.writerId eq sessionScope.userId ? chat.receiverId : chat.writerId}"/>
-				
-				        <!-- writerId가 이미 출력된 경우에는 건너뛰기 -->
-				        <c:if test="${empty printedWriterIds || !empty printedWriterIds && printedWriterIds.indexOf(chat.writerId) == -1}">
-				            <!-- 출력된 writerId를 추가 -->
-				            <c:set var="printedWriterIds" value="${printedWriterIds},${chat.writerId}"/>
-				
-				            <a href="${pageContext.request.contextPath}/chat/chat?writerId=${chat.receiverId}&receiverId=${chat.writerId}">
-				                <c:choose>
-				                    <c:when test="${chat.otherUserRole == 'M'}">
-				                        <p>자취생 ${chat.writerId}님과의 대화</p>
-				                    </c:when>
-				                    <c:when test="${chat.otherUserRole == 'R'}">
-				                        <p>공인중개사 ${chat.writerId}님과의 대화</p>
-				                    </c:when>
-				                    <c:otherwise>
-				                        <p>${chat.writerId}님과의 대화</p>
-				                    </c:otherwise>
-				                </c:choose>
-				            </a>
-				        </c:if>
-				    </c:forEach>
-				</div>
+					    <c:if test="${empty cList}">
+					        <p>채팅내역이 없습니다.</p>
+					    </c:if>
+					
+					    <c:forEach var="chatRoom" items="${cList}">
+					        <c:set var="otherUserId" value="${chatRoom.user1Id == sessionScope.userId ? chatRoom.user2Id : chatRoom.user1Id}" />
+					
+					        <a href="${pageContext.request.contextPath}/chat/chat?writerId=${sessionScope.userId}&receiverId=${otherUserId}">
+					            <p>${otherUserId}님과의 대화</p>
+					        </a>
+					    </c:forEach>
+					</div>
 	                <div class="my-notice">
 	                    <h3>내가 쓴 글</h3>
 	                </div>

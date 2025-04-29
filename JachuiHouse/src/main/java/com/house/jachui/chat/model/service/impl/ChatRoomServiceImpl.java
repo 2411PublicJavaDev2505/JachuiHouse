@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.house.jachui.chat.model.mapper.ChatRoomMapper;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.vo.Chat;
+import com.house.jachui.chat.model.vo.ChatRoom;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +31,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     }
 
     @Override
-    public List<Chat> getChatRoomsByUserId(String userId) {
+    public List<ChatRoom> getChatRoomsByUserId(String userId) {
         // chatRoomMapper에서 사용자의 채팅방 목록을 조회하는 쿼리 호출
         return chatRoomMapper.getChatRoomsByUserId(userId);
     }

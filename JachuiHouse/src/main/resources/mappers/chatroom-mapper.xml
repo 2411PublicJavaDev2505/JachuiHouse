@@ -4,11 +4,34 @@
 
     <!-- 채팅방 조회 -->
     <select id="getChatRoomsByUserId" resultType="com.house.jachui.chat.model.vo.ChatRoom">
-        SELECT * 
+    SELECT chatRoomNo, itemType, itemNo, user1Id, user2Id, createDate, updateTime, opponentId
+    FROM (
+        SELECT 
+            CHAT_ROOM_NO AS chatRoomNo,
+            ITEM_TYPE AS itemType,
+            ITEM_NO AS itemNo,
+            USER1_ID AS user1Id,
+            USER2_ID AS user2Id,
+            CREATE_DATE AS createDate,
+            UPDATE_TIME AS updateTime,
+            CASE 
+                WHEN USER1_ID = #{userId} THEN USER2_ID
+                ELSE USER1_ID
+            END AS opponentId,
+            ROW_NUMBER() OVER (
+                PARTITION BY 
+                    CASE 
+                        WHEN USER1_ID = #{userId} THEN USER2_ID
+                        ELSE USER1_ID
+                    END
+                ORDER BY UPDATE_TIME DESC
+            ) AS rn
         FROM CHAT_ROOM
         WHERE USER1_ID = #{userId} OR USER2_ID = #{userId}
-        ORDER BY CREATED_DATE DESC
-    </select>
+    )
+    WHERE rn = 1
+    ORDER BY updateTime DESC
+</select>
 
     <!-- 채팅방 존재 여부 조회 -->
     <select id="findChatRoom" resultType="Integer">
@@ -17,7 +40,7 @@
         WHERE (USER1_ID = #{user1Id} AND USER2_ID = #{user2Id})
         OR (USER1_ID = #{user2Id} AND USER2_ID = #{user1Id})
     </select>
-
+	
     <!-- 채팅방 생성 -->
     <insert id="createChatRoom">
         INSERT INTO CHAT_ROOM (ROOM_NO, USER1_ID, USER2_ID, CREATED_DATE)

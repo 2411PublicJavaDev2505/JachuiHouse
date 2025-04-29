@@ -276,8 +276,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	// 마이페이지에서 채팅내역 공인중개사인지 자취생인지 구분
 	@Override
-	public String getUserRoleById(String otherUserId) {
-		return mMapper.getUserRoleById(otherUserId);
+	public String getChatByUserId(String otherUserId) {
+		return mMapper.getChatByUserId(otherUserId);
 	}
 
 

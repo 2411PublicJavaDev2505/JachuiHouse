@@ -69,9 +69,10 @@ section {
     background-color: white;
 }
 .main-hello {
-    display: flex;
-    align-items: center;
+    text-align: center;
+    min-height: 20px;
 }
+
 .main-menu a{
     text-decoration: none;
 }

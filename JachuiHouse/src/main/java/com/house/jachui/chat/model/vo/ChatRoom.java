@@ -16,12 +16,12 @@ import lombok.ToString;
 @AllArgsConstructor
 public class ChatRoom {
 	
-	private int roomNo;
+	private int chatRoomNo;
 	private String itemType;
 	private int itemNo;
 	private String user1Id;
 	private String user2Id;
 	private Date createDate;
 	private Timestamp updateTime;
-
+	private int rn;
 }

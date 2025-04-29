@@ -124,9 +124,9 @@ public class ChatController {
         String userId = (String) session.getAttribute("userId");
         
         // 사용자에 해당하는 채팅방 목록 조회
-        List<Chat> chatRoomList = chatRoomService.getChatRoomsByUserId(userId);
+//        List<Chat> chatRoomList = chatRoomService.getChatRoomsByUserId(userId);
         
-        model.addAttribute("chatRoomList", chatRoomList);
+//        model.addAttribute("chatRoomList", chatRoomList);
         return "chat/list";
 
     }
