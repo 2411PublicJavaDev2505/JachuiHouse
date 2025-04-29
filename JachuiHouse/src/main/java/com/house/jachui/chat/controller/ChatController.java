@@ -1,6 +1,5 @@
 package com.house.jachui.chat.controller;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,18 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.chat.controller.dto.SendRequest;
+import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
-import com.house.jachui.common.PageUtil;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
-import com.house.jachui.post.service.PostService;
 import com.house.jachui.trade.model.service.TradeService;
-import com.house.jachui.realtor.model.service.RealtorService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -34,23 +30,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/chat")
 public class ChatController {
-	
-	private final MemberService mService;
-	private final EstateService eService;
-	private final TradeService tService;
-	private final ChatService cService;
-	private final RealtorService rService;
-	private final PageUtil pageUtil;
-	
-	@GetMapping("/torealtor")
+
+    private final ChatRoomService chatRoomService;
+    private final ChatService chatService;
+    private final MemberService memberService;
+    private final EstateService eService;
+    private final TradeService tService;
+
+    @GetMapping("/torealtor")
     public String showEtoBChat(Model model,
                                @RequestParam("estateNo") int estateNo,
                                HttpSession session) {
         try {
             String writerId = (String) session.getAttribute("userId"); // 현재 로그인한 사람
             String receiverId = eService.selectIdByEstateNo(estateNo); // 매물 번호로 중개사 ID 조회
-            System.out.println(writerId);
-            System.out.println(receiverId);
             return "redirect:/chat/chat?writerId=" + writerId + "&receiverId=" + receiverId;
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,42 +51,53 @@ public class ChatController {
             return "common/error";
         }
     }
-	
-	@GetMapping("/totrade")
-	public String showTtoTChat(Model model,
-	                           @RequestParam("tradeNo") int tradeNo,
-	                           HttpSession session) {
-	    try {
-	        String writerId = (String) session.getAttribute("userId"); // 현재 로그인한 사람
-	        String receiverId = tService.selectIdByTradeNo(tradeNo); // 상품 번호로 판매자 ID 조회
-	        System.out.println(writerId);
-	        System.out.println(receiverId);
-	        return "redirect:/chat/chat?writerId=" + writerId + "&receiverId=" + receiverId;
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        model.addAttribute("errorMessage", e.getMessage());
-	        return "common/error";
-	    }
-	}
-	
-	
 
-    // 실제 채팅방으로 진입
-    @GetMapping("/chat")
+    // 중고 거래의 채팅방 열기
+    @GetMapping("/totrade")
+    public String showTtoTChat(Model model,
+                               @RequestParam("tradeNo") int tradeNo,
+                               HttpSession session) {
+        try {
+            String writerId = (String) session.getAttribute("userId"); // 현재 로그인한 사람
+            String receiverId = tService.selectIdByTradeNo(tradeNo); // 상품 번호로 판매자 ID 조회
+            return "redirect:/chat/chat?writerId=" + writerId + "&receiverId=" + receiverId;
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", e.getMessage());
+            return "common/error";
+        }
+    }
+    
+    
+    // 채팅방 입장
+    @GetMapping("/room")
     public String showChatRoom(Model model,
-                                @RequestParam("writerId") String writerId,
-                                @RequestParam("receiverId") String receiverId) {
+                               @RequestParam("writerId") String writerId,
+                               @RequestParam("receiverId") String receiverId) {
+        // 채팅방 조회
         Map<String, String> map = new HashMap<>();
         map.put("writerId", writerId);
         map.put("receiverId", receiverId);
 
-        List<Chat> cList = cService.selectList(map);
-        String receiverName = mService.selectNameById(receiverId);
+        Integer roomNo = chatRoomService.findChatRoom(map);
 
-        model.addAttribute("cList", cList);
+        if (roomNo == null) {
+            // 채팅방이 없다면 새로 생성
+            roomNo = chatRoomService.createChatRoom(map);
+        }
+
+        // 채팅방의 메시지 목록 조회
+        List<Chat> chatList = chatService.getMessagesByRoom(roomNo);
+
+        // 수신자 정보 조회
+        Member receiver = memberService.selectMemberById(receiverId);
+        
+        // 모델에 채팅방 및 메시지 정보 설정
+        model.addAttribute("roomNo", roomNo);
+        model.addAttribute("chatList", chatList);
         model.addAttribute("writerId", writerId);
         model.addAttribute("receiverId", receiverId);
-        model.addAttribute("receiverName", receiverName);
+        model.addAttribute("receiverName", receiver.getUserName());
 
         return "chat/main";
     }
@@ -101,12 +105,10 @@ public class ChatController {
     // 메시지 전송 처리
     @PostMapping("/send")
     @ResponseBody
-    public Map<String, Object> sendChat(@ModelAttribute SendRequest chat,
-                                        HttpSession session,
-                                        @RequestParam(value = "images", required = false)
-                                        List<MultipartFile> images) {
+    public Map<String, Object> sendChatMessage(@ModelAttribute SendRequest sendRequest) {
         Map<String, Object> response = new HashMap<>();
-        int result = cService.sendChat(chat, images);
+        
+        int result = chatService.sendChatMessage(sendRequest);
         if (result > 0) {
             response.put("status", "success");
         } else {
@@ -116,53 +118,29 @@ public class ChatController {
         return response;
     }
 
-    //공인중개사 채팅 리스트
+    // 사용자별 채팅방 목록 조회
     @GetMapping("/list")
-    public String showChatList(HttpSession session, Model model
-    		,@RequestParam(value = "receiverId", required = false) String receiverId
-			,@RequestParam(value="page", defaultValue="1") int currentPage) {
-    	String userRole = (String)session.getAttribute("userRole");
-    	if("R".equals(userRole)) {
-    		String userId = (String)session.getAttribute("userId");
-    		String receiverName = mService.selectNameById(receiverId);
-    		Member member = rService.selectRealtorById(userId);
-    		int totalCount = cService.getTotalCount(userId);
-    		Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
-    		model.addAttribute("maxPage", pageInfo.get("maxPage"));
-			model.addAttribute("startNavi", pageInfo.get("startNavi"));
-			model.addAttribute("endNavi", pageInfo.get("endNavi"));
-    		List<Chat> cList = cService.selectChatByUserId(userId, currentPage, 3);
-    		if(!cList.isEmpty()) {
-			    Collections.sort(cList, (c1, c2) -> Integer.compare(c2.getChatNo(), c1.getChatNo())); // 내림차순 정렬
-			    Chat latestChat = cList.get(0);  // 최신 채팅
-			    model.addAttribute("latestChat", latestChat); // 최신 채팅 객체를 JSP에 전달
-    		}
-    		model.addAttribute("cList", cList);
-    		model.addAttribute("maxPage", pageInfo.get("maxPage"));
-			model.addAttribute("startNavi", pageInfo.get("startNavi"));
-			model.addAttribute("endNavi", pageInfo.get("endNavi"));
-			model.addAttribute("member", member);
-			if(member != null) {
-				model.addAttribute("member", member);
-				return "chat/list";
-			}
-    	}
-    	return "common/error";
+    public String showChatRoomList(HttpSession session, Model model) {
+        String userId = (String) session.getAttribute("userId");
+        
+        // 사용자에 해당하는 채팅방 목록 조회
+        List<Chat> chatRoomList = chatRoomService.getChatRoomsByUserId(userId);
+        
+        model.addAttribute("chatRoomList", chatRoomList);
+        return "chat/list";
     }
-    
+
+    // 새로운 메시지 fetch
     @GetMapping("/fetch")
     @ResponseBody
-    public List<Chat> fetchNewMessages(
-        @RequestParam("writerId") String writerId,
-        @RequestParam("receiverId") String receiverId,
-        @RequestParam(value = "lastChatNo", required = false) Integer lastChatNo) {
-        
+    public List<Chat> fetchNewMessages(@RequestParam("writerId") String writerId,
+                                       @RequestParam("receiverId") String receiverId,
+                                       @RequestParam("lastChatNo") Integer lastChatNo) {
         Map<String, Object> map = new HashMap<>();
         map.put("writerId", writerId);
         map.put("receiverId", receiverId);
         map.put("lastChatNo", lastChatNo);
-
-        return cService.selectNewMessagesAfter(map);
+        
+        return chatService.fetchNewMessages(map);
     }
-
 }

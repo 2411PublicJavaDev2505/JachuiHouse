@@ -15,13 +15,11 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Chat {
 	private int chatNo;
+	private int roomNo;
 	private String writerId;
-	private Date chatSendDate;
-	private String chatContent;
-	private String chatFileName;
-	private String chatFilePath;
-	private String chatFileRename;
-	private String receiverId;
+	private String message;
+	private String isRead;
+	private Date createDate;
 	private Timestamp chatTime;
 	private String otherUserRole;
 }

@@ -3,61 +3,42 @@ package com.house.jachui.chat.model.service.impl;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.house.jachui.chat.controller.dto.SendRequest;
 import com.house.jachui.chat.model.mapper.ChatMapper;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
 
-import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 @Service
-@RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
-	
-	private final ChatMapper cMapper;
-	
-//	@Autowired
-//	public ChatServiceImpl(ChatMapper cMapper, SqlSession session) {
-//		this.cMapper = cMapper;
-//		this.session = session;
-//	}
 
-	@Override
-	public List<Chat> selectList(Map<String, String> map) {
-		return cMapper.selectList(map);
-	}
+    private final ChatMapper chatMapper;
 
-	@Override
-	public int sendChat(SendRequest chat, List<MultipartFile> images) {
-		return cMapper.sendChat(chat);
-	}
+    @Autowired
+    public ChatServiceImpl(ChatMapper chatMapper) {
+        this.chatMapper = chatMapper;
+    }
 
-	public List<Chat> getChatByUserId(String userId) {
-		return cMapper.getChatByUserId(userId);
-	}
+    // 채팅방에 속한 메시지 조회
+    @Override
+    public List<Chat> getMessagesByRoom(Integer roomNo) {
+        return chatMapper.getMessagesByRoom(roomNo);
+    }
 
-	@Override
-	public int getTotalCount(String userId) {
-		return cMapper.getTotalCount(userId);
-	}
+    // 메시지 전송
+    @Override
+    public int sendChatMessage(SendRequest sendRequest) {
+        return chatMapper.sendChat(sendRequest);
+    }
 
-	@Override
-	public List<Chat> selectChatByUserId(String userId, int currentPage, int i) {
-		int limit = 3;
-		int offset = (currentPage-1)*limit;
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return cMapper.selectChatByUserId(userId, rowBounds);
-	}
+    // 새로운 메시지 가져오기
+    @Override
+    public List<Chat> fetchNewMessages(Map<String, Object> map) {
+        return chatMapper.selectNewMessagesAfter(map);
+    }
 
-	@Override
-	public List<Chat> selectNewMessagesAfter(Map<String, Object> map) {
-		return cMapper.selectNewMessagesAfter(map);
-	}
-
+    // 사용자가 참여한 채팅방을 조회하기 위한 쿼리 호출
+  
 }

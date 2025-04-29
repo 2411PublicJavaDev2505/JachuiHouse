@@ -27,13 +27,9 @@ public interface TradeService {
 
 	int countViewUpdate(int tradeNo);
 
-
 	int updateTradeYn(int tradeNo, char tradeYn);
 
 	List<Trade> getTradeByUserId(String userId);
-
-	
-	
 	
 	String selectIdByTradeNo(int tradeNo);
 	
