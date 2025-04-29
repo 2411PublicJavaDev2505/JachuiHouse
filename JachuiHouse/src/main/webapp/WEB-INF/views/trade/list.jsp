@@ -14,7 +14,6 @@
         <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
         <main class="container">
-
             <!-- 검색창 -->
             <form action="/trade/search" method="get">
                 <div class="search-bar">
@@ -62,7 +61,6 @@
             <!-- 페이지 네비게이션 -->
 	            <div class="pagination-container">
 	                <div class="pagination">
-	
 	                    <!-- 이전 버튼 -->
 	                    <c:if test="${currentPage > 1}">
 	                        <c:choose>
@@ -106,7 +104,6 @@
 	                </div>
 	            </div>
             </main>
-
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
 </body>
