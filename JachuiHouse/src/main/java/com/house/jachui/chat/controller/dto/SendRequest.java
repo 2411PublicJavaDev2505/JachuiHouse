@@ -10,10 +10,7 @@ import lombok.ToString;
 public class SendRequest {
 	
 	private String writerId;
-	private String receiverId;
-	private String chatContent;
-	private String chatFileName;
-	private String chatFileRename;
-	private String chatFilePath;
-	private String chatNo;
+    private String receiverId;
+    private String message;
+    private int roomNo;
 }

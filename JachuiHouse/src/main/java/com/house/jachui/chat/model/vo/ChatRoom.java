@@ -15,7 +15,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatRoom {
-	
 	private int roomNo;
 	private String itemType;
 	private int itemNo;
