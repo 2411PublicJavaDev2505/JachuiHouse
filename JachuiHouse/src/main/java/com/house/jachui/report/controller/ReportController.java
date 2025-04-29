@@ -127,6 +127,32 @@ public class ReportController {
 		}
 	}
 	
+	//신고 관리 검색
+	@GetMapping("/search")
+	public String reportSearch(
+			@RequestParam("searchKeyword") String searchKeyword
+			, @RequestParam(value="page", defaultValue="1") int currentPage
+			, Model model) {
+		try {
+			int totalCount = rService.getTotalCountByKeyword(searchKeyword);
+			List<ReportVO> searchList = rService.searchListByKeyword(searchKeyword, currentPage);
+			
+			Map<String, Integer> pageInfo = PageUtil.generatePageInfo(totalCount, currentPage, 10);
+				model.addAttribute("maxPage", pageInfo.get("maxPage"));
+				model.addAttribute("startNavi", pageInfo.get("startNavi"));
+				model.addAttribute("endNavi", pageInfo.get("endNavi"));
+
+				model.addAttribute("searchList", searchList);
+				model.addAttribute("searchKeyword", searchKeyword);
+				return "report/search";
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+				return "common/error";
+		}
+	}
+	
 	//신고반려(신고글 삭제)
 	@PostMapping("/delete")
 	@ResponseBody
