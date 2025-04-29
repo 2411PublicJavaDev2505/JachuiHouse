@@ -13,7 +13,7 @@
         <div id="container">
 			<jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <div class="main">
-            	<form action="/post/update" method="POST" value="${result.postNo}">
+            	<form action="/post/update" method="POST" value="${result.postNo}" onsubmit="return validateUpdateForm();">
 				    <input type="hidden" name="postNo" value="${result.postNo}" />
 				
 				    <div class="write">
@@ -22,10 +22,10 @@
 				        </div>
 				        <div class="title">
 				            <select name="postType" id="postType">
-				                <option value="none" ${result.postType == 'none' ? 'selected' : ''}>선택</option>
-				                <option value="자유" ${result.postType == '자유' ? 'selected' : ''}>자유</option>
-				                <option value="꿀팁" ${result.postType == '꿀팁' ? 'selected' : ''}>꿀팁</option>
-				                <option value="질문" ${result.postType == '질문' ? 'selected' : ''}>질문</option>
+				                <option value="" disabled selected>게시판 선택</option>
+				                <option class="free" value="자유" ${result.postType == '자유' ? 'selected' : ''}>자유</option>
+				                <option class="tip" value="꿀팁" ${result.postType == '꿀팁' ? 'selected' : ''}>꿀팁</option>
+				                <option class="qna" value="질문" ${result.postType == '질문' ? 'selected' : ''}>질문</option>
 				            </select>
 				            <input type="text" name="postTitle" class="inputtitle"
 				                   value="${result.postTitle}" placeholder="수정 할 제목을 입력하세요" />
@@ -43,6 +43,20 @@
 				</form>
             </div>
         	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-        </div>		
+        </div>
+        <script>
+	        function validateUpdateForm() {
+	            const postType = document.getElementById('postType').value;
+	            const postTitle = document.querySelector('input[name="postTitle"]').value.trim();
+	            const postContent = document.querySelector('textarea[name="postContent"]').value.trim();
+	
+	            if (!postType || postTitle === "" || postContent === "") {
+	                alert("빈 칸을 입력하세요.");
+	                return false; // 제출 막기
+	            }
+	
+	            return true; // 제출 진행
+	        }
+        </script>		
 	</body>
 </html>

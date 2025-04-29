@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .main{
     background-color: #FFF9E9;
-    height: 1000px;
+
     padding-top: 50px;
 }
 .write{
@@ -24,6 +24,15 @@
    		border-radius: 15px;
    		border: 1px solid #eee;
    		width: 70px;
+}
+.free{
+    color: green;
+}
+.tip{
+    color: yellow;
+}
+.qna{
+    color:orangered;
 }
 #title{
     padding: 5px;
