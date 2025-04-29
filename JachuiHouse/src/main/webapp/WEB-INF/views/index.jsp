@@ -32,12 +32,12 @@
 							            </a>
 							        </div>
 							        <div class="carousel_slide">
-										<a href="http://localhost:7777/post/detail?postNo=802">
+										<a href="http://localhost:7777/post/detail?postNo=866">
 							                <img src="https://iii.ad/ccc869" alt="두 번째 이미지" />
 							            </a>
 							        </div>
 							        <div class="carousel_slide">
-							            <a href="http://localhost:7777/post/detail?postNo=803">
+							            <a href="http://localhost:7777/post/detail?postNo=867">
 							                <img src="https://iii.ad/054b54" alt="세 번째 이미지" />
 							            </a>
 							        </div>
@@ -113,15 +113,8 @@
 	    </div>
 	</main>
         <!-- JavaScript 파일 연결 -->
+        <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
         <script>
-        new TypeIt('.main-hello', {
-            loop:true,
-            speed: 90,
-            waitUntilVisible: true,})
-            .type("자취하우스에 오신 걸 환영합니다.", {delay:500})
-            .delete(12)
-            .type("서 당신의 꿀팁을 공유해주세요.")
-            .go();
         const images = [
             "../resources/image/main-left.jpeg",
             "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/868/b95e315ef9ac68f64598172e66701798_res.jpeg",
@@ -142,27 +135,7 @@
         }
         
 //         캐러셀
-//         const prevButton = document.querySelector('.prev');
-//         const nextButton = document.querySelector('.next');
-//         const carousel = document.querySelector('.carousel');
-        
-//         let index = 0;//첫 리소스의 값은 0:첫 리소스에 접근해 있을 때 이전 버튼이 클릭이 되면 안됨
 
-//         //translate3d를 활용하여 제어:숫자값인 index와 이전, 이후에 클릭 이벤트를 등록
-//         prevButton.addEventListener('click', () => {
-//         	if (index === 0) return;//이벤트 무효화:이전 버튼 이벤트에는 index가 0이면 return을 하여
-//         	index -= 1;//각자 끝에 있는 리소스가 아닐 경우
-//         	//이전 버튼에는 한 번 클릭마다 index가 1씩 감소, 이후 버튼에는 1씩 증가하면 끝 리소스에서는 이벤트가 실행x
-// 			carousel.style.transform = `translate3d(-${500 * index}px, 0, 0)`;//현재 캐러셀의 넓이가 500px
-//         });
-
-//         nextButton.addEventListener('click', () => {
-//         	if (index === 2) return;//이벤트 무효화:리소스는 총 3개이기 때문에-> index가 2일 때 return
-//         	index += 1;
-//         	carousel.style.transform = `translate3d(-${500 * index}px, 0, 0)`;
-//         });
-
-			//캐러셀2
 			document.addEventListener("DOMContentLoaded", function () {
 		      const swiper = document.querySelector('.carousel_wrapper');
 		      const slides = document.querySelectorAll('.carousel_slide');
@@ -188,12 +161,14 @@
 		
 		      prevBtn.addEventListener('click', (e) => {
 		    	    e.stopPropagation();  // 추가!! 링크 이동 막음
+		    	    e.preventDefault();    // 기본 동작 막기 (링크 이동 금지)
 		        if (currentSlide > 0) showSlide(currentSlide - 1);
 		        updateSlideWidth()
 		      });
 		
 		      nextBtn.addEventListener('click',  (e) => {
 		    	    e.stopPropagation();  // 추가!! 링크 이동 막음
+		    	    e.preventDefault();    // 기본 동작 막기 (링크 이동 금지)
 		        if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
 		        updateSlideWidth()
 		      });
@@ -201,12 +176,29 @@
 		      bullets.forEach((bullet, i) => {
 		        bullet.addEventListener('click',  (e) => {
 		            e.stopPropagation();  // 추가!! 링크 이동 막음
-		        	showSlide(i));
-		        	updateSlideWidth()
+		            e.preventDefault();    // 기본 동작 막기 (링크 이동 금지)
+		        	showSlide(i);
+// 		        	updateSlideWidth()
 		      });
 		    });
-		    
+		      
+		      window.addEventListener('resize', updateSlideWidth);
+		      updateSlideWidth();
+		      showSlide(0); // 처음에 슬라이드 보이게 설정
+		    });
+		</script>
+        <script>
+		document.addEventListener("DOMContentLoaded", function () {
+        new TypeIt('.main-hello', {
+            loop:true,
+            speed: 90,
+            waitUntilVisible: true,
+		})
+            .type("자취하우스에 오신 걸 환영합니다.", {delay:500})
+            .delete(12)
+            .type("서 당신의 꿀팁을 공유해주세요.")
+            .go();
+		});
         </script>
-
 </body>
 </html>

@@ -22,5 +22,9 @@ public interface ReportMapper {
 	int getTotalCount();
 	//신고반려
 	int deleteReport(String reportNo);
+	//신고관리 검색 페이지네이션
+	int getTotalCountByKeyword(String searchKeyword);
+	//신고관리 검색 
+	List<ReportVO> selectSearchList(String searchKeyword, int currentPage, RowBounds rowBounds);
 
 }

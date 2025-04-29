@@ -16,9 +16,13 @@ public interface ReportService {
 	
 	//신고관리 조회
 	List<ReportVO> selectListAll(int currentPage);
-	//신고관리 페이지네이션
+	//신고관리 조회 페이지네이션
 	int getTotalCount();
 	//신고반려
 	int deleteReport(String reportNo);
+	//신고관리 검색 페이지네이션
+	int getTotalCountByKeyword(String searchKeyword);
+	//신고관리 검색 
+	List<ReportVO> searchListByKeyword(String searchKeyword, int currentPage);
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,13 @@
     <link rel="stylesheet" href="../resources/css/footer.css">
 </head>
 <body>
-        <!-- 푸터 -->
+        <!-- 푸터 (여기 url 안먹는 곳)-->
         <footer>
-            이용약관 | 광고문의 | 개인정보처리방침 | 찾아오시는길 | 회사명: 자취스크립트(주) | 대표자 : 강우혁 | 문의 전화: 010-2222-3333
+            <a href="/footer/terms">이용약관</a> | 
+            <a href="/footer/ad">광고문의</a> | 
+            <a href="/footer/Info">개인정보처리방침</a> | 
+            <a href="/footer/location">찾아오시는길</a> | 
+            회사명: 자취스크립트(주) | 대표자 : 강우혁 | 문의 전화: 010-2222-3333
         </footer>
 </body>
 </html>

@@ -54,5 +54,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteReport">
 		DELETE FROM REPORT WHERE REPORT_NO = #{reportNo}
 	</delete>
-	
+<!-- 	신고관리 검색  -->
+	<select id="selectSearchList" resultType="ReportVO">
+		SELECT * FROM REPORT WHERE REPORT_REASON LIKE '%'||#{searchKeyword}||'%'
+	</select>
+<!-- 	신고관리 검색 페이지네이션 -->
+	<select id="getTotalCountByKeyword" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE REPORT_REASON LIKE '%'||#{searchKeyword}||'%' 
+	</select>
 </mapper>
