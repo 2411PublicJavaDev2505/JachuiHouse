@@ -19,14 +19,14 @@
 
             <!-- 채팅 메시지 출력 영역 -->
             <div class="chat-content" id="chatContent">
-                <c:forEach var="chat" items="${cList}">
-                    <c:if test="${chat.writerId eq sessionScope.writerId}">
+                <c:forEach var="chat" items="${chatList}">
+                    <c:if test="${chat.writerId eq writerId}">
                         <div class="my-msg message-${chat.chatNo}" data-chat-no="${chat.chatNo}">
                             <div class="me">나</div>
                             <div class="my-msg-detail">${chat.message}</div>
                         </div>
                     </c:if>
-                    <c:if test="${chat.writerId ne sessionScope.userId}">
+                    <c:if test="${chat.writerId ne writerId}">
                         <div class="not-my-msg message-${chat.chatNo}" data-chat-no="${chat.chatNo}">
                             <div class="receiver-name">${receiverName}</div>
                             <div class="receive-msg">${chat.message}</div>
@@ -36,7 +36,7 @@
             </div>
 
             <!-- 메시지 전송 폼 -->
-            <form id="chatForm" enctype="multipart/form-data">
+            <form id="chatForm">
                 <div class="message">
                     <input type="hidden" name="writerId" value="${writerId}">
                     <input type="hidden" name="receiverId" value="${receiverId}">
@@ -58,7 +58,7 @@
         const receiverId = '${receiverId}';
         const receiverName = '${receiverName}';
 
-        let lastChatNo = ${empty cList ? 0 : cList[cList.size()-1].chatNo};
+        let lastChatNo = ${empty chatList ? 0 : chatList[chatList.size()-1].chatNo};
 
         let isScrolledToBottom = true;
         const chatContent = document.getElementById('chatContent');
