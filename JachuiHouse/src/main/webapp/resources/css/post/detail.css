@@ -100,17 +100,33 @@ body {
 
 .underbar {
     display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+    width: 100%;
 }
 #commentInput {
     padding: 10px;
     border-radius: 25px;
-    width: 60%;
+    width: 100%;
+    max-width: 500px;
     background-color: #f1d4c9;
     border: 1px solid #ccc;
-    margin-right: 10px;
+    box-sizing: border-box;
 }
 
-.commentbtn,
+.commentbtn {
+    background-color: #ffad84;
+    color: white;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    flex-shrink: 0;
+    white-space: nowrap;
+    width:70px;
+}
 .backbtn,
 .updatebtn2,
 .deletebtn2,
@@ -128,10 +144,7 @@ body {
 	width: 500px;
 	
 }
-.commentbtn {
-    background-color: #ffad84;
-    color: white;
-}
+
 
 .commentbtn:hover {
     background-color: #ff8e5e;

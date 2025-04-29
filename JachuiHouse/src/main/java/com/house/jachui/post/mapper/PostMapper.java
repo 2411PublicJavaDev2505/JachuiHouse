@@ -40,7 +40,7 @@ public interface PostMapper {
 	
 	int deleteComment(int commentNo);//댓글 삭제
 
-	int getTotalCount(String searchKeyword, String category);
+	int getTotalSCount(String searchKeyword, String category);
 
 	List<PostVO> selectSearchList(String searchKeyword, String category, RowBounds rowBounds);
 }

@@ -61,6 +61,12 @@
 				</div>
 			</div>
 		</div>
+		<c:if test="${empty sessionScope.userId}">
+		    <script>
+		        alert("로그인이 필요합니다.");
+		        location.href = "/member/login";
+		    </script>
+		</c:if>
        	<div id="main-container">
 		<jsp:include page="/WEB-INF/views/include/header.jsp"/>
            <div class="main">
@@ -105,7 +111,8 @@
 							                       <c:if test="${sessionScope.userId eq comment.userId or sessionScope.userId eq 'admin'}">
 							                           <td>
 							                               <div class="deletebtn">
-							                                   <a href="/post/cdelete?commentNo=${comment.commentNo}&postNo=${result.postNo}">삭제하기</a>
+							                                   <a href="/post/cdelete?commentNo=${comment.commentNo}&postNo=${result.postNo}"
+  																	onclick="return confirm('삭제하시겠습니까?');">삭제하기</a>
 							                               </div>
 							                           </td>
 							                       </c:if>	

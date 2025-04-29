@@ -38,7 +38,7 @@
 	</update>
 	
 	<select id="selectcList" resultType="CommentVO">
-		SELECT * FROM "COMMENT"
+		SELECT * FROM "COMMENT" ORDER BY COMMENT_NO ASC
 	</select>
 	<select id="selectOneByIdEmail" resultType="Member">
 		SELECT USER_ID, USER_EMAIL FROM MEMBER
@@ -60,19 +60,23 @@
 	
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM POST
+	</select>
+	
+	<select id="getTotalSCount" resultType="_int">
+		SELECT COUNT(*) FROM POST
 		WHERE
 		<choose>
 			<when test="category == 'free'">
-				POST_TYPE = 'free' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+				POST_TYPE = '자유' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
 			</when>
 			<when test="category == 'tip'">
-				POST_TYPE = 'tip' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+				POST_TYPE = '꿀팁' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
 			</when>
 			<when test="category == 'qna'">
-				POST_TYPE = 'qna' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
+				POST_TYPE = '질문' AND POST_TITLE LIKE '%' || #{searchKeyword} || '%'
 			</when>
 			<otherwise>
-				1=1
+				POST_TITLE LIKE '%' || #{searchKeyword} || '%'
 			</otherwise>
 		</choose>
 	</select>
