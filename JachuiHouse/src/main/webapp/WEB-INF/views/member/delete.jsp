@@ -60,7 +60,28 @@
 		backToMyPage = () => {
 			location.href = "myPage";
 		}
-		
+		function confirmDelete(event) {
+		    event.preventDefault(); 
+		    const checkbox = document.getElementById("a");
+
+		    if (!checkbox.checked) {
+		        alert("회원탈퇴에 동의해주세요.");
+		        return;
+		    }
+		    const confirmed = confirm("정말로 탈퇴하시겠습니까?");
+		    if (confirmed) {
+		        document.querySelector("form").submit();
+		    }
+		}
+
+		backToMyPage = () => {
+		    location.href = "myPage";
+		}
+
+		// ✅ 서버에서 받은 errorMsg가 있으면 alert로 보여주기
+		<% if (request.getAttribute("errorMsg") != null) { %>
+		    alert('<%= request.getAttribute("errorMsg") %>');
+		<% } %>
 		</script>
 </body>
 </html>

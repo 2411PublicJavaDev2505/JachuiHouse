@@ -373,22 +373,24 @@ public class MemberController {
 	}
 	@PostMapping("/delete")
 	public String deleteMember(
-			HttpSession session,
-			@RequestParam("userId") String userId,
-			@RequestParam("userPw") String userPw,
-			Model model) {
-		if(!mService.checkPw(userId, userPw)) {
-			model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
-			return "common/error";
-		}
-		int result = mService.deleteMember(userId);
-		if(result > 0) {
-			session.invalidate();
-			return "redirect:/";
-		}else {
-		model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
-	        return "common/error";
-		}
+	        HttpSession session,
+	        @RequestParam("userId") String userId,
+	        @RequestParam("userPw") String userPw,
+	        RedirectAttributes redirectAttributes) {
+	    
+	    if (!mService.checkPw(userId, userPw)) {
+	        redirectAttributes.addFlashAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
+	        return "redirect:/member/delete";  // 탈퇴 폼 페이지로 다시 리다이렉트
+	    }
+	    
+	    int result = mService.deleteMember(userId);
+	    if (result > 0) {
+	        session.invalidate();
+	        return "redirect:/";
+	    } else {
+	        redirectAttributes.addFlashAttribute("errorMsg", "서비스가 완료되지 않았습니다.");
+	        return "redirect:/member/delete"; // 실패 시에도 탈퇴 폼으로
+	    }
 	}
 	// 예산계산기
 	@GetMapping("/accountBook")
