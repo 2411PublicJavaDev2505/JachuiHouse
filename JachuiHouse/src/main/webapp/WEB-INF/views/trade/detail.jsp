@@ -19,28 +19,28 @@
             
 
             <div class="detail-box">
-				<div class="view-chat-wrapper">
-				    <c:if test="${not empty sessionScope.userId and trade.userId ne sessionScope.userId}">
-				        <div class="chat-btn">
-				            <a href="/chat/totrade?tradeNo=${tradeNo}">
-				                <button>1:1 채팅문의</button>
-				            </a>
-				        </div>
-				    </c:if>
-				</div>
-				
-				<div class="view-count-wrapper ${empty sessionScope.userId or trade.userId eq sessionScope.userId ? 'no-chat' : ''}">
-				    <span class="view-count-label">
-				        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-				            viewBox="0 0 24 24" stroke="#f38b3f" fill="none" stroke-width="2" 
-				            stroke-linecap="round" stroke-linejoin="round">
-				            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
-				            <circle cx="12" cy="12" r="3"/>
-				        </svg>
-				        조회수
-				    </span>
-				    <span class="view-count-number">${trade.viewCount}</span>
-				</div>
+				<div class="top-info-bar">
+                    <div class="chat-btn-wrapper">
+                        <c:if test="${not empty sessionScope.userId and trade.userId ne sessionScope.userId}">
+                            <a href="/chat/totrade?tradeNo=${tradeNo}">
+                                <button class="chat-btn">1:1 채팅문의</button>
+                            </a>
+                        </c:if>
+                    </div>
+
+                    <div class="view-count-wrapper">
+                        <span class="view-count-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                 viewBox="0 0 24 24" stroke="#f38b3f" fill="none" stroke-width="2" 
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            조회수
+                        </span>
+                        <span class="view-count-number">${trade.viewCount}</span>
+                    </div>
+                </div>
 
                 <div class="info-row">
                     <div class="label">작성자</div>
