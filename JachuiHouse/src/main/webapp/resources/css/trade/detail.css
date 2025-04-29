@@ -199,23 +199,55 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
+    margin-top: 10px;
 }
 
-/* 채팅 버튼이 없을 때 조회수 오른쪽 정렬 */
-.view-count-wrapper.no-chat {
-    justify-content: flex-end !important; /* 오른쪽 정렬 */
+
+
+
+/* 조회수 + 채팅 버튼 감싸는 한 줄 */
+.top-info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* 버튼을 아래로 살짝 내릴 수 있게 */
     margin-bottom: 24px;
+    margin-top: 10px;
 }
 
+/* 조회수 영역 */
 .view-count-wrapper {
     display: flex;
-    justify-content: flex-start; /* 기본적으로 왼쪽 정렬 */
     align-items: center;
     gap: 8px;
     font-size: 16px;
     color: #666;
     font-weight: 500;
-    margin-bottom: 24px;
+}
+
+/* 채팅 버튼 */
+.chat-btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+.chat-btn button {
+    background-color: #f38b3f;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px; /* 버튼을 살짝 아래로 */
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.chat-btn button:hover {
+    background-color: #e4742c;
 }
 
 .view-count-label {
@@ -235,37 +267,16 @@ body {
 }
 
 
-/* 조회수 오른쪽 정렬 수정 */
-.view-chat-wrapper .view-count-wrapper {
-    justify-content: flex-end; /* 조회수를 오른쪽으로 정렬 */
-}
-
-/* '1:1 채팅문의'가 있을 때만 조회수를 오른쪽으로 정렬 */
-.view-chat-wrapper .view-count-wrapper.no-chat {
+/* 채팅 버튼이 없을 때 조회수 오른쪽 정렬 */
+.view-count-wrapper.no-chat {
     justify-content: flex-end !important; /* 오른쪽 정렬 */
 }
 
-
-
-
-
-
-/* 기존의 chat-btn 스타일을 수정하여 버튼 스타일을 통일 */
-.chat-btn a button {
-    background-color: #ff7a40; /* 수정 및 삭제 버튼과 같은 색상 */
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    flex: 1;
+/* 기본적으로 왼쪽 정렬 (채팅 버튼이 있을 때) */
+.view-count-wrapper {
+    justify-content: flex-start;
 }
 
-.chat-btn a button:hover {
-    background-color: #45a049; /* 버튼 호버 효과 */
-}
 
 /* 수정 및 삭제 버튼 스타일 */
 .button-container button {
