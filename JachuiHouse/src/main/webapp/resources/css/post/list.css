@@ -28,10 +28,22 @@
 	color: green;
 }
 .tip{
-	color: yellow;
+	color: rgb(230, 230, 0);
 }
 .qna{
 	color: red;
+}
+.pType-free{
+	color: green;
+	font-weight: bold;
+}
+.pType-tip{
+	color: rgb(230, 230, 0);
+	font-weight: bold;
+}
+.pType-qna{
+	color: red;
+	font-weight: bold;
 }
 .searchplace {
     padding: 10px 15px;

@@ -44,7 +44,19 @@
 									
 		                       		<c:forEach var="post" items="${pList }">
 				                        <tr>
-				                            <td style="width : 150px;">${post.postType }</td>
+				                            <td style="width : 150px;">
+				                            	<c:choose>
+				                            		<c:when test="${post.postType == '자유' }">
+				                            			<span class="pType-free">${post.postType }</span>
+				                            		</c:when>	
+				                            		<c:when test="${post.postType == '꿀팁' }">
+				                            			<span class="pType-tip">${post.postType }</span>
+				                            		</c:when>	
+				                            		<c:when test="${post.postType == '질문' }">
+				                            			<span class="pType-qna">${post.postType }</span>
+				                            		</c:when>	
+				                            	</c:choose>
+				                            </td>
 				                            <td style="width : 700px;"><a href="/post/detail?postNo=${post.postNo }">${post.postTitle }</a></td>
 				                            <td>${post.userId }</td>
 				                            <td>${post.writeDate }</td>
@@ -65,24 +77,28 @@
 			                    </table>	                    	
 	                    	</div>					
 				            <div class="pagination-container">
-				                <div class="pagination">
-				
-				                    <c:if test="${currentPage > 1}">
-				                        <a href="/post/list?page=1" class="first">◁◁</a>
-				                        <a href="/post/list?page=${startNavi - 1}" class="prev">◀</a>
-				                    </c:if>
-				
-				                    <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
-				                        <a href="/post/list?page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
-				                    </c:forEach>
-				
-				                    <c:if test="${currentPage < maxPage}">
-				                        <a href="/post/list?page=${endNavi + 1}" class="next">▶</a>
-				                        <a href="/post/list?page=${maxPage}" class="last">▷▷</a>
-				                    </c:if>
-				
-				                </div>
-           				 </div>
+							    <div class="pagination">
+							
+							        <c:if test="${currentPage > 1}">
+							            <a href="/post/list?page=1" class="first">◁◁</a>
+							            <a href="/post/list?page=${startNavi - 1}" class="prev">◀</a>
+							        </c:if>
+							
+							        <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+							            <a href="/post/list?page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
+							        </c:forEach>
+							
+							        <!-- endNavi + 1이 maxPage보다 작을 때만 출력 -->
+							        <c:if test="${endNavi < maxPage}">
+							            <a href="/post/list?page=${endNavi + 1}" class="next">▶</a>
+							        </c:if>
+							
+							        <c:if test="${currentPage < maxPage}">
+							            <a href="/post/list?page=${maxPage}" class="last">▷▷</a>
+							        </c:if>
+							
+						    </div>
+						</div>
           			</div>
 	        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
         </div>

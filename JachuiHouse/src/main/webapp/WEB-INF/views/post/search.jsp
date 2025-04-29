@@ -19,9 +19,9 @@
 				    <div class="search">
 				        <select name="category" id="postType">
 				            <option value="none">전체 게시판</option>
-				            <option value="free">자유 게시판</option>
-				            <option value="tip">꿀팁 게시판</option>
-				            <option value="qna">질문 게시판</option>
+				            <option value="free" class="free">자유 게시판</option>
+				            <option value="tip" class="tip">꿀팁 게시판</option>
+				            <option value="qna" class="qna">질문 게시판</option>
 				        </select>
 				        <input class="searchplace" name="searchKeyword" type="text" placeholder="제목으로 검색어를 입력하세요.">
 				        <button class="searchbtn" type="submit">검색</button>
@@ -41,7 +41,19 @@
 			                        </tr>
 		                       		<c:forEach var="post" items="${searchList }">
 				                        <tr>
-				                            <td style="width : 150px;">${post.postType }</td>
+				                            <td style="width : 150px;">
+				                            	<c:choose>
+				                            		<c:when test="${post.postType == '자유' }">
+				                            			<span class="pType-free">${post.postType }</span>
+				                            		</c:when>	
+				                            		<c:when test="${post.postType == '꿀팁' }">
+				                            			<span class="pType-tip">${post.postType }</span>
+				                            		</c:when>	
+				                            		<c:when test="${post.postType == '질문' }">
+				                            			<span class="pType-qna">${post.postType }</span>
+				                            		</c:when>	
+				                            	</c:choose>
+				                            </td>
 				                            <td style="width : 700px;"><a href="/post/detail?postNo=${post.postNo }">${post.postTitle }</a></td>
 				                            <td>${post.userId }</td>
 				                            <td>${post.writeDate }</td>

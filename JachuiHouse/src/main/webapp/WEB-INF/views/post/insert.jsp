@@ -21,7 +21,7 @@
 	                    </div>
 	                    <div class="title">
 	                        <select name="postType" id="postType">
-	                            <option value="none">선택</option>
+	                            <option value="" disabled selected>게시판 선택</option>
 	                            <option value="자유" class="free">자유</option>
 	                            <option value="꿀팁" class="tip">꿀팁</option>
 	                            <option value="질문" class="qna">질문</option>
@@ -40,5 +40,16 @@
             </div>
         	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
         </div>		
+		<script>
+			function validateForm() {
+			    var postType = document.getElementById('postType').value;
+			    
+			    if (postType === "none") {
+			        alert("게시판을 선택하세요!");
+			        return false; // 제출을 막는다
+			    }
+			    return true; // 정상 제출
+			}
+		</script>
 	</body>
 </html>
