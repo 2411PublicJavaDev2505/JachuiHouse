@@ -12,7 +12,7 @@
 
 	</head>
 	<body>
-	   	<div id="container">
+	   	<div id="container"></div>
 			<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 	        <div class="main">
 	           	<form action="/post/search" method="get">
@@ -65,7 +65,7 @@
 	            <c:if test="${empty searchList}">
 	                <div class="no-result">검색 결과가 없습니다.</div>
 	            </c:if>
-               						
+	            <c:if test="${not empty searchList }">
 		            <div class="pagination-container">
 					    <div class="pagination">
 					
@@ -73,8 +73,7 @@
 					            <a href="/post/search?page=1&searchKeyword=${searchKeyword}&category=${category}" class="first">◁◁</a>
 					            <a href="/post/search?page=${startNavi - 1}&searchKeyword=${searchKeyword}&category=${category}" class="prev">◀</a>
 					        </c:if>
-					
-					        <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+				        	<c:forEach begin="${startNavi}" end="${endNavi}" var="p">
 					            <a href="/post/search?page=${p}&searchKeyword=${searchKeyword}&category=${category}" class="${p == currentPage ? 'active' : ''}">${p}</a>
 					        </c:forEach>
 					
@@ -87,8 +86,10 @@
 					            <a href="/post/search?page=${maxPage}&searchKeyword=${searchKeyword}&category=${category}" class="last">▷▷</a>
 					        </c:if>
 					
-				    </div>
-				</div>
+				    	</div>
+					</div>
+	            </c:if>
+               						
             </div>
 	        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
         </div>
