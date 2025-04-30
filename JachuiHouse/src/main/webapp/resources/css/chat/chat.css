@@ -1,6 +1,6 @@
 @charset "UTF-8";
 main {
-    width: 800px;
+    width: 600px;
     margin: 0 auto;
     background-color: #FFF9E9;
     padding: 30px;
@@ -19,12 +19,97 @@ main {
     font-size: 24px;
     color: #333;
 }
+/* chat-item-info 영역 스타일 - 배경과 테두리로 구분 */
+.chat-item-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 14px;
+    margin-bottom: 13px;
+    background-color: #fff3e0; /* 부드러운 오렌지 배경 */
+    border: 1px solid #ffd6a0; /* 연한 테두리 */
+    border-radius: 10px;
+}
+
+/* 이미지 */
+.chat-item-info .item-box img {
+    width: 120px;
+    height: 100px;
+    object-fit: contain; /* 사진이 잘리지 않고 전부 보이도록 */
+    border-radius: 8px;
+    background-color: #f5f5f5; /* 빈 영역이 회색으로 보이게 */
+}
+
+/* item-box 안에서 이미지와 estate-inf를 나란히 */
+.chat-item-info .item-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* estate-inf 오른쪽 배치용 */
+.estate-inf {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* 전세/월세 정보 */
+.estate-inf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.estate-rent {
+    color: #FF7C45;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* 타입 */
+.estate-type {
+    font-size: 13px;
+    color: #333;
+}
+
+/* 층, 면적, 주소 */
+.estate-floor-and-width,
+.estate-address {
+    font-size: 15px;
+    color: #666;
+}
+/* estate-style 안에서 이미지와 정보 나란히 */
+.estate-style {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+/* 이미지 크기 설정 + 전체 보기 */
+.estate-style img {
+    width: 90px;
+    height: 60px;
+    object-fit: contain;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+/* estate-inf 정보 영역 정렬 */
+.estate-inf {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
 
 .chat-content {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    height: 500px;
+    height: 285px;
     overflow-y: auto;
     padding: 10px;
     background-color: #fff;
@@ -58,43 +143,54 @@ main {
 /* 내 메시지 */
 .my-msg {
     align-self: flex-end;
-    max-width: 70%;
+    max-width: 50%;
 }
 
 .my-msg .me {
-    font-size: 12px;
+    font-size: 10px;
     color: #FF7C45;
     margin-bottom: 4px;
 }
 
+/* 공통 말풍선 스타일 */
+.my-msg-detail,
+.receive-msg {
+    font-size: 12px;
+    padding: 10px 14px;
+    border-radius: 18px;
+    word-break: break-word;
+    max-width: 80%; /* 너무 길게 안 늘어나게 */
+    display: inline-block;
+}
+
+/* 내 메시지 */
 .my-msg-detail {
     background-color: #FF7C45;
-    color: #fff;
-    padding: 10px 14px;
+    color: white;
     border-radius: 18px 18px 0 18px;
-    word-break: break-word;
 }
+
+/* 상대 메시지 */
+.receive-msg {
+    background-color: #eee;
+    color: #333;
+    border-radius: 18px 18px 18px 0;
+}
+
 
 /* 상대 메시지 */
 .not-my-msg {
     align-self: flex-start;
-    max-width: 70%;
+    max-width: 50%;
     text-align: left;
 }
 
 .receiver-name {
-    font-size: 12px;
+    font-size: 10px;
     color: #555;
     margin-bottom: 4px;
 }
 
-.receive-msg {
-    background-color: #eee;
-    color: #333;
-    padding: 10px 14px;
-    border-radius: 18px 18px 18px 0;
-    word-break: break-word;
-}
 
 /* 메세지 입력창 */
 .message {

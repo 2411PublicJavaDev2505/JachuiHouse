@@ -13,6 +13,57 @@
     <div id="container">
         <jsp:include page="/WEB-INF/views/include/header.jsp" />
         <main>
+            	<div class="chat-item-info">
+				    <c:choose>
+				        <c:when test="${itemName eq 'estate'}">
+				            <div class="item-box">
+				                <div class="item-details">
+				                    <a href="/chazabang/detail/${item.estateNo }" class="estate" data-type="${item.estateType}">
+						                <div class="estate-style">
+						                    <img src="${item.estateFileList[0].estateFilePath}" alt="이미지 준비중">
+						                        <section class="estate-inf">
+						                            <div class="estate-inf-header">
+						                            <c:if test="${item.estateRentType eq 'charter'}">
+													    <div class="estate-rent">전세 ${item.transformEstateDeposit}</div>
+													</c:if>
+													<c:if test="${item.estateRentType eq 'monthly'}">
+													    <div class="estate-rent">월세 ${item.transformEstateDeposit}/${item.transformMonthlyRent}</div>
+													</c:if>
+						                            <span class="estate-type">
+						                            	<c:if test="${item.estateType eq 'onetwo'}">
+								                        	<span class="estate-type">원룸/투룸</span>
+								                        </c:if>
+								                        <c:if test="${item.estateType eq 'villa'}">
+								                        	<span class="estate-type">주택/빌라</span>
+								                        </c:if>
+								                        <c:if test="${item.estateType eq 'apart'}">
+								                        	<span class="estate-type">아파트</span>
+								                        </c:if>
+								                        <c:if test="${item.estateType eq 'officetel'}">
+								                        	<span class="estate-type">오피스텔</span>
+								                        </c:if>
+						                            </span>
+						                        </div>
+						                        <span class="estate-floor-and-width">${item.estateFloor }층, ${item.estateWidth }㎡</span>
+						                        <span class="estate-address">${item.estateAddress }</span>
+						                    </section>
+						                </div>
+						            </a>
+				                </div>
+				            </div>
+				        </c:when>
+				        <c:when test="${itemName eq 'trade'}">
+				            <div class="item-box">
+				                <img src="${item.thumbnail}" alt="중고물품 이미지" class="item-thumbnail" />
+				                <div class="item-details">
+				                    <div class="item-title">${item.tradeTitle}</div>
+				                    <div class="item-sub">가격: ${item.price}원</div>
+				                    <a href="/trade/detail?no=${itemNo}" class="item-link">상세 보기</a>
+				                </div>
+				            </div>
+				        </c:when>
+				    </c:choose>
+				</div>
             <div class="title">
                 <h1>${receiverName} 님과의 채팅</h1>
             </div>
