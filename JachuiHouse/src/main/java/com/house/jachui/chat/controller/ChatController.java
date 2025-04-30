@@ -55,6 +55,7 @@ public class ChatController {
             }
 
             int chatRoomNo = chatRoomService.createEstateChatRoom(user1Id, user2Id, estateNo);
+            System.out.println("Created/Found chatRoomNo for estateNo=" + estateNo + ": " + chatRoomNo);
 
             Estate estate = eService.selectOneByNo(estateNo);
             if (estate == null) {
@@ -89,6 +90,7 @@ public class ChatController {
             }
 
             int chatRoomNo = chatRoomService.createTradeChatRoom(user1Id, user2Id, tradeNo);
+            System.out.println("Created/Found chatRoomNo for tradeNo=" + tradeNo + ": " + chatRoomNo);
 
             Trade trade = tService.selectOneByNo(tradeNo);
             if (trade == null) {
@@ -115,6 +117,11 @@ public class ChatController {
                                @RequestParam("itemNo") int itemNo,
                                HttpSession session) {
         System.out.println("Received request: chatRoomNo=" + chatRoomNo + ", user1Id=" + user1Id + ", user2Id=" + user2Id + ", itemName=" + itemName + ", itemNo=" + itemNo);
+
+        if (chatRoomNo == 0) {
+            model.addAttribute("errorMessage", "유효하지 않은 채팅방 번호입니다: CHAT_ROOM_NO=" + chatRoomNo);
+            return "common/error";
+        }
 
         if (!chatRoomService.checkChatRoomExists(chatRoomNo)) {
             model.addAttribute("errorMessage", "채팅방이 존재하지 않습니다: CHAT_ROOM_NO=" + chatRoomNo);
@@ -143,6 +150,12 @@ public class ChatController {
                 return "common/error";
             }
             model.addAttribute("item", trade);
+        }
+        
+        if(chatList.size() >0) {
+        	model.addAttribute("lastChatNo",chatList.get(chatList.size()-1).getChatNo());
+        }else {
+        	model.addAttribute("lastChatNo",0);
         }
 
         model.addAttribute("chatRoomNo", chatRoomNo);
@@ -210,10 +223,13 @@ public class ChatController {
                                        @RequestParam("receiverId") String receiverId,
                                        @RequestParam("lastChatNo") Integer lastChatNo) {
         Map<String, Object> map = new HashMap<>();
+        System.out.println(writerId);
+        System.out.println(receiverId);
         map.put("writerId", writerId);
         map.put("receiverId", receiverId);
         map.put("lastChatNo", lastChatNo);
-        
-        return chatService.fetchNewMessages(map);
+        List<Chat> cList = chatService.fetchNewMessages(map);
+        System.out.println(cList);
+        return cList;
     }
 }

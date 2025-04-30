@@ -10,11 +10,10 @@
         <result property="isRead" column="IS_READ"/>
         <result property="createDate" column="CREATE_DATE"/>
         <result property="chatTime" column="CHAT_TIME"/>
-        <result property="otherUserRole" column="OTHER_USER_ROLE"/>
     </resultMap>
 
     <select id="selectList" resultMap="chatResultMap">
-        SELECT CHAT_NO, CHAT_ROOM_NO, WRITER_ID, MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME, OTHER_USER_ROLE
+        SELECT CHAT_NO, CHAT_ROOM_NO, WRITER_ID, DBMS_LOB.SUBSTR(MESSAGE, 4000, 1) AS MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME
         FROM CHAT 
         WHERE CHAT_ROOM_NO = #{chatRoomNo}
         ORDER BY CHAT_TIME ASC
@@ -33,32 +32,29 @@
     </insert>
 
     <select id="getChatByUserId" resultMap="chatResultMap">
-        SELECT DISTINCT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME, c.OTHER_USER_ROLE
+        SELECT CHAT_NO, CHAT_ROOM_NO, WRITER_ID, DBMS_LOB.SUBSTR(MESSAGE, 4000, 1) AS MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME
         FROM CHAT c
         JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
         WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
-        ORDER BY c.CHAT_TIME DESC
+        ORDER BY CHAT_TIME DESC
     </select>
 
     <select id="selectNewMessagesAfter" resultMap="chatResultMap">
-        SELECT CHAT_NO, CHAT_ROOM_NO, WRITER_ID, MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME, OTHER_USER_ROLE
-        FROM CHAT
-        WHERE CHAT_ROOM_NO = (
-            SELECT CHAT_ROOM_NO 
-            FROM CHAT_ROOM 
-            WHERE ((USER1_ID = #{writerId} AND USER2_ID = #{receiverId}) 
-                   OR (USER1_ID = #{receiverId} AND USER2_ID = #{writerId}))
-            ORDER BY CREATE_DATE DESC
-            FETCH FIRST 1 ROW ONLY
-        )
-        <if test="lastChatNo != null">
-            AND CHAT_NO > #{lastChatNo}
-        </if>
-        ORDER BY CHAT_NO ASC
+        SELECT *         
+		FROM CHAT         
+		WHERE CHAT_ROOM_NO = (
+		    SELECT CHAT_ROOM_NO              
+		    FROM CHAT_ROOM              
+		    WHERE ((USER1_ID = #{writerId} AND USER2_ID = #{receiverId})
+		           OR (USER1_ID = #{receiverId} AND USER2_ID = #{writerId}))
+		    ORDER BY CREATE_DATE DESC
+		    FETCH FIRST 1 ROWS ONLY
+		)
+		ORDER BY CHAT_NO ASC
     </select>
 
     <select id="getMessagesByRoom" resultMap="chatResultMap">
-        SELECT CHAT_NO, CHAT_ROOM_NO, WRITER_ID, MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME, OTHER_USER_ROLE
+        SELECT CHAT_NO, CHAT_ROOM_NO, WRITER_ID, DBMS_LOB.SUBSTR(MESSAGE, 4000, 1) AS MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME
         FROM CHAT 
         WHERE CHAT_ROOM_NO = #{chatRoomNo}
         ORDER BY CHAT_TIME ASC
