@@ -74,8 +74,6 @@ public class TradeServiceImpl implements TradeService {
 	    return mapper.countViewUpdate(tradeNo);
 	}
 	
-	
-	
 	@Override
 	public int updateTradeYn(int tradeNo, char tradeYn) {
 	    return mapper.updateTradeYn(tradeNo, tradeYn);
@@ -85,8 +83,6 @@ public class TradeServiceImpl implements TradeService {
 	public List<Trade> getTradeByUserId(String userId) {
 		return mapper.getTradeByUserId(userId);
 	}
-	
-	
 	
 	@Override
 	public String selectIdByTradeNo(int tradeNo) {

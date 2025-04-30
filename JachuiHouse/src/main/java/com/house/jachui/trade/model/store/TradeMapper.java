@@ -43,8 +43,5 @@ public interface TradeMapper {
 
     List<Trade> getTradeByUserId(String userId);
 
-    
-    
-    
 	String selectIdByTradeNo(int tradeNo);
 }

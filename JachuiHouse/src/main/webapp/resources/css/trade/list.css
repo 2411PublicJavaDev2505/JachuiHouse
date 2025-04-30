@@ -148,14 +148,6 @@ body {
     margin-top: 4px;
 }
 
-
-
-
-
-
-
-
-
 /* 페이지네이션 */
 .pagination-container {
     display: flex;
@@ -216,8 +208,6 @@ body {
     color: #666;
     text-decoration: none;
 }
-
-
 
 .no-result {
     display: flex;

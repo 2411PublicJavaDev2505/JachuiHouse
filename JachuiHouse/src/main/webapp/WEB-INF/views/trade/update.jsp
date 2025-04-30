@@ -84,7 +84,6 @@
                     <button type="submit" class="custom-button">수정하기</button>
                 </div>
             </main>
-
         </form>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>

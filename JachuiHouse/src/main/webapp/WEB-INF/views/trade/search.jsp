@@ -19,7 +19,7 @@
             <form action="/trade/search" method="get">
                 <div class="search-bar">
                     <select name="category" class="dropdown">
-                        <option value="title">제목</option>
+                        <option value="title">물품명</option>
                         <option value="writer">작성자</option>
                     </select>
                     <input type="text" name="searchKeyword" placeholder="검색어를 입력하세요" class="search-input"/>
@@ -39,7 +39,7 @@
                 <c:forEach var="trade" items="${searchList}">
                     <div class="product-card">
                         <a href="/trade/detail/${trade.tradeNo}" class="trade">
-                            <img src="${pageContext.request.contextPath}/resources/bUploadFiles/${empty trade.tradeFileRename ? 'default.png' : trade.tradeFileRename}" 
+                            <img src="${pageContext.request.contextPath}/resources/tUploadFiles/${empty trade.tradeFileRename ? 'default.png' : trade.tradeFileRename}" 
                                  alt="${trade.tradeTitle}">
                         </a>
                         <div class="product-title">${trade.tradeTitle}</div>
@@ -100,7 +100,6 @@
 			                    </c:otherwise>
 			                </c:choose>
 			            </c:if>
-			
 			        </div>
 			    </div>
 			</c:if>

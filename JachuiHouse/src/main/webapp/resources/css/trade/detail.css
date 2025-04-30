@@ -192,8 +192,6 @@ body {
   text-decoration: none;
 }
 
-
-
 .view-chat-wrapper {
     display: flex;
     justify-content: space-between;
@@ -201,9 +199,6 @@ body {
     margin-bottom: 24px;
     margin-top: 10px;
 }
-
-
-
 
 /* 조회수 + 채팅 버튼 감싸는 한 줄 */
 .top-info-bar {
@@ -230,7 +225,6 @@ body {
     justify-content: flex-end;
     align-items: center;
 }
-
 
 .chat-btn button {
     background-color: #f38b3f;
@@ -266,7 +260,6 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-
 /* 채팅 버튼이 없을 때 조회수 오른쪽 정렬 */
 .view-count-wrapper.no-chat {
     justify-content: flex-end !important; /* 오른쪽 정렬 */
@@ -276,7 +269,6 @@ body {
 .view-count-wrapper {
     justify-content: flex-start;
 }
-
 
 /* 수정 및 삭제 버튼 스타일 */
 .button-container button {
