@@ -103,7 +103,6 @@ main{
 #content-intro{
     height:50px;
     font-size: 28px;
-
 }
 #text-box{
 	width:350px;
@@ -213,11 +212,44 @@ main{
     width:165px;
     height: 165px;
 }
-.pagination a{
+.pagination{
+	width: 50%;
 	margin: 0 auto;
 }
-
+.pagination a{
+	margin:  0 auto;
+}
+.prev{
+	margin: 0 auto;
+}
+#jongro b{
+	color: #555555;
+}
+text #es {
+	color: #555555;
+}
+.estate b{
+	color: #ff7c45;
+}
 .estate {
   color: black;
   text-decoration: none; /* 밑줄 없애고 싶으면 이 줄도 같이 써줘 */
+}
+#bot text {
+	color: #555555;
+}
+
+#report{
+	height:100%;
+    width:80%;
+    font-size: 20px;
+    color: white;
+    border-radius: 6px;
+	background-color: #f60909;
+}
+#aTag{
+	background-color: #f60909;
+}
+#modi{
+	background-color: f60909;
 }
