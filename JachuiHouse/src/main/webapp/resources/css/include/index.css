@@ -11,7 +11,7 @@ body{
 }
 
  .banner {
-    text-align: center;
+    --text-align: center;
     padding: 50px 0;
     background-color: #FFF9E9;
     border-top: 1px solid #E0DFDF;
@@ -24,27 +24,25 @@ body{
     background-color: #F4ECE0;
 } */
 .left-image-container {
+	width: 70%;
+	height: 600px;
+	--height: 30%;
     position: relative;
     --display: inline-block;
-    flex: 0 0 400px;
-    align-items: flex-start;
+    --flex: 0 0 600px;
+    --align-items: flex-start;
     margin-left: 0px;
 }
 
 /* 플렉스 박스를 사용하여 캐러셀과 right-container를 나란히 배치 */
 .banner-content {
+	width: 100%;
     display: flex;
     justify-content: flex-start; /* 왼쪽 정렬 */
     align-items: stretch; /* 높이를 맞춤 */
-    gap: 20px; /* 두 요소 사이 간격 */
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* 캐러셀 컨테이너 */
-.left-image-container {
-    flex: 1; /* 캐러셀이 공간을 차지하도록 */
-    position: relative;
+    gap: 100px; /* 두 요소 사이 간격 */
+    --max-width: 1200px;
+    --margin: 0 auto;
 }
 
 /* 캐러셀 스타일 */
@@ -65,13 +63,13 @@ body{
     position: relative;
 }
 
-.carousel_slide img {
+/* .carousel_slide img {
     display: block;
     width: 100%;
     height: 400px; 
-    object-fit: cover; /* 이미지를 왜곡없이 보여줌 */
+    object-fit: cover; 이미지를 왜곡없이 보여줌
     border-radius: 10px; 
-}
+} */
 
 .arrow {
     position: absolute;
@@ -100,23 +98,33 @@ section {
     gap: 20px;
 }
 .left-image{
-    width: 400px;
+	
+	width: 600px;
+    --height: 40%;
+    --width: 400px;
     height: 300px;
     margin: 40px 0px 0px 40px;
 }
 /* 기존 지붕모양 이미지 */
-/* .right-image{
-    width: 400px;
-    height: 400px;
+.right-image{
+    --width: 400px;
+    --height: 400px;
     margin-right: 50px;
-    border-radius: 399px 399px 0px 0px
-} */
+    border-radius: 399px 399px 0px 0px;
+    display: block;
+    width: 600px;
+    height: 550px;
+    object-fit: cover;
+    
+}
 
 
 /* right-container 스타일 */
 .right-container {
-    flex: 0 0 300px; /* 고정 너비 */
+	width: 30%;
+    --flex: 0 0 300px; /* 고정 너비 */
     padding: 20px;
+    align-items: left;
 }
 
 .right-container p {
@@ -190,17 +198,21 @@ section {
 
 /* 캐러셀 전체 구조  */
 .carousel_main {
-    width: 400px; /* 이미지 크기 설정  */
+    width: 800px;
+    height: 600px;
     position: relative;
     overflow: hidden;
     margin: 0 auto;
     user-select: none;
-    margin-left: 40px;
+    --margin-left: 40px;
 }
 
 .carousel_wrapper {
     display: flex;
     transition: transform 1s;
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: stretch;
 }
 
 .carousel_slide {
@@ -210,8 +222,9 @@ section {
 
 .carousel_slide img {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 800px;
+    --height: 550px;
+    height: 70%;
     object-fit: cover;
 }
 /* 캐러셀 사이드 버튼 */

@@ -69,26 +69,11 @@
 								    </div>
 								</div>
 							</div>
-		                    <!-- <div>
+		                    <div>
 		                        <img src="../resources/image/main-right.png" alt="house" class="right-image">
-		                    </div> -->
-			                <aside class="right-container">
-			                	<p>찾아방</p>
-			                	<div class="houseSale">
-			                	</div>
-			                	
-			                	<p>공지사항</p>
-			                	<div class="noticeCats">
-			                	</div>
-			                	
-			                	<p>자취록</p>
-			                	<div class="roomTales">
-			                	</div>
-			                	
-			                </aside>  
-		                </div>              
-	                </section>
-		                
+		                    </div>
+	                    </div>
+	                </section>                
 	                            
 	                <!-- 주요 기능 소개 -->
 	                <div class="main-menu">
