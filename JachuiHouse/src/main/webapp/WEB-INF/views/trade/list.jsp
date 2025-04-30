@@ -18,7 +18,7 @@
             <form action="/trade/search" method="get">
                 <div class="search-bar">
                     <select name="category" class="dropdown">
-                        <option value="title">제목</option>
+                        <option value="title">물품명</option>
                         <option value="writer">작성자</option>
                     </select>
                     <input type="text" name="searchKeyword" placeholder="검색어를 입력하세요" class="search-input"/>
@@ -38,10 +38,7 @@
                 <c:forEach var="trade" items="${tList}">
                     <div class="product-card">
                         <a href="/trade/detail/${trade.tradeNo}" class="trade">
-<%--                             <img src="${pageContext.request.contextPath}/resources/bUploadFiles/${empty trade.tradeFileRename ? 'default.png' : trade.tradeFileRename}"  --%>
-<%--                                  alt="${trade.tradeTitle}"> --%>
-                            <img src="${trade.tradeFilepath}" 
-                                 alt="${trade.tradeTitle}">
+                            <img src="${trade.tradeFilepath}" alt="${trade.tradeTitle}">
                         </a>
                         <div class="product-title">${trade.tradeTitle}</div>
                         <div class="product-price">${trade.tradePrice}원</div>
@@ -59,51 +56,30 @@
             </div>
 
             <!-- 페이지 네비게이션 -->
-	            <div class="pagination-container">
-	                <div class="pagination">
-	                    <!-- 이전 버튼 -->
-	                    <c:if test="${currentPage > 1}">
-	                        <c:choose>
-	                            <c:when test="${not empty param.category and not empty param.searchKeyword}">
-	                                <a href="/trade/search?category=${param.category}&searchKeyword=${param.searchKeyword}&page=1" class="first">◁◁</a>
-	                                <a href="/trade/search?category=${param.category}&searchKeyword=${param.searchKeyword}&page=${startNavi - 1}" class="prev">◀</a>
-	                            </c:when>
-	                            <c:otherwise>
-	                                <a href="/trade/list?page=1" class="first">◁◁</a>
-	                                <a href="/trade/list?page=${startNavi - 1}" class="prev">◀</a>
-	                            </c:otherwise>
-	                        </c:choose>
-	                    </c:if>
-	
-	                    <!-- 숫자 페이지 -->
-	                    <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
-	                        <c:choose>
-	                            <c:when test="${not empty param.category and not empty param.searchKeyword}">
-	                                <a href="/trade/search?category=${param.category}&searchKeyword=${param.searchKeyword}&page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
-	                            </c:when>
-	                            <c:otherwise>
-	                                <a href="/trade/list?page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
-	                            </c:otherwise>
-	                        </c:choose>
-	                    </c:forEach>
-	
-	                    <!-- 다음 버튼 -->
-	                    <c:if test="${currentPage < maxPage}">
-	                        <c:choose>
-	                            <c:when test="${not empty param.category and not empty param.searchKeyword}">
-	                                <a href="/trade/search?category=${param.category}&searchKeyword=${param.searchKeyword}&page=${endNavi + 1}" class="next">▶</a>
-	                                <a href="/trade/search?category=${param.category}&searchKeyword=${param.searchKeyword}&page=${maxPage}" class="last">▷▷</a>
-	                            </c:when>
-	                            <c:otherwise>
-	                                <a href="/trade/list?page=${endNavi + 1}" class="next">▶</a>
-	                                <a href="/trade/list?page=${maxPage}" class="last">▷▷</a>
-	                            </c:otherwise>
-	                        </c:choose>
-	                    </c:if>
-	
-	                </div>
-	            </div>
-            </main>
+            <c:if test="${not empty tList}">
+                <div class="pagination-container">
+                    <div class="pagination">
+
+                        <!-- 이전 버튼 -->
+                        <c:if test="${currentPage > 1}">
+                            <a href="/trade/list?page=1" class="first">◁◁</a>
+                            <a href="/trade/list?page=${currentPage - 1}" class="prev">◀</a>
+                        </c:if>
+
+                        <!-- 페이지 번호 -->
+                        <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+                            <a href="/trade/list?page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
+                        </c:forEach>
+
+                        <!-- 다음 버튼 -->
+                        <c:if test="${currentPage < maxPage}">
+                            <a href="/trade/list?page=${currentPage + 1}" class="next">▶</a>
+                            <a href="/trade/list?page=${maxPage}" class="last">▷▷</a>
+                        </c:if>
+                    </div>
+                </div>
+            </c:if>
+        </main>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
 </body>

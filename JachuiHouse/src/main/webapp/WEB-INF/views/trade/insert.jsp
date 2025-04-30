@@ -16,7 +16,6 @@
 
         <main class="detail-container">
             <h2>사방팔아방 등록페이지</h2>
-
             <form action="/trade/insert" method="post" enctype="multipart/form-data">
                 <div class="detail-box">
 
@@ -61,7 +60,8 @@
                             <textarea name="tradeContent" placeholder="상품에 대한 상세 설명을 작성해주세요" rows="6" required></textarea>
                         </div>
                     </div>
-
+				</div>
+				
                     <!-- (주석 처리된 첨부파일 입력 영역) -->
                     <!--
                     <div class="info-row">
@@ -71,8 +71,6 @@
                         </div>
                     </div>
                     -->
-
-                </div>
 
                 <div class="register-button-wrapper">
                     <button type="submit" class="register-button">등록</button>

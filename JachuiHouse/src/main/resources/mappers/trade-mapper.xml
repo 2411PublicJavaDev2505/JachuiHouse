@@ -34,6 +34,7 @@
 	<select id="getTotalCountKeyword" resultType="_int">
 		SELECT COUNT(*) FROM TRADE WHERE DEL_YN ='N' AND TRADE_TITLE LIKE '%'||#{searchKeyword}||'%' 
 	</select>
+	
 	<select id="getTotalCount" parameterType="map" resultType="_int">
 	    SELECT COUNT(*) FROM TRADE
 	    WHERE DEL_YN = 'N'
@@ -65,14 +66,11 @@
 	    WHERE RNUM &gt;= #{startRow}
 	</select>
 
-
-
 	<select id="selectIdByTradeNo" resultType="String" parameterType="int">
 	    SELECT USER_ID
 	    FROM TRADE
 	    WHERE TRADE_NO = #{tradeNo}
 	</select>
-
 
     <select id="selectSearchList" resultType="Trade">
 	    SELECT * FROM TRADE
@@ -93,6 +91,7 @@
 	    </choose>
 	    ORDER BY VIEW_COUNT DESC, TRADE_NO DESC
 	</select>
+	
     <select id="getTradeByUserId" resultType="Trade">
     	SELECT * FROM TRADE WHERE USER_ID = #{userId} AND DEL_YN != 'Y' ORDER BY WRITE_DATE DESC
     </select>
@@ -101,6 +100,7 @@
 		INSERT INTO TRADE VALUES(SEQ_TRADE_NO.NEXTVAL, #{userId}, #{tradeTitle}, #{tradeContent}, #{tradePrice},
 		 default, default, #{tradeFilename}, #{tradeFileRename}, #{tradeFilepath}, 'Y', default, 'N')
 	</insert>
+	
 	<update id="updateTrade">
 		UPDATE TRADE
 		SET TRADE_TITLE = #{tradeTitle},
@@ -111,6 +111,7 @@
 		    TRADE_FILEPATH = #{tradeFilepath}
 		WHERE TRADE_NO = #{tradeNo}
 	</update>
+	
 	<delete id="deleteTrade">
 		UPDATE TRADE
 		SET DEL_YN = 'Y'
