@@ -44,4 +44,9 @@ public class ChatServiceImpl implements ChatService {
 	public String selectLastChatById(String receiverId) {
 		return chatMapper.selectLastChatById(receiverId);
 	}
+
+	@Override
+	public List<Chat> getChatRoomsByMyId(String userId) {
+		return chatMapper.getChatRoomsByMyId(userId);
+	}
 }

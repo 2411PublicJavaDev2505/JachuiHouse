@@ -28,6 +28,6 @@ public interface ChatRoomMapper {
 
 	Integer countChatRoomByRoomNo(int roomNo);
 
-	List<Chat> getChatRoomsByMyId(String userId);
+	ChatRoom getChatRoomByNo(int chatRoomNo);
 
 }

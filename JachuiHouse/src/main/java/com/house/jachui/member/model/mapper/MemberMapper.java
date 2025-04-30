@@ -82,8 +82,6 @@ public interface MemberMapper {
 	//관리자 승인
 	int updateApproveYn(String userId);
 
-	String selectNameById(String receiverId);
-
 	Member findMemberByEmailOrName(String userEmail, String userName);
 
 	// 자취생, 공인중개사 id 중복확인
@@ -91,8 +89,6 @@ public interface MemberMapper {
 	
 	// 회원가입 email 중복확인
 	int overlappedEmail(String email);
-
-	String getUserRoleById(String otherUserId);
 
 	int addMember(MemberAddRequest member);
 	// 채팅방 조회

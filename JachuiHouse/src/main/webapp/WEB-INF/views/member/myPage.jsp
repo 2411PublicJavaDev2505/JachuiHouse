@@ -39,20 +39,31 @@
 	            </div>
 	            <div class="rigth-inform">
 	                <div class="chat">
-					    <h3>내 채팅</h3>
-					</div>
-					<div class="chat-content">
-					    <c:if test="${empty cList}">
+	                	<h3>내채팅</h3>
+	                </div>
+	              	    <div class="show-more-wrap-chat">
+					        <button id="showMoreChatBtn" onclick="toggleChatList()">더보기</button>
+					 	</div>
+	                <div class="chat-content">
+					    <c:if test="${empty chatWithList}">
 					        <p>채팅내역이 없습니다.</p>
-					    </c:if>
-					
-<%-- 					    <c:forEach var="chatRoom" items="${cList}"> --%>
-<%-- 					        <c:set var="otherUserId" value="${chatRoom.user1Id == sessionScope.userId ? chatRoom.user2Id : chatRoom.user1Id}" /> --%>
-					
-<%-- 					        <a href="${pageContext.request.contextPath}/chat/chat?writerId=${sessionScope.userId}&receiverId=${otherUserId}"> --%>
-<%-- 					            <p>${otherUserId}님과의 대화</p> --%>
-<!-- 					        </a> -->
-<%-- 					    </c:forEach> --%>
+					    </c:if>			
+					   <c:forEach var="cwl" items="${chatWithList}" varStatus="status">
+						    <a href="${pageContext.request.contextPath}/chat/room?chatRoomNo=${cwl.chatRoom.chatRoomNo}&itemname=${cwl.chatRoom.itemType}&itemNo=${cwl.chatRoom.itemNo}&user1Id=${cwl.chatRoom.user1Id}&user2Id=${cwl.chatRoom.user2Id}" 
+						       style="text-decoration: none; color: inherit;">
+						        <div class="chat-box <c:if test='${status.index >= 3}'>hidden</c:if>" >
+						            <span><strong>상대방 ID:</strong> ${cwl.opponentId}</span>
+						            <span><strong>마지막 메시지:</strong> ${cwl.chat.message}</span>
+						            <span><strong>채팅방 타입:</strong> 
+						                <c:choose>
+						                    <c:when test="${cwl.chatRoom.itemType eq 'trade'}">중고거래</c:when>
+						                    <c:when test="${cwl.chatRoom.itemType eq 'estate'}">부동산</c:when>
+						                    <c:otherwise>기타</c:otherwise>
+						                </c:choose>
+						            </span>
+						        </div>
+						    </a>
+						</c:forEach>
 					</div>
 	                <div class="my-notice">
 	                    <h3>내가 쓴 글</h3>
@@ -109,16 +120,30 @@
 	        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 	<script type="text/javascript">
+	function toggleChatList() {
+	    const allChatItems = document.querySelectorAll('.chat-box');
+	    const button = document.getElementById("showMoreChatBtn");
+	    if (button.innerText === "더보기") {
+	        allChatItems.forEach(item => item.classList.remove('hidden'));
+	        button.innerText = "간략히 보기";
+	    } else {
+	        allChatItems.forEach((item, index) => {
+	        	if (index >= 3) {
+                    item.classList.add('hidden');
+                } else {
+                    item.classList.remove('hidden'); // 처음 3개는 항상 보여야 함
+                }
+	        });
+	        button.innerText = "더보기";
+	    }
+	}
 		function toggleTradeList() {
 		    const allItems = document.querySelectorAll('.trade-item');
 		    const button = document.getElementById("showMoreBtn");
-	
 		    if (button.innerText === "더보기") {
-		        // 전부 보이게
 		        allItems.forEach(item => item.classList.remove('hidden'));
 		        button.innerText = "간략히 보기";
 		    } else {
-		        // 6개만 보이게
 		        allItems.forEach((item, index) => {
 		            if (index >= 6) {
 		                item.classList.add('hidden');
@@ -144,6 +169,7 @@
 	            button.innerText = "더보기";
 	        }
 	    }
+	   
 	</script>	
 </body>
 </html>

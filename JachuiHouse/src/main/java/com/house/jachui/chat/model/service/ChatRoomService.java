@@ -20,6 +20,6 @@ public interface ChatRoomService {
 
 	boolean checkChatRoomExists(int roomNo);
 
-	List<Chat> getChatRoomsByMyId(String userId);
+	ChatRoom getChatRoomByNo(int chatRoomNo);
 
 }

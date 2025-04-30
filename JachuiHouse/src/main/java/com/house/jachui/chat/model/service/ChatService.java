@@ -20,4 +20,5 @@ public interface ChatService {
 
 	String selectLastChatById(String receiverId);
 
+	List<Chat> getChatRoomsByMyId(String userId);
 }
