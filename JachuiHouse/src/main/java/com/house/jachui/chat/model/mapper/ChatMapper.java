@@ -28,4 +28,6 @@ public interface ChatMapper {
 
 	String selectLastChatById(String receiverId);
 
+	List<Chat> getChatRoomsByMyId(String userId);
+
 }

@@ -260,10 +260,6 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalCount(String userId) {
 		return mMapper.getTotalCount();
 	}
-	@Override
-	public String selectNameById(String receiverId) {
-		return mMapper.selectNameById(receiverId);
-	}
 
 	// 자취생, 공인중개사 id 중복확인
 	@Override
@@ -275,11 +271,6 @@ public class MemberServiceImpl implements MemberService {
 	public int overlappedEmail(String email) throws Exception {
 		return mMapper.overlappedEmail(email);
 	}
-	// 마이페이지에서 채팅내역 공인중개사인지 자취생인지 구분
-	@Override
-	public String getChatByUserId(String otherUserId) {
-		return mMapper.getChatByUserId(otherUserId);
-	}
 
 	//공인중개사 파일 저장 처리
 	@Override
@@ -287,11 +278,6 @@ public class MemberServiceImpl implements MemberService {
 		return mMapper.addMember(member);
 	}
 
-	@Override
-	public String getUserRoleById(String otherUserId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 }

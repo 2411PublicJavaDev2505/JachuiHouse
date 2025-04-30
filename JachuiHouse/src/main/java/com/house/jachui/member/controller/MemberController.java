@@ -2,10 +2,13 @@ package com.house.jachui.member.controller;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.house.jachui.common.FileUtil;
+import com.house.jachui.chat.controller.dto.ChatWith;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
@@ -56,6 +60,7 @@ public class MemberController {
 	private final PostService pService;
 	private final TradeService tService;
 	private final MemberService mService;
+	private final ChatService cService; 
 	private final ChatRoomService chatRoomService;
 	//회원 관리 리스트 - 페이지네이션
 	private final PageUtil pageUtil;
@@ -364,26 +369,33 @@ public class MemberController {
 	@GetMapping("/myPage")
 	public String showAloneDetail(
 			HttpSession session,
-			 @RequestParam(value = "receiverId", required = false) String receiverId,
 			Model model) {
 			String userRole = (String)session.getAttribute("userRole");
 			if("M".equals(userRole)) {
 		        Map<String, String> map = new HashMap<>();
-		        map.put("receiverId", receiverId);
-		        String receiverName = mService.selectNameById(receiverId);
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
-				List<Chat> cList = chatRoomService.getChatRoomsByMyId(userId);
+				Set<String> opponentSet = new HashSet<>();
+				List<ChatWith> uniqueChatWithList = new ArrayList<>();
+				List<Chat> cList = cService.getChatRoomsByMyId(userId);
+				List<ChatWith> chatWithList = new ArrayList<>();
 				List<PostVO> pList = pService.getPostsByUserId(userId);
 				List<Trade> tList = tService.getTradeByUserId(userId);
-
+				for (Chat chat : cList) {
+				    ChatRoom room = chatRoomService.getChatRoomByNo(chat.getChatRoomNo());
+				    // 상대방 ID 구하기 (본인 제외)
+				    String opponentId = room.getUser1Id().equals(userId) ? room.getUser2Id() : room.getUser1Id();
+				    if (!opponentSet.contains(opponentId)) {
+				        opponentSet.add(opponentId);
+				        ChatWith cwl = new ChatWith(chat, room, opponentId);
+				        uniqueChatWithList.add(cwl);
+				    }
+				}
+				model.addAttribute("chatWithList", uniqueChatWithList);
 				model.addAttribute("tList", tList);
 				model.addAttribute("member", member);
 				model.addAttribute("pList", pList);
 				model.addAttribute("cList", cList);
-		        model.addAttribute("receiverName", receiverName);
-
-
 				return "member/myPage";
 			}else {
 				model.addAttribute("errorMsg", "서비스가 완료되지 않았습니다.");

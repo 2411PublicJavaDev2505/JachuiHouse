@@ -51,7 +51,7 @@
 		                    <button type="button" onclick="location.href='myPage'">취소</button>
 		                </div>
 		                <div class="updateBtn">
-		                    <button type="submit">수정</button>
+		                    <button type="submit" onclick="updateConfirm(event)">수정</button>
 		                </div>
 		            </div>
 		        </div>
@@ -60,6 +60,13 @@
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 	<script type="text/javascript">
+		function updateConfirm(event) {
+	        event.preventDefault(); 	
+	        const isConfirmed = confirm("회원정보를 수정하시겠습니까?");
+	        if (isConfirmed) {
+	            document.querySelector('form').submit();
+	        }
+	    }
 		function previewImage(event) {
 	        const reader = new FileReader();
 	        reader.onload = e => document.getElementById('profileImage').src = e.target.result;

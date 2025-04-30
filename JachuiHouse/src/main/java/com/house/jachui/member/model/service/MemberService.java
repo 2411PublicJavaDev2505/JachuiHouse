@@ -79,8 +79,6 @@ public interface MemberService {
 
 	int getTotalCount(String userId);
 	
-	String selectNameById(String receiverId);
-
 	// 아이디찾기 페이지에서 자취생/공인중개사 선택 시 
 	String getFindIdErrorMessage(Member member);
 
@@ -92,11 +90,9 @@ public interface MemberService {
      // 자취생, 공인중개사 email 중복확인
   	int overlappedEmail(String userId) throws Exception;
 
-	String getUserRoleById(String otherUserId);
 
 	//공인중개사 파일 저장 처리
 	int addMember(MemberAddRequest member);
-	
-	String getChatByUserId(String otherUserId);
+
 }
 
