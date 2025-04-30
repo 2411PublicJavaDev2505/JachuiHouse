@@ -36,8 +36,8 @@ pageEncoding="UTF-8"%>
                     ${realtor.userEmail }
                 </div>
                 <div id="modi">
-                	<a href="/realtor/update">
-                    	<button type="submit" id="modify">신고하기</button>
+                	<a id="aTag" href="/realtor/update">
+                    	<button type="submit" id="report">신고하기</button>
                    	</a>
                 </div>
                 <!-- <div id="del">
@@ -55,7 +55,7 @@ pageEncoding="UTF-8"%>
                     	<button type="submit" id="chatList">채팅 문의</button>
                     </a>
                 </div>
-                <c:if test="${empty cList}">
+                <c:if test="${empty eList}">
                 	<div id="none">
 						<b><p>게시글이 존재하지 않습니다.</p></b>
 					</div>
@@ -101,18 +101,18 @@ pageEncoding="UTF-8"%>
                         </div>
                         <div id="bot">
                             <div id="top-in">
-                                <text><a href="/chazabang/detail/${estate.estateNo }" class="estate" data-type="${est.estateType}">
+                                <text><a href="/chazabang/detail/${estate.estateNo }" class="estate"  data-type="${est.estateType}">
                                 	<c:if test="${estate.estateType eq 'onetwo'}">
-                                		<b>원룸/투룸</b>
+                                		<b id="es">원룸/투룸</b>
                         			</c:if>
                         			<c:if test="${estate.estateType eq 'villa'}">
-                        				<b>주택/빌라</b>
+                        				<b id="es">주택/빌라</b>
                         			</c:if>
                                 	<c:if test="${estate.estateType eq 'apart'}">
-                        				<b>아파트</b>
+                        				<b id="es">아파트</b>
                         			</c:if>
                         			<c:if test="${estate.estateType eq 'officetel'}">
-                        				<b>오피스텔</b>
+                        				<b id="es">오피스텔</b>
                         			</c:if>
                         		</a> ${estate.estateFloor }층, ${estate.estateWidth }㎡</text>
                             </div>
@@ -122,14 +122,23 @@ pageEncoding="UTF-8"%>
             </c:forEach>
             <div class="pagination">
 				<c:if test="${startNavi ne 1 }">
-					<a href="/realtor/myPage?page=${startNavi - 1 }" class="prev">&lt;</a>
+					<a href="/realtor/page?userId=${realtor.userId }?page=${startNavi - 1 }" class="prev">&lt;</a>
 				</c:if>
 				<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-					<a href="/realtor/myPage?page=${p }">${p }</a>
+					<a href="/realtor/page?userId=${realtor.userId }?page=${p }">${p }</a>
 				</c:forEach>
 				<c:if test="${endNavi ne maxPage }">
-					<a href="/realtor/myPage?page=${endNavi + 1 }" class="next">&gt;</a>
+					<a href="/realtor/page?userId=${realtor.userId }?page=${endNavi + 1 }" class="next">&gt;</a>
 				</c:if>
+				 <!-- 다음 버튼 -->
+	            	<%-- <c:if test="${currentPage < maxPage}">
+	                	<c:choose>
+	              	      <c:otherwise>
+	   	                  		<a href="/realtor/myPage?page=${endNavi + 1}" class="next">▶</a>
+	                        	<a href="/realtor/myPage?page=${maxPage}" class="last">▷▷</a>
+	                      	</c:otherwise>
+	                    </c:choose>
+	                </c:if>  --%>
 			</div>
         </div>
     </main>
