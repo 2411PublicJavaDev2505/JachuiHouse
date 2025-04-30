@@ -46,13 +46,13 @@
 					        <p>채팅내역이 없습니다.</p>
 					    </c:if>
 					
-					    <c:forEach var="chatRoom" items="${cList}">
-					        <c:set var="otherUserId" value="${chatRoom.user1Id == sessionScope.userId ? chatRoom.user2Id : chatRoom.user1Id}" />
+<%-- 					    <c:forEach var="chatRoom" items="${cList}"> --%>
+<%-- 					        <c:set var="otherUserId" value="${chatRoom.user1Id == sessionScope.userId ? chatRoom.user2Id : chatRoom.user1Id}" /> --%>
 					
-					        <a href="${pageContext.request.contextPath}/chat/chat?writerId=${sessionScope.userId}&receiverId=${otherUserId}">
-					            <p>${otherUserId}님과의 대화</p>
-					        </a>
-					    </c:forEach>
+<%-- 					        <a href="${pageContext.request.contextPath}/chat/chat?writerId=${sessionScope.userId}&receiverId=${otherUserId}"> --%>
+<%-- 					            <p>${otherUserId}님과의 대화</p> --%>
+<!-- 					        </a> -->
+<%-- 					    </c:forEach> --%>
 					</div>
 	                <div class="my-notice">
 	                    <h3>내가 쓴 글</h3>

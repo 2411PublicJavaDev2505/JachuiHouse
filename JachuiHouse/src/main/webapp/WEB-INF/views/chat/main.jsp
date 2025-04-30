@@ -57,6 +57,7 @@
         const writerId = '${writerId}';
         const receiverId = '${receiverId}';
         const receiverName = '${receiverName}';
+        const chatRoomNo = '${chatRoomNo}';
 
         let lastChatNo = ${empty chatList ? 0 : chatList[chatList.size()-1].chatNo};
 
@@ -84,7 +85,8 @@
             const sendData = {
                 writerId,
                 receiverId,
-                message: messageContent
+                message: messageContent,
+                chatRoomNo
             };
 
             fetch('/chat/send', {
@@ -112,29 +114,33 @@
         setInterval(fetchChatMessages, 1000);
 
         function fetchChatMessages() {
-            fetch(`/chat/fetch?writerId=${writerId}&receiverId=${receiverId}&lastChatNo=${lastChatNo}`)
+            fetch('/chat/fetch?writerId=${writerId}&receiverId=${receiverId}&lastChatNo=' + lastChatNo)
             .then(res => res.json())
             .then(data => {
-                data.forEach(chat => {
-                    appendNewMessage(chat);
-                });
+                if (data.length > 0) {
+                    data.forEach(chat => {
+                        appendNewMessage(chat);
+                    });
+                    scrollToBottom();
+                }
             })
             .catch(error => console.error("fetch 에러:", error));
         }
 
         function appendNewMessage(chat) {
+        	console.log(chat)
             const div = document.createElement('div');
             if (chat.writerId == writerId) {
                 div.classList.add('my-msg');
                 div.innerHTML = `
                     <div class="me">나</div>
-                    <div class="my-msg-detail">${chat.message || '(내용 없음)'}</div>
+                    <div class="my-msg-detail">`+chat.message +`</div>
                 `;
             } else {
                 div.classList.add('not-my-msg');
                 div.innerHTML = `
-                    <div class="receiver-name">${receiverName}</div>
-                    <div class="receive-msg">${chat.message || '(내용 없음)'}</div>
+                    <div class="receiver-name">상대방</div>
+                    <div class="receive-msg">`+chat.message +`</div>
                 `;
             }
             chatContent.appendChild(div);
@@ -153,7 +159,10 @@
                 <div class="my-msg-detail">${message}</div>
             `;
             chatContent.appendChild(div);
+
+            scrollToBottom();
         }
+
 
         function scrollToBottom() {
             chatContent.scrollTop = chatContent.scrollHeight;

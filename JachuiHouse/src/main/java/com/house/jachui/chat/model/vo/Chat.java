@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Getter
 @Setter
 @ToString
@@ -15,12 +16,11 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Chat {
 	private int chatNo;
-	private int cahtRoomNo;
+	private int chatRoomNo;
 	private String writerId;
 	private String message;
 	private String isRead;
 	private Date createDate;
 	private Timestamp chatTime;
 	private String otherUserRole;
-	
 }

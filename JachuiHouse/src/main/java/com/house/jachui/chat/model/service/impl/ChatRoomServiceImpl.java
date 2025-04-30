@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.house.jachui.chat.model.mapper.ChatRoomMapper;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.vo.Chat;
-import com.house.jachui.chat.model.vo.ChatRoom;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +30,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
     @Override
     public int createEstateChatRoom(String user1Id, String user2Id, int estateNo) {
-        // 중복 채팅방 확인
         Map<String, Object> params = new HashMap<>();
         params.put("user1Id", user1Id);
         params.put("user2Id", user2Id);
@@ -39,23 +37,22 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         params.put("itemNo", estateNo);
         Integer existingChatRoomNo = chatRoomMapper.findChatRoomByUsersAndItem(params);
         if (existingChatRoomNo != null) {
-            System.out.println("Existing chat room found: CHAT_ROOM_NO=" + existingChatRoomNo);
+            System.out.println("Existing chat room found: CHAT_ROOM_NO=" + existingChatRoomNo + " for estateNo=" + estateNo);
             return existingChatRoomNo;
         }
 
-        // 새 채팅방 생성
+        System.out.println("Creating new chat room for estateNo=" + estateNo + ", user1Id=" + user1Id + ", user2Id=" + user2Id);
         chatRoomMapper.createEstateChatRoom(params);
         Integer newChatRoomNo = chatRoomMapper.findChatRoomByUsersAndItem(params);
         if (newChatRoomNo == null) {
             throw new RuntimeException("Failed to create or find chat room for estateNo=" + estateNo);
         }
-        System.out.println("New chat room created: CHAT_ROOM_NO=" + newChatRoomNo);
+        System.out.println("New chat room created: CHAT_ROOM_NO=" + newChatRoomNo + " for estateNo=" + estateNo);
         return newChatRoomNo;
     }
 
     @Override
     public int createTradeChatRoom(String user1Id, String user2Id, int tradeNo) {
-        // 중복 채팅방 확인
         Map<String, Object> params = new HashMap<>();
         params.put("user1Id", user1Id);
         params.put("user2Id", user2Id);
@@ -63,17 +60,17 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         params.put("itemNo", tradeNo);
         Integer existingChatRoomNo = chatRoomMapper.findChatRoomByUsersAndItem(params);
         if (existingChatRoomNo != null) {
-            System.out.println("Existing chat room found: CHAT_ROOM_NO=" + existingChatRoomNo);
+            System.out.println("Existing chat room found: CHAT_ROOM_NO=" + existingChatRoomNo + " for tradeNo=" + tradeNo);
             return existingChatRoomNo;
         }
 
-        // 새 채팅방 생성
+        System.out.println("Creating new chat room for tradeNo=" + tradeNo + ", user1Id=" + user1Id + ", user2Id=" + user2Id);
         chatRoomMapper.createTradeChatRoom(params);
         Integer newChatRoomNo = chatRoomMapper.findChatRoomByUsersAndItem(params);
         if (newChatRoomNo == null) {
             throw new RuntimeException("Failed to create or find chat room for tradeNo=" + tradeNo);
         }
-        System.out.println("New chat room created: CHAT_ROOM_NO=" + newChatRoomNo);
+        System.out.println("New chat room created: CHAT_ROOM_NO=" + newChatRoomNo + " for tradeNo=" + tradeNo);
         return newChatRoomNo;
     }
 
@@ -88,11 +85,12 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     @Override
     public boolean checkChatRoomExists(int chatRoomNo) {
         Integer count = chatRoomMapper.countChatRoomByRoomNo(chatRoomNo);
+        System.out.println("Checking chat room existence: CHAT_ROOM_NO=" + chatRoomNo + ", exists=" + (count != null && count > 0));
         return count != null && count > 0;
     }
 
 	@Override
-	public List<ChatRoom> getChatRoomsByMyId(String userId) {
+	public List<Chat> getChatRoomsByMyId(String userId) {
 		return chatRoomMapper.getChatRoomsByMyId(userId);
 	}
 }
