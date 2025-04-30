@@ -46,6 +46,9 @@
 					      data-userbirth="${member.userBirth}"
 					      data-approveyn="${member.approveYn}"
 					      data-realtorno="${member.realtorNo}"
+					      data-filepath="${member.filePath}"
+						  data-filerename="${member.fileRename}"
+						  data-filename="${member.fileName}"
 					      >
 					      
         				<td>
@@ -114,7 +117,10 @@
 		    userEmail: row.getAttribute("data-useremail"),
 		    userBirth: row.getAttribute("data-userbirth"),
 		    approveYn: row.getAttribute("data-approveyn"),
-		    realtorNo: row.getAttribute("data-realtorno")
+		    realtorNo: row.getAttribute("data-realtorno"),
+		    filePath: row.getAttribute("data-filepath"),
+		    fileRename: row.getAttribute("data-filerename"),
+		    fileName: row.getAttribute("data-filename")
 		  };
 
 		  // 📌 Swal로 회원 정보 보여주는 알림창을 띄워줘
@@ -129,6 +135,7 @@
 		        <p><strong>이메일:</strong>`+member.userEmail+`</p>
 		        <p><strong>생년월일:</strong>`+member.userBirth+`</p>
 		        <p><strong>자격증 번호:</strong>`+member.realtorNo+`</p>
+				<p><strong>첨부파일:</strong> <a href="${member.filePath}/${member.fileRename}" download="${member.fileName}">${member.fileName}</a></p>
 		      </div>
 		    `,
 		    showCloseButton: true,// 오른쪽 위에 'X' 닫기 버튼
