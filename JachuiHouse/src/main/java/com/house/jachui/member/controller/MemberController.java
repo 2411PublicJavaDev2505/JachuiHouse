@@ -538,6 +538,5 @@ public class MemberController {
 	    int result = mService.approveMember(userId);
 	    return result > 0 ? "success" : "fail";
 	}
-
 	
 }

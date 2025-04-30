@@ -70,7 +70,7 @@ margin: 0;
 	width: 600px;
     height: 600px;
     margin-bottom: 1.5rem;
-    
+    object-fit: cover; /* 이미지를 왜곡없이 보여줌 */
 }
 
 /* .main-container img{

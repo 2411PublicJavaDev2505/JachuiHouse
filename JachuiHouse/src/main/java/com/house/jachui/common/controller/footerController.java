@@ -28,9 +28,10 @@ public class footerController {
 		return "footer/ad";
 	}
 	
-	// 확인하고 다 하면 이거 지우기
+	// 확인하고 다 하면 이거 지우기 (에러페이지임)
 	@GetMapping("/error")
 	public String error() {
 		return "common/error";
 	}
+
 }

@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
+
+
 @font-face {
     font-family: 'Cafe24Oneprettynight';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
@@ -31,6 +34,10 @@ body {
     padding: 40px 0px;
     box-sizing: border-box;
     margin-top: auto;
+    
+ /*    Inpa Dev 따라한것
+    align-items: center;
+  	overflow: hidden; */
 }
 
 
@@ -48,6 +55,14 @@ body {
     box-shadow: 2px 5px 10px 3px rgb(165, 162, 162);
     /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
     --justify-content: center;
+    
+    letter-spacing: 0.1em;
+    
+/*     Inpa Dev 따라한것
+    --border-radius: 10px;
+	box-shadow: -5px -5px 10px #fff, 5px 5px 10px #babebc;
+	--position: absolute;
+	--overflow: hidden;  */
 }   
 
 
@@ -59,12 +74,13 @@ body {
     max-width: 500px;
     border: 1px solid #ddd;
  	border-radius: 5px;
- 	padding: 10px;
+ 	--padding: 10px;
     /* padding: 30px; */
     overflow: hidden;
     box-sizing: boder-box;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+	padding-right: 20px;
     
 }   
 
@@ -131,9 +147,13 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-   
+    
     /* position: absolute; */
     /* float: none; */
+   
+   /* 로그인 중앙정렬을 위해 추가한것 */
+    align-items: center;
+    padding-right: 10px;
 }
 
 .login-form h1 {
@@ -145,6 +165,10 @@ h1 {
 
 .form-group {
     margin-bottom: 15px;
+    
+    /* 로그인 중앙정렬을 위해 추가한것 */
+    width: 100%; /* 전체 너비로 설정 */
+    max-width: 400px; /* 입력 필드 너비를 늘림 */
 }
 
 .form-group label {
@@ -159,6 +183,10 @@ h1 {
     padding: 10px;
     border: 1px solid #c0baba;
     border-radius: 5px;
+    margin-right: 10px;
+
+    --box-shadow: -5px -5px 10px #fff, 5px 5px 8px #babebc;
+    --box-shadow: -5px -5px 10px #f4f4f4, 5px 5px 8px #c0c0c0;
 }
 
 .checkbox-container {
@@ -166,6 +194,11 @@ h1 {
     align-items: center;
     margin: 1%;
     margin-bottom: 4%;
+    
+    /* 로그인 중앙정렬을 위해 추가한것 */
+    width: 100%;
+    max-width: 400px; /* 입력 필드 너비와 일치 */
+    justify-content: flex-start; /* 체크박스를 컨테이너 내 왼쪽으로 정렬 */
 }
 
 .checkbox-container input[type="checkbox"] {
@@ -173,6 +206,9 @@ h1 {
 }
 
 .loginBtn {
+	/* display: flex;
+	justify-content: center;
+	align-items: center; */
     width: 100%;
     padding: 10px 20px;
     margin-bottom: 15px;
@@ -183,6 +219,13 @@ h1 {
     color: white;
     border: none;
     border-radius: 5px;
+    letter-spacing: 0.3em;
+    
+    --box-shadow: -5px -5px 10px #fff, 5px 5px 8px #bf4b2b;
+    
+    /* 로그인 중앙정렬을 위해 추가한것 */
+     max-width: 420px; /* 입력 필드 너비와 일치 */
+     margin-left: 20px;
 }
 
 .loginBtn:hover {
@@ -192,7 +235,16 @@ h1 {
 
 .login-form {
     display: flex;
-    width: 300px;
+    --width: 300px;
+    
+    /* 로그인 중앙정렬을 위해 추가한것 */
+    flex: 1;
+    padding: 40px;
+    height: 60%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* 수평 중앙 정렬 */
 }
 
 .login-form p {
@@ -219,6 +271,10 @@ h1 {
     flex-direction: column; /* 요소들을 위아래로 정렬 */
     height: 20%;
     /* margin-bottom: px; */
+    
+    /* 로그인 중앙정렬을 위해 추가한것 */
+    width: 100%;
+    max-width: 400px;
 }
 
 .confirm-container p {

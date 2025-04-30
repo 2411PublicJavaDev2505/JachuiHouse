@@ -21,57 +21,74 @@
 	        <!-- 배너 슬라이드 -->
 	            <div class="main">
 	                <section class="banner">
-	                   <div class="left-image-container">
-<!-- 						    <button class="arrow left" onclick="changeImage(-1)">&#10094;</button> -->
-							<!-- 		캐러셀 추가 -->
-							<div class="carousel_main">
-							    <div class="carousel_wrapper">
-							        <div class="carousel_slide">
-							        	<a href="http://localhost:7777/post/detail?postNo=801">
-<!-- 							            <img src="https://iii.ad/16747a" alt="#" /> -->
-							            	<img src="https://iii.ad/145484" alt="첫 번째 이미지" />
-							            </a>
-							        </div>
-							        <div class="carousel_slide">
-										<a href="http://localhost:7777/post/detail?postNo=866">
-							                <img src="https://iii.ad/ccc869" alt="두 번째 이미지" />
-							            </a>
-							        </div>
-							        <div class="carousel_slide">
-							            <a href="http://localhost:7777/post/detail?postNo=867">
-							                <img src="https://iii.ad/054b54" alt="세 번째 이미지" />
-							            </a>
-							        </div>
-							    </div>
-							
-							    <!-- 캐러셀 사이드 버튼 -->
-							    <div class="carousel_button_container">
-							        <button type="button" class="carousel_prev">
-							            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
-							                <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-							                <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-							            </svg>
-							        </button>
-							        <button type="button" class="carousel_next">
-							            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-							                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
-							                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
-							            </svg>
-							        </button>
-							    </div>
-							
-							    <!-- 캐러셀 중앙 버튼 -->
-							    <div class="carousel_pagination">
-							        <div class="carousel_circle"></div>
-							        <div class="carousel_circle"></div>
-							        <div class="carousel_circle"></div>
-							    </div>
+	                	<div class="banner-content">
+		                   <div class="left-image-container">
+	<!-- 						    <button class="arrow left" onclick="changeImage(-1)">&#10094;</button> -->
+								<!-- 		캐러셀 추가 -->
+								<div class="carousel_main">
+								    <div class="carousel_wrapper">
+								        <div class="carousel_slide">
+								        	<a href="http://localhost:7777/post/detail?postNo=801">
+	<!-- 							            <img src="https://iii.ad/16747a" alt="#" /> -->
+								            	<img src="https://iii.ad/145484" alt="첫 번째 이미지" />
+								            </a>
+								        </div>
+								        <div class="carousel_slide">
+											<a href="http://localhost:7777/post/detail?postNo=866">
+								                <img src="https://iii.ad/ccc869" alt="두 번째 이미지" />
+								            </a>
+								        </div>
+								        <div class="carousel_slide">
+								            <a href="http://localhost:7777/post/detail?postNo=867">
+								                <img src="https://iii.ad/054b54" alt="세 번째 이미지" />
+								            </a>
+								        </div>
+								    </div>
+								
+								    <!-- 캐러셀 사이드 버튼 -->
+								    <div class="carousel_button_container">
+								        <button type="button" class="carousel_prev">
+								            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+								                <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+								                <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+								            </svg>
+								        </button>
+								        <button type="button" class="carousel_next">
+								            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+								                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+								                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+								            </svg>
+								        </button>
+								    </div>
+								
+								    <!-- 캐러셀 중앙 버튼 -->
+								    <div class="carousel_pagination">
+								        <div class="carousel_circle"></div>
+								        <div class="carousel_circle"></div>
+								        <div class="carousel_circle"></div>
+								    </div>
+								</div>
 							</div>
-						</div>
-	                    <div>
-	                        <img src="../resources/image/main-right.png" alt="house" class="right-image">
-	                    </div>
-	                </section>                
+		                    <!-- <div>
+		                        <img src="../resources/image/main-right.png" alt="house" class="right-image">
+		                    </div> -->
+			                <aside class="right-container">
+			                	<p>찾아방</p>
+			                	<div class="houseSale">
+			                	</div>
+			                	
+			                	<p>공지사항</p>
+			                	<div class="noticeCats">
+			                	</div>
+			                	
+			                	<p>자취록</p>
+			                	<div class="roomTales">
+			                	</div>
+			                	
+			                </aside>  
+		                </div>              
+	                </section>
+		                
 	                            
 	                <!-- 주요 기능 소개 -->
 	                <div class="main-menu">
