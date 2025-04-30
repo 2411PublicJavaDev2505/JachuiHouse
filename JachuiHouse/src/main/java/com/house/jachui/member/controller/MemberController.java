@@ -373,7 +373,7 @@ public class MemberController {
 		        String receiverName = mService.selectNameById(receiverId);
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
-				List<ChatRoom> cList = chatRoomService.getChatRoomsByMyId(userId);
+				List<Chat> cList = chatRoomService.getChatRoomsByMyId(userId);
 				List<PostVO> pList = pService.getPostsByUserId(userId);
 				List<Trade> tList = tService.getTradeByUserId(userId);
 

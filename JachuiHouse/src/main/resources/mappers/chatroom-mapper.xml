@@ -42,7 +42,15 @@
     </select>
 
     <select id="getChatRoomsByUserId" resultMap="com.house.jachui.chat.model.mapper.ChatMapper.chatResultMap">
-        SELECT DISTINCT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME, c.OTHER_USER_ROLE
+        SELECT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, DBMS_LOB.SUBSTR(c.MESSAGE, 4000, 1) AS MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME
+        FROM CHAT c
+        JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
+        WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
+        ORDER BY c.CHAT_TIME DESC
+    </select>
+    
+    <select id="getChatRoomsByMyId" resultType="Chat">
+        SELECT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME
         FROM CHAT c
         JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
         WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
@@ -53,13 +61,5 @@
         SELECT COUNT(*)
         FROM CHAT_ROOM
         WHERE CHAT_ROOM_NO = #{chatRoomNo}
-    </select>
-    
-    <select id="getChatRoomsByMyId" resultMap="com.house.jachui.chat.model.mapper.ChatMapper.chatResultMap">
-        SELECT DISTINCT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME, c.OTHER_USER_ROLE
-        FROM CHAT c
-        JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
-        WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
-        ORDER BY c.CHAT_TIME DESC
     </select>
 </mapper>
