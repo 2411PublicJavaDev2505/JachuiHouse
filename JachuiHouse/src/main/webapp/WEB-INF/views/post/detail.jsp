@@ -54,7 +54,7 @@
 							<textarea rows="20" cols="30" placeholder="상세한 내용을 적어주세요." name="reportContent"></textarea>
 						</div>
 						<div class="reportBtn">
-						    <button type="button" onclick="reportPost('post')">신고하기</button>
+						    <button type="submit" onclick="reportPost('post')">신고하기</button>
 						    <button type="button" onclick="reportBackToPage2();">뒤로가기</button>
 						</div>
 					</form>
@@ -127,7 +127,7 @@
 					    <c:if test="${sessionScope.userId ne result.userId }">
 						   <button class="reportbtn2" onClick="showReport2();">신고하기</button>
 					    </c:if>
-                       <form action="/post/cinsert" method="post">
+<!--                        <form action="/post/cinsert" method="post"> -->
 						   <input type="hidden" name="postNo" value="${result.postNo}">
 						   <input type="hidden" name="userId" value="${sessionScope.userId }">
 						   <div class="underbar">
@@ -141,14 +141,13 @@
 								    <button class="deletebtn2" type="button" onclick="confirmDelete(${result.postNo})">삭제하기</button>
 								</c:if>
 								<div class="comment-write">
-							    <input id="commentInput" name="commentContent" type="text" placeholder="댓글을 입력하세요.">
-							    <button type="button" class="commentbtn" onclick="submitComment()">댓글달기</button>
-							</div>
-							
+								    <input id="commentInput" name="commentContent" type="text" placeholder="댓글을 입력하세요.">
+								    <button type="submit" class="commentbtn" onclick="submitComment()">댓글달기</button>
+								</div>
 							<button class="backbtn" type="button" onclick="location.href='/post/list'">목록으로</button>
-							</div>
+						</div>
+<!--                        </form> -->
                     	</div>
-                       </form>
                    </div>
             </div>
    			<jsp:include page="/WEB-INF/views/include/footer.jsp"/>		
@@ -189,6 +188,7 @@
 		        // 빈칸 체크
 		        if (reason === "" || content === "") {
 		            alert("신고 내용을 입력하세요.");
+		            event.preventDefault();
 		            return; // 더 진행하지 않고 종료
 		        }
 		
@@ -235,8 +235,8 @@
 		            success: function(data) {
 		                alert("댓글이 등록되었습니다.");
 		                commentInput.value = ""; // 입력창 비우기
-		                loadCommentList(); // 댓글 목록 새로 불러오기
-		                location.href = `/post/detail?postNo=${result.postNo}`;
+// 		                loadCommentList(); // 댓글 목록 새로 불러오기
+		                location.href = "/post/detail?postNo=${result.postNo}";
 		            },
 		            error: function(xhr, status, error) {
 		                console.error("Error details:", status, error);
@@ -280,12 +280,12 @@
 		    }
 
 		    // 엔터 키로 댓글 등록
-		    document.getElementById('commentInput').addEventListener('keypress', function(event) {
-		        if (event.key === 'Enter') {
-		            event.preventDefault(); // 폼 제출 방지
-		            submitComment(); // 댓글 등록
-		        }
-		    });
+// 		    document.getElementById('commentInput').addEventListener('keypress', function(event) {
+// 		        if (event.key === 'Enter') {
+// 		            event.preventDefault(); // 폼 제출 방지
+// 		            submitComment(); // 댓글 등록
+// 		        }
+// 		    });
 
 		    // 페이지 진입 시 댓글 목록 바로 로딩
 		    document.addEventListener('DOMContentLoaded', function() {
