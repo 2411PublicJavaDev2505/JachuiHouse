@@ -194,18 +194,5 @@
 		      showSlide(0); // 처음에 슬라이드 보이게 설정
 		    });
 		</script>
-        <script>
-		document.addEventListener("DOMContentLoaded", function () {
-        new TypeIt('.main-hello', {
-            loop:true,
-            speed: 90,
-            waitUntilVisible: true,
-		})
-            .type("자취하우스에 오신 걸 환영합니다.", {delay:500})
-            .delete(12)
-            .type("서 당신의 꿀팁을 공유해주세요.")
-            .go();
-		});
-        </script>
 </body>
 </html>
