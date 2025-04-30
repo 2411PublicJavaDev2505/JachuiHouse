@@ -113,8 +113,6 @@
         <!-- JavaScript 파일 연결 -->
         <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
         <script>
-<<<<<<< HEAD
-=======
         new TypeIt('.main-hello', {
             loop: true,
             speed: 120,
@@ -124,7 +122,6 @@
         .delete(12)
         .type("서 당신의 꿀팁을 공유해주세요.")
         .go();
->>>>>>> 7955d1b0d186ed1d8fe9a01ab20ee771afc57d26
         const images = [
             "../resources/image/main-left.jpeg",
             "https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/868/b95e315ef9ac68f64598172e66701798_res.jpeg",
@@ -144,7 +141,6 @@
             document.getElementById("leftImage").src = images[currentImageIndex];
         }
         
-<<<<<<< HEAD
 //         캐러셀
 
 			document.addEventListener("DOMContentLoaded", function () {
@@ -211,56 +207,5 @@
             .go();
 		});
         </script>
-=======
-        document.addEventListener("DOMContentLoaded", function () {
-            const swiper = document.querySelector('.carousel_wrapper');
-            const slides = document.querySelectorAll('.carousel_slide');
-            const prevBtn = document.querySelector('.carousel_prev');
-            const nextBtn = document.querySelector('.carousel_next');
-            const bullets = document.querySelectorAll('.carousel_circle');
-
-            let slideWidth;
-            let currentSlide = 0;
-
-            function updateSlideWidth() {
-                slideWidth = slides[0].clientWidth;
-            }
-
-            function showSlide(value) {
-                const setValue = "-" + (value * slideWidth) + "px"; 
-                swiper.style.transform = `translateX(${setValue})`;
-                currentSlide = value;
-                bullets.forEach((bullet, i) => {
-                    bullet.classList.toggle('active', i === value);
-                });
-            }
-
-            prevBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                updateSlideWidth();  // <- 이게 위로 올라와야 정확
-                if (currentSlide > 0) showSlide(currentSlide - 1);
-            });
-
-            nextBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                updateSlideWidth();
-                if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
-            });
-
-            bullets.forEach((bullet, i) => {
-                bullet.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    updateSlideWidth();
-                    showSlide(i);
-                });
-            });
-
-            // 페이지 로드시 초기 슬라이드 세팅
-            updateSlideWidth();
-            showSlide(0);
-        });
-        </script>
-
->>>>>>> 7955d1b0d186ed1d8fe9a01ab20ee771afc57d26
 </body>
 </html>
