@@ -14,6 +14,7 @@ margin: 0;
     justify-content: center;
     align-items: center;
     --position: relative;
+    background-color: #FFF9E9;
 }
 
 /* 배경 이미지에 투명도 적용 */
@@ -35,6 +36,7 @@ margin: 0;
     justify-content: center;
     align-items: center;
     height: 100vh; */
+   
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -49,14 +51,14 @@ margin: 0;
 	text-align: center;
 	--position: relative; */
 	
-	/* height: 780px;
+	height: 780px;
 	display : flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column; */
-	background-color: #ffffff;
+	flex-direction: column; 
+	--background-color: #FFF9E9;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     text-align: center;
     max-width: 28rem; /* 최대 너비 제한 */
@@ -65,9 +67,10 @@ margin: 0;
 }
 
 .error-image{
-	max-width: 300px;
-    height: auto;
+	width: 600px;
+    height: 600px;
     margin-bottom: 1.5rem;
+    
 }
 
 /* .main-container img{
@@ -76,8 +79,12 @@ margin: 0;
 	background-color: #fff9e9;
 } */
 
+.message {
+	padding-bottom: 30px;
+}
+
 .message h1 {
-    font-size: 1.875rem;
+    font-size: 3rem;
     font-weight: bold;
     color: #dc2626; /* 빨간색 */
     margin-bottom: 0.5rem;
@@ -91,12 +98,14 @@ margin: 0;
 
 .message p {
     color: #6b7280;
+    font-size: 1.4rem;
 }
 
 .navi-container {
 	display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding-top: 50px;
 	
 }
 
@@ -108,7 +117,7 @@ margin: 0;
 }
 
 /* 버튼 스타일 */
-.btn-custom {
+.btn-navi {
     background-color: #FF7337;
     color: #FFFFFF;
     padding: 0.5rem 1.5rem;
@@ -122,6 +131,7 @@ margin: 0;
 
 .btn-custom:hover {
     background-color: #FFA37C;
+    margin-top: 30px;
 }
 
 /* 반응형 디자인 */
@@ -130,7 +140,7 @@ margin: 0;
         max-width: 200px;
     }
 
-    .btn-custom {
+    .btn-navi {
         padding: 0.5rem 1rem;
         font-size: 0.875rem;
     }

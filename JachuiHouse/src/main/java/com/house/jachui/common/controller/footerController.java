@@ -27,5 +27,10 @@ public class footerController {
 	public String showAd() {
 		return "footer/ad";
 	}
-
+	
+	// 확인하고 다 하면 이거 지우기
+	@GetMapping("/error")
+	public String error() {
+		return "common/error";
+	}
 }

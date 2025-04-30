@@ -5,17 +5,17 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>에러메시지</title>
-		<link rel="stylesheet" href="../resources/css/member/error.css">
+		<link rel="stylesheet" href="../resources/css/include/error.css">
 	</head>
 	<body>
 		<div class="container">
 			<main class="main-container">
-				<img src="../resources/images/error1.gif" alt="error-image" class="error-image">
 				<div class="message">
 					<h1>에러발생</h1>
 					<h2>${errorMsg}</h2>
 					<p>요청하신 페이지를 찾을 수 없습니다.</p>
 				</div>
+				<img src="../resources/images/error1.gif" alt="error-image" class="error-image">
 				
 				<div class="navi-container">
 					<a href="/" class="btn-navi">홈으로</a> 
