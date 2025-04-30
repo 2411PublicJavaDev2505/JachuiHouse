@@ -40,13 +40,14 @@
     </select>
 
     <select id="selectNewMessagesAfter" resultMap="chatResultMap">
-        SELECT *         
+		SELECT *
 		FROM CHAT         
 		WHERE CHAT_ROOM_NO = (
 		    SELECT CHAT_ROOM_NO              
 		    FROM CHAT_ROOM              
 		    WHERE ((USER1_ID = #{writerId} AND USER2_ID = #{receiverId})
 		           OR (USER1_ID = #{receiverId} AND USER2_ID = #{writerId}))
+		           AND CHAT_TIME > #{lastCheckedTime }
 		    ORDER BY CREATE_DATE DESC
 		    FETCH FIRST 1 ROWS ONLY
 		)

@@ -1,5 +1,7 @@
 package com.house.jachui.chat.model.service.impl;
 
+import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import com.house.jachui.chat.model.vo.Chat;
 public class ChatServiceImpl implements ChatService {
 
     private final ChatMapper chatMapper;
+    private Timestamp lastCheckedTime = new Timestamp(System.currentTimeMillis());
 
     @Autowired
     public ChatServiceImpl(ChatMapper chatMapper) {
@@ -36,7 +39,18 @@ public class ChatServiceImpl implements ChatService {
     // 새로운 메시지 가져오기
     @Override
     public List<Chat> fetchNewMessages(Map<String, Object> map) {
-        return chatMapper.selectNewMessagesAfter(map);
+//    	map.put("lastCheckedTime", lastCheckedTime);
+//    	List<Chat> lastChat = chatMapper.selectNewMessagesAfter(map);
+//    	if(lastChat.size() > 0) {
+//    		Timestamp chatTime = lastChat.get(0).getChatTime();
+//    		if(chatTime.after(lastCheckedTime)) {
+//    			lastCheckedTime = chatTime;
+//    		}
+//    		return lastChat;
+//    	}else {
+//    		return Collections.emptyList();
+//    	}
+    	return chatMapper.selectNewMessagesAfter(map);
     }
 
     // 사용자가 참여한 채팅방을 조회하기 위한 쿼리 호출
