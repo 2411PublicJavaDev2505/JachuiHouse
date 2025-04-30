@@ -40,7 +40,6 @@
         ORDER BY CREATE_DATE DESC
         FETCH FIRST 1 ROW ONLY
     </select>
-
     
     <select id="getChatRoomByMyId" resultType="Chat">
         SELECT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME
@@ -55,6 +54,7 @@
         FROM CHAT_ROOM
         WHERE CHAT_ROOM_NO = #{chatRoomNo}
     </select>
+    
     <select id="getChatRoomByNo" parameterType="int" resultType="com.house.jachui.chat.model.vo.ChatRoom">
 		SELECT *
 		FROM chat_room

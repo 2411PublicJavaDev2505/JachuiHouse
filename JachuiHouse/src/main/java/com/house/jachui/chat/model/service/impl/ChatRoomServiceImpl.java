@@ -88,4 +88,11 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public ChatRoom getChatRoomByNo(int chatRoomNo) {
 		return chatRoomMapper.getChatRoomByNo(chatRoomNo);
 	}
+
+	@Override
+	public String getReceiverId(int chatRoomNo, String writerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
