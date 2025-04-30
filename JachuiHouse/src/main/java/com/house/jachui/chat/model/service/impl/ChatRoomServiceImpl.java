@@ -37,17 +37,14 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         params.put("itemNo", estateNo);
         Integer existingChatRoomNo = chatRoomMapper.findChatRoomByUsersAndItem(params);
         if (existingChatRoomNo != null) {
-            System.out.println("Existing chat room found: CHAT_ROOM_NO=" + existingChatRoomNo + " for estateNo=" + estateNo);
             return existingChatRoomNo;
         }
 
-        System.out.println("Creating new chat room for estateNo=" + estateNo + ", user1Id=" + user1Id + ", user2Id=" + user2Id);
         chatRoomMapper.createEstateChatRoom(params);
         Integer newChatRoomNo = chatRoomMapper.findChatRoomByUsersAndItem(params);
         if (newChatRoomNo == null) {
             throw new RuntimeException("Failed to create or find chat room for estateNo=" + estateNo);
         }
-        System.out.println("New chat room created: CHAT_ROOM_NO=" + newChatRoomNo + " for estateNo=" + estateNo);
         return newChatRoomNo;
     }
 
@@ -60,17 +57,14 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         params.put("itemNo", tradeNo);
         Integer existingChatRoomNo = chatRoomMapper.findChatRoomByUsersAndItem(params);
         if (existingChatRoomNo != null) {
-            System.out.println("Existing chat room found: CHAT_ROOM_NO=" + existingChatRoomNo + " for tradeNo=" + tradeNo);
             return existingChatRoomNo;
         }
 
-        System.out.println("Creating new chat room for tradeNo=" + tradeNo + ", user1Id=" + user1Id + ", user2Id=" + user2Id);
         chatRoomMapper.createTradeChatRoom(params);
         Integer newChatRoomNo = chatRoomMapper.findChatRoomByUsersAndItem(params);
         if (newChatRoomNo == null) {
             throw new RuntimeException("Failed to create or find chat room for tradeNo=" + tradeNo);
         }
-        System.out.println("New chat room created: CHAT_ROOM_NO=" + newChatRoomNo + " for tradeNo=" + tradeNo);
         return newChatRoomNo;
     }
 
@@ -85,7 +79,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     @Override
     public boolean checkChatRoomExists(int chatRoomNo) {
         Integer count = chatRoomMapper.countChatRoomByRoomNo(chatRoomNo);
-        System.out.println("Checking chat room existence: CHAT_ROOM_NO=" + chatRoomNo + ", exists=" + (count != null && count > 0));
         return count != null && count > 0;
     }
 

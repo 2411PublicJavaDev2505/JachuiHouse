@@ -54,119 +54,92 @@
 
     <!-- 스크립트 -->
     <script>
-        const writerId = '${writerId}';
-        const receiverId = '${receiverId}';
-        const receiverName = '${receiverName}';
-        const chatRoomNo = '${chatRoomNo}';
-
-        let lastChatNo = ${empty chatList ? 0 : chatList[chatList.size()-1].chatNo};
-
-        let isScrolledToBottom = true;
-        const chatContent = document.getElementById('chatContent');
-
-        chatContent.addEventListener('scroll', function() {
-            const scrollPosition = chatContent.scrollTop + chatContent.clientHeight;
-            const scrollHeight = chatContent.scrollHeight;
-            isScrolledToBottom = (scrollPosition === scrollHeight);
-        });
-
-        // 메시지 전송
-        document.getElementById('chatForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const chatInput = document.getElementById('input');
-            const messageContent = chatInput.value.trim();
-
-            if (!messageContent) {
-                alert("메시지를 입력하세요!");
-                return;
-            }
-
-            const sendData = {
-                writerId,
-                receiverId,
-                message: messageContent,
-                chatRoomNo
-            };
-
-            fetch('/chat/send', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(sendData)
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    chatInput.value = '';
-                    appendMyMessage(sendData.message);
-                    if (isScrolledToBottom) {
-                        scrollToBottom();
-                    }
-                } else {
-                    alert("메시지 전송 실패");
-                }
-            })
-            .catch(error => console.error("전송 에러:", error));
-        });
-
-        setInterval(fetchChatMessages, 1000);
-
-        function fetchChatMessages() {
-            fetch('/chat/fetch?writerId=${writerId}&receiverId=${receiverId}&lastChatNo=' + lastChatNo)
-            .then(res => res.json())
-            .then(data => {
-                if (data.length > 0) {
-                    data.forEach(chat => {
-                        appendNewMessage(chat);
-                    });
-                    scrollToBottom();
-                }
-            })
-            .catch(error => console.error("fetch 에러:", error));
-        }
-
-        function appendNewMessage(chat) {
-        	console.log(chat)
-            const div = document.createElement('div');
-            if (chat.writerId == writerId) {
-                div.classList.add('my-msg');
-                div.innerHTML = `
-                    <div class="me">나</div>
-                    <div class="my-msg-detail">`+chat.message +`</div>
-                `;
-            } else {
-                div.classList.add('not-my-msg');
-                div.innerHTML = `
-                    <div class="receiver-name">상대방</div>
-                    <div class="receive-msg">`+chat.message +`</div>
-                `;
-            }
-            chatContent.appendChild(div);
-            lastChatNo = chat.chatNo;
-
-            if (isScrolledToBottom) {
-                scrollToBottom();
-            }
-        }
-
-        function appendMyMessage(message) {
-            const div = document.createElement('div');
-            div.classList.add('my-msg');
-            div.innerHTML = `
-                <div class="me">나</div>
-                <div class="my-msg-detail">${message}</div>
-            `;
-            chatContent.appendChild(div);
-
-            scrollToBottom();
-        }
-
-
-        function scrollToBottom() {
-            chatContent.scrollTop = chatContent.scrollHeight;
-        }
-    </script>
+		document.addEventListener("DOMContentLoaded", function () {
+		    const form = document.getElementById("chatForm");
+		    const input = document.getElementById("input");
+		    const chatContent = document.getElementById("chatContent");
+		
+		    const writerId = "${writerId}";
+		    const receiverId = "${receiverId}";
+		    const receiverName = "${receiverName}";
+		    const chatRoomNo = "${chatRoomNo}";
+		    let lastChatNo = ${lastChatNo}; // 서버에서 전달된 마지막 채팅번호
+		
+		    // 페이지 처음 로딩 시, 가장 아래로 이동
+		    scrollToBottom();
+		
+		    // 메시지 전송 (댓글 작성과 유사)
+		    form.addEventListener("submit", function (e) {
+		        e.preventDefault();
+		
+		        const message = input.value.trim();
+		        if (!message) return;
+		
+		        const payload = {
+		            writerId,
+		            receiverId,
+		            message,
+		            chatRoomNo: parseInt(chatRoomNo)
+		        };
+		
+		        fetch("/chat/send", {
+		            method: "POST",
+		            headers: { "Content-Type": "application/json" },
+		            body: JSON.stringify(payload)
+		        })
+		        .then(res => res.json())
+		        .then(data => {
+		            if (data.status === "success") {
+		                input.value = "";
+		                fetchNewMessages(); // 즉시 반영
+		            } else {
+		                alert("전송 실패: " + data.message);
+		            }
+		        })
+		        .catch(err => console.error("전송 오류:", err));
+		    });
+		
+		    // 새로운 메시지를 주기적으로 받아오기
+		    function fetchNewMessages() {
+		        fetch(`/chat/fetch?writerId=${writerId}&receiverId=${receiverId}&lastChatNo=${lastChatNo}`)
+		            .then(res => res.json())
+		            .then(messages => {
+		                messages.forEach(chat => {
+		                    const msgBox = document.createElement("div");
+		                    msgBox.className = (chat.writerId === writerId ? "my-msg" : "not-my-msg") + ` message-${chat.chatNo}`;
+		                    msgBox.dataset.chatNo = chat.chatNo;
+		
+		                    if (chat.writerId === writerId) {
+		                        msgBox.innerHTML = `
+		                            <div class="me">나</div>
+		                            <div class="my-msg-detail">${chat.message}</div>
+		                        `;
+		                    } else {
+		                        msgBox.innerHTML = `
+		                            <div class="receiver-name">${receiverName}</div>
+		                            <div class="receive-msg">${chat.message}</div>
+		                        `;
+		                    }
+		
+		                    chatContent.appendChild(msgBox);
+		                    lastChatNo = chat.chatNo;
+		                });
+		
+		                if (messages.length > 0) {
+		                    scrollToBottom(); // 새 메시지 있으면 스크롤 아래로
+		                }
+		            })
+		            .catch(err => console.error("수신 오류:", err));
+		    }
+		
+		    // 자동 갱신 (2초마다 새로운 메시지 확인)
+		    setInterval(fetchNewMessages, 2000);
+		
+		    // 스크롤 아래로 이동 함수
+		    function scrollToBottom() {
+		        chatContent.scrollTop = chatContent.scrollHeight;
+		    }
+		});
+	</script>
 </body>
 </html>
