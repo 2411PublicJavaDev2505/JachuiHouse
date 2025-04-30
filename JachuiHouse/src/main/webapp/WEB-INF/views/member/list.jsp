@@ -94,6 +94,7 @@
        		<!-- admin확인절차 넣어줘야 함 -->
        		<c:if test="${sessionScope.userId == 'admin'}">
        		 	<button class="btn"><a href="/report/list">신고 관리</a></button>
+       		 	<button class="btn"><a href="/notice/list">공지사항</a></button>
        		</c:if>  
        	</div>		
         </div>
@@ -135,7 +136,9 @@
 		        <p><strong>이메일:</strong>`+member.userEmail+`</p>
 		        <p><strong>생년월일:</strong>`+member.userBirth+`</p>
 		        <p><strong>자격증 번호:</strong>`+member.realtorNo+`</p>
-				<p><strong>첨부파일:</strong> <a href="${member.filePath}/${member.fileRename}" download="${member.fileName}">${member.fileName}</a></p>
+				<p><strong>첨부파일:</strong> 
+				  <a href="` + member.filePath + `/` + member.fileRename + `" download="` + member.fileName + `">` + member.fileName + `</a>
+				</p>
 		      </div>
 		    `,
 		    showCloseButton: true,// 오른쪽 위에 'X' 닫기 버튼
