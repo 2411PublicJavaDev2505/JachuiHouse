@@ -5,11 +5,18 @@ main{
     justify-content: center;
     gap: 200px;
 }
+
 .left-image img{
     width: 200px;
     height : 200px;
     border-radius: 100%;
 }
+.left-inform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* 세로 가운데 */
+}
+
 .updateBtn button{
     background-color: #FFA37C;
     width: 100%;
@@ -80,6 +87,9 @@ main{
 .chat-content p, .notice-content p {
     border-bottom: 2px solid #E0DFDF;
     text-align: center;
+}
+.post-item a{
+	color : black;
 }
 .thing-content {
     display: flex;
