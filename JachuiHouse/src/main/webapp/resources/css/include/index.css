@@ -287,3 +287,17 @@ section {
 .carousel_circle.active {
     background-color: #333;
 }
+
+/* 공지사항 */
+h3{
+	text-decoration: none;
+	color: white;
+}
+.notice-board li a {
+    color: white;
+}
+.notice-board li {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
