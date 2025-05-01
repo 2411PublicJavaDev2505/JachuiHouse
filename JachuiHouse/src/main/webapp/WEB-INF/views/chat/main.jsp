@@ -13,6 +13,12 @@
     <div id="container">
         <jsp:include page="/WEB-INF/views/include/header.jsp" />
         <main>
+        <c:if test="${empty sessionScope.userId}">
+		    <script>
+		        alert("로그인이 필요합니다.");
+		        location.href = "/member/login";
+		    </script>
+		</c:if>
             <div class="title">
                 <h1>${receiverName} 님과의 채팅</h1>
             </div>

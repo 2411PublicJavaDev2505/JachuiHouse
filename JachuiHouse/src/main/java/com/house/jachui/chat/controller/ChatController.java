@@ -22,6 +22,7 @@ import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
 import com.house.jachui.chat.model.vo.ChatRoom;
+import com.house.jachui.common.PageUtil;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.member.model.service.MemberService;
@@ -44,6 +45,7 @@ public class ChatController {
     private final MemberService memberService;
     private final EstateService eService;
     private final TradeService tService;
+    private final PageUtil pageUtil;
 
     @GetMapping("/torealtor")
     public String showEstateChat(Model model,
@@ -201,12 +203,19 @@ public class ChatController {
     }
 
     @GetMapping("/list")
-    public String showChatRoomList(HttpSession session, Model model) {
+    public String showChatRoomList(HttpSession session, Model model
+    		, @RequestParam(value="page", defaultValue="1") int currentPage) {
         String userId = (String) session.getAttribute("userId");
         String userRole = (String)session.getAttribute("userRole");
         Set<String> opponentSet = new HashSet<>();
 		List<ChatWith> uniqueChatWithList = new ArrayList<>();
-		List<Chat> cList = chatRoomService.getChatRoomsByUserId(userId);
+		List<Chat> cList = chatRoomService.getChatRoomByUserId(userId, currentPage, 3);
+		int totalCount = rService.getTotalCount(userId);
+		Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
+		model.addAttribute("maxPage", pageInfo.get("maxPage"));
+		model.addAttribute("startNavi", pageInfo.get("startNavi"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("endNavi", pageInfo.get("endNavi"));
         Member member = rService.selectRealtorById(userId);
         for (Chat chat : cList) {
 		    ChatRoom room = chatRoomService.getChatRoomByNo(chat.getChatRoomNo());

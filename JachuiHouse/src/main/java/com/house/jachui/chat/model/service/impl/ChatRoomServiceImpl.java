@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.house.jachui.chat.model.mapper.ChatRoomMapper;
@@ -87,5 +88,13 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	@Override
 	public ChatRoom getChatRoomByNo(int chatRoomNo) {
 		return chatRoomMapper.getChatRoomByNo(chatRoomNo);
+	}
+
+	@Override
+	public List<Chat> getChatRoomByUserId(String userId, int currentPage, int i) {
+		int limit = 3;
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return chatRoomMapper.getChatRoomByUserId(userId, rowBounds);
 	}
 }

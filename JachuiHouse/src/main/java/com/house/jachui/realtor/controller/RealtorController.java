@@ -43,7 +43,7 @@ public class RealtorController {
 	public String showRealtorInfo(HttpSession session, Model model
 			, @RequestParam(value="userId") String userId
 			, @RequestParam(value="page", defaultValue="1") int currentPage) {
-//		String userRole = (String)session.getAttribute("userRole");
+		String userRole = (String)session.getAttribute("userRole");
 //		if("R".equals(userRole)) {
 //			String userId = (String)session.getAttribute("userId");
 		Member member = rService.selectRealtorById(userId);
@@ -60,7 +60,7 @@ public class RealtorController {
             List<EstateFile> fileList = fileMapper.selectImageList(est.getEstateNo());
             est.setEstateFileList(fileList);
         }
-		if(member != null) {
+		if("M".equals(userRole) || member == null || userRole == null) {
 			model.addAttribute("realtor", member);
 			return "realtor/page";
 		}
