@@ -16,5 +16,6 @@ import lombok.ToString;
 public class ChatWith {
 	private Chat chat;
 	private ChatRoom chatRoom;
-	private String opponentId;
+	private String opponentId; // 상대방 아이디
+	private String opponentName; // 상대방 이름 
 	}
