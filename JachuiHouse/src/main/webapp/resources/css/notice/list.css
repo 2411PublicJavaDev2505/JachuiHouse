@@ -46,6 +46,23 @@ body {
     width: 15%; /* 폭 줄이기 */
 }
 
+.boardbl .role {
+    min-width: 80px;
+}
+.boardbl .name {
+    min-width: 100px;
+}
+.boardbl .address {
+    min-width: 200px;
+}
+.boardbl .birth {
+    min-width: 90px;
+}
+.boardbl .yn {
+    min-width: 90px;
+}
+
+
 /* .boardbl th:nth-child(3),  공지 제목 */
 /* .boardbl td:nth-child(3) { */
 /*     width: 50%; 폭 넓히기 */
