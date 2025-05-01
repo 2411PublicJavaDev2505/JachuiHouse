@@ -184,8 +184,9 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ![비밀번호재설정 이메일항목alert](https://github.com/user-attachments/assets/6570b63b-c653-4335-84b7-0e6d8ddd7d39)
 ![비밀번호재설정alert](https://github.com/user-attachments/assets/e3913787-6fd7-4750-af1a-984fc6585bf6)
-![비밀번호재설정하기](https://github.com/user-attachments/assets/6bb7d94d-826e-48aa-874d-62d62b1ac63f)
 ![비밀번호재설정url이메일전송](https://github.com/user-attachments/assets/fa0cbca6-d99c-41a5-8294-7a873375d1f2)
+![비밀번호재설정하기](https://github.com/user-attachments/assets/6bb7d94d-826e-48aa-874d-62d62b1ac63f)
+
 
 
 
