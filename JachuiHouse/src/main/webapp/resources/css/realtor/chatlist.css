@@ -34,6 +34,9 @@ main{
     width:100%;
     height: 210px;
 }
+.hidden{
+	display: none;
+}
 #photo{
     width: 66%;
     height: 200px;
@@ -101,7 +104,6 @@ main{
     height:50px;
     font-size: 28px;
     border-bottom: 2px solid gray;
-
 }
 #chatList{
     background-color: #0c8ce9;
@@ -121,6 +123,7 @@ main{
     border: none;
     margin: 0 auto;
     margin-top: 20px;
+    overflow: auto;
 }
 #chat-intro{
     width: 95%;

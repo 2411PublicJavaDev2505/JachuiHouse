@@ -31,6 +31,4 @@ public interface ChatRoomMapper {
 
 	ChatRoom getChatRoomByNo(int chatRoomNo);
 
-	List<Chat> getChatRoomByUserId(String userId, RowBounds rowBounds);
-
 }

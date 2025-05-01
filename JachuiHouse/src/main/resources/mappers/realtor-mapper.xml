@@ -73,5 +73,9 @@
 		SELECT COUNT(*) FROM ESTATE WHERE USER_ID=#{userId}
 	</select>
 	
+	<select id="getChatTotalCount">
+		SELECT COUNT(*) FROM CHAT_ROOM WHERE USER1_ID=#{userId} OR USER2_ID = #{userId} 
+	</select>
+	
 	
 </mapper>

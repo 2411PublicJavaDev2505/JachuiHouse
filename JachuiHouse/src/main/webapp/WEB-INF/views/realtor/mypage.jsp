@@ -133,8 +133,6 @@ pageEncoding="UTF-8"%>
 			</c:if>
         </div>
     </main>
-    <footer>
-        이용약관 | 광고문의 | 개인정보처리방침 | 찾아오시는길 | 회사명: 자취스크립트(주) | 대표자 : 강우혁 | 문의 전화: 010-2222-3333
-    </footer>
+    <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>

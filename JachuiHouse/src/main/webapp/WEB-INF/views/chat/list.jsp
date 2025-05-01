@@ -50,23 +50,26 @@
             <div id="mainRight">
                 <div id="content-intro">
                     <b>채팅</b>
-                    <button type="submit" id="chatList">게시글 목록</button>
+                    <a href="/realtor/myPage">
+                    	<button type="submit" id="chatList">게시글 목록</button>
+                    </a>
                 </div>
-                <div id="content">
+                <div id="content" >
                     <div id="chat-intro">
                         <div id="chatmokrok">
                             <b>채팅 목록</b>
-                        </div>
+<!--                              <button id="showMoreChatBtn" onclick="toggleChatList()">더보기</button>
+ -->                        </div>
                     </div>
                     <c:if test="${empty chatwithList}">
-					        <p>채팅내역이 없습니다.</p>
+					     <p>채팅내역이 없습니다.</p>
 					</c:if>
                             <c:forEach var="cwl" items="${chatwithList}" varStatus="status">
-                    <div id="list">
-                        <div id="nickname">
+							<div id="list" >
+                        		<div id="nickname">
                             <div id="nicknameText">
 					        <a href="${pageContext.request.contextPath}/chat/room?chatRoomNo=${cwl.chatRoom.chatRoomNo}&itemname=${cwl.chatRoom.itemType}&itemNo=${cwl.chatRoom.itemNo}&user1Id=${cwl.chatRoom.user2Id}&user2Id=${cwl.chatRoom.user1Id}">
-					            <b>${cwl.opponentId}</b>님과의 채팅        
+					            <b>${cwl.opponentName} </b>님과의 채팅        
 					        </a>
                             </div>     
                         </div>
@@ -82,53 +85,29 @@
                         </a>
                     </div>
 					    </c:forEach>
-                <c:if test="${not empty cList }">
-            <div class="pagination">
-            <!-- 이전 버튼 -->
-                        <c:if test="${currentPage > 1}">
-                            <a href="/chat/list?page=1" class="first">◁◁</a>
-                            <a href="/chat/list?page=${currentPage - 1}" class="prev">◀</a>
-                        </c:if>
-				
-				<c:forEach begin="${startNavi}" end="${endNavi}" var="p">
-                            <a href="/chat/list?page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
-                </c:forEach>
-				<c:if test="${currentPage < maxPage}">
-                    <a href="/chat/list?page=${currentPage + 1}" class="next">▶</a>
-                    <a href="/chat/list?page=${maxPage}" class="last">▷▷</a>
-                </c:if>
-			</div>
-			</c:if>
-                    <!-- <div id="list">
-                        <div id="nickname">
-                            <div id="nicknameText">
-                                <b>익명의 로랜드고릴라</b>
-                            </div>
-                            
-                        </div>
-                        <div id="time">
-                            17:40
-                        </div>
-                        <div id="chat">
-                            <b>방이 너무 비싸요</b>
-                        </div>
-                    </div>
-                    <div id="list">
-                        <div id="nickname">
-                            <div id="nicknameText">
-                                <b>익명의 긴팔원숭이</b>
-                            </div>
-                        </div>
-                        <div id="time">
-                            17:40
-                        </div>
-                        <div id="chat">
-                            <b>방이 너무 비싸요</b>
-                        </div>
-                    </div> -->
                 </div>
         </div>
     </main>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+    
+    <!-- <script type="text/javascript">
+	function toggleChatList() {
+	    const allChatItems = document.querySelectorAll('#list');
+	    const button = document.getElementById("showMoreChatBtn");
+	    if (button.innerText === "더보기") {
+	        allChatItems.forEach(item => item.classList.remove('hidden'));
+	        button.innerText = "간략히 보기";
+	    } else {
+	        allChatItems.forEach((item, index) => {
+	        	if (index >= 4) {
+                    item.classList.add('hidden');
+                } else {
+                    item.classList.remove('hidden'); // 처음 3개는 항상 보여야 함
+                }
+	        });
+	        button.innerText = "더보기";
+	    }
+	}
+	</script> -->
 </body>
 </html>

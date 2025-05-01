@@ -89,11 +89,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public ChatRoom getChatRoomByNo(int chatRoomNo) {
 		return chatRoomMapper.getChatRoomByNo(chatRoomNo);
 	}
-	@Override
-	public List<Chat> getChatRoomByUserId(String userId, int currentPage, int i) {
-		int limit = 3;
-		int offset = (currentPage - 1) * limit;
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return chatRoomMapper.getChatRoomByUserId(userId, rowBounds);
-	}
+
+
 }

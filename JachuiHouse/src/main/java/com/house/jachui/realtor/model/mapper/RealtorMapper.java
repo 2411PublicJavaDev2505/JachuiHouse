@@ -25,4 +25,6 @@ public interface RealtorMapper {
             @Param("profileImage") String profileImage);
 
 	List<Estate> selectEstatesById(String userId, RowBounds rowBounds);
+
+	int getChatTotalCount(String userId);
 }
