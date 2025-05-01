@@ -78,19 +78,19 @@
 	                <!-- 주요 기능 소개 -->
 	                <div class="main-menu">
 	                    <div class="left-menu">
-	                        <a href="post/list">
-	                            <div class="user-story">
+	                        <a href="post/list" class="tp-post">
+		                   		<div class="user-story">
 	                                <h3>자취록 </h3>
 	                                <p>우리들의 자취 이야기</p>
-	                            </div>
-	                        </a>
-	                        <a href="/chazabang/list">
+		                        </div>
+	                       	</a>
+	                        <a href="/chazabang/list" class="tp-estate">
 	                            <div class="alone-living">
 	                                <h3>찾아방</h3>
 	                                <p>맘에드는 집을 찾아방</p>
 	                            </div>
 	                        </a>
-	                        <a href="/trade/list">
+	                        <a href="/trade/list" class="tp-trade">
 	                            <div class="used-market">
 	                                <h3>사방팔아방</h3>
 	                                <p>자취러들의 중고장터</p>
@@ -98,11 +98,11 @@
 	                        </a>
 	                    </div>
 	                    <div class="right-menu">
-	                        <a href="notice/list">
+	                        <a href="notice/list" class="tp-notice">
 	                            <div class="notice-board">
 	                                <h3>공지사항</h3>
-	                                <li><a href="http://localhost:7777/notice/detail/219">감기 조심하세요</a></li>
-	                                <li><a href="http://localhost:7777/notice/detail/220">사기 예방 안내</a></li>
+	                                <li class="tp-notice-detail"><a href="http://localhost:7777/notice/detail/219">감기 조심하세요</a></li>
+	                                <li class="tp-notice-detail"><a href="http://localhost:7777/notice/detail/220">사기 예방 안내</a></li>
 	                            </div>
 	                        </a>
 	                    </div>

@@ -13,8 +13,66 @@
     <div id="container">
         <jsp:include page="/WEB-INF/views/include/header.jsp" />
         <main>
-            <div class="title">
+            	<div class="chat-item-info">
+				    <c:choose>
+				        <c:when test="${itemName eq 'estate'}">
+				        	<a href="/chazabang/detail/${item.estateNo }" class="item-box-link" data-type="${item.estateType}">
+					            <div class="item-box">
+					                <div class="item-details">
+						                <div class="estate-style">
+						                    <img src="${item.estateFileList[0].estateFilePath}" alt="이미지 준비중">
+						                        <section class="estate-inf">
+						                            <div class="estate-inf-header">
+						                            <c:if test="${item.estateRentType eq 'charter'}">
+													    <div class="estate-rent">전세 ${item.transformEstateDeposit}</div>
+													</c:if>
+													<c:if test="${item.estateRentType eq 'monthly'}">
+													    <div class="estate-rent">월세 ${item.transformEstateDeposit}/${item.transformMonthlyRent}</div>
+													</c:if>
+						                            <span class="estate-type">
+						                            	<c:if test="${item.estateType eq 'onetwo'}">
+								                        	<span class="estate-type">원룸/투룸</span>
+								                        </c:if>
+								                        <c:if test="${item.estateType eq 'villa'}">
+								                        	<span class="estate-type">주택/빌라</span>
+								                        </c:if>
+								                        <c:if test="${item.estateType eq 'apart'}">
+								                        	<span class="estate-type">아파트</span>
+								                        </c:if>
+								                        <c:if test="${item.estateType eq 'officetel'}">
+								                        	<span class="estate-type">오피스텔</span>
+								                        </c:if>
+						                            </span>
+						                        </div>
+						                        <span class="estate-floor-and-width">${item.estateFloor }층, ${item.estateWidth }㎡</span>
+						                        <span class="estate-address">${item.estateAddress }</span>
+						                    </section>
+						                </div>
+					                </div>
+					            </div>
+						   	</a>
+				        </c:when>
+				        <c:when test="${itemName eq 'trade'}">
+					    	<a href="/trade/detail/${item.tradeNo}" class="item-box-link">
+				            	<div class="item-box">
+		                            <img src="${item.tradeFilepath}" alt="${item.tradeTitle}">
+		                            <div class="trade-inf">
+				                        <div class="product-title">${item.tradeTitle}</div>
+				                        <div class="product-price">${item.tradePrice}원</div>
+		                            </div>
+					            </div>
+		                    </a>
+				        </c:when>
+				    </c:choose>
+				</div>
+            <div class="title-with-exit">
                 <h1>${receiverName} 님과의 채팅</h1>
+            	<c:if test="${itemName eq 'estate'}">
+            		<button class="exit-btn" onclick="location.href='/chazabang/detail/${itemNo}'">채팅방 나가기</button>
+            	</c:if>
+            	<c:if test="${itemName eq 'trade'}">
+	                <button class="exit-btn" onclick="location.href='/${itemName }/detail/${itemNo}'">채팅방 나가기</button>
+            	</c:if>
             </div>
 
             <!-- 채팅 메시지 출력 영역 -->
@@ -44,102 +102,117 @@
                     <button type="submit" id="submitBtn">전송</button>
                 </div>
             </form>
-
-            <div class="btn">
-                <button onclick="location.href='/'">채팅방 나가기</button>
-            </div>
         </main>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
 
     <!-- 스크립트 -->
-    <script>
-		document.addEventListener("DOMContentLoaded", function () {
-		    const form = document.getElementById("chatForm");
-		    const input = document.getElementById("input");
-		    const chatContent = document.getElementById("chatContent");
+	<script>
+		const writerId = '${writerId}';
+		const receiverId = '${receiverId}';
+		const receiverName = '${receiverName}';
+		const chatRoomNo = '${chatRoomNo}';
 		
-		    const writerId = "${writerId}";
-		    const receiverId = "${receiverId}";
-		    const receiverName = "${receiverName}";
-		    const chatRoomNo = "${chatRoomNo}";
-		    let lastChatNo = ${lastChatNo}; // 서버에서 전달된 마지막 채팅번호
+		let lastChatNo = ${lastChatNo}; // 최초 렌더링된 마지막 메시지 번호
 		
-		    // 페이지 처음 로딩 시, 가장 아래로 이동
+		// 이미 렌더링된 chatNo 저장용 Set
+		const renderedChatNos = new Set();
+		document.querySelectorAll('[data-chat-no]').forEach(el => {
+		    const chatNo = parseInt(el.getAttribute('data-chat-no'));
+		    renderedChatNos.add(chatNo);
+		});
+		
+		const chatContent = document.getElementById('chatContent');
+		
+		// ✅ 첫 진입 시 스크롤 맨 아래로 이동
+		window.onload = () => {
 		    scrollToBottom();
+		};
 		
-		    // 메시지 전송 (댓글 작성과 유사)
-		    form.addEventListener("submit", function (e) {
-		        e.preventDefault();
+		// ✅ 메시지 전송 - DB 저장만, 화면에는 append 하지 않음
+		document.getElementById('chatForm').addEventListener('submit', function (e) {
+		    e.preventDefault();
 		
-		        const message = input.value.trim();
-		        if (!message) return;
+		    const chatInput = document.getElementById('input');
+		    const messageContent = chatInput.value.trim();
+		    if (!messageContent) {
+		        alert("메시지를 입력하세요!");
+		        return;
+		    }
 		
-		        const payload = {
-		            writerId,
-		            receiverId,
-		            message,
-		            chatRoomNo: parseInt(chatRoomNo)
-		        };
+		    const sendData = {
+		        writerId,
+		        receiverId,
+		        message: messageContent,
+		        chatRoomNo
+		    };
 		
-		        fetch("/chat/send", {
-		            method: "POST",
-		            headers: { "Content-Type": "application/json" },
-		            body: JSON.stringify(payload)
-		        })
+		    fetch('/chat/send', {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/json' },
+		        body: JSON.stringify(sendData)
+		    })
+		    .then(res => res.json())
+		    .then(data => {
+		        if (data.success) {
+		            chatInput.value = '';
+		            // 메시지는 곧 fetch를 통해 렌더링됨
+		        } else {
+		            alert("메시지 전송 실패");
+		        }
+		    })
+		    .catch(err => console.error("전송 에러:", err));
+		});
+		
+		// ✅ 1초마다 새로운 메시지 fetch
+		setInterval(fetchNewMessages, 1000);
+		
+		function fetchNewMessages() {
+		    fetch(`/chat/fetch?chatRoomNo=${chatRoomNo}&lastChatNo=${lastChatNo}`)
 		        .then(res => res.json())
 		        .then(data => {
-		            if (data.status === "success") {
-		                input.value = "";
-		                fetchNewMessages(); // 즉시 반영
-		            } else {
-		                alert("전송 실패: " + data.message);
+		            if (data.success && data.messages && data.messages.length > 0) {
+		                data.messages.forEach(chat => {
+		                    appendMessage(chat);
+		                });
+		                scrollToBottom();
 		            }
 		        })
-		        .catch(err => console.error("전송 오류:", err));
-		    });
+		        .catch(err => console.error("fetch 에러:", err));
+		}
 		
-		    // 새로운 메시지를 주기적으로 받아오기
-		    function fetchNewMessages() {
-		        fetch(`/chat/fetch?writerId=${writerId}&receiverId=${receiverId}&lastChatNo=${lastChatNo}`)
-		            .then(res => res.json())
-		            .then(messages => {
-		                messages.forEach(chat => {
-		                    const msgBox = document.createElement("div");
-		                    msgBox.className = (chat.writerId === writerId ? "my-msg" : "not-my-msg") + ` message-${chat.chatNo}`;
-		                    msgBox.dataset.chatNo = chat.chatNo;
-		
-		                    if (chat.writerId === writerId) {
-		                        msgBox.innerHTML = `
-		                            <div class="me">나</div>
-		                            <div class="my-msg-detail">${chat.message}</div>
-		                        `;
-		                    } else {
-		                        msgBox.innerHTML = `
-		                            <div class="receiver-name">${receiverName}</div>
-		                            <div class="receive-msg">${chat.message}</div>
-		                        `;
-		                    }
-		
-		                    chatContent.appendChild(msgBox);
-		                    lastChatNo = chat.chatNo;
-		                });
-		
-		                if (messages.length > 0) {
-		                    scrollToBottom(); // 새 메시지 있으면 스크롤 아래로
-		                }
-		            })
-		            .catch(err => console.error("수신 오류:", err));
+		// ✅ 메시지 추가 함수 (중복 방지 포함)
+		function appendMessage(chat) {
+		    if (renderedChatNos.has(chat.chatNo)) {
+		        return; // 이미 표시된 메시지면 무시
 		    }
 		
-		    // 자동 갱신 (2초마다 새로운 메시지 확인)
-		    setInterval(fetchNewMessages, 2000);
+		    const div = document.createElement('div');
+		    div.classList.add(chat.writerId === writerId ? 'my-msg' : 'not-my-msg');
+		    div.classList.add(`message-${chat.chatNo}`);
+		    div.setAttribute('data-chat-no', chat.chatNo);
 		
-		    // 스크롤 아래로 이동 함수
-		    function scrollToBottom() {
-		        chatContent.scrollTop = chatContent.scrollHeight;
+		    if (chat.writerId === writerId) {
+		        div.innerHTML = `
+		            <div class="me">나</div>
+		            <div class="my-msg-detail">`+chat.message+`</div>
+		        `;
+		    } else {
+		        div.innerHTML = `
+		            <div class="receiver-name">`+receiverName+`</div>
+		            <div class="receive-msg">`+chat.message+`</div>
+		        `;
 		    }
-		});
+		
+		    chatContent.appendChild(div);
+		    renderedChatNos.add(chat.chatNo);
+		    lastChatNo = Math.max(lastChatNo, chat.chatNo);
+		}
+		
+		// ✅ 스크롤 아래로 이동
+		function scrollToBottom() {
+		    chatContent.scrollTop = chatContent.scrollHeight;
+		}
 	</script>
 </body>
 </html>

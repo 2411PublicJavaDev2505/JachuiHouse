@@ -12,6 +12,11 @@
         <result property="chatTime" column="CHAT_TIME"/>
     </resultMap>
 
+	<insert id="insertMessage" parameterType="Chat">
+	    INSERT INTO CHAT (CHAT_NO, CHAT_ROOM_NO, WRITER_ID, RECEIVER_ID, MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME)
+	    VALUES (SEQ_CHAT_NO.NEXTVAL, #{chatRoomNo}, #{writerId}, #{receiverId}, #{message}, #{isRead}, #{createDate}, #{chatTime})
+	</insert>
+	
     <select id="selectList" resultMap="chatResultMap">
         SELECT CHAT_NO, CHAT_ROOM_NO, WRITER_ID, DBMS_LOB.SUBSTR(MESSAGE, 4000, 1) AS MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME
         FROM CHAT 
@@ -19,18 +24,14 @@
         ORDER BY CHAT_TIME ASC
     </select>
 
-    <insert id="sendChat" parameterType="com.house.jachui.chat.controller.dto.SendRequest">
-        INSERT INTO CHAT (CHAT_NO, CHAT_ROOM_NO, WRITER_ID, MESSAGE, CREATE_DATE, CHAT_TIME)
-        VALUES (
-            SEQ_CHAT_NO.NEXTVAL,
-            #{chatRoomNo},
-            #{writerId},
-            #{message},
-            SYSDATE,
-            SYSTIMESTAMP
-        )
-    </insert>
-
+	
+	<select id="selectMessagesAfter" resultType="Chat">
+	    SELECT * FROM CHAT 
+	    WHERE CHAT_ROOM_NO = #{chatRoomNo} 
+	      AND CHAT_NO > #{lastChatNo}
+	    ORDER BY CHAT_NO ASC
+	</select>
+	
     <select id="getChatByUserId" resultMap="chatResultMap">
         SELECT CHAT_NO, CHAT_ROOM_NO, WRITER_ID, DBMS_LOB.SUBSTR(MESSAGE, 4000, 1) AS MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME
         FROM CHAT c
@@ -39,21 +40,7 @@
         ORDER BY CHAT_TIME DESC
     </select>
 
-    <select id="selectNewMessagesAfter" resultMap="chatResultMap">
-		SELECT *
-		FROM CHAT         
-		WHERE CHAT_ROOM_NO = (
-		    SELECT CHAT_ROOM_NO              
-		    FROM CHAT_ROOM              
-		    WHERE ((USER1_ID = #{writerId} AND USER2_ID = #{receiverId})
-		           OR (USER1_ID = #{receiverId} AND USER2_ID = #{writerId}))
-		           AND CHAT_TIME > #{lastCheckedTime }
-		    ORDER BY CREATE_DATE DESC
-		    FETCH FIRST 1 ROWS ONLY
-		)
-		ORDER BY CHAT_NO ASC
-    </select>
-	    <select id="getChatRoomsByMyId" resultMap="chatResultMap">
+	<select id="getChatRoomsByMyId" resultMap="chatResultMap">
         SELECT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, DBMS_LOB.SUBSTR(c.MESSAGE, 4000, 1) AS MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME
         FROM CHAT c
         JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO

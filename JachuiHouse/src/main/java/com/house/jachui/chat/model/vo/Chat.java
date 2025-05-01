@@ -18,6 +18,7 @@ public class Chat {
 	private int chatNo;
 	private int chatRoomNo;
 	private String writerId;
+	private String receiverId;
 	private String message;
 	private String isRead;
 	private Date createDate;

@@ -1,5 +1,6 @@
 package com.house.jachui.chat.controller;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import com.house.jachui.chat.controller.dto.SendRequest;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
+import com.house.jachui.chat.model.vo.ChatRoom;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.member.model.service.MemberService;
@@ -121,7 +123,6 @@ public class ChatController {
         }
 
         List<Chat> chatList = chatService.getMessagesByRoom(chatRoomNo);
-
         Member receiver = memberService.selectMemberById(user2Id);
         if (receiver == null) {
             model.addAttribute("errorMessage", "수신자 정보를 찾을 수 없습니다.");
@@ -156,42 +157,43 @@ public class ChatController {
         model.addAttribute("receiverId", user2Id);
         model.addAttribute("receiverName", receiver.getUserName());
         model.addAttribute("itemName", itemName);
+        model.addAttribute("itemNo", itemNo);
         session.setAttribute("writerId", user1Id);
 
         return "chat/main";
     }
 
+
     @PostMapping("/send")
     @ResponseBody
-    public Map<String, Object> sendChatMessage(@RequestBody SendRequest sendRequest) {
+    public Map<String, Object> sendMessage(@RequestBody SendRequest sendRequest) {
         Map<String, Object> response = new HashMap<>();
-        if (sendRequest.getWriterId() == null || sendRequest.getReceiverId() == null || sendRequest.getMessage() == null || sendRequest.getChatRoomNo() == 0) {
-            response.put("status", "error");
-            response.put("message", "잘못된 요청: writerId, receiverId, chatRoomNo, message는 필수입니다.");
-            return response;
-        }
-
         try {
-            if (!chatRoomService.checkChatRoomExists(sendRequest.getChatRoomNo())) {
-                response.put("status", "error");
-                response.put("message", "채팅방이 존재하지 않습니다: CHAT_ROOM_NO=" + sendRequest.getChatRoomNo());
-                return response;
-            }
-            
-            int result = chatService.sendChatMessage(sendRequest);
-            if (result > 0) {
-                response.put("status", "success");
-            } else {
-                response.put("status", "error");
-                response.put("message", "메시지 전송 실패: 데이터베이스 삽입 오류");
-            }
+            Chat chat = new Chat();
+            chat.setChatRoomNo(sendRequest.getChatRoomNo());
+            chat.setWriterId(sendRequest.getWriterId());
+            chat.setReceiverId(sendRequest.getReceiverId());
+            chat.setMessage(sendRequest.getMessage());
+            chat.setIsRead("N"); // 초기 상태는 안 읽음
+            chat.setCreateDate(new java.sql.Date(System.currentTimeMillis()));
+            chat.setChatTime(new Timestamp(System.currentTimeMillis()));
+
+            chatService.insertMessage(chat); // DB에 저장
+
+            response.put("success", true);
+            response.put("chat", chat);
         } catch (Exception e) {
             e.printStackTrace();
-            response.put("status", "error");
-            response.put("message", "메시지 전송 중 오류 발생: " + e.getMessage());
+            response.put("success", false);
+            response.put("error", e.getMessage());
         }
         return response;
     }
+
+    
+
+
+
 
     @GetMapping("/list")
     public String showChatRoomList(HttpSession session, Model model) {
@@ -208,14 +210,21 @@ public class ChatController {
 
     @GetMapping("/fetch")
     @ResponseBody
-    public List<Chat> fetchNewMessages(@RequestParam("writerId") String writerId,
-                                       @RequestParam("receiverId") String receiverId,
-                                       @RequestParam("lastChatNo") Integer lastChatNo) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("writerId", writerId);
-        map.put("receiverId", receiverId);
-        map.put("lastChatNo", lastChatNo);
-        List<Chat> cList = chatService.fetchNewMessages(map);
-        return cList;
+    public Map<String, Object> fetchMessages(@RequestParam("chatRoomNo") int chatRoomNo,
+                                             @RequestParam("lastChatNo") int lastChatNo) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            List<Chat> newMessages = chatService.getMessagesAfter(chatRoomNo, lastChatNo);
+            response.put("success", true);
+            response.put("messages", newMessages);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.put("success", false);
+            response.put("error", e.getMessage());
+        }
+        return response;
     }
+
+    
+
 }

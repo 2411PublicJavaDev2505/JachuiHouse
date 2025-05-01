@@ -22,4 +22,6 @@ public interface ChatRoomService {
 
 	ChatRoom getChatRoomByNo(int chatRoomNo);
 
+	String getReceiverId(int chatRoomNo, String writerId);
+
 }

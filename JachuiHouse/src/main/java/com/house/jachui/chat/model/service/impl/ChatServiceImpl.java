@@ -30,29 +30,6 @@ public class ChatServiceImpl implements ChatService {
         return chatMapper.getMessagesByRoom(roomNo);
     }
 
-    // 메시지 전송
-    @Override
-    public int sendChatMessage(SendRequest sendRequest) {
-        return chatMapper.sendChat(sendRequest);
-    }
-
-    // 새로운 메시지 가져오기
-    @Override
-    public List<Chat> fetchNewMessages(Map<String, Object> map) {
-//    	map.put("lastCheckedTime", lastCheckedTime);
-//    	List<Chat> lastChat = chatMapper.selectNewMessagesAfter(map);
-//    	if(lastChat.size() > 0) {
-//    		Timestamp chatTime = lastChat.get(0).getChatTime();
-//    		if(chatTime.after(lastCheckedTime)) {
-//    			lastCheckedTime = chatTime;
-//    		}
-//    		return lastChat;
-//    	}else {
-//    		return Collections.emptyList();
-//    	}
-    	return chatMapper.selectNewMessagesAfter(map);
-    }
-
     // 사용자가 참여한 채팅방을 조회하기 위한 쿼리 호출
 	@Override
 	public String selectLastChatById(String receiverId) {
@@ -63,4 +40,16 @@ public class ChatServiceImpl implements ChatService {
 	public List<Chat> getChatRoomsByMyId(String userId) {
 		return chatMapper.getChatRoomsByMyId(userId);
 	}
+
+	@Override
+	public void insertMessage(Chat chat) {
+	    chatMapper.insertMessage(chat);
+	}
+
+	@Override
+	public List<Chat> getMessagesAfter(int chatRoomNo, int lastChatNo) {
+	    return chatMapper.selectMessagesAfter(chatRoomNo, lastChatNo);
+	}
+
+
 }
