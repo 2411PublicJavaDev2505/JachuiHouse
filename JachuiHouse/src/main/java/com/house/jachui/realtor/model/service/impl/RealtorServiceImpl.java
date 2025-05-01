@@ -36,7 +36,7 @@ public class RealtorServiceImpl implements RealtorService{
 
 	@Override
 	public int getTotalCount(String userId) {
-		return rMapper.getTotalCount(userId);
+		return rMapper.getChatTotalCount(userId);
 	}
 
 	@Override

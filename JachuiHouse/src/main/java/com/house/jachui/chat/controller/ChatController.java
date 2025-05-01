@@ -204,37 +204,37 @@ public class ChatController {
 
 
     @GetMapping("/list")
-    public String showChatRoomList(HttpSession session, Model model
-    		, @RequestParam(value="page", defaultValue="1") int currentPage) {
+    public String showChatRoomList(HttpSession session, Model model) {
         String userId = (String) session.getAttribute("userId");
         String userRole = (String)session.getAttribute("userRole");
-        Set<String> opponentSet = new HashSet<>();
-		List<ChatWith> uniqueChatWithList = new ArrayList<>();
-		List<Chat> cList = chatRoomService.getChatRoomByUserId(userId, currentPage, 3);
-		int totalCount = rService.getTotalCount(userId);
-		Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
-		model.addAttribute("maxPage", pageInfo.get("maxPage"));
-		model.addAttribute("startNavi", pageInfo.get("startNavi"));
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("endNavi", pageInfo.get("endNavi"));
+        Set<Integer> roomSet = new HashSet<>(); // 채팅방 번호 중복 방지
+        List<ChatWith> chatWithList = new ArrayList<>();
+		List<Chat> cList = chatRoomService.getChatRoomsByUserId(userId);		
         Member member = rService.selectRealtorById(userId);
-        for (Chat chat : cList) {
-		    ChatRoom room = chatRoomService.getChatRoomByNo(chat.getChatRoomNo());
-		    // 상대방 ID 구하기 (본인 제외)
-		    String opponentId = room.getUser1Id().equals(userId) ? room.getUser2Id() : room.getUser1Id();
-		    if (!opponentSet.contains(opponentId)) {
-		        opponentSet.add(opponentId);				        
-		        // 상대방 정보 조회
-		        Member opponent = memberService.selectMemberById(opponentId);
-		        String opponentName = opponent != null ? opponent.getUserName() : "알 수 없음";
+        if("R".equals(userRole)) {
+        	for (Chat chat : cList) {
+        	    ChatRoom room = chatRoomService.getChatRoomByNo(chat.getChatRoomNo());
 
-		        ChatWith cwl = new ChatWith(chat, room, opponentId, opponentName);
-		        uniqueChatWithList.add(cwl);
-		    }
-		}
-        model.addAttribute("chatwithList", uniqueChatWithList);
+        	    if (!roomSet.contains(room.getChatRoomNo())) {
+        	        roomSet.add(room.getChatRoomNo());
+
+        	        String opponentId = room.getUser1Id().equals(userId) ? room.getUser2Id() : room.getUser1Id();
+        	        Member opponent = memberService.selectMemberById(opponentId);
+        	        String opponentName = opponent != null ? opponent.getUserName() : "알 수 없음";
+
+        	        ChatWith cwl = new ChatWith(chat, room, opponentId, opponentName);
+        	        chatWithList.add(cwl);
+        	    }
+        	}
+        model.addAttribute("chatwithList", chatWithList);
         model.addAttribute("cList", cList);
+        model.addAttribute("member", member);
         return "chat/list";
+        }
+        return "common/error";
+//        model.addAttribute("cList", cList);
+//        model.addAttribute("member", member);
+//        return "chat/list";
     }
 
     @GetMapping("/fetch")

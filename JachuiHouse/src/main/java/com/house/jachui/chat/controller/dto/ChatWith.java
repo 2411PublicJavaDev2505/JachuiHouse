@@ -18,4 +18,5 @@ public class ChatWith {
 	private ChatRoom chatRoom;
 	private String opponentId; // 상대방 아이디
 	private String opponentName; // 상대방 이름 
+	
 	}
