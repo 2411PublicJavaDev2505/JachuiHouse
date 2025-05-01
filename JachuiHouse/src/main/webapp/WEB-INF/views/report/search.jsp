@@ -21,7 +21,7 @@
 <!-- 	        	'신고종류' 옵션추가 -->
 	        		 <div class="search">
 		        		 <input class="searchplace" name="searchKeyword" type="text" 
-		        		 placeholder="   검색어를 입력하세요." value="${searchKeyword}">
+		        		 placeholder="   신고사유를 입력하세요." value="${searchKeyword}">
 		        		 <button class="btn" type="submit">검색</button>
 	        		 </div>	        
 		        </form> 
@@ -74,6 +74,7 @@
        		<!-- admin확인절차 넣어줘야 함 -->
        		<c:if test="${sessionScope.userId == 'admin'}">
        		 	<button class="btn"><a href="/member/list">회원 관리</a></button>
+       		 	<button class="btn"><a href="/notice/list">공지사항</a></button>
        		</c:if>  
        	</div>		
         </div>

@@ -20,7 +20,7 @@
 	        	<form class="report-form" action="/report/search" method="get">
 <!-- 	        	'신고종류' 옵션추가 -->
 	        		 <div class="search">
-		        		 <input class="searchplace" name="searchKeyword" type="text" placeholder="   검색어를 입력하세요.">
+		        		 <input class="searchplace" name="searchKeyword" type="text" placeholder="   신고사유를 입력하세요.">
 		        		 <button class="btn" type="submit">검색</button>
 	        		 </div>	        
 		        </form> 

@@ -19,7 +19,7 @@
 	        	<form class="report-form" action="/member/search" method="get">
 	        		 <div class="search">
 		        		 <input class="searchplace" name="searchKeyword" type="text" 
-		        		 placeholder="  검색어를 입력하세요." value="${searchKeyword}">
+		        		 placeholder="  이름, 주소, 상호명을 검색하세요." value="${searchKeyword}">
 		        		 <button class="btn" type="submit">검색</button>
 	        		 </div>	        
 		        </form><br>

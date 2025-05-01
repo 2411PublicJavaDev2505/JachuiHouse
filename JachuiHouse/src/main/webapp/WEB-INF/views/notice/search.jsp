@@ -27,12 +27,12 @@
         		 </div>	        
 	        </form> 
 
-<!--         		 <div class="board"> -->
+        		 <div class="board">
 <!--         		 admin확인절차 넣어줘야 함 -->
-<%--         		 <c:if test="${sessionScope.userId == 'admin'}"> --%>
-<!--         		 	<button class="btn"><a href="/notice/add">게시글 등록</a></button> -->
-<%--         		 </c:if>   --%>
-<!--         		 </div> -->
+        		 <c:if test="${sessionScope.userId == 'admin'}">
+        		 	<button class="btn"><a href="/notice/add">게시글 등록</a></button>
+        		 </c:if>  
+        		 </div>
         		 	<br>
 	        	<table class="boardbl">
 	        		<tr>
@@ -81,13 +81,14 @@
 		        </div>
 
 
-<!-- 		    <div class="board"> -->
+		    <div class="board">
 <!--         		admin확인절차 넣어줘야 함 -->
-<%--         		<c:if test="${member.userId == 'admin'}"> --%>
-<!--         		 	<button class="btn"><a href="">신고 관리</a></button> -->
-<%--         		</c:if>   --%>
-<!--         	</div>	 -->
-<!--         	</div>	 -->
+        		<c:if test="${member.userId == 'admin'}">
+        		 	<button class="btn"><a href="/report/list">신고 관리</a></button>
+        		 	<button class="btn"><a href="/member/list">회원 관리</a></button>
+        		</c:if>  
+        	</div>	
+        	</div>	
 	</main>     
     <footer>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
