@@ -35,7 +35,7 @@
 	                   <table class="boardtbl">
 	                       <tr>
 	                           <th>게시판 종류</th>
-	                           <th>공고글 제목</th>
+	                           <th>게시글 제목</th>
 	                           <th>작성자</th>
 	                           <th>작성일</th>
 	                       </tr>

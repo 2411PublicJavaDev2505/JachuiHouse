@@ -38,6 +38,63 @@ public class PostController {
 	private String toTalCount;
 	private List<PostVO> searchList;
 	
+	@PostMapping("/insert")//게시글 작성 (POST)
+	public String insertPost(HttpSession session, Model model,
+			@ModelAttribute PostInsertRequest post) {
+		try {
+			
+			String userId = (String)session.getAttribute("userId");
+			post.setUserId(userId);
+			int result = pService.insertPost(post);
+			if(result > 0) {
+				return "redirect:/post/list";
+			}else {
+				return "common/error";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
+	}
+
+	@PostMapping("/update")//게시글 수정하기 POST
+	public String postUpdate(Model model,
+			@ModelAttribute PostInsertRequest post) {
+		try {
+			int result = pService.postUpdate(post);
+			if(result > 0) {
+				return "redirect:/post/detail?postNo="+post.getPostNo();
+			}else {
+				return "common/error";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
+	}
+
+	@GetMapping("/delete")//게시글 삭제
+	public String deletePost(Model model, 
+			@RequestParam("postNo") int postNo) {
+		try {
+			int result = pService.deletePost(postNo);
+			if(result > 0) {
+				return "redirect:/post/list";
+			}else {
+				return "common/error";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			return "common/error";
+		}
+	}
+
 	@GetMapping("/list")//게시글 전체 정보 조회
 	public String showPostList(
 			@RequestParam(value="page", defaultValue="1") int currentPage,
@@ -76,27 +133,6 @@ public class PostController {
 		}
 	}
 	
-	@PostMapping("/insert")//게시글 작성 (POST)
-	public String insertPost(HttpSession session, Model model,
-			@ModelAttribute PostInsertRequest post) {
-		try {
-			
-			String userId = (String)session.getAttribute("userId");
-			post.setUserId(userId);
-			int result = pService.insertPost(post);
-			if(result > 0) {
-				return "redirect:/post/list";
-			}else {
-				return "common/error";
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
-			return "common/error";
-		}
-	}
-	
 	@GetMapping("/detail")//게시글 상세 조회//댓글조회
 	public String showPostDetail(Model model,
 			@RequestParam("postNo") int postNo) {
@@ -119,24 +155,6 @@ public class PostController {
 		}
 	}
 	
-	@GetMapping("/delete")//게시글 삭제
-	public String deletePost(Model model, 
-			@RequestParam("postNo") int postNo) {
-		try {
-			int result = pService.deletePost(postNo);
-			if(result > 0) {
-				return "redirect:/post/list";
-			}else {
-				return "common/error";
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
-			return "common/error";
-		}
-	}
-
 	@GetMapping("/update")//게시글 수정하기 GET
 	public String showPostUpdate(Model model,
 			@RequestParam(value = "postNo", required = false) Integer postNo) {
@@ -146,26 +164,6 @@ public class PostController {
 			return "post/update";
 	
 	}
-	
-	@PostMapping("/update")//게시글 수정하기 POST
-	public String postUpdate(Model model,
-			@ModelAttribute PostInsertRequest post) {
-		try {
-			int result = pService.postUpdate(post);
-			if(result > 0) {
-				return "redirect:/post/detail?postNo="+post.getPostNo();
-			}else {
-				return "common/error";
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
-			return "common/error";
-		}
-	}
-	
-	
 	
 	@ResponseBody
 	@GetMapping("/cList")//댓글 조회
