@@ -225,7 +225,7 @@ section {
     width: 800px;
     --height: 550px;
     height: 70%;
-    object-fit: cover;
+    object-fit: contain;
 }
 /* 캐러셀 사이드 버튼 */
 .carousel_button_container {
