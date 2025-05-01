@@ -1,9 +1,7 @@
 package com.house.jachui.member.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,9 +12,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +48,6 @@ import com.house.jachui.post.service.PostService;
 import com.house.jachui.trade.model.service.TradeService;
 import com.house.jachui.trade.model.vo.Trade;
 
-import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -378,28 +372,32 @@ public class MemberController {
 			Model model) {
 			String userRole = (String)session.getAttribute("userRole");
 			if("M".equals(userRole)) {
-		        Map<String, String> map = new HashMap<>();
+				Set<Integer> roomSet = new HashSet<>();
 				String userId = (String)session.getAttribute("userId");
 				Member member = mService.selectMemberById(userId);
-				Set<String> opponentSet = new HashSet<>();
-				List<ChatWith> uniqueChatWithList = new ArrayList<>();
+				List<ChatWith> chatWithList = new ArrayList<>();
 				List<Chat> cList = cService.getChatRoomsByMyId(userId);
 				List<PostVO> pList = pService.getPostsByUserId(userId);
 				List<Trade> tList = tService.getTradeByUserId(userId);
 				for (Chat chat : cList) {
 				    ChatRoom room = chatRoomService.getChatRoomByNo(chat.getChatRoomNo());
-				    String opponentId = room.getUser1Id().equals(userId) ? room.getUser2Id() : room.getUser1Id();
-				    if (!opponentSet.contains(opponentId)) {
-				        opponentSet.add(opponentId);				        
-				        // 상대방 정보 조회
-				        Member opponent = mService.selectMemberById(opponentId);
-				        String opponentName = opponent != null ? opponent.getUserName() : "알 수 없음";
-
-				        ChatWith cwl = new ChatWith(chat, room, opponentId, opponentName);
-				        uniqueChatWithList.add(cwl);
+				    int chatRoomNo = room.getChatRoomNo();
+				    // 이미 처리한 채팅방이면 건너뛰기
+				    if (roomSet.contains(chatRoomNo)) {
+				        continue;
 				    }
+				    roomSet.add(chatRoomNo); // 처리한 채팅방 저장
+
+				    String opponentId = room.getUser1Id().equals(userId) ? room.getUser2Id() : room.getUser1Id();
+
+				    // 상대방 정보 조회
+				    Member opponent = mService.selectMemberById(opponentId);
+				    String opponentName = opponent != null ? opponent.getUserName() : "알 수 없음";
+
+				    ChatWith cwl = new ChatWith(chat, room, opponentId, opponentName);
+				    chatWithList.add(cwl);
 				}
-				model.addAttribute("chatWithList", uniqueChatWithList);
+				model.addAttribute("chatWithList", chatWithList);
 				model.addAttribute("tList", tList);
 				model.addAttribute("member", member);
 				model.addAttribute("pList", pList);
@@ -558,6 +556,5 @@ public class MemberController {
 	    int result = mService.approveMember(userId);
 	    return result > 0 ? "success" : "fail";
 	}
-
 	
 }
