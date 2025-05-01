@@ -279,6 +279,8 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ### 중고거래게시판 검색(조회)
 ![중고거래게시판 검색(조회)](https://github.com/user-attachments/assets/fed1d944-1e1d-468d-90e3-4ec416f4a1fc)
+![중고거래게시판 검색(조회)2](https://github.com/user-attachments/assets/687525bb-be4b-43b1-b348-f388ad0f79e1)
+
 
 ### 중고거래게시판 판매여부
 ![중고거래게시판 검색(조회)](https://github.com/user-attachments/assets/def42a16-9e76-4c86-b3f9-0152324e571f)
