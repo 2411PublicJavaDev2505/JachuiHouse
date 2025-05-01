@@ -141,107 +141,92 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ### 1. 메인
 
-![](./docimg/화면_메인.png)
+
 
 ### 2. 마커 추가 요청
 
-![](./docimg/화면_마커추가요청.png)
+
 
 ### 3. 로그인
 
-![](./docimg/화면_로그인.png)
+
 
 ### 4. 회원 가입
 
-![](./docimg/화면_회원가입.png)
-![](./docimg/화면_이메일인증.PNG)
+
 
 ### 5. 아이디 찾기
 
-![](./docimg/화면_아이디찾기.png)
+
 
 ### 6. 비밀번호 찾기
 
-![](./docimg/화면_비밀번호찾기.png)
-![](./docimg/화면_임시비밀번호이메일.PNG)
+
 
 ### 7. 여행지 리스트
 
-![](./docimg/화면_여행지리스트.png)
-![](./docimg/화면_여행지필터.png)
+
 
 ### 8. 여행지 상세정보 - 정보창
 
-![](./docimg/화면_여행지상세정보-정보.png)
+
 
 ### 9. 여행지 상세정보 - 리뷰창
 
-![](./docimg/화면_여행지상세정보-리뷰.png)
+
 
 ### 10. 리뷰, 댓글 등록/수정
 
-![](./docimg/화면_리뷰팝업창.png)
+
 
 ### 11. 리뷰 신고
 
-![](./docimg/화면_여행지리뷰신고.png)
+
 
 ### 12. 마이페이지 - 즐겨찾기 리스트
 
-![](./docimg/즐겨찾기%20리스트%20최신순.png)
+
 
 ### 13. 마이페이지 - 리뷰 조회
 
-![](./docimg/나의%20리뷰.png)
+
 
 ### 14. 마이페이지 - 나의 여행일기 목록 조회
 
-![](./docimg/나의%20여행일기%20리스트%20데아터%20있을때.png)
+
 
 ### 15. 마이페이지 - 나의 여행일기 상세 조회
 
-![](./docimg/나의%20여행일기%20상세조회.png)
+
 
 ### 16. 마이페이지 - 나의 여행일기 등록/수정
 
-![](./docimg/나의%20여행일기%20등록.png)
-![](./docimg/나의%20여행일기%20수정.png)
+
 ### 17. 공지사항 리스트 조회
-![](./docimg/화면_사용자공지사항리스트.png)
+
 
 ### 18. QnA 작성
-![](./docimg/화면_사용자문의작성.png)
+
 
 ### 19. 관리자
 
-![](./docimg/화면_관리자로그인.png)
-![](./docimg/화면_관리자블랙리스트.png)
-![](./docimg/화면_관리자회원상태변경.png)
-![](./docimg/화면_관리자신고리스트.png)
-![](./docimg/화면_관리자마커승인요청리스트.png)
-![](./docimg/화면_관리자마커승인요청상세.png)
-![](./docimg/화면_관리자공지사항리스트.png)
-![](./docimg/화면_관리자공지사항작성.png)
-![](./docimg/화면_관리자QnA답변리스트.png)
-![](./docimg/화면_관리자QnA답변등록페이지.png)
-![](./docimg/화면_관리자여행지리스트.png)
-![](./docimg/화면_관리자여행상세.png)
+
 
 ## 프로젝트 아키텍처
 ### 사용자 흐름도
-![](./docimg/강릉여지도사용자흐름도.png)
+
 ### 서버 흐름도
-![](./docimg/강릉여지도서버흐름도.png)
+
 
 화살표 방향은 의존 관계를 의미합니다. 컨트롤러는 서비스에 의존하지만 서비스는 컨트롤러에 의존하지 않습니다. 서비스는 Mapper 에 의존하지만 Mapper 는 서비스에 의존하지 않습니다. 컨트롤러, 서비스, Mapper 는 모두 ExceptionHandler 에 의존하며 ExceptionHandler 는 컨트롤러, 서비스, Mapper 에서 발생하는 Exception 들을 처리합니다.
 
 ## 프로젝트 산출 문서
 
-- [기획보고서](https://drive.google.com/file/d/1xKrU_t2bgH5kuLAPBtYMu1aJZBpiE3gd/view?usp=drive_link)
-- [요구사항기술서](https://docs.google.com/document/d/1LqVcKy8FHG2ugpnxaTy_QwyCWoX31h1mcSsShtPUOB4/edit?usp=drive_link)
-- [유스케이스](https://drive.google.com/file/d/1WB3xDanCUE0NQFH3LHTC2ihIcdZfGzNw/view?usp=drive_link)
-- [플로우차트](https://drive.google.com/file/d/1hYaTB7DO7Z1tuPH41Wwg9M8V-NbyJLdf/view?usp=drive_link)
-- [와이어프레임](https://drive.google.com/file/d/1P0DsMKzsjJVSnkOympN18StspgC6Ms2x/view?usp=drive_link)
+- [기획보고서](https://drive.google.com/file/d/19wq7IqAmwbmmrIWkGs6C_b33HeiBXo6K/view?usp=drive_link)
+- [요구사항기술서](https://docs.google.com/document/d/1FUEcoi6dF-K0HsaCJfMYB03EmBvbZR0znCKo40GD8V8/edit?usp=sharing)
+- [유스케이스](https://drive.google.com/file/d/1FIg9RZA9UyFE6pXlrPjvkD0YGan3fDu1/view?usp=drive_link)
+- [플로우차트](https://drive.google.com/file/d/1kIxKAKyRxlNSAdrZALMKvhf1jENDsZaE/view?usp=sharing)
+- [와이어프레임](https://www.figma.com/deck/iGB0mgi4iS44uoXOMqQJN6/%EC%9E%90%EC%B7%A8%ED%95%98%EC%9A%B0%EC%8A%A4?node-id=5-125&t=14bQTmMF17yZ8hBT-1)
 - [DB설계](https://drive.google.com/file/d/1UZWH7P_JEf8C3pm4v6jnvyxpJ8qOUPNi/view?usp=drive_link)
 - [테이블정의서](https://docs.google.com/spreadsheets/d/1elBWKfCcjNKvqUCYvIl5JVw6l8x-WuQF/edit?usp=drive_link&ouid=116644278771318603851&rtpof=true&sd=true)
 - [클래스다이어그램](https://drive.google.com/file/d/1bQzmqw-LqOEKO0bWhPJpuFwQkBkj5k0R/view?usp=drive_link)
