@@ -132,8 +132,9 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 |기능명|상세|
 |--|--|
-|게시글 상세 조회|로그인 한 회원은 다른 회원들의 게시글에 들어가 상세 내용을 확인하고 다른 회원들의 댓글을 확인할 수 있다.|
 |게시글 조회|전체 리스트, 자유게시판, 질문게시판, 팁 게시판 중 하나를 선택하여 볼 수 있다. |
+|게시글 상세 조회|로그인 한 회원은 다른 회원들의 게시글에 들어가 상세 내용을 확인하고 다른 회원들의 댓글을 확인할 수 있다.|
+|게시글 검색|전체 리스트, 자유게시판, 질문게시판, 팁 게시판 중 하나를 선택하고 원하는 글의 제목을 검색해서 볼 수 있다. |
 |게시글 등록|로그인 한 회원은 자유게시판, 질문게시판, 팁 게시판 중 하나를 선택한 후 제목과 내용을 입력하여 게시글을 작성할 수 있다.|
 |게시글 수정|로그인 한 회원은 자신이 작성한 게시글의 제목과 내용, 게시할 게시판을 수정할 수 있다.|
 |게시글 삭제|로그인 한 회원은 자신이 작성한 게시글을 삭제할 수 있다.|
@@ -215,6 +216,35 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ### 19. 관리자
 
+### 게시글 조회
+![스크린샷(10)](https://github.com/user-attachments/assets/202b712e-8c91-4fc4-9855-13d78a43204f)
+
+### 게시글 상세조회
+![스크린샷(3)](https://github.com/user-attachments/assets/f25df5b8-2861-4028-ad07-1ab9121a3821)
+
+### 게시글 검색
+![스크린샷(15)](https://github.com/user-attachments/assets/da3c66b9-7e0e-475c-8e4f-adc96acb059f)
+
+### 게시글 등록
+![스크린샷(2)](https://github.com/user-attachments/assets/5639711b-1ef6-4c17-bbc6-be9b19212f92)
+
+### 게시글 수정
+![스크린샷(8)](https://github.com/user-attachments/assets/362ffa7c-d041-44f9-a867-0e03456cdc9a)
+
+### 게시글 삭제
+![스크린샷(9)](https://github.com/user-attachments/assets/e4fb182a-aa38-4d35-b591-e35899bf89ea)
+
+### 게시글 신고
+![스크린샷(6)](https://github.com/user-attachments/assets/828eb915-8be3-4b7c-95bd-fbd6663b93e1)
+
+### 댓글 등록
+![스크린샷(12)](https://github.com/user-attachments/assets/b8785a05-7da6-40ae-b68d-e52124269a9c)
+
+### 댓글 삭제
+![스크린샷(9)](https://github.com/user-attachments/assets/2812af3b-480f-47f4-b3ab-f67f478efa08)
+
+### 댓글 신고
+![스크린샷(7)](https://github.com/user-attachments/assets/38c97611-8184-4d8c-b73b-fe88f44f5f75)
 
 
 ## 프로젝트 아키텍처
