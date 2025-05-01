@@ -26,13 +26,13 @@
 	        		 
         	<table class="boardbl">
         		<tr>
-        			<th>회원 타입</th>
-        			<th>이름</th>
-        			<th>지역(주소)</th>
+        			<th class="role">회원 타입</th>
+        			<th class="name">이름</th>
+        			<th class="address">지역(주소)</th>
         			<th>아이디</th>
         			<th>이메일</th>
-        			<th>생년월일</th>
-        			<th>공인중개사 승인여부</th>
+        			<th class="birth">생년월일</th>
+        			<th class="yn">중개사 승인</th>
         		</tr>	
         		<c:forEach var="member" items="${mList}" varStatus="i">
 					<tr
@@ -136,8 +136,8 @@
 		        <p><strong>이메일:</strong>`+member.userEmail+`</p>
 		        <p><strong>생년월일:</strong>`+member.userBirth+`</p>
 		        <p><strong>자격증 번호:</strong>`+member.realtorNo+`</p>
-				<p><strong>첨부파일:</strong> 
-				  <a href="` + member.filePath + `/` + member.fileRename + `" download="` + member.fileName + `">` + member.fileName + `</a>
+				<p><strong>공인중개사 자격증:</strong> 
+				  <a href="` + member.filePath +`" download="` + member.fileName + `">` + member.fileName + `</a>
 				</p>
 		      </div>
 		    `,
