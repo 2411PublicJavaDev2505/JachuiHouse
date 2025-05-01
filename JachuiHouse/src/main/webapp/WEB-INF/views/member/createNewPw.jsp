@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<title>비밀번호 재설정</title>
 	<link rel="stylesheet" href="../resources/css/member/createNewPw.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
 <body>
     <div class="container">
@@ -27,7 +28,7 @@
         	<input type="hidden" name="userId" value="${userId }">
 	        <div class="form-group">
 	            <label for="userPwCheck">새 비밀번호: </label>
-	                <input type="password" name="userPwCheck" id="userPwCheck" placeholder="새비밀번호를 입력해주세요." class="form-control" required>
+	                <input type="password" name="userPwCheck" id="userPwCheck" placeholder="영어소문자,대문자,숫자로 8~20자리여야 합니다." class="form-control" required>
         	</div>
         	
         	<div class="form-group">
@@ -40,6 +41,16 @@
     </div>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 	<script type="text/javascript">
+	
+		// SweetAlert
+	    function showMessage(msg) {
+	    	Swal.fire({            		
+	     		title: '다시 한 번 확인해주세요.',
+	     		text: msg,
+	     		icon: 'error',
+	   		});
+	    } 	
+ 	
 		// 비밀번호 유효성 검사
 	    const signUpBtn = document.querySelector(".signUpBtn");
      	signUpBtn.addEventListener("click", function (event) {
@@ -54,18 +65,22 @@
 	    	if(!userPwCheckExp.test(userPw.value.trim())){
 				//msgTag.innerText = "비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다"
 				event.preventDefault();
-				showMessage("비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다.");
+				const msg = "비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." "
+				showMessage(msg);
 	           	return false;
 			}
 	        
 	        if(userPwCheckExp.value.trim() !== userPwCheck2.value.trim()){ //.value는 input 태그에 붙이는 것이다. userPwCheck는 값만 가져옴. Expression 사용X
 				//msgTag.innerText = "같은 값을 입력해주세요."
 				event.preventDefault();
-				showMessage("새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+				const msg = "새 비밀번호와 확인 비밀번호가 일치하지 않습니다."
+	        	showMessage(msg);
 	           	return false;
 			}
         
     });
+     	
+     
     // SweetAlert2 
     document.querySelector("#success").addEventListener("click", function() {
     	new swal(

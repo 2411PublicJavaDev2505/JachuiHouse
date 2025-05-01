@@ -52,7 +52,7 @@
         			
                     <div class="form-group">
                         <label for="password">비밀번호: </label>
-                        <input type="password" id="userPw"  name="userPw" placeholder="비밀번호는 영어소문자,대문자,숫자만 입력 가능해야 하고 8~20자리여야 합니다." required>
+                        <input type="password" id="userPw"  name="userPw" placeholder="영어소문자,대문자,숫자로 8~20자리여야 합니다." required>
                     </div>
         
                     <div class="form-group">
