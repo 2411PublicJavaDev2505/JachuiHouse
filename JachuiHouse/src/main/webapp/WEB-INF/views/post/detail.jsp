@@ -31,7 +31,7 @@
 						<textarea rows="20" cols="30" placeholder="상세한 내용을 적어주세요." name="reportContent"></textarea>
 					</div>
 					<div class="reportBtn">
-					    <button type="button" onclick="reportPost('comment')">신고하기</button>
+					    <button type="submit" onclick="reportPost('comment')">신고하기</button>
 					    <button type="button" onclick="reportBackToPage();">뒤로가기</button>
 					</div>
 				</form>
