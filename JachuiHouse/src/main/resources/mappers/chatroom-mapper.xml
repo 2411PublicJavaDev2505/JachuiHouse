@@ -40,7 +40,14 @@
         ORDER BY CREATE_DATE DESC
         FETCH FIRST 1 ROW ONLY
     </select>
-
+    
+	<select id="getChatRoomsByUserId" resultType="Chat">
+        SELECT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, DBMS_LOB.SUBSTR(MESSAGE, 4000, 1) AS MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME
+        FROM CHAT c
+        JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
+        WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
+        ORDER BY CHAT_TIME DESC
+    </select>
     
     <select id="getChatRoomByMyId" resultType="Chat">
         SELECT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, c.MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME

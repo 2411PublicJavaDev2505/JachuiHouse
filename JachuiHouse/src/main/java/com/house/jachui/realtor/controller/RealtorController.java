@@ -48,10 +48,11 @@ public class RealtorController {
 //			String userId = (String)session.getAttribute("userId");
 		Member member = rService.selectRealtorById(userId);
 		List<Estate> eList = rService.selectEstatesById(userId, currentPage, 3);
-		int totalCount = rService.getTotalCount(userId);
+ 		int totalCount = rService.getTotalCount(userId);
 		Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
 		model.addAttribute("maxPage", pageInfo.get("maxPage"));
 		model.addAttribute("startNavi", pageInfo.get("startNavi"));
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("endNavi", pageInfo.get("endNavi"));
 		model.addAttribute("eList", eList);
 		
@@ -80,6 +81,7 @@ public class RealtorController {
 			int totalCount = rService.getTotalCount(userId);
 			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
 			model.addAttribute("maxPage", pageInfo.get("maxPage"));
+			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("startNavi", pageInfo.get("startNavi"));
 			model.addAttribute("endNavi", pageInfo.get("endNavi"));
 			model.addAttribute("eList", eList);

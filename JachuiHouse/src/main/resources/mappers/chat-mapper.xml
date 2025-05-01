@@ -31,13 +31,7 @@
         )
     </insert>
 
-    <select id="getChatByUserId" resultMap="chatResultMap">
-        SELECT CHAT_NO, CHAT_ROOM_NO, WRITER_ID, DBMS_LOB.SUBSTR(MESSAGE, 4000, 1) AS MESSAGE, IS_READ, CREATE_DATE, CHAT_TIME
-        FROM CHAT c
-        JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
-        WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
-        ORDER BY CHAT_TIME DESC
-    </select>
+    
 
     <select id="selectNewMessagesAfter" resultMap="chatResultMap">
 		SELECT *
