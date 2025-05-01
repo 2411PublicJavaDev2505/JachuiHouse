@@ -178,9 +178,11 @@ public class MemberController {
                 request.setFilePath("/resources/mUploadFiles/" + fileInfo.get("mFileRename"));
             }
 
-            // 2. 비밀번호 암호화
-            String encodedPassword = passwordEncoder.encode(request.getUserPw());
-            request.setUserPw(encodedPassword);
+			/*
+			 * // 2. 비밀번호 암호화 String encodedPassword =
+			 * passwordEncoder.encode(request.getUserPw());
+			 * request.setUserPw(encodedPassword);
+			 */
 
             // 3. 회원가입 처리
             int result = mService.signupRealtor(request);

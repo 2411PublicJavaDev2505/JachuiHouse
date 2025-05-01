@@ -52,7 +52,7 @@
 		   
 		                <div class="form-group">
 		                    <label for="password">비밀번호: </label>
-		                    <input type="password" name="userPw" id="userPw" placeholder="영어소문자,대문자,숫자만 입력 가능하고 8~20자리여야 합니다." required>
+		                    <input type="password" name="userPw" id="userPw" placeholder="영어소문자,대문자,숫자로 8~20자리여야 합니다." required>
 		                </div>
 		
 		                <div class="form-group">
@@ -95,7 +95,7 @@
 	
 	                <div class="form-group">
 	                    <label for="realtorNo">공인중개사 등록번호: </label>
-	                    <input type="text" name="realtorNo" id="realtorNo" required>
+	                    <input type="text" name="realtorNo" id="realtorNo" placeholder="6~15자리 숫자로 입력해주세요" minlength="6" maxlength="15" required>
 	                </div>
 	                
 	                <div class="upload-area"> 

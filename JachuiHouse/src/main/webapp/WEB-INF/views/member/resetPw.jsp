@@ -33,7 +33,7 @@
 	            <label for="userEmail">이메일: </label>
 	                <input type="email" name="userEmail" id="userEmail"  placeholder="가입 시 기재한 이메일 주소를 입력해주세요." class="form-control" required>
         	</div>
-        	<button type="button" class="signUpBtn">변경하기</button>
+        	<button type="submit" id="signUpBtn" class="signUpBtn">변경하기</button>
         </form>
     </div>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
@@ -70,6 +70,7 @@
 	       		showMessage(msg);
 	           	return false;
 			}
+	        
 	    });
     </script>
 </body>
