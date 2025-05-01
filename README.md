@@ -260,7 +260,7 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 ### 서버 흐름도
 
 
-화살표 방향은 의존 관계를 의미합니다. 컨트롤러는 서비스에 의존하지만 서비스는 컨트롤러에 의존하지 않습니다. 서비스는 Mapper 에 의존하지만 Mapper 는 서비스에 의존하지 않습니다. 컨트롤러, 서비스, Mapper 는 모두 ExceptionHandler 에 의존하며 ExceptionHandler 는 컨트롤러, 서비스, Mapper 에서 발생하는 Exception 들을 처리합니다.
+
 
 ## 프로젝트 산출 문서
 
