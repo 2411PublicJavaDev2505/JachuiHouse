@@ -27,8 +27,6 @@ public interface MemberMapper {
 
 	Member selectOneByLogin(MemberLoginRequest member);
 
-	Member selectRealtorById(String userId);
-
 	Member selectFindId(Member member);
 
 	Member selectFoundId(Member member);

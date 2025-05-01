@@ -1,9 +1,7 @@
 package com.house.jachui.member.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,9 +12,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +48,6 @@ import com.house.jachui.post.service.PostService;
 import com.house.jachui.trade.model.service.TradeService;
 import com.house.jachui.trade.model.vo.Trade;
 
-import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -396,6 +390,7 @@ public class MemberController {
 				    }
 				    roomSet.add(chatRoomNo); // 처리한 채팅방 저장
 				    String opponentId = room.getUser1Id().equals(userId) ? room.getUser2Id() : room.getUser1Id();
+
 				    // 상대방 정보 조회
 				    Member opponent = mService.selectMemberById(opponentId);
 				    String opponentName = opponent != null ? opponent.getUserName() : "알 수 없음";
@@ -562,6 +557,5 @@ public class MemberController {
 	    int result = mService.approveMember(userId);
 	    return result > 0 ? "success" : "fail";
 	}
-
 	
 }
