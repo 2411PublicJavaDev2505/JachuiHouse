@@ -24,7 +24,6 @@
         ORDER BY CHAT_TIME ASC
     </select>
 
-	
 	<select id="selectMessagesAfter" resultType="Chat">
 	    SELECT * FROM CHAT 
 	    WHERE CHAT_ROOM_NO = #{chatRoomNo} 
@@ -39,7 +38,18 @@
         WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
         ORDER BY CHAT_TIME DESC
     </select>
-
+    <insert id="sendChat" parameterType="com.house.jachui.chat.controller.dto.SendRequest">
+        INSERT INTO CHAT (CHAT_NO, CHAT_ROOM_NO, WRITER_ID, MESSAGE, CREATE_DATE, CHAT_TIME)
+        VALUES (
+            SEQ_CHAT_NO.NEXTVAL,
+            #{chatRoomNo},
+            #{writerId},
+            #{message},
+            SYSDATE,
+            SYSTIMESTAMP
+        )
+    </insert>
+    
 	<select id="getChatRoomsByMyId" resultMap="chatResultMap">
         SELECT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, DBMS_LOB.SUBSTR(c.MESSAGE, 4000, 1) AS MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME
         FROM CHAT c

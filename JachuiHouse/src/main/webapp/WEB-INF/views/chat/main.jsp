@@ -66,6 +66,13 @@
 				    </c:choose>
 				</div>
             <div class="title-with-exit">
+        <c:if test="${empty sessionScope.userId}">
+		    <script>
+		        alert("로그인이 필요합니다.");
+		        location.href = "/member/login";
+		    </script>
+		</c:if>
+            <div class="title">
                 <h1>${receiverName} 님과의 채팅</h1>
             	<c:if test="${itemName eq 'estate'}">
             		<button class="exit-btn" onclick="location.href='/chazabang/detail/${itemNo}'">채팅방 나가기</button>

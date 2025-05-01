@@ -22,6 +22,6 @@ public interface ChatRoomService {
 
 	ChatRoom getChatRoomByNo(int chatRoomNo);
 
-	String getReceiverId(int chatRoomNo, String writerId);
+	List<Chat> getChatRoomByUserId(String userId, int currentPage, int i);
 
 }

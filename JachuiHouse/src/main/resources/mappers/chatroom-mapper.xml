@@ -60,4 +60,11 @@
 		FROM chat_room
 		WHERE chat_room_no = #{chatRoomNo}
 	</select>
+	<select id="getChatRoomByUserId" resultType="Chat">
+        SELECT c.CHAT_NO, c.CHAT_ROOM_NO, c.WRITER_ID, DBMS_LOB.SUBSTR(MESSAGE, 4000, 1) AS MESSAGE, c.IS_READ, c.CREATE_DATE, c.CHAT_TIME
+        FROM CHAT c
+        JOIN CHAT_ROOM cr ON c.CHAT_ROOM_NO = cr.CHAT_ROOM_NO
+        WHERE cr.USER1_ID = #{userId} OR cr.USER2_ID = #{userId}
+        ORDER BY CHAT_TIME DESC
+    </select>
 </mapper>

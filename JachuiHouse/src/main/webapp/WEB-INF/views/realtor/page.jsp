@@ -50,8 +50,8 @@ pageEncoding="UTF-8"%>
                 <div id="content-intro">
                 	<div id="text-box">
                     	<b>${realtor.userName}님의 게시글</b>
-                    </div>
-                    <a href="/chat/list">
+                    </div>  
+                    <a href="/chat/torealtor?estateNo=${estateNo }">
                     	<button type="submit" id="chatList">채팅 문의</button>
                     </a>
                 </div>
@@ -120,26 +120,37 @@ pageEncoding="UTF-8"%>
                 	</div>           
                 </div>            	            	
             </c:forEach>
+            <c:if test="${not empty eList }">
             <div class="pagination">
+            <!-- 이전 버튼 -->
+                        <c:if test="${currentPage > 1}">
+                            <a href="/realtor/page?userId=${realtor.userId }&page=1" class="first">◁◁</a>
+                            <a href="/realtor/page?userId=${realtor.userId }&page=${currentPage - 1}" class="prev">◀</a>
+                        </c:if>
+				
+				<c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+                            <a href="/realtor/page?userId=${realtor.userId }&page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
+                </c:forEach>
+				<c:if test="${currentPage < maxPage}">
+                    <a href="/realtor/page?userId=${realtor.userId }&page=${currentPage + 1}" class="next">▶</a>
+                    <a href="/realtor/page?userId=${realtor.userId }&page=${maxPage}" class="last">▷▷</a>
+                </c:if>
+			</div>
+			</c:if>
+            <%-- <div class="pagination">
+            <div class="page">
 				<c:if test="${startNavi ne 1 }">
-					<a href="/realtor/page?userId=${realtor.userId }?page=${startNavi - 1 }" class="prev">&lt;</a>
+					<a href="/realtor/page?userId=${realtor.userId }&page=${startNavi - 1 }" class="prev">&lt;</a>
 				</c:if>
 				<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-					<a href="/realtor/page?userId=${realtor.userId }?page=${p }">${p }</a>
+					<a href="/realtor/page?userId=${realtor.userId }&page=${p }">${p }</a>
 				</c:forEach>
 				<c:if test="${endNavi ne maxPage }">
-					<a href="/realtor/page?userId=${realtor.userId }?page=${endNavi + 1 }" class="next">&gt;</a>
+					<a href="/realtor/page?userId=${realtor.userId }&page=${endNavi + 1 }" class="next">&gt;</a>
 				</c:if>
+				</div>
 				 <!-- 다음 버튼 -->
-	            	<%-- <c:if test="${currentPage < maxPage}">
-	                	<c:choose>
-	              	      <c:otherwise>
-	   	                  		<a href="/realtor/myPage?page=${endNavi + 1}" class="next">▶</a>
-	                        	<a href="/realtor/myPage?page=${maxPage}" class="last">▷▷</a>
-	                      	</c:otherwise>
-	                    </c:choose>
-	                </c:if>  --%>
-			</div>
+			</div> --%>
         </div>
     </main>
     <footer>

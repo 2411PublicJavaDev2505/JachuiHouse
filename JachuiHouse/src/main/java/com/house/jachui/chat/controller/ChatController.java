@@ -1,9 +1,12 @@
 package com.house.jachui.chat.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,15 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.house.jachui.chat.controller.dto.ChatWith;
 import com.house.jachui.chat.controller.dto.SendRequest;
 import com.house.jachui.chat.model.service.ChatRoomService;
 import com.house.jachui.chat.model.service.ChatService;
 import com.house.jachui.chat.model.vo.Chat;
 import com.house.jachui.chat.model.vo.ChatRoom;
+import com.house.jachui.common.PageUtil;
 import com.house.jachui.estate.model.service.EstateService;
 import com.house.jachui.estate.model.vo.Estate;
 import com.house.jachui.member.model.service.MemberService;
 import com.house.jachui.member.model.vo.Member;
+import com.house.jachui.realtor.model.service.RealtorService;
 import com.house.jachui.trade.model.service.TradeService;
 import com.house.jachui.trade.model.vo.Trade;
 
@@ -34,11 +40,13 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/chat")
 public class ChatController {
 
+	private final RealtorService rService;
     private final ChatRoomService chatRoomService;
     private final ChatService chatService;
     private final MemberService memberService;
     private final EstateService eService;
     private final TradeService tService;
+    private final PageUtil pageUtil;
 
     @GetMapping("/torealtor")
     public String showEstateChat(Model model,
@@ -196,15 +204,32 @@ public class ChatController {
 
 
     @GetMapping("/list")
-    public String showChatRoomList(HttpSession session, Model model) {
+    public String showChatRoomList(HttpSession session, Model model
+    		, @RequestParam(value="page", defaultValue="1") int currentPage) {
         String userId = (String) session.getAttribute("userId");
-        if (userId == null) {
-            model.addAttribute("errorMessage", "로그인이 필요합니다.");
-            return "common/error";
-        }
-        
-        List<Chat> chatRoomList = chatRoomService.getChatRoomsByUserId(userId);
-        model.addAttribute("chatRoomList", chatRoomList);
+        String userRole = (String)session.getAttribute("userRole");
+        Set<String> opponentSet = new HashSet<>();
+		List<ChatWith> uniqueChatWithList = new ArrayList<>();
+		List<Chat> cList = chatRoomService.getChatRoomByUserId(userId, currentPage, 3);
+		int totalCount = rService.getTotalCount(userId);
+		Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
+		model.addAttribute("maxPage", pageInfo.get("maxPage"));
+		model.addAttribute("startNavi", pageInfo.get("startNavi"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("endNavi", pageInfo.get("endNavi"));
+        Member member = rService.selectRealtorById(userId);
+        for (Chat chat : cList) {
+		    ChatRoom room = chatRoomService.getChatRoomByNo(chat.getChatRoomNo());
+		    // 상대방 ID 구하기 (본인 제외)
+		    String opponentId = room.getUser1Id().equals(userId) ? room.getUser2Id() : room.getUser1Id();
+		    if (!opponentSet.contains(opponentId)) {
+		        opponentSet.add(opponentId);
+		        ChatWith cwl = new ChatWith(chat, room, opponentId);
+		        uniqueChatWithList.add(cwl);
+		    }
+		}
+        model.addAttribute("chatwithList", uniqueChatWithList);
+        model.addAttribute("cList", cList);
         return "chat/list";
     }
 

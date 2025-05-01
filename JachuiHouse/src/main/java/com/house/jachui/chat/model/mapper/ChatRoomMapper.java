@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import com.house.jachui.chat.model.vo.Chat;
 import com.house.jachui.chat.model.vo.ChatRoom;
@@ -29,5 +30,7 @@ public interface ChatRoomMapper {
 	Integer countChatRoomByRoomNo(int roomNo);
 
 	ChatRoom getChatRoomByNo(int chatRoomNo);
+
+	List<Chat> getChatRoomByUserId(String userId, RowBounds rowBounds);
 
 }
