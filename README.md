@@ -252,23 +252,44 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 ### 댓글 신고
 ![스크린샷(7)](https://github.com/user-attachments/assets/38c97611-8184-4d8c-b73b-fe88f44f5f75)
 
-### 중고거래
+### 중고거래게시판
 
-### 게시글 조회
+### 중고거래게시판 목록(회원)
+![중고거래게시판 목록(회원)](https://github.com/user-attachments/assets/a8e6cebe-0ea1-43bb-a449-a075d3305bbc)
 
-### 게시글 조회
+### 중고거래게시판 목록(비회원)
+![중고거래게시판 목록페이지(비회원)](https://github.com/user-attachments/assets/1b0bdc83-e107-4991-bcb8-01cd1b27c157)
 
-### 게시글 조회
+### 중고거래게시판 상세(회원)
+![중고거래게시판 상세(회원)](https://github.com/user-attachments/assets/1b49ae6f-970b-4f93-993d-a1100dafb987)
 
-### 게시글 조회
+### 중고거래게시판 상세(비회원)
+![중고거래게시판 상세(비회원)](https://github.com/user-attachments/assets/d34f888e-ad0b-437c-bd39-a60f9dc39e18)
 
-### 게시글 조회
+### 중고거래게시판 등록
+![중고거래게시판 등록](https://github.com/user-attachments/assets/a37dfcc0-47a5-435b-9097-882d5445b37a)
 
-### 게시글 조회
+### 중고거래게시판 수정
+![중고거래게시판 수정](https://github.com/user-attachments/assets/a0541e9e-9e22-4ec0-a1be-3e564a9eb44e)
 
-### 게시글 조회
+### 중고거래게시판 삭제
+![중고거래게시판 삭제1](https://github.com/user-attachments/assets/b4df9ef1-7633-4d93-b8ec-36273bc08f0f)
+![중고거래게시판 삭제2](https://github.com/user-attachments/assets/3d0d9f71-41fd-4dfe-861c-049b1af1e268)
+![중고거래게시판 삭제3](https://github.com/user-attachments/assets/8bb1e490-ee32-4207-997c-962f76878fdc)
 
-### 게시글 조회
+### 중고거래게시판 검색(조회)
+![중고거래게시판 검색(조회)](https://github.com/user-attachments/assets/fed1d944-1e1d-468d-90e3-4ec416f4a1fc)
+
+### 중고거래게시판 판매여부
+![중고거래게시판 검색(조회)](https://github.com/user-attachments/assets/def42a16-9e76-4c86-b3f9-0152324e571f)
+![중고거래게시판 판매여부2](https://github.com/user-attachments/assets/15b3892c-0fd9-4ddb-a40e-adf2fa0743af)
+![중고거래게시판 판매여부3](https://github.com/user-attachments/assets/80b46bf8-920c-4575-9a45-999987f67933)
+
+### 중고거래와 부동산 매물 페이지를 이용한 1:1 채팅
+
+### 중고거래 1:1 채팅
+![중고거래게시판 채팅](https://github.com/user-attachments/assets/d68977ca-d3e8-4240-ac7e-54ffc5bf51ce)
+
 
 ## 프로젝트 아키텍처
 ### 사용자 흐름도
