@@ -20,6 +20,7 @@
                 <a href="#">자취록</a>
                 <a href="#">찾아방</a>
                 <a href="#">사방팔방</a>
+                <a href="#">공지사항</a>
             </div>
             <div class="loginBtn">
                 <a href="#">로그인</a>

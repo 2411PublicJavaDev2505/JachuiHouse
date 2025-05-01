@@ -46,7 +46,7 @@
                         <div class="info-row">
                             <div class="label">기존 이미지</div>
                             <div class="value image-wrapper">
-                                <img src="${pageContext.request.contextPath}/resources/bUploadFiles/${trade.tradeFileRename}" >
+                                <img src="${pageContext.request.contextPath}/resources/tUploadFiles/${trade.tradeFileRename}" >
                             </div>
                         </div>
                     </c:if>
@@ -69,11 +69,12 @@
                         <div class="label">이미지 변경</div>
                         <div class="value file-upload">
                             <div class="file-top-row">
-                                <label for="fileInput" class="file-label">파일 선택</label>
-                                <a href="${pageContext.request.contextPath}/resources/bUploadFiles/${trade.tradeFileRename}" download>
-                                    ${trade.tradeFilename}
-                                </a>
-                            </div>
+							    <label for="fileInput" class="file-label">파일 선택</label>
+							    <a href="${pageContext.request.contextPath}/resources/tUploadFiles/${trade.tradeFileRename}" 
+							       style="color: inherit; text-decoration: none;">
+							        ${trade.tradeFilename}
+							    </a>
+							</div>
                             <small>기존 파일: ${trade.tradeFilename}</small>
                             <input type="file" name="reloadFile" id="fileInput" class="file-hidden" />
                         </div>

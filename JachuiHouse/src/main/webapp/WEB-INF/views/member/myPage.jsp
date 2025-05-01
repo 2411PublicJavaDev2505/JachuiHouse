@@ -53,6 +53,7 @@
 						       style="text-decoration: none; color: inherit;">
 						        <div class="chat-box <c:if test='${status.index >= 3}'>hidden</c:if>" >
 						            <span><strong>상대방 ID:</strong> ${cwl.opponentId}</span>
+						            <span><strong>상대방 이름:</strong> ${cwl.opponentName}</span>
 						            <span><strong>마지막 메시지:</strong> ${cwl.chat.message}</span>
 						            <span><strong>채팅방 타입:</strong> 
 						                <c:choose>
@@ -108,7 +109,7 @@
     						<c:if test="${trade.delYn != 'Y'}">
 								<div class="trade-item <c:if test='${status.index >= 6}'>hidden</c:if>">					            
 									<a href="/trade/detail/${trade.tradeNo}">
-						                <img src="/resources/bUploadFiles/${trade.tradeFileRename}" alt="상품 이미지" class="trade-thumb">
+						                <img src="/resources/tUploadFiles/${trade.tradeFileRename}" alt="상품 이미지" class="trade-thumb">
 						                <p class="trade-title">${trade.tradeTitle}</p>
 						            </a>
 						        </div>

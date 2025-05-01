@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>JachuiHouse</name>
 	<description>first cookie for Spring Boot</description>
+	<packaging>war</packaging>
 	<url/>
 	<licenses>
 		<license/>
@@ -129,6 +130,13 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+		<!-- war 배포시 사용 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		      <artifactId>spring-boot-starter-tomcat</artifactId>
+		      <scope>provided</scope> <!-- 안되어 있는 경우 변경! -->
+		</dependency>
+		
 	</dependencies>
 
 	<build>

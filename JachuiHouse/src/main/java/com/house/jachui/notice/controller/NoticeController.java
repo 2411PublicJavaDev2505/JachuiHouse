@@ -135,31 +135,6 @@ public class NoticeController {
 				return "common/error";
 			}
 	}
-//	//다운로드 처리용 메서드
-//	@GetMapping("/download")
-//	public void downloadFile(
-//	    @RequestParam("filepath") String filepath,
-//	    @RequestParam("filename") String filename,
-//	    HttpServletRequest request,
-//	    HttpServletResponse response) {
-//
-//	    try {
-//	        // 저장된 실제 경로
-//	        String savePath = request.getServletContext().getRealPath(filepath);
-//	        File file = new File(savePath, filename);
-//
-//	        if (file.exists()) {
-//	            response.setContentType("application/octet-stream");
-//	            response.setHeader("Content-Disposition", "attachment;filename=\"" + java.net.URLEncoder.encode(filename, "UTF-8") + "\"");
-//	            response.setContentLength((int) file.length());
-//
-//	            java.nio.file.Files.copy(file.toPath(), response.getOutputStream());
-//	            response.getOutputStream().flush();
-//	        }
-//	    } catch (Exception e) {
-//	        e.printStackTrace();
-//	    }
-//	}
 
 	
 	@GetMapping("/detail/{noticeNo}")

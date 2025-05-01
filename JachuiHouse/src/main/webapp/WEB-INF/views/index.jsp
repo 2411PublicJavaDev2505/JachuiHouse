@@ -78,19 +78,19 @@
 	                <!-- 주요 기능 소개 -->
 	                <div class="main-menu">
 	                    <div class="left-menu">
-	                        <a href="post/list">
-	                            <div class="user-story">
+	                        <a href="post/list" class="tp-post">
+		                   		<div class="user-story">
 	                                <h3>자취록 </h3>
 	                                <p>우리들의 자취 이야기</p>
-	                            </div>
-	                        </a>
-	                        <a href="/chazabang/list">
+		                        </div>
+	                       	</a>
+	                        <a href="/chazabang/list" class="tp-estate">
 	                            <div class="alone-living">
 	                                <h3>찾아방</h3>
 	                                <p>맘에드는 집을 찾아방</p>
 	                            </div>
 	                        </a>
-	                        <a href="/trade/list">
+	                        <a href="/trade/list" class="tp-trade">
 	                            <div class="used-market">
 	                                <h3>사방팔아방</h3>
 	                                <p>자취러들의 중고장터</p>
@@ -98,11 +98,11 @@
 	                        </a>
 	                    </div>
 	                    <div class="right-menu">
-	                        <a href="notice/list">
+	                        <a href="notice/list" class="tp-notice">
 	                            <div class="notice-board">
 	                                <h3>공지사항</h3>
-	                                <li><a href="http://localhost:7777/notice/detail/219">감기 조심하세요</a></li>
-	                                <li><a href="http://localhost:7777/notice/detail/220">사기 예방 안내</a></li>
+	                                <li class="tp-notice-detail"><a href="http://localhost:7777/notice/detail/219">감기 조심하세요</a></li>
+	                                <li class="tp-notice-detail"><a href="http://localhost:7777/notice/detail/220">사기 예방 안내</a></li>
 	                            </div>
 	                        </a>
 	                    </div>
@@ -151,9 +151,10 @@
 		      const prevBtn = document.querySelector('.carousel_prev');
 		      const nextBtn = document.querySelector('.carousel_next');
 		      const bullets = document.querySelectorAll('.carousel_circle');
-// 		      const slideWidth = slides[0].offsetWidth;
+
 	          let slideWidth;
 			  let currentSlide = 0;
+			  let autoSlideInterval;//이거 추가
 				
 			  function updateSlideWidth() {
 			    slideWidth = slides[0].clientWidth;
@@ -161,32 +162,53 @@
 		
 		      function showSlide(value) {
 		    	const setValue = "-" + (value * slideWidth) + "px"; 
-		        swiper.style.transform = `translateX(`+setValue+`)`;
+		        swiper.style.transform = `translateX(`+setValue+`)`;//$로 바꿔야 하나?
 		        currentSlide = value;
 		        bullets.forEach((bullet, i) => {
 		          bullet.classList.toggle('active', i === value);
 		        });
 		      }
 		
+		      //슬라이드 추가
+		      function nextSlide() {
+		          const next = (currentSlide + 1) % slides.length;
+		          showSlide(next);
+		      }
+
+		      function startAutoSlide() {
+		          autoSlideInterval = setInterval(nextSlide, 3000); // 3초마다 자동 슬라이드
+		      }
+
+		      function stopAutoSlide() {
+		          clearInterval(autoSlideInterval);
+		      }
+		      
 		      prevBtn.addEventListener('click', (e) => {
 		    	    e.stopPropagation();  // 추가!! 링크 이동 막음
 		    	    e.preventDefault();    // 기본 동작 막기 (링크 이동 금지)
 		        if (currentSlide > 0) showSlide(currentSlide - 1);
 		        updateSlideWidth()
+		        stopAutoSlide();//슬라이드 추가
+		        startAutoSlide();//슬라이드 추가
 		      });
 		
 		      nextBtn.addEventListener('click',  (e) => {
-		    	    e.stopPropagation();  // 추가!! 링크 이동 막음
-		    	    e.preventDefault();    // 기본 동작 막기 (링크 이동 금지)
+		    	    e.stopPropagation();  
+		    	    e.preventDefault();  
 		        if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
-		        updateSlideWidth()
+		        else showSlide(0); // 마지막 슬라이드 다음은 처음으로
+		        updateSlideWidth();
+		        stopAutoSlide();
+		        startAutoSlide();
 		      });
 		
 		      bullets.forEach((bullet, i) => {
 		        bullet.addEventListener('click',  (e) => {
-		            e.stopPropagation();  // 추가!! 링크 이동 막음
-		            e.preventDefault();    // 기본 동작 막기 (링크 이동 금지)
+		            e.stopPropagation();  
+		            e.preventDefault();    
 		        	showSlide(i);
+		        	stopAutoSlide();
+			        startAutoSlide();
 // 		        	updateSlideWidth()
 		      });
 		    });
@@ -194,6 +216,7 @@
 		      window.addEventListener('resize', updateSlideWidth);
 		      updateSlideWidth();
 		      showSlide(0); // 처음에 슬라이드 보이게 설정
+		      startAutoSlide(); // 자동 슬라이드 시작
 		    });
 		</script>
 </body>

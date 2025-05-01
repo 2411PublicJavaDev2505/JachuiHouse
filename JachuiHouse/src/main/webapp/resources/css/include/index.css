@@ -1,21 +1,18 @@
 @charset "UTF-8";
 body{
     margin: 0;
-    background-color: #FFF9E9;
+    background-color: #fff9e9;
 } 
 .main {
 	width: 1500px;
     margin: 0 auto;
-    --height: 755px;
-    margin-top : 60px;
+    margin-top : 20px;
 }
 
  .banner {
     --text-align: center;
     padding: 50px 0;
-    background-color: #FFF9E9;
-    border-top: 1px solid #E0DFDF;
-    border-bottom: 1px solid #E0DFDF;
+    background-color: #f4ece0;
 }
 /* .banner2 {
     text-align: center;
@@ -115,9 +112,7 @@ section {
     width: 600px;
     height: 550px;
     object-fit: cover;
-    
 }
-
 
 /* right-container 스타일 */
 .right-container {
@@ -138,7 +133,6 @@ section {
     height: 100px; /* 임시 높이 설정 */
     --background-color: #f5f5f5;
     border-radius: 10px;
-    border-top: 1px solid #E0DFDF;
     margin-bottom: 20px;
     display: left;
 }
@@ -147,10 +141,7 @@ section {
 .main-menu {
     display: flex;
     gap: 70px;
-    background-color: #FFF9E9;
-    /* padding: 40px 0;
-    max-width: 1200px;
-    margin: 0 auto; */
+   	background-color: #fffdf6;
 }
 .main-hello {
     text-align: center;
@@ -159,11 +150,12 @@ section {
 
 .main-menu a{
     text-decoration: none;
+    color: unset;
 }
 .left-menu {
     display: flex;
-    
 }
+
 .main-menu div{
     border-radius: 25px;
     margin: 20px;
@@ -172,28 +164,34 @@ section {
     color: white;
     background-color: #FF7337;
     padding: 20px;
+    transition: box-shadow 0.2s ease;
 }
-
-.user-stroy hover{
-	background-color: #ff5b0d; 
-	box-shadow: -5px -5px 10px #fff, 5px 5px 10px #babebc;
+.user-story:hover{
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 .alone-living {
     color: white;
     background-color: #FF804A;
     padding: 20px;
-    --box-shadow: -5px -5px 10px #fff, 5px 5px 10px #babebc;
+    transition: box-shadow 0.2s ease;
+}
+.alone-living:hover{
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 .used-market {
     color: white;
     background-color: #FFA37C;
     padding: 20px;
-    --box-shadow: -5px -5px 10px #fff, 5px 5px 10px #babebc;
+    transition: box-shadow 0.2s ease;
+}
+.used-market:hover{
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 .notice-board {
     color: white;
     background-color: #6A9D81;
     padding: 20px 35px 20px 35px;
+    transition: box-shadow 0.2s ease;
 }
 
 /* 캐러셀 전체 구조  */
@@ -288,4 +286,18 @@ section {
 
 .carousel_circle.active {
     background-color: #333;
+}
+
+/* 공지사항 */
+h3{
+	text-decoration: none;
+	color: white;
+}
+.notice-board li a {
+    color: white;
+}
+.notice-board li {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
 }

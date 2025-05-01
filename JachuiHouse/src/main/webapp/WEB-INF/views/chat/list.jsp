@@ -18,7 +18,7 @@
             <div id="mainLeft">
                 <div id="profile">
                     <div id="photo">
-                        <img src="/Image20250120123326.png">
+                        <img src="/resources/image/${member.profileImage}" alt="image" id="profileImage" style="width:200px; height:200px; margin-left:50px; border-radius:100%;">	               
                     </div>
                 </div>
                 <div id="name">
@@ -58,29 +58,48 @@
                             <b>채팅 목록</b>
                         </div>
                     </div>
-                    <div id="list">
-                    <c:if test="${empty cList}">
+                    <c:if test="${empty chatwithList}">
 					        <p>채팅내역이 없습니다.</p>
 					</c:if>
+                            <c:forEach var="cwl" items="${chatwithList}" varStatus="status">
+                    <div id="list">
                         <div id="nickname">
                             <div id="nicknameText">
-                            <c:forEach var="chat" items="${cList}" varStatus="i">
-					        <a href="${pageContext.request.contextPath}/chat/chat?writerId=${chat.receiverId}&receiverId=${chat.writerId}">
-					            <!-- 마지막으로 보낸 메시지의 writerId 또는 receiverId를 출력 -->
-					            <b>${chat.writerId}</b>
+					        <a href="${pageContext.request.contextPath}/chat/room?chatRoomNo=${cwl.chatRoom.chatRoomNo}&itemname=${cwl.chatRoom.itemType}&itemNo=${cwl.chatRoom.itemNo}&user1Id=${cwl.chatRoom.user2Id}&user2Id=${cwl.chatRoom.user1Id}">
+					            <b>${cwl.opponentId}</b>님과의 채팅        
 					        </a>
-					    </c:forEach>
-                            </div>
-                            
+                            </div>     
                         </div>
-                        <div id="time">
-                            17:40
-                        </div>
+ 					    <a href="${pageContext.request.contextPath}/chat/room?chatRoomNo=${cwl.chatRoom.chatRoomNo}&itemname=${cwl.chatRoom.itemType}&itemNo=${cwl.chatRoom.itemNo}&user1Id=${cwl.chatRoom.user2Id}&user2Id=${cwl.chatRoom.user1Id}">       
+                        	<div id="time">
+                           		${cwl.chat.createDate }
+                        	</div>
+                        </a>
+					    <a href="${pageContext.request.contextPath}/chat/room?chatRoomNo=${cwl.chatRoom.chatRoomNo}&itemname=${cwl.chatRoom.itemType}&itemNo=${cwl.chatRoom.itemNo}&user1Id=${cwl.chatRoom.user2Id}&user2Id=${cwl.chatRoom.user1Id}">
                         <div id="chat">
-                            <b>${chat.chatContent}</b>
+                            <b>${cwl.chat.message}</b>
                         </div>
+                        </a>
                     </div>
-                    <div id="list">
+					    </c:forEach>
+                <c:if test="${not empty cList }">
+            <div class="pagination">
+            <!-- 이전 버튼 -->
+                        <c:if test="${currentPage > 1}">
+                            <a href="/chat/list?page=1" class="first">◁◁</a>
+                            <a href="/chat/list?page=${currentPage - 1}" class="prev">◀</a>
+                        </c:if>
+				
+				<c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+                            <a href="/chat/list?page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
+                </c:forEach>
+				<c:if test="${currentPage < maxPage}">
+                    <a href="/chat/list?page=${currentPage + 1}" class="next">▶</a>
+                    <a href="/chat/list?page=${maxPage}" class="last">▷▷</a>
+                </c:if>
+			</div>
+			</c:if>
+                    <!-- <div id="list">
                         <div id="nickname">
                             <div id="nicknameText">
                                 <b>익명의 로랜드고릴라</b>
@@ -106,7 +125,7 @@
                         <div id="chat">
                             <b>방이 너무 비싸요</b>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
         </div>
     </main>

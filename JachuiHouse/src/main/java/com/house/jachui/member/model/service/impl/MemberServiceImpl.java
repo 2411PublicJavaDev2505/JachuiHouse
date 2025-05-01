@@ -158,7 +158,7 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
-	//회원 관리 리스트
+	//회원 관리 조회
 	@Override
 	public List<Member> selectListAll(int currentPage) {
 		int limit = 10;

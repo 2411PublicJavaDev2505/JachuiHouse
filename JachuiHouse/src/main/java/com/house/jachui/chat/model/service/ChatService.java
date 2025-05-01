@@ -14,11 +14,11 @@ public interface ChatService {
 
 	List<Chat> getMessagesByRoom(Integer roomNo);
 
-	int sendChatMessage(SendRequest sendRequest);
-
-	List<Chat> fetchNewMessages(Map<String, Object> map);
-
 	String selectLastChatById(String receiverId);
 
 	List<Chat> getChatRoomsByMyId(String userId);
+
+	List<Chat> getMessagesAfter(int chatRoomNo, int lastChatNo);
+
+	void insertMessage(Chat chat);
 }

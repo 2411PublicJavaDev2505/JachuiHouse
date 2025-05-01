@@ -14,10 +14,6 @@ public interface ChatMapper {
 
 	List<Chat> getMessagesByRoom(Integer roomNo);
 
-	int sendChat(SendRequest sendRequest);
-
-	List<Chat> selectNewMessagesAfter(Map<String, Object> map);
-
 	List<Chat> selectNewMessages(Map<String, Object> map);
 	
 	List<Chat> getChatByUserId(String userId);
@@ -29,5 +25,9 @@ public interface ChatMapper {
 	String selectLastChatById(String receiverId);
 
 	List<Chat> getChatRoomsByMyId(String userId);
+
+	void insertMessage(Chat chat);
+
+	List<Chat> selectMessagesAfter(int chatRoomNo, int lastChatNo);
 
 }

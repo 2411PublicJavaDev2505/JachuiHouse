@@ -60,13 +60,6 @@
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 	<script type="text/javascript">
-		function updateConfirm(event) {
-	        event.preventDefault(); 	
-	        const isConfirmed = confirm("회원정보를 수정하시겠습니까?");
-	        if (isConfirmed) {
-	            document.querySelector('form').submit();
-	        }
-	    }
 		function previewImage(event) {
 	        const reader = new FileReader();
 	        reader.onload = e => document.getElementById('profileImage').src = e.target.result;
@@ -94,9 +87,14 @@
 	            alert('전화번호는 010으로 시작하고 총 11자리여야 합니다.');
 	            return false;
 	        }
-
-	        // 모든 조건 통과
 	        return true;
+	    }
+	    function updateConfirm(event) {
+	        event.preventDefault(); 	
+	        const isConfirmed = confirm("회원정보를 수정하시겠습니까?");
+	        if (isConfirmed) {
+	            document.querySelector('form').submit();
+	        }
 	    }
 	</script>
 </body>
