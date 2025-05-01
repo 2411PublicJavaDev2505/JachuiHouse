@@ -6,17 +6,21 @@
 <head>
     <meta charset="UTF-8">
     <title>사방팔아방 상세페이지</title>
+    <!-- 공통 스타일 시트 -->
     <link rel="stylesheet" href="/resources/css/include/header.css">
     <link rel="stylesheet" href="/resources/css/trade/detail.css">
     <link rel="stylesheet" href="/resources/css/include/footer.css">
 </head>
 <body>
     <div id="container">
+    	<!-- 공통 헤더 포함 -->
         <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
         <main class="detail-container">
             <div class="detail-box">
+            	<!-- 채팅 버튼 및 조회수 -->
                 <div class="top-info-bar">
+                	
                     <c:choose>
                         <c:when test="${not empty sessionScope.userId and trade.userId ne sessionScope.userId}">
                             <div class="chat-btn">
