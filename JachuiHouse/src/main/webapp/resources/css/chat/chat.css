@@ -12,6 +12,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .title h1 {
@@ -20,12 +21,11 @@ main {
 }
 
 .title-with-exit {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 16px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    
 }
 
 .title-with-exit h1 {

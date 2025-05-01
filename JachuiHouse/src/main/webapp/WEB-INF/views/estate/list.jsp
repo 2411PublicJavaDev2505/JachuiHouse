@@ -23,7 +23,7 @@
 				    <li><button class="officetel" data-type="officetel">오피스텔</button></li>
 				</ul>
             </div>
-            <c:if test="${userRole eq 'R'}">
+            <c:if test="${userRole eq 'R' and approveYn eq 'Y'}">
 			    <div class="add-estate-btn">
 			        <button onClick="location.href='/chazabang/insert'">매물등록</button>
 			    </div>
