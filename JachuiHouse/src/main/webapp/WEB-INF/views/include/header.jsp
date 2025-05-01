@@ -21,6 +21,7 @@
                 <a href="/post/list">자취록</a>
                 <a href="/chazabang/list">찾아방</a>
                 <a href="/trade/list">사방팔방</a>
+                <a href="/notice/list">공지사항</a>
             </div>
             <div class="loginBtn">
             <c:if test="${sessionScope.userId eq null }">

@@ -16,9 +16,9 @@
             	<div class="chat-item-info">
 				    <c:choose>
 				        <c:when test="${itemName eq 'estate'}">
-				            <div class="item-box">
-				                <div class="item-details">
-				                    <a href="/chazabang/detail/${item.estateNo }" class="estate" data-type="${item.estateType}">
+				        	<a href="/chazabang/detail/${item.estateNo }" class="item-box-link" data-type="${item.estateType}">
+					            <div class="item-box">
+					                <div class="item-details">
 						                <div class="estate-style">
 						                    <img src="${item.estateFileList[0].estateFilePath}" alt="이미지 준비중">
 						                        <section class="estate-inf">
@@ -48,24 +48,31 @@
 						                        <span class="estate-address">${item.estateAddress }</span>
 						                    </section>
 						                </div>
-						            </a>
-				                </div>
-				            </div>
+					                </div>
+					            </div>
+						   	</a>
 				        </c:when>
 				        <c:when test="${itemName eq 'trade'}">
-				            <div class="item-box">
-				                <img src="${item.thumbnail}" alt="중고물품 이미지" class="item-thumbnail" />
-				                <div class="item-details">
-				                    <div class="item-title">${item.tradeTitle}</div>
-				                    <div class="item-sub">가격: ${item.price}원</div>
-				                    <a href="/trade/detail?no=${itemNo}" class="item-link">상세 보기</a>
-				                </div>
-				            </div>
+					    	<a href="/trade/detail/${item.tradeNo}" class="item-box-link">
+				            	<div class="item-box">
+		                            <img src="${item.tradeFilepath}" alt="${item.tradeTitle}">
+		                            <div class="trade-inf">
+				                        <div class="product-title">${item.tradeTitle}</div>
+				                        <div class="product-price">${item.tradePrice}원</div>
+		                            </div>
+					            </div>
+		                    </a>
 				        </c:when>
 				    </c:choose>
 				</div>
-            <div class="title">
+            <div class="title-with-exit">
                 <h1>${receiverName} 님과의 채팅</h1>
+            	<c:if test="${itemName eq 'estate'}">
+            		<button class="exit-btn" onclick="location.href='/chazabang/detail/${itemNo}'">채팅방 나가기</button>
+            	</c:if>
+            	<c:if test="${itemName eq 'trade'}">
+	                <button class="exit-btn" onclick="location.href='/${itemName }/detail/${itemNo}'">채팅방 나가기</button>
+            	</c:if>
             </div>
 
             <!-- 채팅 메시지 출력 영역 -->
@@ -95,10 +102,6 @@
                     <button type="submit" id="submitBtn">전송</button>
                 </div>
             </form>
-
-            <div class="btn">
-                <button onclick="location.href='/'">채팅방 나가기</button>
-            </div>
         </main>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>

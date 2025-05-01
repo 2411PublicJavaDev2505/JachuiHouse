@@ -12,24 +12,38 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .title h1 {
     font-size: 24px;
     color: #333;
 }
-/* chat-item-info 영역 스타일 - 배경과 테두리로 구분 */
-.chat-item-info {
+
+.title-with-exit {
     display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 14px;
-    margin-bottom: 13px;
-    background-color: #fff3e0; /* 부드러운 오렌지 배경 */
-    border: 1px solid #ffd6a0; /* 연한 테두리 */
-    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
+
+.title-with-exit h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.exit-btn {
+    padding: 6px 12px;
+    background-color: #ff6767;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* chat-item-info 영역 스타일 - 배경과 테두리로 구분 */
 
 /* 이미지 */
 .chat-item-info .item-box img {
@@ -47,12 +61,58 @@ main {
     gap: 16px;
 }
 
+/* 공통 item-box 스타일 */
+.item-box-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.item-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px;
+    border: 1px solid #eee;
+    background-color: #fffef7;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.2s ease;
+}
+
+.item-box:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* 이미지 크기 (trade용) */
+.item-box img {
+    width: 120px;
+    height: 100px;
+    object-fit: cover; /* 이미지가 잘리지 않고 비율 유지하며 꽉 채움 */
+    border-radius: 6px;
+}
+
+/* 상품 정보 텍스트 */
+.item-box .product-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.item-box .product-price {
+    font-size: 14px;
+    color: #666;
+}
+
 /* estate-inf 오른쪽 배치용 */
 .estate-inf {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 6px;
+    margin-top:5px;
 }
 
 /* 전세/월세 정보 */
@@ -72,6 +132,7 @@ main {
 .estate-type {
     font-size: 13px;
     color: #333;
+    margin-left: 10px;
 }
 
 /* 층, 면적, 주소 */
@@ -96,12 +157,56 @@ main {
     border-radius: 8px;
 }
 
-/* estate-inf 정보 영역 정렬 */
-.estate-inf {
+.trade {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    background-color: #fffefc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+}
+
+.trade img {
+    width: 120px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.trade:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #fffbe0;
+    transform: translateY(-2px);
+}
+.trade-inf{
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.product-title,
+.product-price {
+    display: block;
+}
+
+.product-title {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+.product-price {
+	font-size: 50px;
+}
+
+
+.trade > div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 6px;
 }
 
 
@@ -109,7 +214,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    height: 285px;
+    height: 428px;
     overflow-y: auto;
     padding: 10px;
     background-color: #fff;
