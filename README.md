@@ -160,18 +160,31 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 
 ### 3. 로그인
+![로그인](https://github.com/user-attachments/assets/33232bb8-eb46-4e22-9ae6-02364a8260af)
+![로그아웃](https://github.com/user-attachments/assets/5fdd39ed-9034-4232-9af0-53ec88807f5d)
 
 
 
 ### 4. 회원 가입
+![일반회원가입](https://github.com/user-attachments/assets/34fbc3bb-ec43-4a3a-a4e1-d368055d5d5c)
+![공인중개사 회원가입](https://github.com/user-attachments/assets/f8babf8d-6c98-4a92-823a-ab6801a50282)
+![공인중개사 회원가입](https://github.com/user-attachments/assets/7e88c391-c93c-4328-9b70-bf85b5b4d780)
 
 
 
 ### 5. 아이디 찾기
+![아이디찾기](https://github.com/user-attachments/assets/0fc21518-92b4-4380-a46b-fa43d5017815)
+![아이디찾기결과 alert](https://github.com/user-attachments/assets/5cdba862-9aeb-4d94-a525-08064972e2ed)
+![아이디찾기결과](https://github.com/user-attachments/assets/3d184735-26f4-40a5-8b8a-996aa65a49c7)
 
 
 
-### 6. 비밀번호 찾기
+### 6. 비밀번호 재설정
+![비밀번호재설정](https://github.com/user-attachments/assets/07385dd5-fcaa-4f3a-81a5-3cd6061cb8b9)
+
+![비밀번호재설정 이메일항목alert](https://github.com/user-attachments/assets/6570b63b-c653-4335-84b7-0e6d8ddd7d39)
+![비밀번호재설정alert](https://github.com/user-attachments/assets/e3913787-6fd7-4750-af1a-984fc6585bf6)
+![비밀번호재설정하기](https://github.com/user-attachments/assets/6bb7d94d-826e-48aa-874d-62d62b1ac63f)
 
 
 
@@ -269,6 +282,10 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 ### 게시글 조회
 
 ### 게시글 조회
+
+### 오류 페이지
+![error](https://github.com/user-attachments/assets/eecfb058-153b-4fa5-a830-9d6bdf9b1bd4)
+
 
 ## 프로젝트 아키텍처
 ### 사용자 흐름도
