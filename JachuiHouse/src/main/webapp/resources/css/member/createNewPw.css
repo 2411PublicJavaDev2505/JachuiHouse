@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+
+body {
+    margin: 0;
+    padding: 0;
+    display: block;
+    /* align-items: center; */
+    font-family: Arial, sans-serif;
+    background-color: #FFFBF0;
+}
+
+.container {
+    width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-image {
+	padding-left: 42px;	
+}
+
+
+h2 {
+    padding-bottom: 40px;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row; /* 라벨과 입력 필드를 가로로 배치 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 10px; /* 라벨과 입력 필드 사이 간격 */
+    width: 150px; /* 라벨 너비 고정으로 정렬 맞춤 */
+    text-align: left; /* 라벨 텍스트 왼쪽 정렬 */
+}
+
+.form-group input {
+    width: 100%; /* 입력 필드 너비를 100%로 설정 */
+    max-width: 300px; /* 기존 입력 필드 너비 유지 */
+    padding: 10px;
+    border: 1px solid #c0baba;
+    border-radius: 5px;
+    
+}
+
+/* .form-group button {
+    width: 80%;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+} */
+
+.signUpBtn {
+	width: 400px;
+	height: 40px;
+    background-color: #ff7337;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.signUpBtn:hover {
+    background-color: #e55a00;
+}

@@ -6,21 +6,32 @@
 <head>
 	<meta charset="UTF-8">
 	<title>비밀번호 재설정</title>
-	<link rel="stylesheet" href="../resources/css/member/resetPw.css">
+	<link rel="stylesheet" href="../resources/css/member/createNewPw.css">
 </head>
 <body>
     <div class="container">
-        <h2>비밀번호 재설정 하기</h2>
-        <h3>${error }</h3>
+    	<div class="logo-container">
+			<div class="login-image">
+				<a href="http://localhost:7777">
+					<img src="../resources/image/loginEnter.png" alt="로그인 이미지">
+				</a>
+			</div>
+			<div>
+		        <h2>비밀번호 재설정 하기</h2>
+		        <h3>${error }</h3>
+	        <div id="msgTag" style="color: red;"></div>
+			</div>
+		</div>
+        
         <form action="/member/createNewPw" method="post">
         	<input type="hidden" name="userId" value="${userId }">
 	        <div class="form-group">
-	            <label for="userPwCheck">새 비밀번호</label>
+	            <label for="userPwCheck">새 비밀번호: </label>
 	                <input type="password" name="userPwCheck" id="userPwCheck" placeholder="새비밀번호를 입력해주세요." class="form-control" required>
         	</div>
         	
         	<div class="form-group">
-	            <label for="userPwCheck2">새 비밀번호 확인</label>
+	            <label for="userPwCheck2">새 비밀번호 확인: </label>
 	                <input type="password" name="userPwCheck2" id="userPwCheck2" placeholder="다시 한 번 입력해주세요." class="form-control" required>
         	</div>
         	
