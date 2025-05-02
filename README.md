@@ -253,7 +253,8 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 ### 중고거래와 부동산 매물 페이지를 이용한 1:1 채팅
 
 ### 중고거래 1:1 채팅
-![중고거래게시판 채팅](https://github.com/user-attachments/assets/d68977ca-d3e8-4240-ac7e-54ffc5bf51ce)
+![중고거래게시판 채팅페이지](https://github.com/user-attachments/assets/3ce4950e-4da6-490f-aae0-597cededdf73)
+
 
 ## 프로젝트 후기
 
