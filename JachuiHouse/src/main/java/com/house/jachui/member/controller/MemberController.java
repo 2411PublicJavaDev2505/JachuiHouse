@@ -98,6 +98,7 @@ public class MemberController {
 				session.setAttribute("userId", mem.getUserId()); // 유저 ID 저장
 				session.setAttribute("userName", mem.getUserName()); // 사용자 이름 저장
 				session.setAttribute("userRole", mem.getUserRole()); 
+				session.setAttribute("approveYn", mem.getApproveYn()); 
 				model.addAttribute("success", "가입이 완료되었습니다.");
 				return "redirect:/"; //메인페이지로 리다이렉트
 			} else {
