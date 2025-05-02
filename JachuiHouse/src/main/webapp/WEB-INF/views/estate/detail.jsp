@@ -14,6 +14,14 @@
         <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
         <div class="wrapper">
 		<main class="main-container">
+		<c:if test="${userRole != 'R' }">
+			<div id="nickName">
+				<form action="/realtor/page" method="get">
+					<input type="hidden" value="${estate.userId }" name="userId">
+					<button type="submit"><b>${estate.userId} </b></button><b>님의 게시글</b>
+				</form>
+			</div>
+			</c:if>
             <div class="estate-card">
                 <c:if test="${userId eq estate.userId}">
                     <a href="/chazabang/modify/${estateNo }">

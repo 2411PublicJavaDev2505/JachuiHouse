@@ -54,7 +54,12 @@ pageEncoding="UTF-8"%>
                     	<button type="submit" id="chatList">채팅 내역</button>
                     </a>
                 </div>
-                <c:forEach items="${eList }" var="estate">               
+                <c:if test="${empty eList}">
+                <div id="noChat">  
+					<b>게시글이 존재하지 않습니다.</b>
+				</div>
+				</c:if>             
+                <c:forEach items="${eList }" var="estate">
                 <div id="content">               
                     <div id="roomImg">
                     	<a href="/chazabang/detail/${estate.estateNo }" class="estate" data-type="${est.estateType}">

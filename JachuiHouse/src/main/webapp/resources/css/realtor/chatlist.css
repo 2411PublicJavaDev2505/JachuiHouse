@@ -131,6 +131,12 @@ main{
     margin: 0 auto;
     border-bottom: 2px solid gray;
 }
+#none{
+	text-align:center;
+	font-size: 30px;
+	margin-top: 200px;
+	color: #555555;
+}
 #chatmokrok{
     height: 100%;
     font-size: 35px;
@@ -225,4 +231,7 @@ main{
     font-size: 16px;
     color: #d6805b;
     font-weight: 400;
+}
+#chat b{
+	color:black;
 }

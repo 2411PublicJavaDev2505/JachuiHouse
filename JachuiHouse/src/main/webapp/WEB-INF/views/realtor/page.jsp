@@ -36,9 +36,7 @@ pageEncoding="UTF-8"%>
                     ${realtor.userEmail }
                 </div>
                 <div id="modi">
-                	<a id="aTag" href="/realtor/update">
-                    	<button type="submit" id="report">신고하기</button>
-                   	</a>
+                	
                 </div>
                 <!-- <div id="del">
                 	<a href="/member/delete">
@@ -51,9 +49,7 @@ pageEncoding="UTF-8"%>
                 	<div id="text-box">
                     	<b>${realtor.userName}님의 게시글</b>
                     </div>  
-                    <a href="/chat/torealtor?estateNo=${estateNo }">
-                    	<button type="submit" id="chatList">채팅 문의</button>
-                    </a>
+                    
                 </div>
                 <c:if test="${empty eList}">
                 	<div id="none">
@@ -127,7 +123,6 @@ pageEncoding="UTF-8"%>
                             <a href="/realtor/page?userId=${realtor.userId }&page=1" class="first">◁◁</a>
                             <a href="/realtor/page?userId=${realtor.userId }&page=${currentPage - 1}" class="prev">◀</a>
                         </c:if>
-				
 				<c:forEach begin="${startNavi}" end="${endNavi}" var="p">
                             <a href="/realtor/page?userId=${realtor.userId }&page=${p}" class="${p == currentPage ? 'active' : ''}">${p}</a>
                 </c:forEach>
