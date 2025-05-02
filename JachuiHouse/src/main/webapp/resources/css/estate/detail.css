@@ -11,9 +11,30 @@ body {
     width: 100%;
     padding: 50px 0;
 }
-
+#nickName{
+	margin: 0 auto;
+	width: 50%;
+	text-align: center;
+}
 a {
 	text-decoration: none;
+}
+input{
+	border:none;
+	background-color: #fff9e9;
+}
+button{
+	border:none;
+	background-color: #fff9e9;
+	margin: 0 auto;
+}
+button b{
+	background-color: none;
+	font-size: 18px;
+	color: #555555;
+}
+form b{
+	color: #555555;
 }
 
 .edit-btn {

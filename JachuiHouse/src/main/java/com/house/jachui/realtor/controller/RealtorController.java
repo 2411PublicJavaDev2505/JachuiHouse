@@ -49,6 +49,7 @@ public class RealtorController {
 		Member member = rService.selectRealtorById(userId);
 		List<Estate> eList = rService.selectEstatesById(userId, currentPage, 3);
  		int totalCount = rService.getTotalCount(userId);
+ 		System.out.println(totalCount);
 		Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, 3);
 		model.addAttribute("maxPage", pageInfo.get("maxPage"));
 		model.addAttribute("startNavi", pageInfo.get("startNavi"));
@@ -60,7 +61,7 @@ public class RealtorController {
             List<EstateFile> fileList = fileMapper.selectImageList(est.getEstateNo());
             est.setEstateFileList(fileList);
         }
-		if("M".equals(userRole) || member == null || userRole == null) {
+		if("M".equals(userRole) || member == null || userRole == null ) {
 			model.addAttribute("realtor", member);
 			return "realtor/page";
 		}

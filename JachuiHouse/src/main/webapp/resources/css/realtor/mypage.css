@@ -145,10 +145,10 @@ main{
     margin-left: 5px;
 }
 #roomIntro b{
-    font-size: 30px;
+    font-size: 25px;
 }
 #roomIntro text{
-    font-size: 30px;
+    font-size: 25px;
 }
 #top{
     width:100%;
@@ -177,7 +177,7 @@ main{
     
 }
 #jongro b{
-	font-size: 25px;
+	font-size: 20px;
 }
 #button-box{
     margin-top: 6px;
@@ -315,6 +315,12 @@ text #es {
 #aTag{
 	background-color: #f60909;
 }
-#modi{
-	background-color: f60909;
+#noChat b{
+	color:gray;
+	font-size: 33px;
+}
+#noChat{
+	width:60%;
+	margin: 0 auto;
+	margin-top: 200px;
 }

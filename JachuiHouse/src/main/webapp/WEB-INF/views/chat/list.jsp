@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공인중개사-채팅 목록</title>
 <link rel="stylesheet" href="../../resources/css/include/header.css">
 <link rel="stylesheet" href="../../resources/css/include/footer.css">
 <link rel="stylesheet" href="../../resources/css/realtor/chatlist.css">
@@ -62,8 +62,10 @@
  -->                        </div>
                     </div>
                     <c:if test="${empty chatwithList}">
-					     <p>채팅내역이 없습니다.</p>
-					</c:if>
+                	<div id="none">
+						<b><p>채팅 내역이 존재하지 않습니다.</p></b>
+					</div>
+				</c:if>
                             <c:forEach var="cwl" items="${chatwithList}" varStatus="status">
 							<div id="list" >
                         		<div id="nickname">
@@ -75,7 +77,6 @@
                         </div>
  					    <a href="${pageContext.request.contextPath}/chat/room?chatRoomNo=${cwl.chatRoom.chatRoomNo}&itemname=${cwl.chatRoom.itemType}&itemNo=${cwl.chatRoom.itemNo}&user1Id=${cwl.chatRoom.user2Id}&user2Id=${cwl.chatRoom.user1Id}">       
                         	<div id="time">
-                           		${cwl.chat.createDate }
                         	</div>
                         </a>
 					    <a href="${pageContext.request.contextPath}/chat/room?chatRoomNo=${cwl.chatRoom.chatRoomNo}&itemname=${cwl.chatRoom.itemType}&itemNo=${cwl.chatRoom.itemNo}&user1Id=${cwl.chatRoom.user2Id}&user2Id=${cwl.chatRoom.user1Id}">
