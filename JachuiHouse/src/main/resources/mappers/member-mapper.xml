@@ -124,7 +124,7 @@
 	</select>
 	
 	<select id="selectOneByLogin" resultType="Member">
-	    SELECT USER_ID, USER_NAME, USER_ROLE FROM MEMBER
+	    SELECT * FROM MEMBER
 	    WHERE USER_ID = #{userId}
 	    AND USER_PW = #{userPw}
 	    AND DELETE_YN = 'N'
