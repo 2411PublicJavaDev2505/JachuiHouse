@@ -44,13 +44,13 @@ spring.datasource.username
 spring.datasource.password
 ```
 
-를 참고해서 계정을 만듭니다. 
+를 참고해서 계정을 만듭니다. <br><br>
 이때
 ```
 spring.datasource.url
 ```
-을 확인해서 spring.datasource.url 을 변경한 후에 거기에 계정을 만드는 걸로 합니다.
-2. 그 계정에 RESOURCE, CONNECT 권한을 부여합니다. 
+을 확인해서 spring.datasource.url 을 변경한 후에 거기에 계정을 만드는 걸로 합니다.<br><br>
+2. 그 계정에 RESOURCE, CONNECT 권한을 부여합니다. <br>
 3. [CREATE SQL](./GNTOUR_CREATE.sql) 를 참고해서 테이블을 구성합니다.
 4. [INSERT SQL](./INSERT_TRAVEL_INFO.sql) 를 참고해서 데이터를 구성합니다.
 5. 환경변수를 다음과 같이 설정합니다.
@@ -59,7 +59,8 @@ GANGNEUNG_UPLOAD_FOLDER_PATH: [업로드할 폴더 경로] +"/"
 EMAIL_APP_ID: [GMAIL 계정]
 EMAIL_APP_PW: [GMAIL APP PASSWORD]
 ```
-6. 그런다음 Intellij 에서 실행을 합니다.
+
+6. 그런 다음 Intellij 에서 실행을 합니다.
 
 ## 기술 스택
 
