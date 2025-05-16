@@ -295,4 +295,4 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 - [시퀀스다이어그램](https://drive.google.com/file/d/1T5XjSvDoyM_FZtRxVWgLjUAS4TQrsBZj/view?usp=sharing)
 - [최종보고서](https://drive.google.com/file/d/1yWmMtOqoFn7DF0qPl9h6ayW_AUK1gQFf/view?usp=drive_link)
 - [프로젝트 소스 DB](https://drive.google.com/file/d/1QAztOddYWz0mndtvfkSmkG8T9M61E56T/view?usp=drive_link)
-- [시연영상](https://drive.google.com/file/d/1JID-QHkuA2Ul_8XNnFRgQY_ERgKv5f03/view?usp=drive_link)
+- [시연영상](https://drive.google.com/file/d/1PIB3kV6DRV-8nHfGpEjWH0T9sBEq19Jo/view?usp=sharing)
