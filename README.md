@@ -208,42 +208,50 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ### 중고거래게시판 목록(회원)
 ![중고거래게시판 목록(회원)](https://github.com/user-attachments/assets/a8e6cebe-0ea1-43bb-a449-a075d3305bbc)
-
+- 중고물품을 볼 수 있는 목록페이지로서 중고물품에 대한 이미지와 함께 그에 대한 가격 , 조회수, 물품에 거래 상태에 대한 정보를 확인할 수 있으며 최신 등록순으로 보여지며 회원인 경우 중고물품판매글을 작성을 할 수 있다.
+  
 ### 중고거래게시판 목록(비회원)
 ![중고거래게시판 목록페이지(비회원)](https://github.com/user-attachments/assets/1b0bdc83-e107-4991-bcb8-01cd1b27c157)
+- 중고물품을 볼 수 있는 목록페이지로서 중고물품에 대한 이미지와 함께 그에 대한 가격 , 조회수, 물품에 거래 상태에 대한 정보를 확인할 수 있으며 최신 등록순으로 보여진다. 
 
 ### 중고거래게시판 상세(회원)
 ![중고거래게시판 상세(회원)](https://github.com/user-attachments/assets/1b49ae6f-970b-4f93-993d-a1100dafb987)
+- 중고물품에 대한 자세한 정보를 볼 수 있는 상세페이지로서 중고물품에 대한 가격, 상품 이미지, 상세내용, 작성일, 거래상태 등에 대한 정보를 얻을수 있으며 글을 쓴 작성자는 거래상태, 수정, 삭제 등을 할 수 있으며 다른 사람과의 1대1 채팅도 가능하다. 
 
 ### 중고거래게시판 상세(비회원)
 ![중고거래게시판 상세(비회원)](https://github.com/user-attachments/assets/d34f888e-ad0b-437c-bd39-a60f9dc39e18)
+- 중고물품에 대한 자세한 정보를 볼 수 있는 상세페이지로서 중고물품에 대한 가격, 상품 이미지, 상세내용, 작성일, 거래상태 등에 대한 정보를 얻을 수 있다.
 
 ### 중고거래게시판 등록
 ![중고거래게시판 등록](https://github.com/user-attachments/assets/a37dfcc0-47a5-435b-9097-882d5445b37a)
+- 로그인을 한 자취생만이 중고거래 물품을 등록하는 페이지이다. 물품을 등록시에는 물품에 대한 사진과 그에 해당하는 물품 정보를 작성해주어야 한다.
 
 ### 중고거래게시판 수정
 ![중고거래게시판 수정](https://github.com/user-attachments/assets/a0541e9e-9e22-4ec0-a1be-3e564a9eb44e)
+- 자신이 작성한 글을 수정할 수 있다. 물품명, 가격,  상세내용,  첨부파일을 수정 가능하다.
 
 ### 중고거래게시판 삭제
 ![중고거래게시판 삭제1](https://github.com/user-attachments/assets/b4df9ef1-7633-4d93-b8ec-36273bc08f0f)
 ![중고거래게시판 삭제2](https://github.com/user-attachments/assets/3d0d9f71-41fd-4dfe-861c-049b1af1e268)
 ![중고거래게시판 삭제3](https://github.com/user-attachments/assets/8bb1e490-ee32-4207-997c-962f76878fdc)
+- 자신이 작성한 글을 삭제할 수 있다. 삭제시에 작성한 글은 작성자와 다른 사람에게 보이지 않는다.
 
 ### 중고거래게시판 검색(조회)
 ![중고거래게시판 검색(조회)](https://github.com/user-attachments/assets/fed1d944-1e1d-468d-90e3-4ec416f4a1fc)
 ![중고거래게시판 검색(조회)2](https://github.com/user-attachments/assets/687525bb-be4b-43b1-b348-f388ad0f79e1)
-
+- 중고물품은 물품명, 작성자로 검색할 수 있고, 검색결과에 해당하는 물품이 없을시에 검색 결과가 없다고 표시되며 검색시엔 중고물품들이 조회순으로 보여지며 작성자로 검색 시 작성자의 중고물품이 조회순으로 보여진다.
 
 ### 중고거래게시판 판매여부
 ![중고거래게시판 검색(조회)](https://github.com/user-attachments/assets/def42a16-9e76-4c86-b3f9-0152324e571f)
 ![중고거래게시판 판매여부2](https://github.com/user-attachments/assets/15b3892c-0fd9-4ddb-a40e-adf2fa0743af)
 ![중고거래게시판 판매여부3](https://github.com/user-attachments/assets/80b46bf8-920c-4575-9a45-999987f67933)
+- 중고물품을 올렸을시 글을 쓴 작성자만이 거래상태(판매중, 거래완료)를 버튼을 클릭함으로써 변경시킬 수 있다.
 
 ### 중고거래와 부동산 매물 페이지를 이용한 1:1 채팅
 
 ### 중고거래 1:1 채팅
 ![중고거래게시판 채팅페이지](https://github.com/user-attachments/assets/3ce4950e-4da6-490f-aae0-597cededdf73)
-
+- 로그인을 한 상태인 자취생인 회원들만 이용 가능하고, 중고물품을 거래하는 구매자와 판매자가 채팅 기능을 이용하여 실시간으로 서로 소통을 할 수 있다.
 
 ## 프로젝트 후기
 
