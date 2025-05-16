@@ -284,7 +284,7 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ## 프로젝트 산출 문서
 
-- [기획보고서](https://drive.google.com/file/d/19wq7IqAmwbmmrIWkGs6C_b33HeiBXo6K/view?usp=drive_link)
+- [기획보고서](https://drive.google.com/file/d/16_4R5AM1VDHC9rvQ0wilB0FZz4RwVaSl/view?usp=sharing)
 - [요구사항기술서](https://docs.google.com/document/d/1FUEcoi6dF-K0HsaCJfMYB03EmBvbZR0znCKo40GD8V8/edit?usp=sharing)
 - [유스케이스](https://drive.google.com/file/d/1FIg9RZA9UyFE6pXlrPjvkD0YGan3fDu1/view?usp=drive_link)
 - [플로우차트](https://drive.google.com/file/d/1kIxKAKyRxlNSAdrZALMKvhf1jENDsZaE/view?usp=sharing)
