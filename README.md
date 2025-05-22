@@ -77,6 +77,17 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 
 ## 주요기능
+
+### 로그인/회원가입 페이지
+
+|기능명|상세|
+|--|--|
+|        로그인       	| 회원가입 시 데이터베이스에 저장된 계정과 일치하는지 확인하여 로그인 할 수 있다.                                                             
+|   자취생 회원가입   	| 사용자는 정보를 입력하여 회원가입을 할 수 있으며 작성한 정보의 요구 조건이 충족되면 바로 가입 가능하다.                                                    	|   	|
+| 공인중개사 회원가입 	| 사용자는 정보를 입력하여 회원가입을 할 수 있으며 작성한 정보의 요구 조건이 충족되면 가입을 신청할 수 있고, 관리자에세 승인을 받으면 회원가입이 완료됩니다. 	|   	|
+|     아이디 찾기     	| 이름과 이메일을 입력하고, 회원유형을 선택 시 아이디를 찾을 수 있다.                                                                                        	|   	|
+|    비밀번호 찾기    	| 가입한 아이디와 이메일을 입력하면 메일로 비밀번호 재설정 화면과 연동된 링크가 발송된다. 비밀번호 재설정 화면에서 새 비밀번호를 설정할 수 있다.             	|   	|
+
 ### 자취생  마이페이지
 
 |기능명|상세|
@@ -153,24 +164,24 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ## 화면 구현
 
-### 1. 메인
+### 메인
 ![image](https://github.com/user-attachments/assets/2b118f2b-780f-4b92-8c8b-394d26f184dd)
 - 메인페이지
 
-### 2. 마이페이지
+### 마이페이지
 ![image](https://github.com/user-attachments/assets/a28bd36b-8650-482d-8d45-da6bbfb883bc)
 - 내정보, 내채팅, 내가 쓴 글, 내가 올린 물건을 조회할 수 있고, 클릭하여 상세보기를 할 수 있다.
 
-### 3. 회원 정보 수정
+### 회원 정보 수정
 ![image](https://github.com/user-attachments/assets/3ca6d3fe-86d3-4a10-96e9-47cec2fa5a8a)
 - 아이디, 이름, 생년월일을 제외한 나머지를 수정할 수 있다.
 
-### 4. 회원 탈퇴
+### 회원 탈퇴
 ![image](https://github.com/user-attachments/assets/0e99f882-0221-4f8d-9521-2c135bdcd12e)
 - 비밀번호를 입력하고 동의 버튼을 클릭해야 회원 탈퇴가 진행된다. 틀리면 오류를 발생
 
 
-### 5. 예산계산기
+### 예산계산기
 ![image](https://github.com/user-attachments/assets/7a18dcb5-2225-4aa4-9782-0d571d568410)
 - 주거비, 식비, 교통비, 통신비, 생활용품, 의료비, 교육비, 문화생활에 숫자를 입력하면 자동으로 계산해준다.
 
@@ -292,7 +303,7 @@ ERD와 DB의 불일치를 해결하기 위해서 불필요한 컬럼을 삭제�
 - [요구사항기술서](https://docs.google.com/document/d/1FUEcoi6dF-K0HsaCJfMYB03EmBvbZR0znCKo40GD8V8/edit?usp=sharing)
 - [유스케이스](https://drive.google.com/file/d/1FIg9RZA9UyFE6pXlrPjvkD0YGan3fDu1/view?usp=drive_link)
 - [플로우차트](https://drive.google.com/file/d/1kIxKAKyRxlNSAdrZALMKvhf1jENDsZaE/view?usp=sharing)
-- [와이어프레임](https://www.figma.com/deck/iGB0mgi4iS44uoXOMqQJN6/%EC%9E%90%EC%B7%A8%ED%95%98%EC%9A%B0%EC%8A%A4?node-id=5-125&t=14bQTmMF17yZ8hBT-1)
+- [와이어프레임](https://www.figma.com/deck/iGB0mgi4iS44uo)
 - [DB설계](https://drive.google.com/file/d/1oTJyCaArGMo1ZILLOEU6UfIagveIRwmE/view?usp=sharing)
 - [테이블정의서](https://drive.google.com/file/d/1oTJyCaArGMo1ZILLOEU6UfIagveIRwmE/view?usp=sharing)
 - [클래스다이어그램](https://drive.google.com/file/d/1TM9ciPQ9pR1s3qRJn5023LDABb8SMrsW/view?usp=sharing)
