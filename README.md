@@ -301,6 +301,8 @@ ERD와 DB의 불일치를 해결하기 위해서 불필요한 컬럼을 삭제�
 
 - [기획보고서](https://drive.google.com/file/d/16_4R5AM1VDHC9rvQ0wilB0FZz4RwVaSl/view?usp=sharing)
 - [요구사항기술서](https://docs.google.com/document/d/1FUEcoi6dF-K0HsaCJfMYB03EmBvbZR0znCKo40GD8V8/edit?usp=sharing)
+- [요구사항정의서](https://drive.google.com/file/d/1vOZDQ4FNqnWm8kT_Q9z3pK8zo1VJS4Ld/view?usp=sharing)
+- [요구사항리스트](https://drive.google.com/file/d/1SUoHAJdU4y4Sbufe8TjgWsJikeI1V16z/view?usp=sharing)
 - [유스케이스](https://drive.google.com/file/d/184R74Td28Uw_YiSExECOuwf3V0n33flK/view?usp=sharing)
 - [플로우차트](https://drive.google.com/file/d/1UhmdB1Xq8MXYGoNSmCSnj7LLDC7lmvEx/view?usp=sharing)
 - [와이어프레임](https://drive.google.com/file/d/1UoBqSy-Q0kq8RrN5h_TleaWVrIjZboAX/view?usp=sharing)
