@@ -164,6 +164,37 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ## 화면 구현
 
+### 로그인
+![로그인화면](https://github.com/user-attachments/assets/e40dc2cf-fde6-4b58-b872-ccd0b521cdc9)
+
+### 자취생(일반) 회원가입
+![일반회원가입화면](https://github.com/user-attachments/assets/7538362f-d764-4f31-b19d-36d9bbf2f45f) <br>
+![회원가입중복확인](https://github.com/user-attachments/assets/238b4c29-91ac-44d4-a392-2eaa23f234fd)
+
+### 공인중개사 회원가입
+![공인중개사중복확인](https://github.com/user-attachments/assets/5b0b5c21-b5a9-4922-b499-540468bcca37)
+![공인중개사사업자등록증첨부](https://github.com/user-attachments/assets/7b4c9002-9c19-4998-af8a-de8abd020bd6)
+
+### 아이디찾기
+![아이디찾기화면](https://github.com/user-attachments/assets/fffd5f8d-bfe8-4283-847e-259b289ff15a) <br>
+
+- 아이디찾기 회원유형 잘못 선택할 시 모달 화면 <br>
+![아디찾기회원유형잘못선택](https://github.com/user-attachments/assets/a810069e-e591-47a3-a04c-6f87d967a2cb)
+
+### 아이디찾기 결과
+![아이디찾기결과화면](https://github.com/user-attachments/assets/89193ca6-5193-444e-bb0d-6d3fa67754dd)
+
+### 비밀번호재설정
+![비밀번호재설정화면](https://github.com/user-attachments/assets/7d3ec196-7ea1-4339-8c20-5904f9fb0e8f)
+
+- 가입한 아이디/이메일 정보를 입력하면 메일로 "비밀번호재설정하기" 링크가 발송된다. <br>
+![비밀번호재설정링크메일수신2](https://github.com/user-attachments/assets/430f7c19-86da-48c5-8fe2-4ca0b1467d83)
+![비밀번호재설정링크메일수신](https://github.com/user-attachments/assets/5c9fedb7-76d1-42c3-bdc9-cb06c2a7f9a9)
+
+### 비밀번호재설정하기 
+![비밀번호재설정하기화면](https://github.com/user-attachments/assets/a6c5e28e-dd77-4132-8081-6cec7c69cf0d) <br>
+![비밀번호재설정중](https://github.com/user-attachments/assets/1199d584-f943-4400-8cc0-9b0205817e28)
+
 ### 메인
 ![image](https://github.com/user-attachments/assets/2b118f2b-780f-4b92-8c8b-394d26f184dd)
 - 메인페이지
@@ -269,8 +300,13 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 ## 프로젝트 후기
 
 ### 강우혁
+- 프로젝트를 하면서 부족함을 많이 느꼈습니다. 
 
 ### 이하나
+- 사실 뭐라도 더 배울 수 있지 않을까 싶었는데 실력이 부족해서 여러가지로 미안했던 프로젝트였습니다~
+자기 방식대로 다들 도와준 점들이 감사했습니다!
+쳇쳇하면서도 다 챙기고 마무리 하는 팀장님께 많이 배웠고, 많이 친해지지 못한 팀원들과는 아쉬움이 남네요 :)
+고생하셨습니다~~
 
 ### 채소형
 - 파이널 프로젝트에서 Ajax와 API를 활용해 웹 애플리케이션을 구현하며, 저는 기획을 주도하고 로그인 페이지 및 비밀번호 재설정의 이메일 인증 기능을 맡았습니다. 그러나 ERD와 DB 불일치, 변수명 혼선, CSS 정렬 문제로 어려움이 있었습니다.
@@ -290,6 +326,8 @@ ERD와 DB의 불일치를 해결하기 위해서 불필요한 컬럼을 삭제�
 - 이번 파이널 프로젝트를 하면서 느낀점은 저번 세미 프로젝트를 하며 어려움을 느꼈던 테이블과 VO 구조에 대해 생각을 하며 진행하여 훨씬 효율적으로 프로젝트를 진행했고 이번에 맡게 되었던 리스트 조회, 등록, 수정, 삭제 기능을 구현함으로써 한번 더 기본적인 웹 개발 능력을 다질 수 있었습니다.
 또한 이를 바탕으로 더 세밀하게 코드를 작성할 수 있었습니다. 그리고 이번 프로젝트에서 자바스크립트를 많이 활용했는데 훨씬 더 다양한 기능과 세밀한 코드를 작성하며 자바스크립트에 대한 이해도를 높이고 앞으로 더 수준 높은 코드를 자신있게 구현할 수 있을 것 같습니다.  
 ### 박현서
+- 즐겁고 열심히 했습니다.
+다같이 열심히 한 팀원분들에게 감사합니다.
 
 ## 프로젝트 아키텍처
 ### 사용자 흐름도
